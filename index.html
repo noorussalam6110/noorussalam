@@ -1,40 +1,908 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ml">
 <head>
     <meta charset="UTF-8">
-    <title>Madrasa Name</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ക്വിസ് ബസർ</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js",
+                "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js",
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js",
+                "firebase/functions": "https://www.gstatic.com/firebasejs/10.12.0/firebase-functions.js"
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0b0f1c;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: radial-gradient(circle at 50% 0%, #1a1f35, #0b0f1c 70%);
+            color: #e2e8f0;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            max-width: 500px;
+            max-height: 900px;
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0 5px;
+            flex-shrink: 0;
+        }
+        .header h1 {
+            color: #facc15;
+            font-size: 1.8rem;
+            text-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
+        }
+        .header .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .header .room-badge {
+            background: #1e293b;
+            padding: 4px 14px;
+            border-radius: 50px;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            border: 1px solid #334155;
+        }
+        .admin-toggle {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .admin-toggle:hover { background: #1e293b; color: #facc15; }
+        .admin-toggle.active { color: #facc15; background: #1e293b; }
+        /* മൊബൈലിൽ admin-toggle മറയ്ക്കാം */
+        .admin-toggle.mobile-hidden { display: none !important; }
+
+        /* Player View */
+        #playerView {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            height: 100%;
+        }
+        .buzzer-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            min-height: 250px;
+        }
+        .buzzer-btn {
+            width: 85%;
+            aspect-ratio: 1/1;
+            max-width: 320px;
+            border-radius: 50%;
+            border: none;
+            background: radial-gradient(circle at 40% 35%, #ff6b6b, #c92a2a);
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.3), 0 15px 30px rgba(0,0,0,0.8);
+            cursor: pointer;
+            transition: all 0.08s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            border: 4px solid rgba(255,255,255,0.1);
+        }
+        .buzzer-btn::after {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.05);
+            animation: pulse-ring 2.5s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.1); opacity: 0; }
+        }
+        .buzzer-btn:active:not(:disabled) {
+            transform: scale(0.92);
+            box-shadow: 0 0 70px rgba(239, 68, 68, 0.9), 0 5px 10px rgba(0,0,0,0.8);
+        }
+        .buzzer-btn:disabled {
+            opacity: 0.35;
+            filter: grayscale(0.8);
+            transform: scale(0.95);
+            cursor: not-allowed;
+            box-shadow: 0 0 20px rgba(100,100,100,0.2);
+        }
+        .buzzer-btn .sub-text {
+            font-size: 0.7rem;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-top: 5px;
+            background: rgba(0,0,0,0.3);
+            padding: 3px 15px;
+            border-radius: 30px;
+        }
+
+        .status-area {
+            width: 100%;
+            text-align: center;
+            padding: 5px 0 10px;
+            flex-shrink: 0;
+        }
+        .status-msg {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            border: 1px solid #334155;
+            display: inline-block;
+            width: auto;
+            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .status-msg.success { border-color: #4ade80; color: #4ade80; }
+        .status-msg.error { border-color: #f87171; color: #f87171; }
+        .status-msg.warning { border-color: #facc15; color: #facc15; }
+
+        .leaderboard {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 12px 10px;
+            border: 1px solid #1e293b;
+            max-height: 32vh;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        .leaderboard h3 {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+        #ranking-list { list-style: none; padding: 0; margin: 0; }
+        #ranking-list li {
+            display: flex;
+            align-items: center;
+            padding: 6px 12px;
+            background: rgba(30, 41, 59, 0.5);
+            margin-bottom: 4px;
+            border-radius: 12px;
+            border-left: 4px solid #334155;
+            animation: slideIn 0.25s ease;
+        }
+        #ranking-list li.top1 { border-left-color: #facc15; background: rgba(250, 204, 21, 0.12); }
+        #ranking-list li.top2 { border-left-color: #94a3b8; background: rgba(148, 163, 184, 0.08); }
+        #ranking-list li.top3 { border-left-color: #cd7f32; background: rgba(205, 127, 50, 0.08); }
+        @keyframes slideIn {
+            0% { transform: translateX(-15px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        .rank { font-weight: 800; color: #facc15; min-width: 40px; font-size: 1rem; }
+        .player-name { flex: 1; margin-left: 8px; font-weight: 500; font-size: 0.9rem; }
+        .player-time { font-size: 0.65rem; color: #64748b; background: #1e293b; padding: 2px 10px; border-radius: 20px; }
+        .empty-state { color: #475569; text-align: center; padding: 15px; font-style: italic; }
+
+        /* Admin View */
+        #adminView {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            height: 100%;
+            padding-top: 5px;
+        }
+        #adminView.active { display: flex; }
+        #playerView.hidden { display: none; }
+
+        .stats {
+            display: flex;
+            gap: 12px;
+            margin: 10px 0;
+            flex-shrink: 0;
+        }
+        .stat-card {
+            background: #1e293b;
+            padding: 10px 18px;
+            border-radius: 15px;
+            flex: 1;
+            border-left: 3px solid #facc15;
+        }
+        .stat-card label { color: #94a3b8; font-size: 0.7rem; display: block; }
+        .stat-card span { font-size: 1.5rem; font-weight: bold; }
+
+        .admin-list-container {
+            background: #1e293b;
+            border-radius: 20px;
+            padding: 12px;
+            flex: 1;
+            overflow-y: auto;
+            margin: 5px 0 10px;
+        }
+        .admin-list-container h3 {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .admin-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: #0f172a;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            border-left: 3px solid #475569;
+        }
+        .admin-item .pos { font-weight: 700; color: #facc15; min-width: 40px; }
+        .admin-item .id { flex: 1; font-family: monospace; font-size: 0.8rem; margin-left: 8px; overflow: hidden; text-overflow: ellipsis; }
+        .admin-item .time { color: #94a3b8; font-size: 0.7rem; background: #1e293b; padding: 2px 12px; border-radius: 20px; }
+        .admin-item.top1 { border-left-color: #facc15; background: rgba(250, 204, 21, 0.08); }
+        .admin-item.top2 { border-left-color: #94a3b8; }
+        .admin-item.top3 { border-left-color: #cd7f32; }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+            padding-bottom: 5px;
+        }
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            flex: 1;
+            transition: 0.2s;
+        }
+        .btn-danger { background: #dc2626; color: white; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3); }
+        .btn-danger:hover { transform: scale(1.02); background: #b91c1c; }
+        .btn-success { background: #16a34a; color: white; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3); }
+        .btn-success:hover { transform: scale(1.02); background: #15803d; }
+
+        /* Password Modal */
+        #passwordModal {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #passwordModal.active { display: flex; }
+        .modal-box {
+            background: #1e293b;
+            padding: 35px 25px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 380px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+            border: 1px solid #334155;
+        }
+        .modal-box h2 { color: #facc15; margin-bottom: 5px; }
+        .modal-box p { color: #94a3b8; margin-bottom: 20px; font-size: 0.9rem; }
+        .modal-box input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 15px;
+            border: none;
+            background: #0f172a;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            border: 2px solid #334155;
+        }
+        .modal-box input:focus { outline: none; border-color: #facc15; }
+        .modal-box button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 15px;
+            background: #facc15;
+            color: #0f172a;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .modal-box .error-msg { color: #f87171; margin-top: 10px; display: block; text-align: center; }
+        .modal-close {
+            background: none;
+            border: none;
+            color: #64748b;
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Flash */
+        .flash-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999;
+            transition: opacity 0.1s;
+        }
+        .flash-overlay.active { opacity: 0.25; transition: opacity 0s; }
+
+        /* Scrollbar */
+        .leaderboard::-webkit-scrollbar, .admin-list-container::-webkit-scrollbar { width: 4px; }
+        .leaderboard::-webkit-scrollbar-thumb, .admin-list-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+
+        /* Mode indicator */
+        .mode-indicator {
+            font-size: 0.65rem;
+            padding: 3px 12px;
+            border-radius: 30px;
+            background: #1e293b;
+            color: #94a3b8;
+            border: 1px solid #334155;
+        }
+        .mode-indicator.admin-mode { color: #facc15; border-color: #facc15; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Madrasa Name</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#courses">Courses</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Our madrasa is committed to providing quality education and spiritual guidance.</p>
-        </section>
-        <section id="courses">
-            <h2>Courses</h2>
-            <ul>
-                <li>Quran Recitation</li>
-                <li>Islamic Studies</li>
-                <li>Arabic Language</li>
+
+<div class="flash-overlay" id="flashOverlay"></div>
+
+<!-- Password Modal -->
+<div id="passwordModal">
+    <div class="modal-box">
+        <button class="modal-close" id="modalCloseBtn">&times;</button>
+        <h2>🔐 അഡ്മിൻ ആക്സസ്</h2>
+        <p>തുടരുന്നതിന് പാസ്വേഡ് നൽകുക.</p>
+        <input type="password" id="adminPasswordInput" placeholder="പാസ്വേഡ് നൽകുക" autocomplete="off">
+        <button id="loginAdminBtn">തുറക്കുക</button>
+        <span id="loginError" class="error-msg"></span>
+    </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>🔔 ബസർ</h1>
+        <div class="actions">
+            <span class="room-badge" id="roomBadge">റൂം: quiz123</span>
+            <button class="admin-toggle" id="adminToggleBtn" title="അഡ്മിൻ പാനൽ">🔐</button>
+        </div>
+    </div>
+
+    <!-- Player View -->
+    <div id="playerView">
+        <div class="buzzer-wrapper">
+            <button id="buzzerBtn" class="buzzer-btn" disabled>
+                അമർത്തുക
+                <span class="sub-text" id="buzzerSub">ലോഗിൻ ചെയ്യുന്നു...</span>
+            </button>
+        </div>
+
+        <div class="status-area">
+            <div id="statusMsg" class="status-msg">⏳ കണക്റ്റ് ചെയ്യുന്നു...</div>
+        </div>
+
+        <div class="leaderboard">
+            <h3>🏆 ലീഡർബോർഡ് (Top 10)</h3>
+            <ul id="ranking-list">
+                <li class="empty-state">⏳ കാത്തിരിക്കുക...</li>
             </ul>
-        </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Email: info@madrasa.com</p>
-            <p>Phone: 123-456-7890</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Madrasa Name</p>
-    </footer>
+        </div>
+    </div>
+
+    <!-- Admin View -->
+    <div id="adminView">
+        <div class="stats">
+            <div class="stat-card"><label>ആകെ ബസർ</label><span id="totalCount">0</span></div>
+            <div class="stat-card"><label>അവസാന സമയം</label><span id="lastBuzzer">-</span></div>
+        </div>
+
+        <div class="admin-list-container">
+            <h3>🏆 ക്രമം (Timestamp)</h3>
+            <div id="adminRankingList">
+                <div class="empty-state">⏳ ലോഡ് ചെയ്യുന്നു...</div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-danger" id="resetBtn">🔄 റീസെറ്റ്</button>
+            <button class="btn btn-success" id="refreshBtn">↻ പുതുക്കുക</button>
+        </div>
+        <p style="color: #64748b; font-size: 0.65rem; text-align: center; margin-top: 4px;">* റീസെറ്റ് ചെയ്താൽ എല്ലാ ഡാറ്റയും മായും.</p>
+    </div>
+</div>
+
+<script type="module">
+    // --------------------------------------------------------------
+    // 🔥 Firebase Config (നിങ്ങളുടേത് മാറ്റിച്ചേർക്കുക)
+    // --------------------------------------------------------------
+    import { initializeApp } from 'firebase/app';
+    import { getAuth, signInAnonymously, signOut, onAuthStateChanged } from 'firebase/auth';
+    import { getFirestore, doc, onSnapshot, updateDoc, arrayUnion, arrayRemove, serverTimestamp } from 'firebase/firestore';
+    import { getFunctions, httpsCallable } from 'firebase/functions';
+
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const functions = getFunctions(app);
+
+    // --------------------------------------------------------------
+    // 📱 Device Detection
+    // --------------------------------------------------------------
+    function isMobileDevice() {
+        return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone|Opera Mini|IEMobile/i.test(navigator.userAgent);
+    }
+
+    const IS_MOBILE = isMobileDevice();
+    console.log(`📱 Device: ${IS_MOBILE ? 'Mobile' : 'Desktop'}`);
+
+    // --------------------------------------------------------------
+    // Constants
+    // --------------------------------------------------------------
+    const ROOM_ID = 'quiz123';
+    const ADMIN_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // "admin123"
+
+    // --------------------------------------------------------------
+    // State
+    // --------------------------------------------------------------
+    let currentMode = 'player';
+    let currentUser = null;
+    let unsubscribeSnapshot = null;
+    let isLocked = false;
+    let hasBuzzed = false;
+    let buzzerOrderData = [];
+
+    // --------------------------------------------------------------
+    // DOM Elements
+    // --------------------------------------------------------------
+    const playerView = document.getElementById('playerView');
+    const adminView = document.getElementById('adminView');
+    const adminToggleBtn = document.getElementById('adminToggleBtn');
+    const passwordModal = document.getElementById('passwordModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const adminPasswordInput = document.getElementById('adminPasswordInput');
+    const loginAdminBtn = document.getElementById('loginAdminBtn');
+    const loginError = document.getElementById('loginError');
+
+    const buzzerBtn = document.getElementById('buzzerBtn');
+    const buzzerSub = document.getElementById('buzzerSub');
+    const statusMsg = document.getElementById('statusMsg');
+    const rankingList = document.getElementById('ranking-list');
+    const roomBadge = document.getElementById('roomBadge');
+    const flashOverlay = document.getElementById('flashOverlay');
+
+    const totalCount = document.getElementById('totalCount');
+    const lastBuzzer = document.getElementById('lastBuzzer');
+    const adminRankingList = document.getElementById('adminRankingList');
+    const resetBtn = document.getElementById('resetBtn');
+    const refreshBtn = document.getElementById('refreshBtn');
+
+    roomBadge.textContent = `റൂം: ${ROOM_ID}`;
+
+    // --------------------------------------------------------------
+    // 🚫 Mobile: hide admin toggle
+    // --------------------------------------------------------------
+    if (IS_MOBILE) {
+        adminToggleBtn.classList.add('mobile-hidden');
+        // Mobile-ൽ ആരും അഡ്മിൻ പാനൽ കാണില്ല
+    } else {
+        // Desktop-ൽ admin toggle visible
+        adminToggleBtn.classList.remove('mobile-hidden');
+    }
+
+    // --------------------------------------------------------------
+    // 🎵 Buzzer Sound
+    // --------------------------------------------------------------
+    function playBuzzerSound() {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.35);
+        } catch (e) { console.log('Sound error:', e); }
+    }
+
+    // --------------------------------------------------------------
+    // 🔐 Admin Password Check (Desktop only)
+    // --------------------------------------------------------------
+    async function verifyPassword(pass) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(pass);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex === ADMIN_HASH;
+    }
+
+    function showAdminLogin() {
+        if (IS_MOBILE) return; // Mobile-ൽ അഡ്മിൻ ഇല്ല
+        passwordModal.classList.add('active');
+        adminPasswordInput.value = '';
+        loginError.textContent = '';
+        adminPasswordInput.focus();
+    }
+
+    function hideAdminLogin() {
+        passwordModal.classList.remove('active');
+    }
+
+    async function handleAdminLogin() {
+        if (IS_MOBILE) return;
+        const pass = adminPasswordInput.value;
+        if (!pass) { loginError.textContent = '⚠️ പാസ്വേഡ് നൽകുക.'; return; }
+        const isValid = await verifyPassword(pass);
+        if (isValid) {
+            hideAdminLogin();
+            switchToAdminMode();
+        } else {
+            loginError.textContent = '❌ തെറ്റായ പാസ്വേഡ്!';
+            adminPasswordInput.value = '';
+            adminPasswordInput.focus();
+        }
+    }
+
+    // Desktop-ൽ മാത്രം admin toggle click handler
+    adminToggleBtn.addEventListener('click', () => {
+        if (IS_MOBILE) return;
+        if (currentMode === 'admin') {
+            switchToPlayerMode();
+        } else {
+            showAdminLogin();
+        }
+    });
+
+    modalCloseBtn.addEventListener('click', hideAdminLogin);
+    loginAdminBtn.addEventListener('click', handleAdminLogin);
+    adminPasswordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleAdminLogin(); });
+
+    // --------------------------------------------------------------
+    // 🔄 Mode Switching (Desktop only)
+    // --------------------------------------------------------------
+    function switchToAdminMode() {
+        if (IS_MOBILE) return;
+        currentMode = 'admin';
+        playerView.classList.add('hidden');
+        adminView.classList.add('active');
+        adminToggleBtn.classList.add('active');
+        adminToggleBtn.textContent = '👤 പ്ലെയർ';
+        // Re-render admin view
+        if (buzzerOrderData.length > 0) renderAdminList(buzzerOrderData);
+        else renderAdminList([]);
+        updateAdminStats(buzzerOrderData);
+    }
+
+    function switchToPlayerMode() {
+        currentMode = 'player';
+        playerView.classList.remove('hidden');
+        adminView.classList.remove('active');
+        adminToggleBtn.classList.remove('active');
+        adminToggleBtn.textContent = '🔐';
+        renderPlayerList(buzzerOrderData);
+        updatePlayerStatus(buzzerOrderData);
+    }
+
+    // --------------------------------------------------------------
+    // 👤 Player Auto Logout + Login
+    // --------------------------------------------------------------
+    async function resetPlayerSession() {
+        try {
+            if (auth.currentUser) {
+                await signOut(auth);
+                console.log('✅ Player session cleared.');
+            }
+            await signInAnonymously(auth);
+            console.log('✅ New player logged in.');
+        } catch (error) {
+            statusMsg.textContent = '❌ ലോഗിൻ പരാജയം: ' + error.message;
+            statusMsg.className = 'status-msg error';
+        }
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            currentUser = user;
+            console.log('User UID:', user.uid);
+            if (currentMode === 'player') {
+                statusMsg.textContent = '✅ ലോഗിൻ വിജയകരം. റൂമിലേക്ക് കണക്റ്റ് ചെയ്യുന്നു...';
+                statusMsg.className = 'status-msg';
+                buzzerSub.textContent = 'തയ്യാറാണ്!';
+                connectToRoom(ROOM_ID);
+            }
+        } else {
+            if (currentMode === 'player') {
+                resetPlayerSession();
+            } else {
+                signInAnonymously(auth).catch(console.error);
+            }
+        }
+    });
+
+    // --------------------------------------------------------------
+    // 🔗 Firestore Listener (Shared)
+    // --------------------------------------------------------------
+    function connectToRoom(roomId) {
+        if (unsubscribeSnapshot) {
+            unsubscribeSnapshot();
+            unsubscribeSnapshot = null;
+        }
+
+        const roomRef = doc(db, 'rooms', roomId);
+
+        unsubscribeSnapshot = onSnapshot(roomRef, (docSnap) => {
+            if (!docSnap.exists()) {
+                const errMsg = '❌ റൂം കണ്ടെത്തിയില്ല!';
+                if (currentMode === 'player') {
+                    statusMsg.textContent = errMsg;
+                    statusMsg.className = 'status-msg error';
+                    buzzerBtn.disabled = true;
+                    rankingList.innerHTML = '<li class="empty-state">❌ റൂം ഇല്ല</li>';
+                } else {
+                    adminRankingList.innerHTML = '<div class="empty-state">❌ റൂം ഇല്ല. ആദ്യം റൂം സൃഷ്ടിക്കുക.</div>';
+                }
+                return;
+            }
+
+            const data = docSnap.data();
+            const order = data.buzzerOrder || [];
+            buzzerOrderData = order;
+
+            if (currentMode === 'player') {
+                updatePlayerStatus(order);
+                renderPlayerList(order);
+            } else {
+                updateAdminStats(order);
+                renderAdminList(order);
+            }
+
+        }, (error) => {
+            const errMsg = '❌ കണക്ഷൻ പിശക്: ' + error.message;
+            if (currentMode === 'player') {
+                statusMsg.textContent = errMsg;
+                statusMsg.className = 'status-msg error';
+            } else {
+                adminRankingList.innerHTML = `<div class="empty-state">${errMsg}</div>`;
+            }
+        });
+    }
+
+    // --------------------------------------------------------------
+    // 🎨 Player Render Functions
+    // --------------------------------------------------------------
+    function updatePlayerStatus(order) {
+        if (!currentUser) return;
+        const locked = order.length >= 10;
+        isLocked = locked;
+        const existing = order.find(entry => entry.userId === currentUser.uid);
+
+        if (existing) {
+            hasBuzzed = true;
+            buzzerBtn.disabled = true;
+            buzzerSub.textContent = `✅ ${existing.position}-ാം സ്ഥാനം`;
+            statusMsg.textContent = `🎉 നിങ്ങൾ ${existing.position}-ാം സ്ഥാനത്ത് ബസർ ചെയ്തു!`;
+            statusMsg.className = 'status-msg success';
+        } else {
+            hasBuzzed = false;
+            if (locked) {
+                buzzerBtn.disabled = true;
+                buzzerSub.textContent = '⛔ പൂർണ്ണം';
+                statusMsg.textContent = '⛔ 10 പേർ കഴിഞ്ഞു. മത്സരം അവസാനിച്ചു.';
+                statusMsg.className = 'status-msg warning';
+            } else {
+                buzzerBtn.disabled = false;
+                buzzerSub.textContent = `${order.length + 1}/10`;
+                statusMsg.textContent = `🎯 തയ്യാറാണ്! (${order.length + 1}/10)`;
+                statusMsg.className = 'status-msg';
+            }
+        }
+    }
+
+    function renderPlayerList(order) {
+        if (!order || order.length === 0) {
+            rankingList.innerHTML = '<li class="empty-state">⏳ ഇതുവരെ ആരും ബസർ ചെയ്തിട്ടില്ല</li>';
+            return;
+        }
+        const sorted = [...order].sort((a, b) => a.position - b.position);
+        const top10 = sorted.slice(0, 10);
+        let html = '';
+        top10.forEach((entry, idx) => {
+            const rank = idx + 1;
+            const shortId = entry.userId.substring(0, 6);
+            let medal = '', cls = '';
+            if (rank === 1) { medal = '🥇'; cls = 'top1'; }
+            else if (rank === 2) { medal = '🥈'; cls = 'top2'; }
+            else if (rank === 3) { medal = '🥉'; cls = 'top3'; }
+            const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--';
+            html += `
+                <li class="${cls}">
+                    <span class="rank">${medal} #${rank}</span>
+                    <span class="player-name">Player ${shortId}...</span>
+                    <span class="player-time">${time}</span>
+                </li>
+            `;
+        });
+        rankingList.innerHTML = html;
+    }
+
+    // --------------------------------------------------------------
+    // 🎨 Admin Render Functions (Desktop only)
+    // --------------------------------------------------------------
+    function updateAdminStats(order) {
+        totalCount.textContent = order.length;
+        if (order.length > 0) {
+            const last = order[order.length - 1];
+            const time = last.timestamp?.seconds ? new Date(last.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : 'N/A';
+            lastBuzzer.textContent = time;
+        } else {
+            lastBuzzer.textContent = '-';
+        }
+    }
+
+    function renderAdminList(order) {
+        if (!order || order.length === 0) {
+            adminRankingList.innerHTML = '<div class="empty-state">⏳ ആരും ബസർ ചെയ്തിട്ടില്ല.</div>';
+            return;
+        }
+        const sorted = [...order].sort((a, b) => a.position - b.position);
+        let html = '';
+        sorted.forEach((entry, idx) => {
+            const rank = idx + 1;
+            const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
+            let cls = '';
+            if (rank === 1) cls = 'top1';
+            else if (rank === 2) cls = 'top2';
+            else if (rank === 3) cls = 'top3';
+            html += `
+                <div class="admin-item ${cls}">
+                    <span class="pos">#${rank}</span>
+                    <span class="id">${entry.userId}</span>
+                    <span class="time">${time}</span>
+                </div>
+            `;
+        });
+        adminRankingList.innerHTML = html;
+    }
+
+    // --------------------------------------------------------------
+    // 🚀 Press Buzzer (Player)
+    // --------------------------------------------------------------
+    async function pressBuzzer() {
+        if (!currentUser) {
+            statusMsg.textContent = '⚠️ ലോഗിൻ ചെയ്തിട്ടില്ല.';
+            statusMsg.className = 'status-msg error';
+            return;
+        }
+        if (isLocked) {
+            statusMsg.textContent = '⛔ ബസർ ലോക്ക് ആയി.';
+            statusMsg.className = 'status-msg warning';
+            return;
+        }
+        if (hasBuzzed) {
+            statusMsg.textContent = '⚠️ നിങ്ങൾ ഇതിനകം ബസർ ചെയ്തു.';
+            statusMsg.className = 'status-msg warning';
+            return;
+        }
+
+        buzzerBtn.disabled = true;
+        buzzerSub.textContent = '⏳...';
+        statusMsg.textContent = '⏳ അയയ്ക്കുന്നു...';
+        statusMsg.className = 'status-msg';
+
+        try {
+            const pressFn = httpsCallable(functions, 'pressBuzzer');
+            const result = await pressFn({ roomId: ROOM_ID });
+            const pos = result.data.position;
+            
+            playBuzzerSound();
+            flashOverlay.classList.add('active');
+            setTimeout(() => flashOverlay.classList.remove('active'), 200);
+            
+            statusMsg.textContent = `🎉 വിജയം! നിങ്ങൾ ${pos}-ാം സ്ഥാനത്ത്!`;
+            statusMsg.className = 'status-msg success';
+            buzzerSub.textContent = `✅ ${pos}-ാം സ്ഥാനം`;
+            hasBuzzed = true;
+
+        } catch (error) {
+            console.error(error);
+            let msg = '❌ പിശക്: ' + error.message;
+            if (error.message.includes('ലോക്ക്')) msg = '⛔ ബസർ പൂർണ്ണമായി.';
+            else if (error.message.includes('ഇതിനകം')) msg = '⚠️ നിങ്ങൾ ഇതിനകം ബസർ ചെയ്തു.';
+            else if (error.message.includes('റൂം')) msg = '❌ റൂം കണ്ടെത്തിയില്ല.';
+            
+            statusMsg.textContent = msg;
+            statusMsg.className = 'status-msg error';
+            if (!isLocked && !hasBuzzed) {
+                buzzerBtn.disabled = false;
+                buzzerSub.textContent = 'വീണ്ടും';
+            }
+        }
+    }
+
+    buzzerBtn.addEventListener('click', pressBuzzer);
+
+    // --------------------------------------------------------------
+    // 🔄 Admin Reset & Refresh (Desktop only)
+    // --------------------------------------------------------------
+    async function resetBuzzer() {
+        if (!confirm('⚠️ എല്ലാ ബസർ ഡാറ്റയും മായ്ക്കും. തുടരണോ?')) return;
+        try {
+            const roomRef = doc(db, 'rooms', ROOM_ID);
+            await updateDoc(roomRef, { buzzerOrder: [] });
+            alert('✅ റീസെറ്റ് ചെയ്തു!');
+        } catch (error) {
+            alert('❌ റീസെറ്റ് പരാജയം: ' + error.message);
+        }
+    }
+
+    resetBtn.addEventListener('click', resetBuzzer);
+    refreshBtn.addEventListener('click', () => {
+        connectToRoom(ROOM_ID);
+    });
+
+    // --------------------------------------------------------------
+    // 🚀 Initial Load
+    // --------------------------------------------------------------
+    console.log('🚀 Unified Buzzer App Loaded');
+    if (IS_MOBILE) {
+        console.log('📱 Mobile mode: Player only');
+    } else {
+        console.log('💻 Desktop mode: Player + Admin');
+    }
+
+    // Cleanup
+    window.addEventListener('beforeunload', () => {
+        if (unsubscribeSnapshot) unsubscribeSnapshot();
+    });
+</script>
 </body>
 </html>
