@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ക്വിസ് ബസർ</title>
+    <title>Quiz Buzzer</title>
     <script type="importmap">
         {
             "imports": {
@@ -20,7 +20,7 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            touch-action: manipulation; /* Zoom തടയാൻ */
+            touch-action: manipulation;
         }
         body {
             background: #0b0f1c;
@@ -124,7 +124,6 @@
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             border: 4px solid rgba(255,255,255,0.1);
-            /* Default / Ready state - GREEN */
             background: radial-gradient(circle at 40% 35%, #4ade80, #15803d);
             box-shadow: 0 0 50px rgba(74, 222, 128, 0.35), 0 15px 30px rgba(0,0,0,0.8);
         }
@@ -140,7 +139,6 @@
             0% { transform: scale(1); opacity: 0.3; }
             100% { transform: scale(1.1); opacity: 0; }
         }
-        /* Pressed state - RED */
         .buzzer-btn.pressed {
             background: radial-gradient(circle at 40% 35%, #ff6b6b, #b91c1c) !important;
             box-shadow: 0 0 70px rgba(239, 68, 68, 0.7), 0 5px 10px rgba(0,0,0,0.8) !important;
@@ -370,7 +368,7 @@
             cursor: pointer;
         }
 
-        /* 🚨 Strobe Overlay (Vehicle Emergency Light Effect) */
+        /* Strobe Overlay */
         .strobe-overlay {
             position: fixed;
             top: 0;
@@ -384,7 +382,7 @@
             animation: none;
         }
         .strobe-overlay.active {
-            animation: strobe-flash 0.15s ease 4; /* 4 തവണ വേഗത്തിൽ മിന്നും */
+            animation: strobe-flash 0.15s ease 4;
         }
         @keyframes strobe-flash {
             0% { opacity: 0.9; }
@@ -392,27 +390,24 @@
             100% { opacity: 0.9; }
         }
 
-        /* Scrollbar */
         .leaderboard::-webkit-scrollbar, .admin-list-container::-webkit-scrollbar { width: 4px; }
         .leaderboard::-webkit-scrollbar-thumb, .admin-list-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-
-        /* Mobile Admin hidden */
         .admin-toggle.mobile-hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<!-- 🚨 Strobe Overlay -->
+<!-- Strobe Overlay -->
 <div class="strobe-overlay" id="strobeOverlay"></div>
 
 <!-- Password Modal -->
 <div id="passwordModal">
     <div class="modal-box">
         <button class="modal-close" id="modalCloseBtn">&times;</button>
-        <h2>🔐 അഡ്മിൻ ആക്സസ്</h2>
-        <p>തുടരുന്നതിന് പാസ്വേഡ് നൽകുക.</p>
-        <input type="password" id="adminPasswordInput" placeholder="പാസ്വേഡ് നൽകുക" autocomplete="off">
-        <button id="loginAdminBtn">തുറക്കുക</button>
+        <h2>🔐 Admin Access</h2>
+        <p>Enter password to continue.</p>
+        <input type="password" id="adminPasswordInput" placeholder="Enter password" autocomplete="off">
+        <button id="loginAdminBtn">Unlock</button>
         <span id="loginError" class="error-msg"></span>
     </div>
 </div>
@@ -421,10 +416,10 @@
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <h1>🔔 ബസർ</h1>
+        <h1>🔔 Quiz Buzzer</h1>
         <div class="actions">
-            <span class="room-badge" id="roomBadge">റൂം: quiz123</span>
-            <button class="admin-toggle" id="adminToggleBtn" title="അഡ്മിൻ പാനൽ">🔐</button>
+            <span class="room-badge" id="roomBadge">Room: quiz123</span>
+            <button class="admin-toggle" id="adminToggleBtn" title="Admin Panel">🔐</button>
         </div>
     </div>
 
@@ -432,19 +427,19 @@
     <div id="playerView">
         <div class="buzzer-wrapper">
             <button id="buzzerBtn" class="buzzer-btn" disabled>
-                അമർത്തുക
-                <span class="sub-text" id="buzzerSub">ലോഗിൻ ചെയ്യുന്നു...</span>
+                BUZZ
+                <span class="sub-text" id="buzzerSub">Logging in...</span>
             </button>
         </div>
 
         <div class="status-area">
-            <div id="statusMsg" class="status-msg">⏳ കണക്റ്റ് ചെയ്യുന്നു...</div>
+            <div id="statusMsg" class="status-msg">⏳ Connecting...</div>
         </div>
 
         <div class="leaderboard">
-            <h3>🏆 ലീഡർബോർഡ് (Top 10)</h3>
+            <h3>🏆 Leaderboard (Top 10)</h3>
             <ul id="ranking-list">
-                <li class="empty-state">⏳ കാത്തിരിക്കുക...</li>
+                <li class="empty-state">⏳ Waiting...</li>
             </ul>
         </div>
     </div>
@@ -452,32 +447,32 @@
     <!-- Admin View -->
     <div id="adminView">
         <div class="stats">
-            <div class="stat-card"><label>ആകെ ബസർ</label><span id="totalCount">0</span></div>
-            <div class="stat-card"><label>അവസാന സമയം</label><span id="lastBuzzer">-</span></div>
+            <div class="stat-card"><label>Total Buzzes</label><span id="totalCount">0</span></div>
+            <div class="stat-card"><label>Last Time</label><span id="lastBuzzer">-</span></div>
         </div>
 
         <div class="admin-list-container">
-            <h3>🏆 ക്രമം (Timestamp)</h3>
+            <h3>🏆 Order (Timestamp)</h3>
             <div id="adminRankingList">
-                <div class="empty-state">⏳ ലോഡ് ചെയ്യുന്നു...</div>
+                <div class="empty-state">⏳ Loading...</div>
             </div>
         </div>
 
         <div class="actions">
-            <button class="btn btn-danger" id="resetBtn">🔄 റീസെറ്റ്</button>
-            <button class="btn btn-success" id="refreshBtn">↻ പുതുക്കുക</button>
+            <button class="btn btn-danger" id="resetBtn">🔄 Reset</button>
+            <button class="btn btn-success" id="refreshBtn">↻ Refresh</button>
         </div>
-        <p style="color: #64748b; font-size: 0.6rem; text-align: center; margin-top: 4px;">* റീസെറ്റ് ചെയ്താൽ എല്ലാ ഡാറ്റയും മായും.</p>
+        <p style="color: #64748b; font-size: 0.6rem; text-align: center; margin-top: 4px;">* Reset will clear all buzzer data.</p>
     </div>
 </div>
 
 <script type="module">
     // --------------------------------------------------------------
-    // 🔥 Firebase Config (നിങ്ങളുടേത് മാറ്റിച്ചേർക്കുക)
+    // 🔥 Firebase Config (Replace with your own)
     // --------------------------------------------------------------
     import { initializeApp } from 'firebase/app';
     import { getAuth, signInAnonymously, signOut, onAuthStateChanged } from 'firebase/auth';
-    import { getFirestore, doc, onSnapshot, updateDoc, arrayUnion, arrayRemove, serverTimestamp } from 'firebase/firestore';
+    import { getFirestore, doc, onSnapshot, updateDoc, serverTimestamp } from 'firebase/firestore';
     import { getFunctions, httpsCallable } from 'firebase/functions';
 
     const firebaseConfig = {
@@ -506,7 +501,7 @@
     // --------------------------------------------------------------
     // Constants
     // --------------------------------------------------------------
-    const ROOM_ID = 'quiz123';
+    const ROOM_ID = 'quiz123'; // Change if needed
     const ADMIN_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // "admin123"
 
     // --------------------------------------------------------------
@@ -518,6 +513,7 @@
     let isLocked = false;
     let hasBuzzed = false;
     let buzzerOrderData = [];
+    let prevBuzzerCount = 0; // For admin sound detection
 
     // --------------------------------------------------------------
     // DOM Elements
@@ -544,7 +540,7 @@
     const resetBtn = document.getElementById('resetBtn');
     const refreshBtn = document.getElementById('refreshBtn');
 
-    roomBadge.textContent = `റൂം: ${ROOM_ID}`;
+    roomBadge.textContent = `Room: ${ROOM_ID}`;
 
     // --------------------------------------------------------------
     // 🚫 Mobile: hide admin toggle
@@ -554,12 +550,41 @@
     }
 
     // --------------------------------------------------------------
-    // 🎨 Button State Manager (Green/Red/Grey)
+    // 🎵 Admin Sound (Beep) - Admin only
+    // --------------------------------------------------------------
+    function playAdminSound() {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.25);
+        } catch (e) {
+            console.log('Admin sound error:', e);
+        }
+    }
+
+    // --------------------------------------------------------------
+    // 📳 Player Vibration (Mobile only)
+    // --------------------------------------------------------------
+    function triggerVibration() {
+        if (navigator.vibrate) {
+            navigator.vibrate(200); // 200ms
+        }
+    }
+
+    // --------------------------------------------------------------
+    // 🎨 Button State Manager
     // --------------------------------------------------------------
     function setButtonState(state, subText = null) {
-        // state: 'ready' (green), 'pressed' (red), 'locked' (grey/disabled)
         buzzerBtn.classList.remove('ready', 'pressed');
-        
         if (state === 'ready') {
             buzzerBtn.style.background = 'radial-gradient(circle at 40% 35%, #4ade80, #15803d)';
             buzzerBtn.style.boxShadow = '0 0 50px rgba(74, 222, 128, 0.35), 0 15px 30px rgba(0,0,0,0.8)';
@@ -578,39 +603,19 @@
     }
 
     // --------------------------------------------------------------
-    // 🚨 Strobe Effect (Vehicle Red Flash)
+    // 🚨 Strobe Effect (Vehicle Red Flash) - Player only
     // --------------------------------------------------------------
     function triggerStrobe() {
         strobeOverlay.classList.remove('active');
-        // Force reflow to restart animation
         void strobeOverlay.offsetWidth;
         strobeOverlay.classList.add('active');
         setTimeout(() => {
             strobeOverlay.classList.remove('active');
-        }, 800); // 0.15s * 4 = 0.6s + buffer
+        }, 800);
     }
 
     // --------------------------------------------------------------
-    // 🎵 Buzzer Sound
-    // --------------------------------------------------------------
-    function playBuzzerSound() {
-        try {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'square';
-            osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.35);
-        } catch (e) { console.log('Sound error:', e); }
-    }
-
-    // --------------------------------------------------------------
-    // 🔐 Admin Password Check (Desktop only)
+    // 🔐 Admin Password Check
     // --------------------------------------------------------------
     async function verifyPassword(pass) {
         const encoder = new TextEncoder();
@@ -636,13 +641,13 @@
     async function handleAdminLogin() {
         if (IS_MOBILE) return;
         const pass = adminPasswordInput.value;
-        if (!pass) { loginError.textContent = '⚠️ പാസ്വേഡ് നൽകുക.'; return; }
+        if (!pass) { loginError.textContent = '⚠️ Enter password.'; return; }
         const isValid = await verifyPassword(pass);
         if (isValid) {
             hideAdminLogin();
             switchToAdminMode();
         } else {
-            loginError.textContent = '❌ തെറ്റായ പാസ്വേഡ്!';
+            loginError.textContent = '❌ Wrong password!';
             adminPasswordInput.value = '';
             adminPasswordInput.focus();
         }
@@ -662,7 +667,7 @@
     adminPasswordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleAdminLogin(); });
 
     // --------------------------------------------------------------
-    // 🔄 Mode Switching (Desktop only)
+    // 🔄 Mode Switching
     // --------------------------------------------------------------
     function switchToAdminMode() {
         if (IS_MOBILE) return;
@@ -670,7 +675,8 @@
         playerView.classList.add('hidden');
         adminView.classList.add('active');
         adminToggleBtn.classList.add('active');
-        adminToggleBtn.textContent = '👤 പ്ലെയർ';
+        adminToggleBtn.textContent = '👤 Player';
+        prevBuzzerCount = buzzerOrderData.length;
         if (buzzerOrderData.length > 0) renderAdminList(buzzerOrderData);
         else renderAdminList([]);
         updateAdminStats(buzzerOrderData);
@@ -698,7 +704,7 @@
             await signInAnonymously(auth);
             console.log('✅ New player logged in.');
         } catch (error) {
-            statusMsg.textContent = '❌ ലോഗിൻ പരാജയം: ' + error.message;
+            statusMsg.textContent = '❌ Login failed: ' + error.message;
             statusMsg.className = 'status-msg error';
         }
     }
@@ -708,7 +714,7 @@
             currentUser = user;
             console.log('User UID:', user.uid);
             if (currentMode === 'player') {
-                statusMsg.textContent = '✅ ലോഗിൻ വിജയകരം. റൂമിലേക്ക് കണക്റ്റ് ചെയ്യുന്നു...';
+                statusMsg.textContent = '✅ Login successful. Connecting to room...';
                 statusMsg.className = 'status-msg';
                 connectToRoom(ROOM_ID);
             }
@@ -734,21 +740,27 @@
 
         unsubscribeSnapshot = onSnapshot(roomRef, (docSnap) => {
             if (!docSnap.exists()) {
-                const errMsg = '❌ റൂം കണ്ടെത്തിയില്ല!';
+                const errMsg = '❌ Room not found!';
                 if (currentMode === 'player') {
                     statusMsg.textContent = errMsg;
                     statusMsg.className = 'status-msg error';
-                    setButtonState('disabled', 'റൂം ഇല്ല');
-                    rankingList.innerHTML = '<li class="empty-state">❌ റൂം ഇല്ല</li>';
+                    setButtonState('disabled', 'Room missing');
+                    rankingList.innerHTML = '<li class="empty-state">❌ Room not found</li>';
                 } else {
-                    adminRankingList.innerHTML = '<div class="empty-state">❌ റൂം ഇല്ല. ആദ്യം റൂം സൃഷ്ടിക്കുക.</div>';
+                    adminRankingList.innerHTML = '<div class="empty-state">❌ Room not found. Please create it first.</div>';
                 }
                 return;
             }
 
             const data = docSnap.data();
             const order = data.buzzerOrder || [];
+            const oldLength = buzzerOrderData.length;
             buzzerOrderData = order;
+
+            // Admin Sound: if new entry arrives (only in admin mode)
+            if (currentMode === 'admin' && order.length > oldLength) {
+                playAdminSound();
+            }
 
             if (currentMode === 'player') {
                 updatePlayerStatus(order);
@@ -759,7 +771,7 @@
             }
 
         }, (error) => {
-            const errMsg = '❌ കണക്ഷൻ പിശക്: ' + error.message;
+            const errMsg = '❌ Connection error: ' + error.message;
             if (currentMode === 'player') {
                 statusMsg.textContent = errMsg;
                 statusMsg.className = 'status-msg error';
@@ -781,18 +793,18 @@
 
         if (existing) {
             hasBuzzed = true;
-            setButtonState('pressed', `✅ ${existing.position}-ാം സ്ഥാനം`);
-            statusMsg.textContent = `🎉 നിങ്ങൾ ${existing.position}-ാം സ്ഥാനത്ത് ബസർ ചെയ്തു!`;
+            setButtonState('pressed', `✅ Position ${existing.position}`);
+            statusMsg.textContent = `🎉 You buzzed at position ${existing.position}!`;
             statusMsg.className = 'status-msg success';
         } else {
             hasBuzzed = false;
             if (locked) {
-                setButtonState('locked', '⛔ പൂർണ്ണം');
-                statusMsg.textContent = '⛔ 10 പേർ കഴിഞ്ഞു. മത്സരം അവസാനിച്ചു.';
+                setButtonState('locked', '⛔ Full');
+                statusMsg.textContent = '⛔ Buzzer is full (10/10). Competition over.';
                 statusMsg.className = 'status-msg warning';
             } else {
-                setButtonState('ready', `${order.length + 1}/10 അമർത്തുക`);
-                statusMsg.textContent = `🎯 തയ്യാറാണ്! (${order.length + 1}/10)`;
+                setButtonState('ready', `${order.length + 1}/10 Press`);
+                statusMsg.textContent = `🎯 Ready! (${order.length + 1}/10)`;
                 statusMsg.className = 'status-msg';
             }
         }
@@ -800,7 +812,7 @@
 
     function renderPlayerList(order) {
         if (!order || order.length === 0) {
-            rankingList.innerHTML = '<li class="empty-state">⏳ ഇതുവരെ ആരും ബസർ ചെയ്തിട്ടില്ല</li>';
+            rankingList.innerHTML = '<li class="empty-state">⏳ No one has buzzed yet</li>';
             return;
         }
         const sorted = [...order].sort((a, b) => a.position - b.position);
@@ -841,7 +853,7 @@
 
     function renderAdminList(order) {
         if (!order || order.length === 0) {
-            adminRankingList.innerHTML = '<div class="empty-state">⏳ ആരും ബസർ ചെയ്തിട്ടില്ല.</div>';
+            adminRankingList.innerHTML = '<div class="empty-state">⏳ No buzzes yet.</div>';
             return;
         }
         const sorted = [...order].sort((a, b) => a.position - b.position);
@@ -867,23 +879,23 @@
     // --------------------------------------------------------------
     async function pressBuzzer() {
         if (!currentUser) {
-            statusMsg.textContent = '⚠️ ലോഗിൻ ചെയ്തിട്ടില്ല.';
+            statusMsg.textContent = '⚠️ Not logged in.';
             statusMsg.className = 'status-msg error';
             return;
         }
         if (isLocked) {
-            statusMsg.textContent = '⛔ ബസർ ലോക്ക് ആയി.';
+            statusMsg.textContent = '⛔ Buzzer is locked.';
             statusMsg.className = 'status-msg warning';
             return;
         }
         if (hasBuzzed) {
-            statusMsg.textContent = '⚠️ നിങ്ങൾ ഇതിനകം ബസർ ചെയ്തു.';
+            statusMsg.textContent = '⚠️ You already buzzed.';
             statusMsg.className = 'status-msg warning';
             return;
         }
 
         setButtonState('disabled', '⏳...');
-        statusMsg.textContent = '⏳ അയയ്ക്കുന്നു...';
+        statusMsg.textContent = '⏳ Sending buzz...';
         statusMsg.className = 'status-msg';
 
         try {
@@ -891,28 +903,27 @@
             const result = await pressFn({ roomId: ROOM_ID });
             const pos = result.data.position;
             
-            // 🎵 Sound + 🚨 Strobe (Vehicle Red Flash)
-            playBuzzerSound();
+            // 📳 Player Vibration
+            triggerVibration();
+            // 🚨 Visual Strobe
             triggerStrobe();
             
-            // ബട്ടൺ Red ആക്കുക
-            setButtonState('pressed', `✅ ${pos}-ാം സ്ഥാനം`);
-            statusMsg.textContent = `🎉 വിജയം! നിങ്ങൾ ${pos}-ാം സ്ഥാനത്ത്!`;
+            setButtonState('pressed', `✅ Position ${pos}`);
+            statusMsg.textContent = `🎉 Success! You buzzed at position ${pos}!`;
             statusMsg.className = 'status-msg success';
             hasBuzzed = true;
 
         } catch (error) {
             console.error(error);
-            let msg = '❌ പിശക്: ' + error.message;
-            if (error.message.includes('ലോക്ക്')) msg = '⛔ ബസർ പൂർണ്ണമായി.';
-            else if (error.message.includes('ഇതിനകം')) msg = '⚠️ നിങ്ങൾ ഇതിനകം ബസർ ചെയ്തു.';
-            else if (error.message.includes('റൂം')) msg = '❌ റൂം കണ്ടെത്തിയില്ല.';
+            let msg = '❌ Error: ' + error.message;
+            if (error.message.includes('ലോക്ക്') || error.message.includes('full')) msg = '⛔ Buzzer is full.';
+            else if (error.message.includes('ഇതിനകം') || error.message.includes('already')) msg = '⚠️ You already buzzed.';
+            else if (error.message.includes('റൂം') || error.message.includes('Room')) msg = '❌ Room not found.';
             
             statusMsg.textContent = msg;
             statusMsg.className = 'status-msg error';
-            // വീണ്ടും പച്ചയാക്കും, പക്ഷേ listener update ചെയ്യും
             if (!isLocked && !hasBuzzed) {
-                setButtonState('ready', 'വീണ്ടും ശ്രമിക്കുക');
+                setButtonState('ready', 'Try again');
             }
         }
     }
@@ -923,13 +934,13 @@
     // 🔄 Admin Reset & Refresh
     // --------------------------------------------------------------
     async function resetBuzzer() {
-        if (!confirm('⚠️ എല്ലാ ബസർ ഡാറ്റയും മായ്ക്കും. തുടരണോ?')) return;
+        if (!confirm('⚠️ This will clear all buzzer data. Continue?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
             await updateDoc(roomRef, { buzzerOrder: [] });
-            alert('✅ റീസെറ്റ് ചെയ്തു!');
+            alert('✅ Reset successful!');
         } catch (error) {
-            alert('❌ റീസെറ്റ് പരാജയം: ' + error.message);
+            alert('❌ Reset failed: ' + error.message);
         }
     }
 
@@ -941,14 +952,13 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('🚀 Unified Buzzer App Loaded (Green/Red Strobe)');
+    console.log('🚀 Quiz Buzzer App Loaded (English UI)');
     if (IS_MOBILE) {
-        console.log('📱 Mobile mode: Player only, Full Screen');
+        console.log('📱 Mobile mode: Player only, Vibration enabled');
     } else {
-        console.log('💻 Desktop mode: Player + Admin');
+        console.log('💻 Desktop mode: Player + Admin, Admin sound enabled');
     }
 
-    // Cleanup
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
     });
