@@ -2,7 +2,7 @@
 <html lang="ml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>ക്വിസ് ബസർ</title>
     <script type="importmap">
         {
@@ -16,27 +16,36 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            touch-action: manipulation; /* Zoom തടയാൻ */
+        }
         body {
             background: #0b0f1c;
             font-family: 'Segoe UI', system-ui, sans-serif;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             background-image: radial-gradient(circle at 50% 0%, #1a1f35, #0b0f1c 70%);
             color: #e2e8f0;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
         }
         .container {
             width: 100%;
-            height: 100%;
-            max-width: 500px;
-            max-height: 900px;
-            padding: 15px 20px;
+            height: 100vh;
+            max-width: 100%;
+            max-height: 100vh;
+            padding: 12px 15px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             position: relative;
+            overflow: hidden;
         }
 
         /* Header */
@@ -44,12 +53,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0 5px;
+            padding: 5px 0 5px;
             flex-shrink: 0;
         }
         .header h1 {
             color: #facc15;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             text-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
         }
         .header .actions {
@@ -62,14 +71,14 @@
             padding: 4px 14px;
             border-radius: 50px;
             color: #94a3b8;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             border: 1px solid #334155;
         }
         .admin-toggle {
             background: none;
             border: none;
             color: #64748b;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             padding: 5px 8px;
             border-radius: 10px;
@@ -77,7 +86,6 @@
         }
         .admin-toggle:hover { background: #1e293b; color: #facc15; }
         .admin-toggle.active { color: #facc15; background: #1e293b; }
-        /* മൊബൈലിൽ admin-toggle മറയ്ക്കാം */
         .admin-toggle.mobile-hidden { display: none !important; }
 
         /* Player View */
@@ -86,29 +94,28 @@
             flex-direction: column;
             flex: 1;
             height: 100%;
+            min-height: 0;
         }
         .buzzer-wrapper {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px 0;
-            min-height: 250px;
+            padding: 5px 0;
+            min-height: 0;
         }
         .buzzer-btn {
-            width: 85%;
+            width: 82%;
             aspect-ratio: 1/1;
-            max-width: 320px;
+            max-width: 380px;
             border-radius: 50%;
             border: none;
-            background: radial-gradient(circle at 40% 35%, #ff6b6b, #c92a2a);
             color: white;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 900;
             text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            box-shadow: 0 0 40px rgba(239, 68, 68, 0.3), 0 15px 30px rgba(0,0,0,0.8);
             cursor: pointer;
-            transition: all 0.08s ease;
+            transition: all 0.1s ease;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -117,6 +124,9 @@
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             border: 4px solid rgba(255,255,255,0.1);
+            /* Default / Ready state - GREEN */
+            background: radial-gradient(circle at 40% 35%, #4ade80, #15803d);
+            box-shadow: 0 0 50px rgba(74, 222, 128, 0.35), 0 15px 30px rgba(0,0,0,0.8);
         }
         .buzzer-btn::after {
             content: '';
@@ -130,44 +140,55 @@
             0% { transform: scale(1); opacity: 0.3; }
             100% { transform: scale(1.1); opacity: 0; }
         }
-        .buzzer-btn:active:not(:disabled) {
+        /* Pressed state - RED */
+        .buzzer-btn.pressed {
+            background: radial-gradient(circle at 40% 35%, #ff6b6b, #b91c1c) !important;
+            box-shadow: 0 0 70px rgba(239, 68, 68, 0.7), 0 5px 10px rgba(0,0,0,0.8) !important;
+            animation: button-pulse-red 0.8s ease 3;
+        }
+        @keyframes button-pulse-red {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); box-shadow: 0 0 100px rgba(255, 0, 0, 0.9); }
+            100% { transform: scale(1); }
+        }
+        .buzzer-btn:active:not(:disabled):not(.pressed) {
             transform: scale(0.92);
-            box-shadow: 0 0 70px rgba(239, 68, 68, 0.9), 0 5px 10px rgba(0,0,0,0.8);
+            box-shadow: 0 0 70px rgba(74, 222, 128, 0.6), 0 5px 10px rgba(0,0,0,0.8);
         }
         .buzzer-btn:disabled {
-            opacity: 0.35;
+            opacity: 0.4;
             filter: grayscale(0.8);
             transform: scale(0.95);
             cursor: not-allowed;
             box-shadow: 0 0 20px rgba(100,100,100,0.2);
         }
+        .buzzer-btn:disabled::after { animation: none; }
         .buzzer-btn .sub-text {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 400;
-            opacity: 0.8;
+            opacity: 0.9;
             margin-top: 5px;
             background: rgba(0,0,0,0.3);
-            padding: 3px 15px;
+            padding: 3px 18px;
             border-radius: 30px;
         }
 
         .status-area {
             width: 100%;
             text-align: center;
-            padding: 5px 0 10px;
+            padding: 2px 0 8px;
             flex-shrink: 0;
         }
         .status-msg {
             background: rgba(30, 41, 59, 0.8);
             backdrop-filter: blur(10px);
-            padding: 10px 20px;
+            padding: 8px 18px;
             border-radius: 50px;
             color: #e2e8f0;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             border: 1px solid #334155;
             display: inline-block;
-            width: auto;
-            min-width: 200px;
+            min-width: 180px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .status-msg.success { border-color: #4ade80; color: #4ade80; }
@@ -179,27 +200,28 @@
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
             border-radius: 20px;
-            padding: 12px 10px;
+            padding: 10px 10px;
             border: 1px solid #1e293b;
-            max-height: 32vh;
+            max-height: 30vh;
             overflow-y: auto;
             flex-shrink: 0;
+            margin-top: 2px;
         }
         .leaderboard h3 {
             color: #94a3b8;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             padding-left: 5px;
         }
         #ranking-list { list-style: none; padding: 0; margin: 0; }
         #ranking-list li {
             display: flex;
             align-items: center;
-            padding: 6px 12px;
+            padding: 5px 12px;
             background: rgba(30, 41, 59, 0.5);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             border-radius: 12px;
             border-left: 4px solid #334155;
             animation: slideIn 0.25s ease;
@@ -211,10 +233,10 @@
             0% { transform: translateX(-15px); opacity: 0; }
             100% { transform: translateX(0); opacity: 1; }
         }
-        .rank { font-weight: 800; color: #facc15; min-width: 40px; font-size: 1rem; }
-        .player-name { flex: 1; margin-left: 8px; font-weight: 500; font-size: 0.9rem; }
-        .player-time { font-size: 0.65rem; color: #64748b; background: #1e293b; padding: 2px 10px; border-radius: 20px; }
-        .empty-state { color: #475569; text-align: center; padding: 15px; font-style: italic; }
+        .rank { font-weight: 800; color: #facc15; min-width: 38px; font-size: 0.9rem; }
+        .player-name { flex: 1; margin-left: 8px; font-weight: 500; font-size: 0.85rem; }
+        .player-time { font-size: 0.6rem; color: #64748b; background: #1e293b; padding: 2px 10px; border-radius: 20px; }
+        .empty-state { color: #475569; text-align: center; padding: 12px; font-style: italic; }
 
         /* Admin View */
         #adminView {
@@ -230,49 +252,47 @@
         .stats {
             display: flex;
             gap: 12px;
-            margin: 10px 0;
+            margin: 5px 0 8px;
             flex-shrink: 0;
         }
         .stat-card {
             background: #1e293b;
-            padding: 10px 18px;
+            padding: 8px 15px;
             border-radius: 15px;
             flex: 1;
             border-left: 3px solid #facc15;
         }
-        .stat-card label { color: #94a3b8; font-size: 0.7rem; display: block; }
-        .stat-card span { font-size: 1.5rem; font-weight: bold; }
+        .stat-card label { color: #94a3b8; font-size: 0.65rem; display: block; }
+        .stat-card span { font-size: 1.3rem; font-weight: bold; }
 
         .admin-list-container {
             background: #1e293b;
             border-radius: 20px;
-            padding: 12px;
+            padding: 10px;
             flex: 1;
             overflow-y: auto;
             margin: 5px 0 10px;
         }
         .admin-list-container h3 {
             color: #94a3b8;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         .admin-item {
             display: flex;
             align-items: center;
-            padding: 8px 12px;
+            padding: 6px 12px;
             background: #0f172a;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             border-radius: 10px;
             border-left: 3px solid #475569;
         }
-        .admin-item .pos { font-weight: 700; color: #facc15; min-width: 40px; }
-        .admin-item .id { flex: 1; font-family: monospace; font-size: 0.8rem; margin-left: 8px; overflow: hidden; text-overflow: ellipsis; }
-        .admin-item .time { color: #94a3b8; font-size: 0.7rem; background: #1e293b; padding: 2px 12px; border-radius: 20px; }
+        .admin-item .pos { font-weight: 700; color: #facc15; min-width: 35px; font-size: 0.9rem; }
+        .admin-item .id { flex: 1; font-family: monospace; font-size: 0.7rem; margin-left: 8px; overflow: hidden; text-overflow: ellipsis; }
+        .admin-item .time { color: #94a3b8; font-size: 0.65rem; background: #1e293b; padding: 2px 12px; border-radius: 20px; }
         .admin-item.top1 { border-left-color: #facc15; background: rgba(250, 204, 21, 0.08); }
-        .admin-item.top2 { border-left-color: #94a3b8; }
-        .admin-item.top3 { border-left-color: #cd7f32; }
 
         .actions {
             display: flex;
@@ -281,11 +301,11 @@
             padding-bottom: 5px;
         }
         .btn {
-            padding: 12px 20px;
+            padding: 10px 20px;
             border: none;
             border-radius: 15px;
             font-weight: bold;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             flex: 1;
             transition: 0.2s;
@@ -308,15 +328,15 @@
         #passwordModal.active { display: flex; }
         .modal-box {
             background: #1e293b;
-            padding: 35px 25px;
+            padding: 30px 25px;
             border-radius: 30px;
             width: 90%;
-            max-width: 380px;
+            max-width: 360px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.9);
             border: 1px solid #334155;
         }
         .modal-box h2 { color: #facc15; margin-bottom: 5px; }
-        .modal-box p { color: #94a3b8; margin-bottom: 20px; font-size: 0.9rem; }
+        .modal-box p { color: #94a3b8; margin-bottom: 20px; font-size: 0.85rem; }
         .modal-box input {
             width: 100%;
             padding: 14px;
@@ -350,36 +370,40 @@
             cursor: pointer;
         }
 
-        /* Flash */
-        .flash-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: white;
+        /* 🚨 Strobe Overlay (Vehicle Emergency Light Effect) */
+        .strobe-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #ff0000;
             opacity: 0;
             pointer-events: none;
-            z-index: 999;
-            transition: opacity 0.1s;
+            z-index: 9999;
+            animation: none;
         }
-        .flash-overlay.active { opacity: 0.25; transition: opacity 0s; }
+        .strobe-overlay.active {
+            animation: strobe-flash 0.15s ease 4; /* 4 തവണ വേഗത്തിൽ മിന്നും */
+        }
+        @keyframes strobe-flash {
+            0% { opacity: 0.9; }
+            50% { opacity: 0.05; }
+            100% { opacity: 0.9; }
+        }
 
         /* Scrollbar */
         .leaderboard::-webkit-scrollbar, .admin-list-container::-webkit-scrollbar { width: 4px; }
         .leaderboard::-webkit-scrollbar-thumb, .admin-list-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
 
-        /* Mode indicator */
-        .mode-indicator {
-            font-size: 0.65rem;
-            padding: 3px 12px;
-            border-radius: 30px;
-            background: #1e293b;
-            color: #94a3b8;
-            border: 1px solid #334155;
-        }
-        .mode-indicator.admin-mode { color: #facc15; border-color: #facc15; }
+        /* Mobile Admin hidden */
+        .admin-toggle.mobile-hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<div class="flash-overlay" id="flashOverlay"></div>
+<!-- 🚨 Strobe Overlay -->
+<div class="strobe-overlay" id="strobeOverlay"></div>
 
 <!-- Password Modal -->
 <div id="passwordModal">
@@ -443,7 +467,7 @@
             <button class="btn btn-danger" id="resetBtn">🔄 റീസെറ്റ്</button>
             <button class="btn btn-success" id="refreshBtn">↻ പുതുക്കുക</button>
         </div>
-        <p style="color: #64748b; font-size: 0.65rem; text-align: center; margin-top: 4px;">* റീസെറ്റ് ചെയ്താൽ എല്ലാ ഡാറ്റയും മായും.</p>
+        <p style="color: #64748b; font-size: 0.6rem; text-align: center; margin-top: 4px;">* റീസെറ്റ് ചെയ്താൽ എല്ലാ ഡാറ്റയും മായും.</p>
     </div>
 </div>
 
@@ -476,7 +500,6 @@
     function isMobileDevice() {
         return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone|Opera Mini|IEMobile/i.test(navigator.userAgent);
     }
-
     const IS_MOBILE = isMobileDevice();
     console.log(`📱 Device: ${IS_MOBILE ? 'Mobile' : 'Desktop'}`);
 
@@ -513,7 +536,7 @@
     const statusMsg = document.getElementById('statusMsg');
     const rankingList = document.getElementById('ranking-list');
     const roomBadge = document.getElementById('roomBadge');
-    const flashOverlay = document.getElementById('flashOverlay');
+    const strobeOverlay = document.getElementById('strobeOverlay');
 
     const totalCount = document.getElementById('totalCount');
     const lastBuzzer = document.getElementById('lastBuzzer');
@@ -528,10 +551,43 @@
     // --------------------------------------------------------------
     if (IS_MOBILE) {
         adminToggleBtn.classList.add('mobile-hidden');
-        // Mobile-ൽ ആരും അഡ്മിൻ പാനൽ കാണില്ല
-    } else {
-        // Desktop-ൽ admin toggle visible
-        adminToggleBtn.classList.remove('mobile-hidden');
+    }
+
+    // --------------------------------------------------------------
+    // 🎨 Button State Manager (Green/Red/Grey)
+    // --------------------------------------------------------------
+    function setButtonState(state, subText = null) {
+        // state: 'ready' (green), 'pressed' (red), 'locked' (grey/disabled)
+        buzzerBtn.classList.remove('ready', 'pressed');
+        
+        if (state === 'ready') {
+            buzzerBtn.style.background = 'radial-gradient(circle at 40% 35%, #4ade80, #15803d)';
+            buzzerBtn.style.boxShadow = '0 0 50px rgba(74, 222, 128, 0.35), 0 15px 30px rgba(0,0,0,0.8)';
+            buzzerBtn.disabled = false;
+        } else if (state === 'pressed') {
+            buzzerBtn.classList.add('pressed');
+            buzzerBtn.style.background = 'radial-gradient(circle at 40% 35%, #ff6b6b, #b91c1c)';
+            buzzerBtn.style.boxShadow = '0 0 70px rgba(239, 68, 68, 0.7), 0 5px 10px rgba(0,0,0,0.8)';
+            buzzerBtn.disabled = true;
+        } else if (state === 'locked' || state === 'disabled') {
+            buzzerBtn.style.background = 'radial-gradient(circle at 40% 35%, #475569, #1e293b)';
+            buzzerBtn.style.boxShadow = '0 0 20px rgba(100,100,100,0.2)';
+            buzzerBtn.disabled = true;
+        }
+        if (subText) buzzerSub.textContent = subText;
+    }
+
+    // --------------------------------------------------------------
+    // 🚨 Strobe Effect (Vehicle Red Flash)
+    // --------------------------------------------------------------
+    function triggerStrobe() {
+        strobeOverlay.classList.remove('active');
+        // Force reflow to restart animation
+        void strobeOverlay.offsetWidth;
+        strobeOverlay.classList.add('active');
+        setTimeout(() => {
+            strobeOverlay.classList.remove('active');
+        }, 800); // 0.15s * 4 = 0.6s + buffer
     }
 
     // --------------------------------------------------------------
@@ -566,7 +622,7 @@
     }
 
     function showAdminLogin() {
-        if (IS_MOBILE) return; // Mobile-ൽ അഡ്മിൻ ഇല്ല
+        if (IS_MOBILE) return;
         passwordModal.classList.add('active');
         adminPasswordInput.value = '';
         loginError.textContent = '';
@@ -592,7 +648,6 @@
         }
     }
 
-    // Desktop-ൽ മാത്രം admin toggle click handler
     adminToggleBtn.addEventListener('click', () => {
         if (IS_MOBILE) return;
         if (currentMode === 'admin') {
@@ -616,7 +671,6 @@
         adminView.classList.add('active');
         adminToggleBtn.classList.add('active');
         adminToggleBtn.textContent = '👤 പ്ലെയർ';
-        // Re-render admin view
         if (buzzerOrderData.length > 0) renderAdminList(buzzerOrderData);
         else renderAdminList([]);
         updateAdminStats(buzzerOrderData);
@@ -656,7 +710,6 @@
             if (currentMode === 'player') {
                 statusMsg.textContent = '✅ ലോഗിൻ വിജയകരം. റൂമിലേക്ക് കണക്റ്റ് ചെയ്യുന്നു...';
                 statusMsg.className = 'status-msg';
-                buzzerSub.textContent = 'തയ്യാറാണ്!';
                 connectToRoom(ROOM_ID);
             }
         } else {
@@ -685,7 +738,7 @@
                 if (currentMode === 'player') {
                     statusMsg.textContent = errMsg;
                     statusMsg.className = 'status-msg error';
-                    buzzerBtn.disabled = true;
+                    setButtonState('disabled', 'റൂം ഇല്ല');
                     rankingList.innerHTML = '<li class="empty-state">❌ റൂം ഇല്ല</li>';
                 } else {
                     adminRankingList.innerHTML = '<div class="empty-state">❌ റൂം ഇല്ല. ആദ്യം റൂം സൃഷ്ടിക്കുക.</div>';
@@ -710,6 +763,7 @@
             if (currentMode === 'player') {
                 statusMsg.textContent = errMsg;
                 statusMsg.className = 'status-msg error';
+                setButtonState('disabled', 'Error');
             } else {
                 adminRankingList.innerHTML = `<div class="empty-state">${errMsg}</div>`;
             }
@@ -727,20 +781,17 @@
 
         if (existing) {
             hasBuzzed = true;
-            buzzerBtn.disabled = true;
-            buzzerSub.textContent = `✅ ${existing.position}-ാം സ്ഥാനം`;
+            setButtonState('pressed', `✅ ${existing.position}-ാം സ്ഥാനം`);
             statusMsg.textContent = `🎉 നിങ്ങൾ ${existing.position}-ാം സ്ഥാനത്ത് ബസർ ചെയ്തു!`;
             statusMsg.className = 'status-msg success';
         } else {
             hasBuzzed = false;
             if (locked) {
-                buzzerBtn.disabled = true;
-                buzzerSub.textContent = '⛔ പൂർണ്ണം';
+                setButtonState('locked', '⛔ പൂർണ്ണം');
                 statusMsg.textContent = '⛔ 10 പേർ കഴിഞ്ഞു. മത്സരം അവസാനിച്ചു.';
                 statusMsg.className = 'status-msg warning';
             } else {
-                buzzerBtn.disabled = false;
-                buzzerSub.textContent = `${order.length + 1}/10`;
+                setButtonState('ready', `${order.length + 1}/10 അമർത്തുക`);
                 statusMsg.textContent = `🎯 തയ്യാറാണ്! (${order.length + 1}/10)`;
                 statusMsg.className = 'status-msg';
             }
@@ -775,7 +826,7 @@
     }
 
     // --------------------------------------------------------------
-    // 🎨 Admin Render Functions (Desktop only)
+    // 🎨 Admin Render Functions
     // --------------------------------------------------------------
     function updateAdminStats(order) {
         totalCount.textContent = order.length;
@@ -800,8 +851,6 @@
             const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
             let cls = '';
             if (rank === 1) cls = 'top1';
-            else if (rank === 2) cls = 'top2';
-            else if (rank === 3) cls = 'top3';
             html += `
                 <div class="admin-item ${cls}">
                     <span class="pos">#${rank}</span>
@@ -833,8 +882,7 @@
             return;
         }
 
-        buzzerBtn.disabled = true;
-        buzzerSub.textContent = '⏳...';
+        setButtonState('disabled', '⏳...');
         statusMsg.textContent = '⏳ അയയ്ക്കുന്നു...';
         statusMsg.className = 'status-msg';
 
@@ -843,13 +891,14 @@
             const result = await pressFn({ roomId: ROOM_ID });
             const pos = result.data.position;
             
+            // 🎵 Sound + 🚨 Strobe (Vehicle Red Flash)
             playBuzzerSound();
-            flashOverlay.classList.add('active');
-            setTimeout(() => flashOverlay.classList.remove('active'), 200);
+            triggerStrobe();
             
+            // ബട്ടൺ Red ആക്കുക
+            setButtonState('pressed', `✅ ${pos}-ാം സ്ഥാനം`);
             statusMsg.textContent = `🎉 വിജയം! നിങ്ങൾ ${pos}-ാം സ്ഥാനത്ത്!`;
             statusMsg.className = 'status-msg success';
-            buzzerSub.textContent = `✅ ${pos}-ാം സ്ഥാനം`;
             hasBuzzed = true;
 
         } catch (error) {
@@ -861,9 +910,9 @@
             
             statusMsg.textContent = msg;
             statusMsg.className = 'status-msg error';
+            // വീണ്ടും പച്ചയാക്കും, പക്ഷേ listener update ചെയ്യും
             if (!isLocked && !hasBuzzed) {
-                buzzerBtn.disabled = false;
-                buzzerSub.textContent = 'വീണ്ടും';
+                setButtonState('ready', 'വീണ്ടും ശ്രമിക്കുക');
             }
         }
     }
@@ -871,7 +920,7 @@
     buzzerBtn.addEventListener('click', pressBuzzer);
 
     // --------------------------------------------------------------
-    // 🔄 Admin Reset & Refresh (Desktop only)
+    // 🔄 Admin Reset & Refresh
     // --------------------------------------------------------------
     async function resetBuzzer() {
         if (!confirm('⚠️ എല്ലാ ബസർ ഡാറ്റയും മായ്ക്കും. തുടരണോ?')) return;
@@ -892,9 +941,9 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('🚀 Unified Buzzer App Loaded');
+    console.log('🚀 Unified Buzzer App Loaded (Green/Red Strobe)');
     if (IS_MOBILE) {
-        console.log('📱 Mobile mode: Player only');
+        console.log('📱 Mobile mode: Player only, Full Screen');
     } else {
         console.log('💻 Desktop mode: Player + Admin');
     }
