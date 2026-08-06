@@ -9,8 +9,7 @@
             "imports": {
                 "firebase/app": "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js",
                 "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js",
-                "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js",
-                "firebase/functions": "https://www.gstatic.com/firebasejs/10.12.0/firebase-functions.js"
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"
             }
         }
     </script>
@@ -468,26 +467,25 @@
 
 <script type="module">
     // --------------------------------------------------------------
-    // 🔥 Firebase Config (Replace with your own)
+    // 🔥 Firebase Config (YOUR CONFIG INTEGRATED HERE)
     // --------------------------------------------------------------
     import { initializeApp } from 'firebase/app';
     import { getAuth, signInAnonymously, signOut, onAuthStateChanged } from 'firebase/auth';
-    import { getFirestore, doc, onSnapshot, updateDoc, serverTimestamp } from 'firebase/firestore';
-    import { getFunctions, httpsCallable } from 'firebase/functions';
+    import { getFirestore, doc, runTransaction, onSnapshot, updateDoc, serverTimestamp } from 'firebase/firestore';
 
     const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "YOUR_PROJECT.firebaseapp.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT.appspot.com",
-        messagingSenderId: "YOUR_SENDER_ID",
-        appId: "YOUR_APP_ID"
+        apiKey: "AIzaSyBmPd-Ir4X_ZLmRqgZr53NuA_9wSgNIfsw",
+        authDomain: "quiz-buzzer-app-edbdf.firebaseapp.com",
+        projectId: "quiz-buzzer-app-edbdf",
+        storageBucket: "quiz-buzzer-app-edbdf.firebasestorage.app",
+        messagingSenderId: "563009152379",
+        appId: "1:563009152379:web:a062996a15c5cb52f9c9de",
+        measurementId: "G-XJHJDDW3ZK"
     };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const functions = getFunctions(app);
 
     // --------------------------------------------------------------
     // 📱 Device Detection
@@ -501,7 +499,7 @@
     // --------------------------------------------------------------
     // Constants
     // --------------------------------------------------------------
-    const ROOM_ID = 'quiz123'; // Change if needed
+    const ROOM_ID = 'quiz123'; // Change this if you created a different room
     const ADMIN_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // "admin123"
 
     // --------------------------------------------------------------
@@ -875,7 +873,7 @@
     }
 
     // --------------------------------------------------------------
-    // 🚀 Press Buzzer (Player)
+    // 🚀 Press Buzzer (Using Firestore Transaction - No Cloud Function!)
     // --------------------------------------------------------------
     async function pressBuzzer() {
         if (!currentUser) {
@@ -898,10 +896,47 @@
         statusMsg.textContent = '⏳ Sending buzz...';
         statusMsg.className = 'status-msg';
 
+        const roomRef = doc(db, 'rooms', ROOM_ID);
+
         try {
-            const pressFn = httpsCallable(functions, 'pressBuzzer');
-            const result = await pressFn({ roomId: ROOM_ID });
-            const pos = result.data.position;
+            // 🔥 Firestore Transaction - runs on the server, safe for concurrency
+            const result = await runTransaction(db, async (transaction) => {
+                const roomDoc = await transaction.get(roomRef);
+                
+                if (!roomDoc.exists) {
+                    throw new Error('Room not found');
+                }
+
+                const data = roomDoc.data();
+                const buzzerOrder = data.buzzerOrder || [];
+
+                // Check if already 10 people
+                if (buzzerOrder.length >= 10) {
+                    throw new Error('Buzzer is full');
+                }
+
+                // Check if this user already buzzed
+                if (buzzerOrder.some(entry => entry.userId === currentUser.uid)) {
+                    throw new Error('Already buzzed');
+                }
+
+                // Create new entry
+                const newEntry = {
+                    userId: currentUser.uid,
+                    timestamp: serverTimestamp(), // Firestore server timestamp
+                    position: buzzerOrder.length + 1
+                };
+
+                // Update the document
+                transaction.update(roomRef, {
+                    buzzerOrder: [...buzzerOrder, newEntry]
+                });
+
+                return newEntry;
+            });
+
+            // ✅ Success
+            const pos = result.position;
             
             // 📳 Player Vibration
             triggerVibration();
@@ -916,9 +951,9 @@
         } catch (error) {
             console.error(error);
             let msg = '❌ Error: ' + error.message;
-            if (error.message.includes('ലോക്ക്') || error.message.includes('full')) msg = '⛔ Buzzer is full.';
-            else if (error.message.includes('ഇതിനകം') || error.message.includes('already')) msg = '⚠️ You already buzzed.';
-            else if (error.message.includes('റൂം') || error.message.includes('Room')) msg = '❌ Room not found.';
+            if (error.message.includes('full')) msg = '⛔ Buzzer is full.';
+            else if (error.message.includes('Already')) msg = '⚠️ You already buzzed.';
+            else if (error.message.includes('not found')) msg = '❌ Room not found.';
             
             statusMsg.textContent = msg;
             statusMsg.className = 'status-msg error';
@@ -952,7 +987,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('🚀 Quiz Buzzer App Loaded (English UI)');
+    console.log('🚀 Quiz Buzzer App Loaded (Client-Side Transaction)');
     if (IS_MOBILE) {
         console.log('📱 Mobile mode: Player only, Vibration enabled');
     } else {
