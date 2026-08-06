@@ -14,6 +14,7 @@
         }
     </script>
     <style>
+        /* === PASTE YOUR EXISTING STYLES HERE (they haven't changed) === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
             height: 100%;
@@ -46,8 +47,6 @@
             position: relative;
             overflow: hidden;
         }
-
-        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -86,8 +85,6 @@
         .admin-toggle:hover { background: #1e293b; color: #facc15; }
         .admin-toggle.active { color: #facc15; background: #1e293b; }
         .admin-toggle.mobile-hidden { display: none !important; }
-
-        /* Player View */
         #playerView {
             display: flex;
             flex-direction: column;
@@ -169,7 +166,6 @@
             padding: 3px 18px;
             border-radius: 30px;
         }
-
         .status-area {
             width: 100%;
             text-align: center;
@@ -191,7 +187,6 @@
         .status-msg.success { border-color: #4ade80; color: #4ade80; }
         .status-msg.error { border-color: #f87171; color: #f87171; }
         .status-msg.warning { border-color: #facc15; color: #facc15; }
-
         .leaderboard {
             width: 100%;
             background: rgba(15, 23, 42, 0.8);
@@ -234,8 +229,6 @@
         .player-name { flex: 1; margin-left: 8px; font-weight: 500; font-size: 0.85rem; }
         .player-time { font-size: 0.6rem; color: #64748b; background: #1e293b; padding: 2px 10px; border-radius: 20px; }
         .empty-state { color: #475569; text-align: center; padding: 12px; font-style: italic; }
-
-        /* Admin View */
         #adminView {
             display: none;
             flex-direction: column;
@@ -245,7 +238,6 @@
         }
         #adminView.active { display: flex; }
         #playerView.hidden { display: none; }
-
         .stats {
             display: flex;
             gap: 12px;
@@ -261,7 +253,6 @@
         }
         .stat-card label { color: #94a3b8; font-size: 0.65rem; display: block; }
         .stat-card span { font-size: 1.3rem; font-weight: bold; }
-
         .admin-list-container {
             background: #1e293b;
             border-radius: 20px;
@@ -290,7 +281,6 @@
         .admin-item .id { flex: 1; font-family: monospace; font-size: 0.7rem; margin-left: 8px; overflow: hidden; text-overflow: ellipsis; }
         .admin-item .time { color: #94a3b8; font-size: 0.65rem; background: #1e293b; padding: 2px 12px; border-radius: 20px; }
         .admin-item.top1 { border-left-color: #facc15; background: rgba(250, 204, 21, 0.08); }
-
         .actions {
             display: flex;
             gap: 12px;
@@ -311,8 +301,6 @@
         .btn-danger:hover { transform: scale(1.02); background: #b91c1c; }
         .btn-success { background: #16a34a; color: white; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3); }
         .btn-success:hover { transform: scale(1.02); background: #15803d; }
-
-        /* Password Modal */
         #passwordModal {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.85);
@@ -366,8 +354,6 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-
-        /* Strobe Overlay */
         .strobe-overlay {
             position: fixed;
             top: 0;
@@ -388,7 +374,6 @@
             50% { opacity: 0.05; }
             100% { opacity: 0.9; }
         }
-
         .leaderboard::-webkit-scrollbar, .admin-list-container::-webkit-scrollbar { width: 4px; }
         .leaderboard::-webkit-scrollbar-thumb, .admin-list-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
         .admin-toggle.mobile-hidden { display: none !important; }
@@ -471,7 +456,8 @@
     // --------------------------------------------------------------
     import { initializeApp } from 'firebase/app';
     import { getAuth, signInAnonymously, signOut, onAuthStateChanged } from 'firebase/auth';
-    import { getFirestore, doc, runTransaction, onSnapshot, updateDoc, serverTimestamp } from 'firebase/firestore';
+    // ✅ FIXED: Replaced serverTimestamp with Timestamp
+    import { getFirestore, doc, runTransaction, onSnapshot, updateDoc, Timestamp } from 'firebase/firestore';
 
     const firebaseConfig = {
         apiKey: "AIzaSyBmPd-Ir4X_ZLmRqgZr53NuA_9wSgNIfsw",
@@ -499,7 +485,7 @@
     // --------------------------------------------------------------
     // Constants
     // --------------------------------------------------------------
-    const ROOM_ID = 'quiz123'; // Change this if you created a different room
+    const ROOM_ID = 'quiz123';
     const ADMIN_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // "admin123"
 
     // --------------------------------------------------------------
@@ -511,7 +497,7 @@
     let isLocked = false;
     let hasBuzzed = false;
     let buzzerOrderData = [];
-    let prevBuzzerCount = 0; // For admin sound detection
+    let prevBuzzerCount = 0;
 
     // --------------------------------------------------------------
     // DOM Elements
@@ -540,15 +526,12 @@
 
     roomBadge.textContent = `Room: ${ROOM_ID}`;
 
-    // --------------------------------------------------------------
-    // 🚫 Mobile: hide admin toggle
-    // --------------------------------------------------------------
     if (IS_MOBILE) {
         adminToggleBtn.classList.add('mobile-hidden');
     }
 
     // --------------------------------------------------------------
-    // 🎵 Admin Sound (Beep) - Admin only
+    // 🎵 Admin Sound
     // --------------------------------------------------------------
     function playAdminSound() {
         try {
@@ -564,17 +547,15 @@
             gain.connect(audioCtx.destination);
             osc.start();
             osc.stop(audioCtx.currentTime + 0.25);
-        } catch (e) {
-            console.log('Admin sound error:', e);
-        }
+        } catch (e) { console.log('Admin sound error:', e); }
     }
 
     // --------------------------------------------------------------
-    // 📳 Player Vibration (Mobile only)
+    // 📳 Player Vibration
     // --------------------------------------------------------------
     function triggerVibration() {
         if (navigator.vibrate) {
-            navigator.vibrate(200); // 200ms
+            navigator.vibrate(200);
         }
     }
 
@@ -601,7 +582,7 @@
     }
 
     // --------------------------------------------------------------
-    // 🚨 Strobe Effect (Vehicle Red Flash) - Player only
+    // 🚨 Strobe Effect
     // --------------------------------------------------------------
     function triggerStrobe() {
         strobeOverlay.classList.remove('active');
@@ -726,7 +707,7 @@
     });
 
     // --------------------------------------------------------------
-    // 🔗 Firestore Listener (Shared)
+    // 🔗 Firestore Listener
     // --------------------------------------------------------------
     function connectToRoom(roomId) {
         if (unsubscribeSnapshot) {
@@ -755,7 +736,6 @@
             const oldLength = buzzerOrderData.length;
             buzzerOrderData = order;
 
-            // Admin Sound: if new entry arrives (only in admin mode)
             if (currentMode === 'admin' && order.length > oldLength) {
                 playAdminSound();
             }
@@ -781,7 +761,7 @@
     }
 
     // --------------------------------------------------------------
-    // 🎨 Player Render Functions
+    // 🎨 Render Functions
     // --------------------------------------------------------------
     function updatePlayerStatus(order) {
         if (!currentUser) return;
@@ -835,9 +815,6 @@
         rankingList.innerHTML = html;
     }
 
-    // --------------------------------------------------------------
-    // 🎨 Admin Render Functions
-    // --------------------------------------------------------------
     function updateAdminStats(order) {
         totalCount.textContent = order.length;
         if (order.length > 0) {
@@ -873,7 +850,7 @@
     }
 
     // --------------------------------------------------------------
-    // 🚀 Press Buzzer (Using Firestore Transaction - No Cloud Function!)
+    // 🚀 Press Buzzer (Using Firestore Transaction - FIXED!)
     // --------------------------------------------------------------
     async function pressBuzzer() {
         if (!currentUser) {
@@ -899,7 +876,6 @@
         const roomRef = doc(db, 'rooms', ROOM_ID);
 
         try {
-            // 🔥 Firestore Transaction - runs on the server, safe for concurrency
             const result = await runTransaction(db, async (transaction) => {
                 const roomDoc = await transaction.get(roomRef);
                 
@@ -910,24 +886,21 @@
                 const data = roomDoc.data();
                 const buzzerOrder = data.buzzerOrder || [];
 
-                // Check if already 10 people
                 if (buzzerOrder.length >= 10) {
                     throw new Error('Buzzer is full');
                 }
 
-                // Check if this user already buzzed
                 if (buzzerOrder.some(entry => entry.userId === currentUser.uid)) {
                     throw new Error('Already buzzed');
                 }
 
-                // Create new entry
+                // ✅ FIX: Use Timestamp.now() instead of serverTimestamp()
                 const newEntry = {
                     userId: currentUser.uid,
-                    timestamp: serverTimestamp(), // Firestore server timestamp
+                    timestamp: Timestamp.now(),   // <- This works inside arrays!
                     position: buzzerOrder.length + 1
                 };
 
-                // Update the document
                 transaction.update(roomRef, {
                     buzzerOrder: [...buzzerOrder, newEntry]
                 });
@@ -935,12 +908,9 @@
                 return newEntry;
             });
 
-            // ✅ Success
             const pos = result.position;
             
-            // 📳 Player Vibration
             triggerVibration();
-            // 🚨 Visual Strobe
             triggerStrobe();
             
             setButtonState('pressed', `✅ Position ${pos}`);
@@ -987,7 +957,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('🚀 Quiz Buzzer App Loaded (Client-Side Transaction)');
+    console.log('🚀 Quiz Buzzer App Loaded (Client-Side Transaction - Fixed)');
     if (IS_MOBILE) {
         console.log('📱 Mobile mode: Player only, Vibration enabled');
     } else {
