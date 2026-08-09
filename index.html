@@ -133,10 +133,7 @@
             white-space: nowrap;
             transition: 0.2s;
         }
-        .name-input-area .save-btn:hover {
-            background: #eab308;
-            transform: scale(1.02);
-        }
+        .name-input-area .save-btn:hover { background: #eab308; transform: scale(1.02); }
 
         .buzzer-wrapper {
             flex: 1;
@@ -557,6 +554,71 @@
     const db = getFirestore(app);
 
     // --------------------------------------------------------------
+    // 🔊 Audio Context (shared for all sounds)
+    // --------------------------------------------------------------
+    let audioCtx = null;
+
+    function getAudioContext() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        // Resume if suspended (needed after autoplay block)
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume().catch(e => console.log('AudioContext resume error:', e));
+        }
+        return audioCtx;
+    }
+
+    // --------------------------------------------------------------
+    // 🔊 Player Buzzer Sound (square wave)
+    // --------------------------------------------------------------
+    function playPlayerSound() {
+        try {
+            const ctx = getAudioContext();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(440, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.2);
+        } catch (e) { console.log('Player sound error:', e); }
+    }
+
+    // --------------------------------------------------------------
+    // 🔊 Admin Beep Sound (sine wave)
+    // --------------------------------------------------------------
+    function playAdminSound() {
+        try {
+            const ctx = getAudioContext();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.25);
+        } catch (e) { console.log('Admin sound error:', e); }
+    }
+
+    // --------------------------------------------------------------
+    // 📳 Player Vibration
+    // --------------------------------------------------------------
+    function triggerVibration() {
+        if (navigator.vibrate) {
+            navigator.vibrate(200);
+        }
+    }
+
+    // --------------------------------------------------------------
     // 📱 Device Detection
     // --------------------------------------------------------------
     function isMobileDevice() {
@@ -620,22 +682,20 @@
     // --------------------------------------------------------------
     // 📝 Save / Load Name (localStorage)
     // --------------------------------------------------------------
-    // On page load, restore saved name
     const savedName = localStorage.getItem('quizPlayerName');
     if (savedName) {
         playerNameInput.value = savedName;
         playerName = savedName;
     }
 
-    // Save name to localStorage when button is clicked
     saveNameBtn.addEventListener('click', () => {
+        getAudioContext(); // resume audio on user click
         const name = playerNameInput.value.trim();
         if (name) {
             localStorage.setItem('quizPlayerName', name);
             playerName = name;
             statusMsg.textContent = `✅ Name saved: ${name}`;
             statusMsg.className = 'status-msg success';
-            // Re‑evaluate button state (if disabled, may enable it)
             if (currentUser && buzzerOrderData.length < 10) {
                 updatePlayerStatus(buzzerOrderData);
             }
@@ -645,39 +705,9 @@
         }
     });
 
-    // Also update playerName on input change (so it's ready for buzzing)
     playerNameInput.addEventListener('input', () => {
         playerName = playerNameInput.value.trim();
     });
-
-    // --------------------------------------------------------------
-    // 🎵 Admin Sound
-    // --------------------------------------------------------------
-    function playAdminSound() {
-        try {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
-            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.25);
-        } catch (e) { console.log('Admin sound error:', e); }
-    }
-
-    // --------------------------------------------------------------
-    // 📳 Player Vibration
-    // --------------------------------------------------------------
-    function triggerVibration() {
-        if (navigator.vibrate) {
-            navigator.vibrate(200);
-        }
-    }
 
     // --------------------------------------------------------------
     // 🎨 Button State Manager
@@ -722,6 +752,7 @@
 
     function showAdminLogin() {
         if (IS_MOBILE) return;
+        getAudioContext(); // resume audio on user click
         passwordModal.classList.add('active');
         adminPasswordInput.value = '';
         loginError.textContent = '';
@@ -748,6 +779,7 @@
 
     adminToggleBtn.addEventListener('click', () => {
         if (IS_MOBILE) return;
+        getAudioContext(); // resume audio on user click
         if (currentMode === 'admin') {
             switchToPlayerMode();
         } else {
@@ -851,7 +883,7 @@
             previousOrderData = previous;
 
             if (currentMode === 'admin' && order.length > oldLength) {
-                playAdminSound();
+                playAdminSound(); // 🔊 Admin beep on new buzz
             }
 
             if (currentMode === 'player') {
@@ -1009,6 +1041,9 @@
             return;
         }
 
+        // Resume audio on user click (ensures sound works)
+        getAudioContext();
+
         setButtonState('disabled', '⏳...');
         statusMsg.textContent = '⏳ Sending buzz...';
         statusMsg.className = 'status-msg';
@@ -1018,14 +1053,11 @@
         try {
             const result = await runTransaction(db, async (transaction) => {
                 const roomDoc = await transaction.get(roomRef);
-                // If room doesn't exist, create it!
                 if (!roomDoc.exists) {
-                    // Set initial data
                     transaction.set(roomRef, {
                         buzzerOrder: [],
                         previousBuzzerOrder: []
                     });
-                    // Re-read after creation
                     const newDoc = await transaction.get(roomRef);
                     return { newEntry: { position: 1, userId: currentUser.uid, playerName: playerName, timestamp: Timestamp.now() }, created: true };
                 }
@@ -1051,8 +1083,14 @@
             });
 
             const pos = result.newEntry.position;
+            
+            // 🔊 Play sound for player
+            playPlayerSound();
+            // 📳 Vibrate for player
             triggerVibration();
+            // 🚨 Strobe
             triggerStrobe();
+            
             setButtonState('pressed', `✅ Position ${pos}`);
             statusMsg.textContent = `🎉 Success! You buzzed at position ${pos}!`;
             statusMsg.className = 'status-msg success';
@@ -1119,7 +1157,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('🚀 Quiz Buzzer App Loaded (with Save Name Button)');
+    console.log('🚀 Quiz Buzzer App Loaded (with Sound + Vibration)');
     if (IS_MOBILE) {
         console.log('📱 Mobile mode: Player only, Vibration enabled');
     } else {
