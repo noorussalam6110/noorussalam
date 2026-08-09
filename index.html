@@ -14,6 +14,7 @@
         }
     </script>
     <style>
+        /* ----- Reset & Fullscreen ----- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
             height: 100%;
@@ -46,6 +47,8 @@
             position: relative;
             overflow: hidden;
         }
+
+        /* ----- Header ----- */
         .header {
             display: flex;
             justify-content: space-between;
@@ -85,6 +88,7 @@
         .admin-toggle.active { color: #facc15; background: #1e293b; }
         .admin-toggle.mobile-hidden { display: none !important; }
 
+        /* ----- Player View ----- */
         #playerView {
             display: flex;
             flex-direction: column;
@@ -259,6 +263,7 @@
         .player-time { font-size: 0.6rem; color: #64748b; background: #1e293b; padding: 2px 10px; border-radius: 20px; }
         .empty-state { color: #475569; text-align: center; padding: 12px; font-style: italic; }
 
+        /* ----- Admin View ----- */
         #adminView {
             display: none;
             flex-direction: column;
@@ -336,13 +341,12 @@
         }
         .btn-danger { background: #dc2626; color: white; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3); }
         .btn-danger:hover { transform: scale(1.02); background: #b91c1c; }
-        .btn-success { background: #16a34a; color: white; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3); }
-        .btn-success:hover { transform: scale(1.02); background: #15803d; }
         .btn-warning { background: #f59e0b; color: white; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
         .btn-warning:hover { transform: scale(1.02); background: #d97706; }
         .btn-secondary { background: #475569; color: white; box-shadow: 0 4px 15px rgba(71, 85, 105, 0.3); }
         .btn-secondary:hover { transform: scale(1.02); background: #334155; }
 
+        /* ----- Password Modal ----- */
         #passwordModal {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.85);
@@ -397,6 +401,7 @@
             cursor: pointer;
         }
 
+        /* ----- Strobe Overlay ----- */
         .strobe-overlay {
             position: fixed;
             top: 0;
@@ -435,8 +440,10 @@
 </head>
 <body>
 
+<!-- Strobe Overlay -->
 <div class="strobe-overlay" id="strobeOverlay"></div>
 
+<!-- Password Modal -->
 <div id="passwordModal">
     <div class="modal-box">
         <button class="modal-close" id="modalCloseBtn">&times;</button>
@@ -448,7 +455,9 @@
     </div>
 </div>
 
+<!-- Main Container -->
 <div class="container">
+    <!-- Header -->
     <div class="header">
         <h1>🔔 Quiz Buzzer</h1>
         <div class="actions">
@@ -457,6 +466,7 @@
         </div>
     </div>
 
+    <!-- Player View -->
     <div id="playerView">
         <div class="name-input-area">
             <span class="name-label">👤 Name</span>
@@ -482,6 +492,7 @@
         </div>
     </div>
 
+    <!-- Admin View -->
     <div id="adminView">
         <div class="stats">
             <div class="stat-card"><label>Total Buzzes</label><span id="totalCount">0</span></div>
@@ -509,11 +520,11 @@
 
 <script type="module">
     // --------------------------------------------------------------
-    // 🔥 Firebase Config
+    // 🔥 Firebase Config (REPLACE WITH YOUR OWN!)
     // --------------------------------------------------------------
     import { initializeApp } from 'firebase/app';
     import { getAuth, signInAnonymously, signOut, onAuthStateChanged } from 'firebase/auth';
-    import { getFirestore, doc, runTransaction, onSnapshot, updateDoc, Timestamp } from 'firebase/firestore';
+    import { getFirestore, doc, runTransaction, onSnapshot, setDoc, Timestamp } from 'firebase/firestore';
 
     const firebaseConfig = {
         apiKey: "AIzaSyBmPd-Ir4X_ZLmRqgZr53NuA_9wSgNIfsw",
@@ -553,9 +564,7 @@
     let hasBuzzed = false;
     let buzzerOrderData = [];
     let previousOrderData = [];
-    let prevBuzzerCount = 0;
     let playerName = '';
-    let roomData = {};
 
     // --------------------------------------------------------------
     // DOM Elements
@@ -714,7 +723,6 @@
         adminView.classList.add('active');
         adminToggleBtn.classList.add('active');
         adminToggleBtn.textContent = '👤 Player';
-        prevBuzzerCount = buzzerOrderData.length;
         renderAdminView();
     }
 
@@ -748,7 +756,7 @@
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
-            console.log('User UID:', user.uid);
+            console.log('✅ User UID:', user.uid);
             if (currentMode === 'player') {
                 statusMsg.textContent = '✅ Login successful. Enter your name and buzz!';
                 statusMsg.className = 'status-msg';
@@ -776,20 +784,19 @@
 
         unsubscribeSnapshot = onSnapshot(roomRef, (docSnap) => {
             if (!docSnap.exists()) {
-                const errMsg = '❌ Room not found!';
+                const errMsg = '⚠️ Room not found!';
                 if (currentMode === 'player') {
                     statusMsg.textContent = errMsg;
                     statusMsg.className = 'status-msg error';
                     setButtonState('disabled', 'Room missing');
-                    rankingList.innerHTML = '<li class="empty-state">❌ Room not found</li>';
+                    rankingList.innerHTML = '<li class="empty-state">⚠️ Room not found</li>';
                 } else {
-                    adminRankingList.innerHTML = '<div class="empty-state">❌ Room not found. Please create it first.</div>';
+                    adminRankingList.innerHTML = '<div class="empty-state">⚠️ Room not found. Create it by buzzing or using New Round.</div>';
                 }
                 return;
             }
 
             const data = docSnap.data();
-            roomData = data;
             const order = data.buzzerOrder || [];
             const previous = data.previousBuzzerOrder || [];
             const oldLength = buzzerOrderData.length;
@@ -810,12 +817,13 @@
 
         }, (error) => {
             const errMsg = '❌ Connection error: ' + error.message;
+            console.error('🔥 Listener error:', error);
             if (currentMode === 'player') {
                 statusMsg.textContent = errMsg;
                 statusMsg.className = 'status-msg error';
                 setButtonState('disabled', 'Error');
             } else {
-                adminRankingList.innerHTML = `<div class="empty-state">${errMsg}</div>`;
+                adminRankingList.innerHTML = `<div class="empty-state">❌ ${errMsg}</div>`;
             }
         });
     }
@@ -882,14 +890,12 @@
     }
 
     // --------------------------------------------------------------
-    // 👑 Admin Render Functions (with Previous Result)
+    // 👑 Admin Render Functions
     // --------------------------------------------------------------
     function renderAdminView() {
-        // Show previous result if exists, otherwise current
         const hasPrevious = previousOrderData && previousOrderData.length > 0;
         const displayOrder = hasPrevious ? previousOrderData : buzzerOrderData;
         
-        // Update stats
         totalCount.textContent = buzzerOrderData.length;
         if (buzzerOrderData.length > 0) {
             const last = buzzerOrderData[buzzerOrderData.length - 1];
@@ -899,14 +905,12 @@
             lastBuzzer.textContent = '-';
         }
 
-        // Update title
         if (hasPrevious) {
             adminListTitle.innerHTML = `🏆 Previous Round Result <span class="badge-prev">RESET</span>`;
         } else {
             adminListTitle.innerHTML = '🏆 Current Round (Name & Timestamp)';
         }
 
-        // Render list
         if (!displayOrder || displayOrder.length === 0) {
             adminRankingList.innerHTML = '<div class="empty-state">⏳ No buzzes yet.</div>';
             return;
@@ -968,9 +972,18 @@
         try {
             const result = await runTransaction(db, async (transaction) => {
                 const roomDoc = await transaction.get(roomRef);
+                // If room doesn't exist, create it!
                 if (!roomDoc.exists) {
-                    throw new Error('Room not found');
+                    // Set initial data
+                    transaction.set(roomRef, {
+                        buzzerOrder: [],
+                        previousBuzzerOrder: []
+                    });
+                    // Re-read after creation
+                    const newDoc = await transaction.get(roomRef);
+                    return { newEntry: { position: 1, userId: currentUser.uid, playerName: playerName, timestamp: Timestamp.now() }, created: true };
                 }
+                
                 const data = roomDoc.data();
                 const buzzerOrder = data.buzzerOrder || [];
                 if (buzzerOrder.length >= 10) {
@@ -988,10 +1001,10 @@
                 transaction.update(roomRef, {
                     buzzerOrder: [...buzzerOrder, newEntry]
                 });
-                return newEntry;
+                return { newEntry: newEntry, created: false };
             });
 
-            const pos = result.position;
+            const pos = result.newEntry.position;
             triggerVibration();
             triggerStrobe();
             setButtonState('pressed', `✅ Position ${pos}`);
@@ -1000,7 +1013,7 @@
             hasBuzzed = true;
 
         } catch (error) {
-            console.error(error);
+            console.error('🔥 Buzzer error:', error);
             let msg = '❌ Error: ' + error.message;
             if (error.message.includes('full')) msg = '⛔ Buzzer is full.';
             else if (error.message.includes('Already')) msg = '⚠️ You already buzzed.';
@@ -1016,35 +1029,37 @@
     buzzerBtn.addEventListener('click', pressBuzzer);
 
     // --------------------------------------------------------------
-    // 🔄 Admin: New Round (Reset) - Saves previous result
+    // 🔄 Admin: New Round (saves previous result)
     // --------------------------------------------------------------
     async function newRound() {
         if (!confirm('🔄 This will save current result and clear buzzer for next round. Continue?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
-            await updateDoc(roomRef, {
+            await setDoc(roomRef, {
                 previousBuzzerOrder: buzzerOrderData,
                 buzzerOrder: []
-            });
+            }, { merge: true });
             alert('✅ New round started! Previous result saved.');
         } catch (error) {
+            console.error('🔥 NewRound error:', error);
             alert('❌ Failed: ' + error.message);
         }
     }
 
     // --------------------------------------------------------------
-    // ⏹ Admin: End Quiz - Clears everything
+    // ⏹ Admin: End Quiz - clears everything
     // --------------------------------------------------------------
     async function endQuiz() {
         if (!confirm('⏹ This will clear ALL data (including previous results). Are you sure?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
-            await updateDoc(roomRef, {
+            await setDoc(roomRef, {
                 previousBuzzerOrder: [],
                 buzzerOrder: []
-            });
+            }, { merge: true });
             alert('✅ Quiz ended. All data cleared.');
         } catch (error) {
+            console.error('🔥 EndQuiz error:', error);
             alert('❌ Failed: ' + error.message);
         }
     }
@@ -1058,7 +1073,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('🚀 Quiz Buzzer App Loaded (with Previous Result)');
+    console.log('🚀 Quiz Buzzer App Loaded (Complete Solution)');
     if (IS_MOBILE) {
         console.log('📱 Mobile mode: Player only, Vibration enabled');
     } else {
