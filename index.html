@@ -48,7 +48,7 @@
             overflow: hidden;
         }
 
-        /* ----- Header ----- */
+        /* ----- Header (Admin only – hidden on player) ----- */
         .header {
             display: flex;
             justify-content: space-between;
@@ -89,7 +89,7 @@
         .admin-toggle.mobile-hidden { display: none !important; }
 
         /* ============================================================ */
-        /* PLAYER VIEW – Mobile App Style */
+        /* PLAYER VIEW – App-like with Splash & Full-screen Buzzer */
         /* ============================================================ */
         #playerView {
             display: flex;
@@ -97,87 +97,120 @@
             flex: 1;
             height: 100%;
             min-height: 0;
+            position: relative;
         }
 
-        /* Welcome Header */
-        .player-welcome {
+        /* ---- Splash + Name Setup View ---- */
+        #setupView {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
             text-align: center;
-            padding: 8px 0 4px 0;
-            flex-shrink: 0;
+            padding: 20px;
+            animation: fadeInUp 0.8s ease;
         }
-        .player-welcome h2 {
-            font-size: 1.4rem;
+        #setupView.hidden {
+            display: none;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .splash-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #facc15;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(250, 204, 21, 0.2);
+            line-height: 1.3;
+        }
+        .splash-sub {
+            font-size: 1.2rem;
             font-weight: 300;
             color: #94a3b8;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 400px;
         }
-        .player-welcome h2 span {
+        .splash-sub span {
             color: #facc15;
-            font-weight: 700;
+            font-weight: 600;
         }
-        .player-welcome p {
-            font-size: 0.8rem;
-            color: #64748b;
-            margin-top: 2px;
-        }
-
-        .name-input-area {
+        .setup-name-area {
             display: flex;
-            gap: 8px;
-            padding: 5px 0;
-            flex-shrink: 0;
-            align-items: center;
-            background: rgba(30, 41, 59, 0.4);
-            border-radius: 60px;
-            padding: 4px 8px 4px 16px;
-            backdrop-filter: blur(4px);
-            border: 1px solid #334155;
+            flex-direction: column;
+            width: 100%;
+            max-width: 320px;
+            gap: 12px;
         }
-        .name-input-area input {
-            flex: 1;
-            padding: 10px 0;
-            border: none;
-            background: transparent;
+        .setup-name-area input {
+            padding: 16px 20px;
+            border-radius: 50px;
+            border: 2px solid #334155;
+            background: #1e293b;
             color: #e2e8f0;
-            font-size: 1rem;
+            font-size: 1.1rem;
             outline: none;
+            text-align: center;
+            transition: border-color 0.3s;
         }
-        .name-input-area input::placeholder { color: #64748b; }
-        .name-input-area .name-label {
-            color: #94a3b8;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .setup-name-area input:focus {
+            border-color: #facc15;
         }
-        .name-input-area .save-btn {
-            background: #facc15;
+        .setup-name-area input::placeholder {
+            color: #64748b;
+        }
+        .setup-name-area .enter-btn {
+            padding: 16px;
+            border-radius: 50px;
             border: none;
-            border-radius: 40px;
-            padding: 8px 18px;
-            font-weight: bold;
+            background: #facc15;
             color: #0f172a;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
-            white-space: nowrap;
             transition: 0.2s;
-            font-size: 0.85rem;
+            box-shadow: 0 4px 20px rgba(250, 204, 21, 0.3);
         }
-        .name-input-area .save-btn:hover { background: #eab308; transform: scale(1.02); }
+        .setup-name-area .enter-btn:hover {
+            transform: scale(1.02);
+            background: #eab308;
+        }
+        .setup-name-area .enter-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
 
-        .buzzer-wrapper {
+        /* ---- Full-screen Buzzer View (only buzzer) ---- */
+        #buzzerView {
+            display: none;
             flex: 1;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+        }
+        #buzzerView.active {
+            display: flex;
+        }
+        .buzzer-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 5px 0;
-            min-height: 0;
+            width: 100%;
+            flex: 1;
         }
         .buzzer-btn {
             width: 82%;
             aspect-ratio: 1/1;
-            max-width: 380px;
+            max-width: 420px;
             border-radius: 50%;
             border: none;
             color: white;
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             font-weight: 900;
             text-shadow: 0 4px 15px rgba(0,0,0,0.5);
             cursor: pointer;
@@ -189,14 +222,14 @@
             position: relative;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
-            border: 4px solid rgba(255,255,255,0.1);
+            border: 6px solid rgba(255,255,255,0.08);
             background: radial-gradient(circle at 40% 35%, #4ade80, #15803d);
-            box-shadow: 0 0 50px rgba(74, 222, 128, 0.35), 0 15px 30px rgba(0,0,0,0.8);
+            box-shadow: 0 0 60px rgba(74, 222, 128, 0.4), 0 15px 30px rgba(0,0,0,0.8);
         }
         .buzzer-btn::after {
             content: '';
             position: absolute;
-            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            top: -12px; left: -12px; right: -12px; bottom: -12px;
             border-radius: 50%;
             border: 2px solid rgba(255,255,255,0.05);
             animation: pulse-ring 2.5s infinite;
@@ -207,17 +240,17 @@
         }
         .buzzer-btn.pressed {
             background: radial-gradient(circle at 40% 35%, #ff6b6b, #b91c1c) !important;
-            box-shadow: 0 0 70px rgba(239, 68, 68, 0.7), 0 5px 10px rgba(0,0,0,0.8) !important;
+            box-shadow: 0 0 80px rgba(239, 68, 68, 0.8), 0 5px 10px rgba(0,0,0,0.8) !important;
             animation: button-pulse-red 0.8s ease 3;
         }
         @keyframes button-pulse-red {
             0% { transform: scale(1); }
-            50% { transform: scale(0.95); box-shadow: 0 0 100px rgba(255, 0, 0, 0.9); }
+            50% { transform: scale(0.95); box-shadow: 0 0 120px rgba(255, 0, 0, 0.9); }
             100% { transform: scale(1); }
         }
         .buzzer-btn:active:not(:disabled):not(.pressed) {
             transform: scale(0.92);
-            box-shadow: 0 0 70px rgba(74, 222, 128, 0.6), 0 5px 10px rgba(0,0,0,0.8);
+            box-shadow: 0 0 80px rgba(74, 222, 128, 0.6), 0 5px 10px rgba(0,0,0,0.8);
         }
         .buzzer-btn:disabled {
             opacity: 0.4;
@@ -228,79 +261,15 @@
         }
         .buzzer-btn:disabled::after { animation: none; }
         .buzzer-btn .sub-text {
-            font-size: 0.75rem;
-            font-weight: 400;
+            font-size: 1.2rem;
+            font-weight: 500;
             opacity: 0.9;
-            margin-top: 5px;
+            margin-top: 10px;
             background: rgba(0,0,0,0.3);
-            padding: 3px 18px;
-            border-radius: 30px;
+            padding: 6px 25px;
+            border-radius: 40px;
+            letter-spacing: 1px;
         }
-
-        .status-area {
-            width: 100%;
-            text-align: center;
-            padding: 2px 0 8px;
-            flex-shrink: 0;
-        }
-        .status-msg {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 8px 18px;
-            border-radius: 50px;
-            color: #e2e8f0;
-            font-size: 0.9rem;
-            border: 1px solid #334155;
-            display: inline-block;
-            min-width: 180px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .status-msg.success { border-color: #4ade80; color: #4ade80; }
-        .status-msg.error { border-color: #f87171; color: #f87171; }
-        .status-msg.warning { border-color: #facc15; color: #facc15; }
-
-        .leaderboard {
-            width: 100%;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 10px 10px;
-            border: 1px solid #1e293b;
-            max-height: 30vh;
-            overflow-y: auto;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        .leaderboard h3 {
-            color: #94a3b8;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 6px;
-            padding-left: 5px;
-        }
-        #ranking-list { list-style: none; padding: 0; margin: 0; }
-        #ranking-list li {
-            display: flex;
-            align-items: center;
-            padding: 5px 12px;
-            background: rgba(30, 41, 59, 0.5);
-            margin-bottom: 3px;
-            border-radius: 12px;
-            border-left: 4px solid #334155;
-            animation: slideIn 0.25s ease;
-        }
-        #ranking-list li.top1 { border-left-color: #facc15; background: rgba(250, 204, 21, 0.12); }
-        #ranking-list li.top2 { border-left-color: #94a3b8; background: rgba(148, 163, 184, 0.08); }
-        #ranking-list li.top3 { border-left-color: #cd7f32; background: rgba(205, 127, 50, 0.08); }
-        @keyframes slideIn {
-            0% { transform: translateX(-15px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-        .rank { font-weight: 800; color: #facc15; min-width: 38px; font-size: 0.9rem; }
-        .player-name { flex: 1; margin-left: 8px; font-weight: 500; font-size: 0.85rem; }
-        .player-time { font-size: 0.6rem; color: #64748b; background: #1e293b; padding: 2px 10px; border-radius: 20px; }
-        .empty-state { color: #475569; text-align: center; padding: 12px; font-style: italic; }
 
         /* ============================================================ */
         /* ADMIN VIEW – Projector / Full Screen with Animations */
@@ -418,12 +387,10 @@
             font-weight: 500;
         }
         .admin-item.top1 { border-left-color: #facc15; background: rgba(250, 204, 21, 0.15); }
-        .admin-item.top1 .pos { color: #facc15; }
         .admin-item.top2 { border-left-color: #94a3b8; background: rgba(148, 163, 184, 0.08); }
         .admin-item.top3 { border-left-color: #cd7f32; background: rgba(205, 127, 50, 0.08); }
         .admin-item.previous-result { border-left-color: #8b5cf6; background: rgba(139, 92, 246, 0.08); }
 
-        /* Highlight animation for new buzz */
         .admin-item.highlight {
             animation: buzzHighlight 1.2s ease;
             border-left-color: #facc15 !important;
@@ -462,9 +429,7 @@
         .admin-actions .btn-secondary { background: #475569; color: white; box-shadow: 0 4px 20px rgba(71, 85, 105, 0.3); }
         .admin-actions .btn-secondary:hover { transform: scale(1.02); background: #334155; }
 
-        /* ============================================================ */
-        /* ADMIN BUZZ NOTIFICATION – Full Screen Popup */
-        /* ============================================================ */
+        /* Admin Buzz Notification */
         .buzz-notification {
             position: fixed;
             top: 0;
@@ -482,9 +447,7 @@
             padding: 20px;
             text-align: center;
         }
-        .buzz-notification.active {
-            display: flex;
-        }
+        .buzz-notification.active { display: flex; }
         @keyframes notifFadeIn {
             0% { opacity: 0; transform: scale(0.95); }
             100% { opacity: 1; transform: scale(1); }
@@ -522,7 +485,6 @@
             text-transform: uppercase;
             animation: nameSlide 0.5s ease 0.4s both;
         }
-        /* Confetti-like sparkle overlay */
         .buzz-notification::before {
             content: '✨🎉✨';
             position: absolute;
@@ -614,11 +576,7 @@
             100% { opacity: 0.9; }
         }
 
-        /* Scrollbars */
-        .leaderboard::-webkit-scrollbar, .admin-list-container::-webkit-scrollbar { width: 6px; }
-        .leaderboard::-webkit-scrollbar-thumb, .admin-list-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
         .admin-toggle.mobile-hidden { display: none !important; }
-
         .badge-prev {
             display: inline-block;
             background: #8b5cf6;
@@ -628,6 +586,10 @@
             border-radius: 30px;
             margin-left: 12px;
         }
+
+        /* Scrollbar */
+        .admin-list-container::-webkit-scrollbar { width: 6px; }
+        .admin-list-container::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -657,8 +619,8 @@
 
 <!-- Main Container -->
 <div class="container">
-    <!-- Header -->
-    <div class="header">
+    <!-- Header (visible only for Admin) -->
+    <div class="header" id="mainHeader">
         <h1>🔔 Quiz Buzzer</h1>
         <div class="actions">
             <span class="room-badge" id="roomBadge">Room: quiz123</span>
@@ -666,56 +628,44 @@
         </div>
     </div>
 
-    <!-- Player View -->
+    <!-- ===== Player View ===== -->
     <div id="playerView">
-        <!-- Welcome Message -->
-        <div class="player-welcome">
-            <h2>👋 Welcome, <span>Player!</span></h2>
-            <p>Enter your name and get ready to buzz!</p>
+        <!-- Setup View (Splash + Name) -->
+        <div id="setupView">
+            <div class="splash-title">🎤 മെഗാ ക്വിസ് റിയാലിറ്റി</div>
+            <div class="splash-sub">
+                നൂറുസ്സലാം മദ്രസ <span>sksbv</span> യൂണിറ്റ് നടത്തുന്ന<br>
+                മെഗാ ക്വിസ് റിയാലിറ്റി ഷോയിലേക്ക്<br>
+                <span>സ്വാഗതം</span> 🙌
+            </div>
+            <div class="setup-name-area">
+                <input type="text" id="playerNameInput" placeholder="നിങ്ങളുടെ പേര് നൽകുക" maxlength="20">
+                <button class="enter-btn" id="enterBtn">🚀 Enter & Buzz</button>
+            </div>
         </div>
 
-        <div class="name-input-area">
-            <span class="name-label">📝 Name</span>
-            <input type="text" id="playerNameInput" placeholder="Your name" maxlength="20">
-            <button class="save-btn" id="saveNameBtn">💾 Save</button>
-        </div>
-
-        <div class="buzzer-wrapper">
-            <button id="buzzerBtn" class="buzzer-btn" disabled>
-                BUZZ
-                <span class="sub-text" id="buzzerSub">Logging in...</span>
-            </button>
-        </div>
-
-        <div class="status-area">
-            <div id="statusMsg" class="status-msg">⏳ Connecting...</div>
-        </div>
-
-        <div class="leaderboard">
-            <h3>🏆 Leaderboard (Top 10)</h3>
-            <ul id="ranking-list">
-                <li class="empty-state">⏳ Waiting...</li>
-            </ul>
+        <!-- Buzzer View (Only Buzzer) -->
+        <div id="buzzerView">
+            <div class="buzzer-wrapper">
+                <button id="buzzerBtn" class="buzzer-btn" disabled>
+                    BUZZ
+                    <span class="sub-text" id="buzzerSub">Connecting...</span>
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Admin View -->
+    <!-- ===== Admin View ===== -->
     <div id="adminView">
         <div class="admin-stats">
-            <div class="admin-stat-card">
-                <label>Total Buzzes</label>
-                <span id="totalCount">0</span>
-            </div>
-            <div class="admin-stat-card">
-                <label>Last Buzz</label>
-                <span id="lastBuzzer">-</span>
-            </div>
+            <div class="admin-stat-card"><label>Total Buzzes</label><span id="totalCount">0</span></div>
+            <div class="admin-stat-card"><label>Last Buzz</label><span id="lastBuzzer">-</span></div>
         </div>
 
         <div class="admin-list-container">
             <h3 id="adminListTitle">🏆 Order (Name & Timestamp)</h3>
             <div id="adminRankingList">
-                <div class="empty-state">⏳ Loading...</div>
+                <div class="empty-state" style="text-align:center; color:#475569; padding:30px;">⏳ Loading...</div>
             </div>
         </div>
 
@@ -754,7 +704,7 @@
     const db = getFirestore(app);
 
     // --------------------------------------------------------------
-    // 🔊 Audio Context (shared for all sounds)
+    // 🔊 Audio Context
     // --------------------------------------------------------------
     let audioCtx = null;
 
@@ -768,9 +718,6 @@
         return audioCtx;
     }
 
-    // --------------------------------------------------------------
-    // 🔊 Player Buzzer Sound
-    // --------------------------------------------------------------
     function playPlayerSound() {
         try {
             const ctx = getAudioContext();
@@ -788,9 +735,6 @@
         } catch (e) { console.log('Player sound error:', e); }
     }
 
-    // --------------------------------------------------------------
-    // 🔊 Admin Beep Sound
-    // --------------------------------------------------------------
     function playAdminSound() {
         try {
             const ctx = getAudioContext();
@@ -808,9 +752,6 @@
         } catch (e) { console.log('Admin sound error:', e); }
     }
 
-    // --------------------------------------------------------------
-    // 📳 Player Vibration
-    // --------------------------------------------------------------
     function triggerVibration() {
         if (navigator.vibrate) {
             navigator.vibrate(200);
@@ -856,14 +797,15 @@
     const loginAdminBtn = document.getElementById('loginAdminBtn');
     const loginError = document.getElementById('loginError');
 
+    const setupView = document.getElementById('setupView');
+    const buzzerView = document.getElementById('buzzerView');
+    const playerNameInput = document.getElementById('playerNameInput');
+    const enterBtn = document.getElementById('enterBtn');
+
     const buzzerBtn = document.getElementById('buzzerBtn');
     const buzzerSub = document.getElementById('buzzerSub');
-    const statusMsg = document.getElementById('statusMsg');
-    const rankingList = document.getElementById('ranking-list');
-    const roomBadge = document.getElementById('roomBadge');
     const strobeOverlay = document.getElementById('strobeOverlay');
-    const playerNameInput = document.getElementById('playerNameInput');
-    const saveNameBtn = document.getElementById('saveNameBtn');
+    const roomBadge = document.getElementById('roomBadge');
 
     const totalCount = document.getElementById('totalCount');
     const lastBuzzer = document.getElementById('lastBuzzer');
@@ -884,34 +826,44 @@
     }
 
     // --------------------------------------------------------------
-    // 📝 Save / Load Name
+    // 📝 Enter Button Logic (Save Name & Show Buzzer)
     // --------------------------------------------------------------
+    enterBtn.addEventListener('click', () => {
+        getAudioContext();
+        const name = playerNameInput.value.trim();
+        if (name) {
+            playerName = name;
+            localStorage.setItem('quizPlayerName', name);
+            // Transition to buzzer view
+            setupView.classList.add('hidden');
+            buzzerView.classList.add('active');
+            // Enable buzzer after login is confirmed
+            if (currentUser) {
+                updatePlayerStatus(buzzerOrderData);
+            } else {
+                buzzerBtn.disabled = true;
+                buzzerSub.textContent = 'Logging in...';
+            }
+        } else {
+            playerNameInput.focus();
+            playerNameInput.style.borderColor = '#f87171';
+            setTimeout(() => playerNameInput.style.borderColor = '#334155', 1000);
+        }
+    });
+
+    // Allow Enter key on input
+    playerNameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            enterBtn.click();
+        }
+    });
+
+    // Auto-load saved name
     const savedName = localStorage.getItem('quizPlayerName');
     if (savedName) {
         playerNameInput.value = savedName;
         playerName = savedName;
     }
-
-    saveNameBtn.addEventListener('click', () => {
-        getAudioContext();
-        const name = playerNameInput.value.trim();
-        if (name) {
-            localStorage.setItem('quizPlayerName', name);
-            playerName = name;
-            statusMsg.textContent = `✅ Name saved: ${name}`;
-            statusMsg.className = 'status-msg success';
-            if (currentUser && buzzerOrderData.length < 10) {
-                updatePlayerStatus(buzzerOrderData);
-            }
-        } else {
-            statusMsg.textContent = '⚠️ Please enter a name first.';
-            statusMsg.className = 'status-msg warning';
-        }
-    });
-
-    playerNameInput.addEventListener('input', () => {
-        playerName = playerNameInput.value.trim();
-    });
 
     // --------------------------------------------------------------
     // 🎨 Button State Manager
@@ -920,12 +872,12 @@
         buzzerBtn.classList.remove('ready', 'pressed');
         if (state === 'ready') {
             buzzerBtn.style.background = 'radial-gradient(circle at 40% 35%, #4ade80, #15803d)';
-            buzzerBtn.style.boxShadow = '0 0 50px rgba(74, 222, 128, 0.35), 0 15px 30px rgba(0,0,0,0.8)';
+            buzzerBtn.style.boxShadow = '0 0 60px rgba(74, 222, 128, 0.4), 0 15px 30px rgba(0,0,0,0.8)';
             buzzerBtn.disabled = false;
         } else if (state === 'pressed') {
             buzzerBtn.classList.add('pressed');
             buzzerBtn.style.background = 'radial-gradient(circle at 40% 35%, #ff6b6b, #b91c1c)';
-            buzzerBtn.style.boxShadow = '0 0 70px rgba(239, 68, 68, 0.7), 0 5px 10px rgba(0,0,0,0.8)';
+            buzzerBtn.style.boxShadow = '0 0 80px rgba(239, 68, 68, 0.8), 0 5px 10px rgba(0,0,0,0.8)';
             buzzerBtn.disabled = true;
         } else if (state === 'locked' || state === 'disabled') {
             buzzerBtn.style.background = 'radial-gradient(circle at 40% 35%, #475569, #1e293b)';
@@ -1014,8 +966,10 @@
         adminView.classList.remove('active');
         adminToggleBtn.classList.remove('active');
         adminToggleBtn.textContent = '🔐';
-        renderPlayerList(buzzerOrderData);
-        updatePlayerStatus(buzzerOrderData);
+        // Only update if buzzer view is active
+        if (buzzerView.classList.contains('active')) {
+            updatePlayerStatus(buzzerOrderData);
+        }
     }
 
     // --------------------------------------------------------------
@@ -1030,8 +984,7 @@
             await signInAnonymously(auth);
             console.log('✅ New player logged in.');
         } catch (error) {
-            statusMsg.textContent = '❌ Login failed: ' + error.message;
-            statusMsg.className = 'status-msg error';
+            console.error('Login error:', error);
         }
     }
 
@@ -1039,17 +992,17 @@
         if (user) {
             currentUser = user;
             console.log('✅ User UID:', user.uid);
-            if (currentMode === 'player') {
-                statusMsg.textContent = '✅ Login successful. Enter your name and buzz!';
-                statusMsg.className = 'status-msg';
-                connectToRoom(ROOM_ID);
+            connectToRoom(ROOM_ID);
+            if (buzzerView.classList.contains('active')) {
+                updatePlayerStatus(buzzerOrderData);
+            } else {
+                // Still in setup, just show login success
+                if (setupView.classList.contains('hidden') === false) {
+                    // Optionally update setup view, but user hasn't entered yet
+                }
             }
         } else {
-            if (currentMode === 'player') {
-                resetPlayerSession();
-            } else {
-                signInAnonymously(auth).catch(console.error);
-            }
+            resetPlayerSession();
         }
     });
 
@@ -1066,14 +1019,12 @@
 
         unsubscribeSnapshot = onSnapshot(roomRef, (docSnap) => {
             if (!docSnap.exists()) {
-                const errMsg = '⚠️ Room not found!';
-                if (currentMode === 'player') {
-                    statusMsg.textContent = errMsg;
-                    statusMsg.className = 'status-msg error';
-                    setButtonState('disabled', 'Room missing');
-                    rankingList.innerHTML = '<li class="empty-state">⚠️ Room not found</li>';
-                } else {
-                    adminRankingList.innerHTML = '<div class="empty-state">⚠️ Room not found. Create it by buzzing or using New Round.</div>';
+                // Room doesn't exist – create it silently if admin is present, or wait for first buzz
+                if (currentMode === 'admin') {
+                    adminRankingList.innerHTML = '<div class="empty-state" style="text-align:center; color:#475569; padding:30px;">⚠️ Room not found. Create it by buzzing or using New Round.</div>';
+                }
+                if (currentMode === 'player' && buzzerView.classList.contains('active')) {
+                    setButtonState('disabled', 'Waiting for quiz...');
                 }
                 return;
             }
@@ -1083,53 +1034,47 @@
             const previous = data.previousBuzzerOrder || [];
             const oldLength = buzzerOrderData.length;
             
-            // Check if new buzz arrived
             const hasNewBuzz = order.length > oldLength;
             
             buzzerOrderData = order;
             previousOrderData = previous;
 
+            // Admin
             if (currentMode === 'admin') {
                 if (hasNewBuzz && order.length > 0) {
                     const newEntry = order[order.length - 1];
-                    playAdminSound(); // 🔊 Admin beep
+                    playAdminSound();
                     showBuzzNotification(newEntry.playerName || `Player ${newEntry.userId.substring(0, 4)}`, newEntry.position);
                 }
                 renderAdminView();
             }
 
+            // Player
             if (currentMode === 'player') {
-                updatePlayerStatus(order);
-                renderPlayerList(order);
+                if (buzzerView.classList.contains('active')) {
+                    updatePlayerStatus(order);
+                }
             }
 
         }, (error) => {
-            const errMsg = '❌ Connection error: ' + error.message;
             console.error('🔥 Listener error:', error);
-            if (currentMode === 'player') {
-                statusMsg.textContent = errMsg;
-                statusMsg.className = 'status-msg error';
-                setButtonState('disabled', 'Error');
-            } else {
-                adminRankingList.innerHTML = `<div class="empty-state">❌ ${errMsg}</div>`;
+            if (currentMode === 'admin') {
+                adminRankingList.innerHTML = `<div class="empty-state" style="text-align:center; color:#f87171; padding:30px;">❌ ${error.message}</div>`;
             }
         });
     }
 
     // --------------------------------------------------------------
-    // 🎉 Admin Buzz Notification (Full Screen Popup)
+    // 🎉 Admin Buzz Notification
     // --------------------------------------------------------------
     function showBuzzNotification(name, position) {
         if (notifTimeout) {
             clearTimeout(notifTimeout);
             notifDiv.classList.remove('active');
         }
-
         notifRank.textContent = `#${position}`;
         notifName.textContent = name;
         notifDiv.classList.add('active');
-        
-        // Auto hide after 3 seconds
         notifTimeout = setTimeout(() => {
             notifDiv.classList.remove('active');
             notifTimeout = null;
@@ -1137,7 +1082,7 @@
     }
 
     // --------------------------------------------------------------
-    // 🎨 Render Functions
+    // 🎨 Player Update Function
     // --------------------------------------------------------------
     function updatePlayerStatus(order) {
         if (!currentUser) return;
@@ -1148,57 +1093,22 @@
         if (existing) {
             hasBuzzed = true;
             setButtonState('pressed', `✅ Position ${existing.position}`);
-            statusMsg.textContent = `🎉 You buzzed at position ${existing.position}!`;
-            statusMsg.className = 'status-msg success';
         } else {
             hasBuzzed = false;
             if (locked) {
                 setButtonState('locked', '⛔ Full');
-                statusMsg.textContent = '⛔ Buzzer is full (10/10). Competition over.';
-                statusMsg.className = 'status-msg warning';
             } else {
                 if (!playerName) {
-                    statusMsg.textContent = '⚠️ Please enter your name before buzzing.';
-                    statusMsg.className = 'status-msg warning';
                     setButtonState('disabled', 'Enter name');
                 } else {
-                    setButtonState('ready', `${order.length + 1}/10 Press`);
-                    statusMsg.textContent = `🎯 Ready, ${playerName}! (${order.length + 1}/10)`;
-                    statusMsg.className = 'status-msg';
+                    setButtonState('ready', `${order.length + 1}/10`);
                 }
             }
         }
     }
 
-    function renderPlayerList(order) {
-        if (!order || order.length === 0) {
-            rankingList.innerHTML = '<li class="empty-state">⏳ No one has buzzed yet</li>';
-            return;
-        }
-        const sorted = [...order].sort((a, b) => a.position - b.position);
-        const top10 = sorted.slice(0, 10);
-        let html = '';
-        top10.forEach((entry, idx) => {
-            const rank = idx + 1;
-            const displayName = entry.playerName || `Player ${entry.userId.substring(0, 4)}`;
-            let medal = '', cls = '';
-            if (rank === 1) { medal = '🥇'; cls = 'top1'; }
-            else if (rank === 2) { medal = '🥈'; cls = 'top2'; }
-            else if (rank === 3) { medal = '🥉'; cls = 'top3'; }
-            const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--';
-            html += `
-                <li class="${cls}">
-                    <span class="rank">${medal} #${rank}</span>
-                    <span class="player-name">${displayName}</span>
-                    <span class="player-time">${time}</span>
-                </li>
-            `;
-        });
-        rankingList.innerHTML = html;
-    }
-
     // --------------------------------------------------------------
-    // 👑 Admin Render Functions (Projector Style)
+    // 👑 Admin Render Functions
     // --------------------------------------------------------------
     function renderAdminView() {
         const hasPrevious = previousOrderData && previousOrderData.length > 0;
@@ -1220,7 +1130,7 @@
         }
 
         if (!displayOrder || displayOrder.length === 0) {
-            adminRankingList.innerHTML = '<div class="empty-state">⏳ No buzzes yet.</div>';
+            adminRankingList.innerHTML = '<div class="empty-state" style="text-align:center; color:#475569; padding:30px;">⏳ No buzzes yet.</div>';
             return;
         }
 
@@ -1236,7 +1146,6 @@
             if (rank === 3) cls = 'top3';
             if (hasPrevious) cls += ' previous-result';
             
-            // Check if this is the newest entry (only for current round)
             const isNew = !hasPrevious && entry.position === buzzerOrderData.length;
             if (isNew) cls += ' highlight';
             
@@ -1253,35 +1162,27 @@
     }
 
     // --------------------------------------------------------------
-    // 🚀 Press Buzzer (Firestore Transaction)
+    // 🚀 Press Buzzer
     // --------------------------------------------------------------
     async function pressBuzzer() {
         if (!currentUser) {
-            statusMsg.textContent = '⚠️ Not logged in.';
-            statusMsg.className = 'status-msg error';
+            setButtonState('disabled', 'Login...');
             return;
         }
         if (isLocked) {
-            statusMsg.textContent = '⛔ Buzzer is locked.';
-            statusMsg.className = 'status-msg warning';
+            setButtonState('locked', 'Full');
             return;
         }
         if (hasBuzzed) {
-            statusMsg.textContent = '⚠️ You already buzzed.';
-            statusMsg.className = 'status-msg warning';
             return;
         }
         if (!playerName) {
-            statusMsg.textContent = '⚠️ Please enter your name first!';
-            statusMsg.className = 'status-msg warning';
-            playerNameInput.focus();
+            setButtonState('disabled', 'Name?');
             return;
         }
 
         getAudioContext();
         setButtonState('disabled', '⏳...');
-        statusMsg.textContent = '⏳ Sending buzz...';
-        statusMsg.className = 'status-msg';
 
         const roomRef = doc(db, 'rooms', ROOM_ID);
 
@@ -1293,8 +1194,7 @@
                         buzzerOrder: [],
                         previousBuzzerOrder: []
                     });
-                    const newDoc = await transaction.get(roomRef);
-                    return { newEntry: { position: 1, userId: currentUser.uid, playerName: playerName, timestamp: Timestamp.now() }, created: true };
+                    return { newEntry: { position: 1, userId: currentUser.uid, playerName: playerName, timestamp: Timestamp.now() } };
                 }
                 
                 const data = roomDoc.data();
@@ -1314,7 +1214,7 @@
                 transaction.update(roomRef, {
                     buzzerOrder: [...buzzerOrder, newEntry]
                 });
-                return { newEntry: newEntry, created: false };
+                return { newEntry: newEntry };
             });
 
             const pos = result.newEntry.position;
@@ -1322,21 +1222,17 @@
             triggerVibration();
             triggerStrobe();
             
-            setButtonState('pressed', `✅ Position ${pos}`);
-            statusMsg.textContent = `🎉 Success! You buzzed at position ${pos}!`;
-            statusMsg.className = 'status-msg success';
+            setButtonState('pressed', `✅ #${pos}`);
             hasBuzzed = true;
 
         } catch (error) {
             console.error('🔥 Buzzer error:', error);
-            let msg = '❌ Error: ' + error.message;
-            if (error.message.includes('full')) msg = '⛔ Buzzer is full.';
-            else if (error.message.includes('Already')) msg = '⚠️ You already buzzed.';
-            else if (error.message.includes('not found')) msg = '❌ Room not found.';
-            statusMsg.textContent = msg;
-            statusMsg.className = 'status-msg error';
+            let msg = 'Error';
+            if (error.message.includes('full')) msg = 'Full';
+            else if (error.message.includes('Already')) msg = 'Already';
+            setButtonState('disabled', msg);
             if (!isLocked && !hasBuzzed) {
-                setButtonState('ready', 'Try again');
+                setTimeout(() => setButtonState('ready', `${buzzerOrderData.length + 1}/10`), 1500);
             }
         }
     }
@@ -1344,7 +1240,7 @@
     buzzerBtn.addEventListener('click', pressBuzzer);
 
     // --------------------------------------------------------------
-    // 🔄 Admin: New Round
+    // 🔄 Admin: New Round / End Quiz
     // --------------------------------------------------------------
     async function newRound() {
         if (!confirm('🔄 This will save current result and clear buzzer for next round. Continue?')) return;
@@ -1356,14 +1252,10 @@
             }, { merge: true });
             alert('✅ New round started! Previous result saved.');
         } catch (error) {
-            console.error('🔥 NewRound error:', error);
             alert('❌ Failed: ' + error.message);
         }
     }
 
-    // --------------------------------------------------------------
-    // ⏹ Admin: End Quiz
-    // --------------------------------------------------------------
     async function endQuiz() {
         if (!confirm('⏹ This will clear ALL data (including previous results). Are you sure?')) return;
         try {
@@ -1374,7 +1266,6 @@
             }, { merge: true });
             alert('✅ Quiz ended. All data cleared.');
         } catch (error) {
-            console.error('🔥 EndQuiz error:', error);
             alert('❌ Failed: ' + error.message);
         }
     }
@@ -1388,12 +1279,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('🚀 Quiz Buzzer App Loaded (Projector + Mobile App UI)');
-    if (IS_MOBILE) {
-        console.log('📱 Mobile mode: Player only, Vibration enabled');
-    } else {
-        console.log('💻 Desktop mode: Player + Admin, Admin animations enabled');
-    }
+    console.log('🚀 Quiz Buzzer App Loaded (Splash + Full-screen Buzzer)');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
