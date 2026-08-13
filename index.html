@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>NOORUSSALAM-Buzzzer</title>
 
-    <!-- Google Font: Anek Malayalam -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@100..800&display=swap" rel="stylesheet">
@@ -57,7 +56,7 @@
             overflow: hidden;
         }
 
-        /* ----- Header (Admin only – hidden on player) ----- */
+        /* ----- Header (Admin only) ----- */
         .header {
             display: flex;
             justify-content: space-between;
@@ -71,7 +70,6 @@
             font-size: 1.5rem;
             font-weight: 600;
             letter-spacing: 1px;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .header .actions {
             display: flex;
@@ -86,7 +84,6 @@
             color: #94a3b8;
             font-size: 0.7rem;
             border: 1px solid rgba(51, 65, 85, 0.5);
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .admin-toggle {
             background: rgba(30, 41, 59, 0.4);
@@ -97,7 +94,6 @@
             padding: 6px 14px;
             border-radius: 30px;
             transition: all 0.3s ease;
-            font-family: 'Anek Malayalam', sans-serif;
             backdrop-filter: blur(8px);
         }
         .admin-toggle:hover { background: rgba(250, 204, 21, 0.15); color: #facc15; border-color: #facc1550; }
@@ -105,7 +101,7 @@
         .admin-toggle.mobile-hidden { display: none !important; }
 
         /* ============================================================ */
-        /* PLAYER VIEW – App-like with Splash & Full-screen Buzzer */
+        /* PLAYER VIEW */
         /* ============================================================ */
         #playerView {
             display: flex;
@@ -114,10 +110,7 @@
             height: 100%;
             min-height: 0;
             position: relative;
-            font-family: 'Anek Malayalam', sans-serif;
         }
-
-        /* ---- Splash + Name Setup View ---- */
         #setupView {
             display: flex;
             flex-direction: column;
@@ -140,8 +133,6 @@
             margin-bottom: 12px;
             text-shadow: 0 0 40px rgba(250, 204, 21, 0.15);
             line-height: 1.3;
-            font-family: 'Anek Malayalam', sans-serif;
-            letter-spacing: 1px;
         }
         .splash-sub {
             font-size: 1.1rem;
@@ -150,13 +141,8 @@
             margin-bottom: 35px;
             line-height: 1.7;
             max-width: 380px;
-            font-family: 'Anek Malayalam', sans-serif;
         }
-        .splash-sub span {
-            color: #facc15;
-            font-weight: 600;
-            font-family: 'Anek Malayalam', sans-serif;
-        }
+        .splash-sub span { color: #facc15; font-weight: 600; }
         .setup-name-area {
             display: flex;
             flex-direction: column;
@@ -175,7 +161,6 @@
             outline: none;
             text-align: center;
             transition: all 0.3s ease;
-            font-family: 'Anek Malayalam', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -186,7 +171,6 @@
         }
         .setup-name-area input::placeholder {
             color: #64748b;
-            font-family: 'Anek Malayalam', sans-serif;
             text-transform: none;
             letter-spacing: 0;
         }
@@ -201,7 +185,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 30px rgba(250, 204, 21, 0.25);
-            font-family: 'Anek Malayalam', sans-serif;
             letter-spacing: 1px;
         }
         .setup-name-area .enter-btn:hover {
@@ -215,7 +198,6 @@
             transform: none;
         }
 
-        /* ---- Full-screen Buzzer View (only buzzer) ---- */
         #buzzerView {
             display: none;
             flex: 1;
@@ -233,8 +215,6 @@
             flex: 1;
             position: relative;
         }
-
-        /* ---- Attractive Buzzer Button ---- */
         .buzzer-btn {
             width: 78%;
             aspect-ratio: 1/1;
@@ -261,7 +241,6 @@
                 inset 0 -8px 20px rgba(0,0,0,0.3),
                 inset 0 8px 20px rgba(255,255,255,0.15);
             transition: all 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
-            font-family: 'Anek Malayalam', sans-serif;
             border: 3px solid rgba(255,255,255,0.06);
         }
         .buzzer-btn::before {
@@ -294,19 +273,11 @@
         }
         .buzzer-btn:active:not(:disabled):not(.pressed) {
             transform: scale(0.94);
-            box-shadow: 
-                0 0 100px rgba(74, 222, 128, 0.35),
-                0 5px 20px rgba(0,0,0,0.6),
-                inset 0 -4px 15px rgba(0,0,0,0.4),
-                inset 0 4px 15px rgba(255,255,255,0.1);
+            box-shadow: 0 0 100px rgba(74, 222, 128, 0.35), 0 5px 20px rgba(0,0,0,0.6), inset 0 -4px 15px rgba(0,0,0,0.4), inset 0 4px 15px rgba(255,255,255,0.1);
         }
         .buzzer-btn.pressed {
             background: radial-gradient(circle at 40% 30%, #ff6b6b, #dc2626 60%, #991b1b);
-            box-shadow: 
-                0 0 80px rgba(239, 68, 68, 0.4),
-                0 15px 40px rgba(0,0,0,0.6),
-                inset 0 -8px 20px rgba(0,0,0,0.3),
-                inset 0 8px 20px rgba(255,255,255,0.08);
+            box-shadow: 0 0 80px rgba(239, 68, 68, 0.4), 0 15px 40px rgba(0,0,0,0.6), inset 0 -8px 20px rgba(0,0,0,0.3), inset 0 8px 20px rgba(255,255,255,0.08);
             animation: pressed-pulse 0.8s ease 3;
             color: #fff;
         }
@@ -334,12 +305,11 @@
             padding: 4px 24px;
             border-radius: 40px;
             letter-spacing: 1px;
-            font-family: 'Anek Malayalam', sans-serif;
             backdrop-filter: blur(4px);
         }
 
         /* ============================================================ */
-        /* ADMIN VIEW – Projector / Full Screen with Animations */
+        /* ADMIN VIEW */
         /* ============================================================ */
         #adminView {
             display: none;
@@ -347,7 +317,6 @@
             flex: 1;
             height: 100%;
             padding-top: 5px;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         #adminView.active { display: flex; }
         #playerView.hidden { display: none; }
@@ -366,7 +335,6 @@
             flex: 1;
             border-left: 3px solid #facc15;
             text-align: center;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .admin-stat-card label {
             color: #94a3b8;
@@ -374,7 +342,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             display: block;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .admin-stat-card span {
             font-size: 2rem;
@@ -382,7 +349,6 @@
             color: #facc15;
             display: block;
             margin-top: 2px;
-            font-family: 'Anek Malayalam', sans-serif;
         }
 
         .admin-list-container {
@@ -395,7 +361,6 @@
             margin: 4px 0 14px;
             border: 1px solid rgba(51, 65, 85, 0.3);
             box-shadow: inset 0 0 60px rgba(0,0,0,0.2);
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .admin-list-container h3 {
             color: #94a3b8;
@@ -405,7 +370,6 @@
             letter-spacing: 3px;
             font-weight: 400;
             text-align: center;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .admin-item {
             display: flex;
@@ -417,7 +381,6 @@
             border-left: 4px solid #475569;
             transition: all 0.3s ease;
             animation: adminItemSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            font-family: 'Anek Malayalam', sans-serif;
         }
         @keyframes adminItemSlide {
             0% { transform: translateX(-30px); opacity: 0; }
@@ -428,7 +391,6 @@
             color: #facc15;
             min-width: 50px;
             font-size: 1.6rem;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .admin-item .name {
             flex: 1;
@@ -437,7 +399,6 @@
             margin-left: 12px;
             color: #f1f5f9;
             letter-spacing: 0.5px;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .admin-item .uid {
             color: #64748b;
@@ -455,12 +416,10 @@
             padding: 2px 14px;
             border-radius: 30px;
             font-weight: 400;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .admin-item.top1 { border-left-color: #facc15; background: rgba(250, 204, 21, 0.10); }
         .admin-item.top2 { border-left-color: #94a3b8; background: rgba(148, 163, 184, 0.05); }
         .admin-item.top3 { border-left-color: #cd7f32; background: rgba(205, 127, 50, 0.05); }
-        .admin-item.previous-result { border-left-color: #8b5cf6; background: rgba(139, 92, 246, 0.06); }
         .admin-item.highlight {
             animation: buzzHighlight 1.2s ease;
             border-left-color: #facc15 !important;
@@ -490,7 +449,6 @@
             min-width: 100px;
             transition: all 0.3s ease;
             letter-spacing: 0.5px;
-            font-family: 'Anek Malayalam', sans-serif;
             backdrop-filter: blur(4px);
         }
         .admin-actions .btn-danger { background: #dc2626; color: white; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.2); }
@@ -501,78 +459,8 @@
         .admin-actions .btn-secondary:hover { transform: scale(1.02); background: rgba(71, 85, 105, 0.7); }
         .admin-actions .btn-projector { background: rgba(139, 92, 246, 0.4); color: #c4b5fd; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1); }
         .admin-actions .btn-projector:hover { transform: scale(1.02); background: rgba(139, 92, 246, 0.6); }
-        .admin-actions .btn-history { background: rgba(52, 211, 153, 0.3); color: #6ee7b7; box-shadow: 0 4px 20px rgba(52, 211, 153, 0.1); }
-        .admin-actions .btn-history:hover { transform: scale(1.02); background: rgba(52, 211, 153, 0.5); }
 
-        /* ----- Rounds History Modal ----- */
-        .history-modal {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(16px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9997;
-            padding: 20px;
-        }
-        .history-modal.active { display: flex; }
-        .history-modal-content {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            padding: 25px 30px;
-            max-width: 700px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            border: 1px solid rgba(51, 65, 85, 0.4);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            font-family: 'Anek Malayalam', sans-serif;
-        }
-        .history-modal-content h2 {
-            color: #facc15;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .history-modal-content h2 button {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .history-modal-content h2 button:hover { color: #f87171; transform: rotate(90deg); }
-        .history-round {
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 16px;
-            padding: 12px 16px;
-            margin-bottom: 12px;
-            border-left: 4px solid #facc15;
-        }
-        .history-round .round-title {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #facc15;
-            margin-bottom: 6px;
-        }
-        .history-entry {
-            display: flex;
-            padding: 4px 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            font-size: 1rem;
-            color: #e2e8f0;
-        }
-        .history-entry .h-rank { min-width: 50px; color: #94a3b8; }
-        .history-entry .h-name { flex: 1; margin-left: 10px; }
-        .history-entry .h-time { color: #64748b; font-size: 0.8rem; }
-        .history-empty { color: #64748b; text-align: center; padding: 20px; }
-
-        /* ----- Projector Overlay (full‑screen slideshow) ----- */
+        /* ----- Projector Overlay ----- */
         .projector-overlay {
             position: fixed;
             top: 0;
@@ -594,8 +482,6 @@
             overflow: hidden;
         }
         .projector-overlay.active { display: flex; }
-
-        /* Animated background gradient */
         .projector-overlay::before {
             content: '';
             position: absolute;
@@ -624,7 +510,6 @@
             0% { opacity: 0; transform: scale(0.92) rotate(-2deg); }
             100% { opacity: 1; transform: scale(1) rotate(0); }
         }
-
         .projector-rank {
             font-size: 9rem;
             font-weight: 800;
@@ -632,21 +517,18 @@
             text-shadow: 0 0 100px rgba(250, 204, 21, 0.4), 0 0 200px rgba(250, 204, 21, 0.1);
             line-height: 1;
             margin-bottom: 10px;
-            font-family: 'Anek Malayalam', sans-serif;
             animation: rankPopProjector 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         @keyframes rankPopProjector {
             0% { transform: scale(0.2); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-
         .projector-name {
             font-size: 5.5rem;
             font-weight: 700;
             color: #ffffff;
             text-shadow: 0 4px 50px rgba(255, 255, 255, 0.1);
             margin-bottom: 10px;
-            font-family: 'Anek Malayalam', sans-serif;
             word-break: break-word;
             animation: nameSlideProjector 0.5s ease 0.15s both;
         }
@@ -654,17 +536,14 @@
             0% { transform: translateY(40px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
-
         .projector-time {
             font-size: 1.8rem;
             color: #94a3b8;
             font-weight: 300;
             letter-spacing: 3px;
-            font-family: 'Anek Malayalam', sans-serif;
             animation: nameSlideProjector 0.5s ease 0.3s both;
         }
 
-        /* Confetti / Particle burst */
         .projector-confetti {
             position: absolute;
             width: 100%;
@@ -707,7 +586,6 @@
             align-items: center;
             transition: all 0.3s ease;
             user-select: none;
-            font-family: 'Anek Malayalam', sans-serif;
             z-index: 3;
         }
         .projector-nav:hover {
@@ -735,7 +613,6 @@
             justify-content: center;
             align-items: center;
             transition: all 0.3s ease;
-            font-family: 'Anek Malayalam', sans-serif;
             z-index: 3;
         }
         .projector-close:hover {
@@ -751,42 +628,12 @@
             color: #64748b;
             font-size: 1.2rem;
             letter-spacing: 2px;
-            font-family: 'Anek Malayalam', sans-serif;
             background: rgba(0,0,0,0.3);
             padding: 6px 20px;
             border-radius: 30px;
             backdrop-filter: blur(4px);
             z-index: 3;
         }
-
-        .projector-round-nav {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(8px);
-            padding: 6px 16px;
-            border-radius: 40px;
-            border: 1px solid rgba(51, 65, 85, 0.3);
-            z-index: 3;
-        }
-        .projector-round-nav button {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 1rem;
-            padding: 4px 12px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Anek Malayalam', sans-serif;
-            font-weight: 600;
-        }
-        .projector-round-nav button:hover { background: rgba(250, 204, 21, 0.15); color: #facc15; }
-        .projector-round-nav button.active { background: rgba(250, 204, 21, 0.2); color: #facc15; }
 
         /* ----- Admin Buzz Notification ----- */
         .buzz-notification {
@@ -805,7 +652,6 @@
             animation: notifFadeIn 0.35s ease;
             padding: 30px;
             text-align: center;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         .buzz-notification.active { display: flex; }
         @keyframes notifFadeIn {
@@ -820,7 +666,6 @@
             line-height: 1;
             margin-bottom: 8px;
             animation: rankPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            font-family: 'Anek Malayalam', sans-serif;
         }
         @keyframes rankPop {
             0% { transform: scale(0.3); opacity: 0; }
@@ -833,7 +678,6 @@
             text-shadow: 0 4px 30px rgba(255, 255, 255, 0.08);
             margin-bottom: 8px;
             animation: nameSlide 0.5s ease 0.15s both;
-            font-family: 'Anek Malayalam', sans-serif;
         }
         @keyframes nameSlide {
             0% { transform: translateY(30px); opacity: 0; }
@@ -846,7 +690,6 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             animation: nameSlide 0.5s ease 0.3s both;
-            font-family: 'Anek Malayalam', sans-serif;
         }
 
         /* ----- Password Modal ----- */
@@ -869,10 +712,9 @@
             max-width: 360px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.6);
             border: 1px solid rgba(51, 65, 85, 0.4);
-            font-family: 'Anek Malayalam', sans-serif;
         }
-        .modal-box h2 { color: #facc15; margin-bottom: 4px; font-family: 'Anek Malayalam', sans-serif; font-weight: 600; }
-        .modal-box p { color: #94a3b8; margin-bottom: 20px; font-size: 0.85rem; font-family: 'Anek Malayalam', sans-serif; }
+        .modal-box h2 { color: #facc15; margin-bottom: 4px; font-weight: 600; }
+        .modal-box p { color: #94a3b8; margin-bottom: 20px; font-size: 0.85rem; }
         .modal-box input {
             width: 100%;
             padding: 14px 18px;
@@ -882,7 +724,6 @@
             color: white;
             font-size: 1rem;
             margin-bottom: 16px;
-            font-family: 'Anek Malayalam', sans-serif;
             transition: border-color 0.3s;
         }
         .modal-box input:focus { outline: none; border-color: #facc15; }
@@ -896,11 +737,10 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            font-family: 'Anek Malayalam', sans-serif;
             transition: transform 0.2s;
         }
         .modal-box button:hover { transform: scale(1.02); }
-        .modal-box .error-msg { color: #f87171; margin-top: 10px; display: block; text-align: center; font-family: 'Anek Malayalam', sans-serif; }
+        .modal-box .error-msg { color: #f87171; margin-top: 10px; display: block; text-align: center; }
         .modal-close {
             background: none;
             border: none;
@@ -933,25 +773,11 @@
         }
 
         .admin-toggle.mobile-hidden { display: none !important; }
-        .badge-prev {
-            display: inline-block;
-            background: #8b5cf6;
-            color: white;
-            font-size: 0.6rem;
-            padding: 2px 12px;
-            border-radius: 30px;
-            margin-left: 10px;
-            font-family: 'Anek Malayalam', sans-serif;
-        }
 
         .admin-list-container::-webkit-scrollbar { width: 4px; }
         .admin-list-container::-webkit-scrollbar-thumb { background: rgba(51, 65, 85, 0.5); border-radius: 10px; }
         .admin-list-container::-webkit-scrollbar-track { background: transparent; }
 
-        .history-modal-content::-webkit-scrollbar { width: 4px; }
-        .history-modal-content::-webkit-scrollbar-thumb { background: rgba(51, 65, 85, 0.5); border-radius: 10px; }
-
-        /* Responsive adjustments */
         @media (max-width: 480px) {
             .splash-title { font-size: 1.5rem; }
             .splash-sub { font-size: 1rem; }
@@ -967,8 +793,6 @@
             .projector-nav { width: 50px; height: 50px; font-size: 1.8rem; }
             .projector-nav-left { left: 10px; }
             .projector-nav-right { right: 10px; }
-            .projector-round-nav { font-size: 0.7rem; padding: 4px 10px; }
-            .projector-round-nav button { font-size: 0.7rem; padding: 2px 8px; }
         }
     </style>
 </head>
@@ -991,25 +815,12 @@
     <button class="projector-close" id="projectorCloseBtn">✕</button>
     <button class="projector-nav projector-nav-left" id="projectorPrevBtn">◀</button>
     <button class="projector-nav projector-nav-right" id="projectorNextBtn">▶</button>
-    <div class="projector-round-nav" id="projectorRoundNav">
-        <button id="projectorRoundPrev">◀ Round</button>
-        <span style="color:#94a3b8; font-weight:300;">|</span>
-        <button id="projectorRoundNext">Round ▶</button>
-    </div>
     <div class="projector-content" id="projectorContent">
         <div class="projector-rank" id="projectorRank">#1</div>
         <div class="projector-name" id="projectorName">Player Name</div>
         <div class="projector-time" id="projectorTime">--:--:--</div>
     </div>
     <div class="projector-counter" id="projectorCounter">1 / 10</div>
-</div>
-
-<!-- Rounds History Modal -->
-<div class="history-modal" id="historyModal">
-    <div class="history-modal-content">
-        <h2>📜 Rounds History <button id="historyCloseBtn">✕</button></h2>
-        <div id="historyList"></div>
-    </div>
 </div>
 
 <!-- Password Modal -->
@@ -1026,7 +837,6 @@
 
 <!-- Main Container -->
 <div class="container">
-    <!-- Header (visible only for Admin) -->
     <div class="header" id="mainHeader">
         <h1>NOORUSSALAM-MEGA QUIZ FINALE</h1>
         <div class="actions">
@@ -1035,9 +845,8 @@
         </div>
     </div>
 
-    <!-- ===== Player View ===== -->
+    <!-- Player View -->
     <div id="playerView">
-        <!-- Setup View (Splash + Name) -->
         <div id="setupView">
             <div class="splash-title">GRANT FINALE</div>
             <div class="splash-sub">
@@ -1050,8 +859,6 @@
                 <button class="enter-btn" id="enterBtn">Enter &amp; Buzz</button>
             </div>
         </div>
-
-        <!-- Buzzer View (Only Buzzer) -->
         <div id="buzzerView">
             <div class="buzzer-wrapper">
                 <button id="buzzerBtn" class="buzzer-btn" disabled>
@@ -1062,23 +869,20 @@
         </div>
     </div>
 
-    <!-- ===== Admin View ===== -->
+    <!-- Admin View -->
     <div id="adminView">
         <div class="admin-stats">
             <div class="admin-stat-card"><label>Total Buzzes</label><span id="totalCount">0</span></div>
             <div class="admin-stat-card"><label>Last Buzz</label><span id="lastBuzzer">-</span></div>
         </div>
-
         <div class="admin-list-container">
             <h3 id="adminListTitle">Order (Name &amp; Timestamp)</h3>
             <div id="adminRankingList">
-                <div class="empty-state" style="text-align:center; color:#475569; padding:30px; font-family:'Anek Malayalam',sans-serif;">Loading...</div>
+                <div class="empty-state" style="text-align:center; color:#475569; padding:30px;">Loading...</div>
             </div>
         </div>
-
         <div class="admin-actions">
             <button class="btn btn-projector" id="projectorToggleBtn">📽️ Projector</button>
-            <button class="btn btn-history" id="historyToggleBtn">📜 History</button>
             <button class="btn btn-warning" id="resetBtn">New Round</button>
             <button class="btn btn-danger" id="endQuizBtn">End Quiz</button>
             <button class="btn btn-secondary" id="refreshBtn">Refresh</button>
@@ -1091,7 +895,7 @@
 
 <script type="module">
     // --------------------------------------------------------------
-    // 🔥 Firebase Config (REPLACE WITH YOUR OWN!)
+    // 🔥 FIREBASE CONFIG – REPLACE WITH YOUR OWN!
     // --------------------------------------------------------------
     import { initializeApp } from 'firebase/app';
     import { getAuth, signInAnonymously, signOut, onAuthStateChanged } from 'firebase/auth';
@@ -1112,17 +916,13 @@
     const db = getFirestore(app);
 
     // --------------------------------------------------------------
-    // 🔊 Audio Context
+    // 🔉 Audio & Vibration
     // --------------------------------------------------------------
     let audioCtx = null;
 
     function getAudioContext() {
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-            audioCtx.resume().catch(() => {});
-        }
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
         return audioCtx;
     }
 
@@ -1161,9 +961,7 @@
     }
 
     function triggerVibration() {
-        if (navigator.vibrate) {
-            navigator.vibrate(200);
-        }
+        if (navigator.vibrate) navigator.vibrate(200);
     }
 
     // --------------------------------------------------------------
@@ -1188,15 +986,13 @@
     let unsubscribeSnapshot = null;
     let isLocked = false;
     let hasBuzzed = false;
-    let buzzerOrderData = []; // current round buzzes
-    let roundHistory = []; // array of arrays (each array is a past round's buzzes)
+    let buzzerOrderData = [];
     let playerName = '';
     let notifTimeout = null;
 
-    // Projector state
+    // Projector
     let projectorActive = false;
-    let projectorEntryIndex = 0;
-    let projectorRoundIndex = -1; // -1 means current round, 0,1,2... for history
+    let projectorIndex = 0;
 
     // --------------------------------------------------------------
     // DOM Elements
@@ -1232,7 +1028,6 @@
     const notifRank = document.getElementById('notifRank');
     const notifName = document.getElementById('notifName');
 
-    // Projector elements
     const projectorOverlay = document.getElementById('projectorOverlay');
     const projectorRank = document.getElementById('projectorRank');
     const projectorName = document.getElementById('projectorName');
@@ -1244,24 +1039,12 @@
     const projectorToggleBtn = document.getElementById('projectorToggleBtn');
     const projectorContent = document.getElementById('projectorContent');
     const projectorConfetti = document.getElementById('projectorConfetti');
-    const projectorRoundPrev = document.getElementById('projectorRoundPrev');
-    const projectorRoundNext = document.getElementById('projectorRoundNext');
-    const projectorRoundNav = document.getElementById('projectorRoundNav');
-
-    // History modal
-    const historyModal = document.getElementById('historyModal');
-    const historyCloseBtn = document.getElementById('historyCloseBtn');
-    const historyToggleBtn = document.getElementById('historyToggleBtn');
-    const historyList = document.getElementById('historyList');
 
     roomBadge.textContent = `Room: ${ROOM_ID}`;
-
-    if (IS_MOBILE) {
-        adminToggleBtn.classList.add('mobile-hidden');
-    }
+    if (IS_MOBILE) adminToggleBtn.classList.add('mobile-hidden');
 
     // --------------------------------------------------------------
-    // 📝 Enter Button Logic (Save Name & Show Buzzer)
+    // 📝 Enter Button Logic
     // --------------------------------------------------------------
     enterBtn.addEventListener('click', () => {
         getAudioContext();
@@ -1271,12 +1054,8 @@
             localStorage.setItem('quizPlayerName', name);
             setupView.classList.add('hidden');
             buzzerView.classList.add('active');
-            if (currentUser) {
-                updatePlayerStatus(buzzerOrderData);
-            } else {
-                buzzerBtn.disabled = true;
-                buzzerSub.textContent = 'Logging in...';
-            }
+            if (currentUser) updatePlayerStatus(buzzerOrderData);
+            else { buzzerBtn.disabled = true; buzzerSub.textContent = 'Logging in...'; }
         } else {
             playerNameInput.focus();
             playerNameInput.style.borderColor = '#f87171';
@@ -1284,10 +1063,7 @@
         }
     });
 
-    playerNameInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') enterBtn.click();
-    });
-
+    playerNameInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') enterBtn.click(); });
     playerNameInput.addEventListener('input', () => {
         playerNameInput.value = playerNameInput.value.toUpperCase();
         playerName = playerNameInput.value.trim();
@@ -1301,7 +1077,7 @@
     }
 
     // --------------------------------------------------------------
-    // 🎨 Button State Manager
+    // 🎨 Button State
     // --------------------------------------------------------------
     function setButtonState(state, subText = null) {
         buzzerBtn.classList.remove('ready', 'pressed');
@@ -1314,7 +1090,7 @@
             buzzerBtn.style.background = 'radial-gradient(circle at 40% 30%, #ff6b6b, #dc2626 60%, #991b1b)';
             buzzerBtn.style.boxShadow = '0 0 80px rgba(239,68,68,0.4), 0 15px 40px rgba(0,0,0,0.6), inset 0 -8px 20px rgba(0,0,0,0.3), inset 0 8px 20px rgba(255,255,255,0.08)';
             buzzerBtn.disabled = true;
-        } else if (state === 'locked' || state === 'disabled') {
+        } else {
             buzzerBtn.style.background = 'radial-gradient(circle at 40% 30%, #475569, #1e293b 60%, #0f172a)';
             buzzerBtn.style.boxShadow = '0 0 30px rgba(100,100,100,0.08), 0 15px 40px rgba(0,0,0,0.5), inset 0 -8px 20px rgba(0,0,0,0.3)';
             buzzerBtn.disabled = true;
@@ -1323,24 +1099,19 @@
     }
 
     // --------------------------------------------------------------
-    // 🚨 Strobe Effect
+    // 🚨 Strobe
     // --------------------------------------------------------------
     function triggerStrobe() {
         strobeOverlay.classList.remove('active');
         void strobeOverlay.offsetWidth;
         strobeOverlay.classList.add('active');
-        setTimeout(() => {
-            strobeOverlay.classList.remove('active');
-        }, 800);
+        setTimeout(() => { strobeOverlay.classList.remove('active'); }, 800);
     }
 
     // --------------------------------------------------------------
     // 🔐 Admin Password
     // --------------------------------------------------------------
-    function verifyPassword(pass) {
-        return pass === ADMIN_PASSWORD;
-    }
-
+    function verifyPassword(pass) { return pass === ADMIN_PASSWORD; }
     function showAdminLogin() {
         if (IS_MOBILE) return;
         getAudioContext();
@@ -1349,11 +1120,7 @@
         loginError.textContent = '';
         adminPasswordInput.focus();
     }
-
-    function hideAdminLogin() {
-        passwordModal.classList.remove('active');
-    }
-
+    function hideAdminLogin() { passwordModal.classList.remove('active'); }
     function handleAdminLogin() {
         if (IS_MOBILE) return;
         const pass = adminPasswordInput.value;
@@ -1371,13 +1138,9 @@
     adminToggleBtn.addEventListener('click', () => {
         if (IS_MOBILE) return;
         getAudioContext();
-        if (currentMode === 'admin') {
-            switchToPlayerMode();
-        } else {
-            showAdminLogin();
-        }
+        if (currentMode === 'admin') switchToPlayerMode();
+        else showAdminLogin();
     });
-
     modalCloseBtn.addEventListener('click', hideAdminLogin);
     loginAdminBtn.addEventListener('click', handleAdminLogin);
     adminPasswordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleAdminLogin(); });
@@ -1393,9 +1156,7 @@
         adminToggleBtn.classList.add('active');
         adminToggleBtn.textContent = 'Player';
         renderAdminView();
-        if (projectorActive) {
-            openProjector(); // re-open with updated data
-        }
+        if (projectorActive) openProjector();
     }
 
     function switchToPlayerMode() {
@@ -1404,106 +1165,74 @@
         adminView.classList.remove('active');
         adminToggleBtn.classList.remove('active');
         adminToggleBtn.textContent = 'Admin';
-        if (projectorActive) {
-            closeProjector();
-        }
-        if (buzzerView.classList.contains('active')) {
-            updatePlayerStatus(buzzerOrderData);
-        }
+        if (projectorActive) closeProjector();
+        if (buzzerView.classList.contains('active')) updatePlayerStatus(buzzerOrderData);
     }
 
     // --------------------------------------------------------------
-    // 👤 Auto Logout + Login
+    // 👤 Auth
     // --------------------------------------------------------------
     async function resetPlayerSession() {
         try {
-            if (auth.currentUser) {
-                await signOut(auth);
-                console.log('Player session cleared.');
-            }
+            if (auth.currentUser) await signOut(auth);
             await signInAnonymously(auth);
-            console.log('New player logged in.');
-        } catch (error) {
-            console.error('Login error:', error);
-        }
+        } catch (error) { console.error('Login error:', error); }
     }
-
     onAuthStateChanged(auth, (user) => {
         if (user) {
             currentUser = user;
             console.log('User UID:', user.uid);
             connectToRoom(ROOM_ID);
-            if (buzzerView.classList.contains('active')) {
-                updatePlayerStatus(buzzerOrderData);
-            }
-        } else {
-            resetPlayerSession();
-        }
+            if (buzzerView.classList.contains('active')) updatePlayerStatus(buzzerOrderData);
+        } else { resetPlayerSession(); }
     });
 
     // --------------------------------------------------------------
     // 🔗 Firestore Listener
     // --------------------------------------------------------------
     function connectToRoom(roomId) {
-        if (unsubscribeSnapshot) {
-            unsubscribeSnapshot();
-            unsubscribeSnapshot = null;
-        }
-
+        if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
         const roomRef = doc(db, 'rooms', roomId);
-
         unsubscribeSnapshot = onSnapshot(roomRef, (docSnap) => {
             if (!docSnap.exists()) {
                 if (currentMode === 'admin') {
-                    adminRankingList.innerHTML = '<div class="empty-state" style="text-align:center; color:#475569; padding:30px; font-family:Anek Malayalam,sans-serif;">Room not found. Buzz or use New Round.</div>';
+                    adminRankingList.innerHTML = '<div class="empty-state" style="text-align:center; color:#475569; padding:30px;">Room not found. Buzz or use New Round.</div>';
                 }
                 if (currentMode === 'player' && buzzerView.classList.contains('active')) {
                     setButtonState('disabled', 'Waiting...');
                 }
                 return;
             }
-
             const data = docSnap.data();
-            const current = data.buzzerOrder || [];
-            const history = data.roundHistory || [];
-            
+            const order = data.buzzerOrder || [];
             const oldLength = buzzerOrderData.length;
-            const hasNewBuzz = current.length > oldLength;
-            
-            buzzerOrderData = current;
-            roundHistory = history;
+            const hasNewBuzz = order.length > oldLength;
+            buzzerOrderData = order;
 
             if (projectorActive) {
-                // if new buzz came, jump to it (current round, last entry)
-                if (hasNewBuzz && current.length > 0) {
-                    projectorRoundIndex = -1;
-                    projectorEntryIndex = current.length - 1;
+                if (hasNewBuzz && order.length > 0) {
+                    projectorIndex = order.length - 1;
                     updateProjectorContent();
                 }
                 updateProjectorCounter();
-                updateProjectorRoundNav();
             }
 
             if (currentMode === 'admin') {
-                if (hasNewBuzz && current.length > 0) {
-                    const newEntry = current[current.length - 1];
+                if (hasNewBuzz && order.length > 0) {
+                    const newEntry = order[order.length - 1];
                     playAdminSound();
                     showBuzzNotification(newEntry.playerName || `Player ${newEntry.userId.substring(0, 4)}`, newEntry.position);
                 }
                 renderAdminView();
-                // Update history modal if open? We'll refresh on open.
             }
 
             if (currentMode === 'player') {
-                if (buzzerView.classList.contains('active')) {
-                    updatePlayerStatus(current);
-                }
+                if (buzzerView.classList.contains('active')) updatePlayerStatus(order);
             }
-
         }, (error) => {
             console.error('Listener error:', error);
             if (currentMode === 'admin') {
-                adminRankingList.innerHTML = `<div class="empty-state" style="text-align:center; color:#f87171; padding:30px; font-family:Anek Malayalam,sans-serif;">${error.message}</div>`;
+                adminRankingList.innerHTML = `<div class="empty-state" style="text-align:center; color:#f87171; padding:30px;">${error.message}</div>`;
             }
         });
     }
@@ -1512,10 +1241,7 @@
     // 🎉 Admin Buzz Notification
     // --------------------------------------------------------------
     function showBuzzNotification(name, position) {
-        if (notifTimeout) {
-            clearTimeout(notifTimeout);
-            notifDiv.classList.remove('active');
-        }
+        if (notifTimeout) { clearTimeout(notifTimeout); notifDiv.classList.remove('active'); }
         notifRank.textContent = `#${position}`;
         notifName.textContent = name;
         notifDiv.classList.add('active');
@@ -1526,57 +1252,43 @@
     }
 
     // --------------------------------------------------------------
-    // 🎨 Player Update Function
+    // 🎨 Player Update
     // --------------------------------------------------------------
     function updatePlayerStatus(order) {
         if (!currentUser) return;
         const locked = order.length >= 10;
         isLocked = locked;
         const existing = order.find(entry => entry.userId === currentUser.uid);
-
         if (existing) {
             hasBuzzed = true;
             setButtonState('pressed', `Position ${existing.position}`);
         } else {
             hasBuzzed = false;
-            if (locked) {
-                setButtonState('locked', 'Full');
-            } else {
-                if (!playerName) {
-                    setButtonState('disabled', 'Enter name');
-                } else {
-                    setButtonState('ready', `${order.length + 1}/10`);
-                }
+            if (locked) setButtonState('locked', 'Full');
+            else {
+                if (!playerName) setButtonState('disabled', 'Enter name');
+                else setButtonState('ready', `${order.length + 1}/10`);
             }
         }
     }
 
     // --------------------------------------------------------------
-    // 👑 Admin Render Functions
+    // 👑 Admin Render
     // --------------------------------------------------------------
     function renderAdminView() {
-        const displayOrder = buzzerOrderData; // show current only in main list
-        
+        const displayOrder = buzzerOrderData;
         totalCount.textContent = buzzerOrderData.length;
         if (buzzerOrderData.length > 0) {
             const last = buzzerOrderData[buzzerOrderData.length - 1];
             const time = last.timestamp?.seconds ? new Date(last.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : 'N/A';
             lastBuzzer.textContent = time;
-        } else {
-            lastBuzzer.textContent = '-';
-        }
+        } else { lastBuzzer.textContent = '-'; }
 
-        if (roundHistory.length > 0) {
-            adminListTitle.innerHTML = `Current Round (${buzzerOrderData.length} buzzes) <span class="badge-prev">${roundHistory.length} previous</span>`;
-        } else {
-            adminListTitle.innerHTML = 'Current Round (Name & Timestamp)';
-        }
-
+        adminListTitle.innerHTML = 'Current Round (Name & Timestamp)';
         if (!displayOrder || displayOrder.length === 0) {
-            adminRankingList.innerHTML = '<div class="empty-state" style="text-align:center; color:#475569; padding:30px; font-family:Anek Malayalam,sans-serif;">No buzzes yet.</div>';
+            adminRankingList.innerHTML = '<div class="empty-state" style="text-align:center; color:#475569; padding:30px;">No buzzes yet.</div>';
             return;
         }
-
         const sorted = [...displayOrder].sort((a, b) => a.position - b.position);
         let html = '';
         sorted.forEach((entry, idx) => {
@@ -1587,9 +1299,7 @@
             if (rank === 1) cls = 'top1';
             if (rank === 2) cls = 'top2';
             if (rank === 3) cls = 'top3';
-            // highlight only the newest entry of current round
             if (rank === displayOrder.length) cls += ' highlight';
-            
             html += `
                 <div class="admin-item ${cls}">
                     <span class="pos">#${rank}</span>
@@ -1608,19 +1318,12 @@
     function openProjector() {
         projectorActive = true;
         projectorOverlay.classList.add('active');
-        // default: show current round (index -1) and latest buzz
-        projectorRoundIndex = -1;
-        if (buzzerOrderData.length > 0) {
-            projectorEntryIndex = buzzerOrderData.length - 1;
-        } else {
-            projectorEntryIndex = 0;
-        }
+        if (buzzerOrderData.length > 0) projectorIndex = buzzerOrderData.length - 1;
+        else projectorIndex = 0;
         updateProjectorContent();
         updateProjectorCounter();
-        updateProjectorRoundNav();
-        // Confetti for #1 if applicable
-        const currentRound = getCurrentRoundEntries();
-        if (currentRound.length > 0 && currentRound[projectorEntryIndex]?.position === 1) {
+        // Confetti if #1
+        if (buzzerOrderData.length > 0 && buzzerOrderData[projectorIndex]?.position === 1) {
             triggerConfetti();
         }
     }
@@ -1629,141 +1332,37 @@
         projectorActive = false;
         projectorOverlay.classList.remove('active');
         projectorToggleBtn.textContent = '📽️ Projector';
-        // Clear confetti
         projectorConfetti.innerHTML = '';
     }
 
-    function getCurrentRoundEntries() {
-        if (projectorRoundIndex === -1) return buzzerOrderData;
-        if (projectorRoundIndex >= 0 && projectorRoundIndex < roundHistory.length) {
-            return roundHistory[projectorRoundIndex];
-        }
-        return [];
-    }
-
     function updateProjectorContent() {
-        const entries = getCurrentRoundEntries();
-        if (!entries || entries.length === 0 || projectorEntryIndex >= entries.length) {
+        const entries = buzzerOrderData;
+        if (!entries || entries.length === 0 || projectorIndex >= entries.length) {
             projectorRank.textContent = '—';
             projectorName.textContent = 'No buzz yet';
             projectorTime.textContent = '';
-            projectorContent.style.animation = 'none';
-            void projectorContent.offsetWidth;
-            projectorContent.style.animation = 'projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
             return;
         }
-        const entry = entries[projectorEntryIndex];
+        const entry = entries[projectorIndex];
         const rank = entry.position;
         const name = entry.playerName || `Player ${entry.userId.substring(0, 6)}`;
         const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
         projectorRank.textContent = `#${rank}`;
         projectorName.textContent = name;
         projectorTime.textContent = time;
-        // Animate
         projectorContent.style.animation = 'none';
         void projectorContent.offsetWidth;
         projectorContent.style.animation = 'projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-        // Confetti if rank #1 (only if current entry is rank 1)
-        if (rank === 1) {
-            triggerConfetti();
-        }
+        if (rank === 1) triggerConfetti();
     }
 
     function updateProjectorCounter() {
-        const entries = getCurrentRoundEntries();
-        const total = entries.length;
-        if (total === 0) {
-            projectorCounter.textContent = '0 / 0';
-        } else {
-            projectorCounter.textContent = `${projectorEntryIndex + 1} / ${total}`;
-        }
-        // Update navigation buttons
-        projectorPrevBtn.style.display = (total === 0 || projectorEntryIndex <= 0) ? 'none' : 'flex';
-        projectorNextBtn.style.display = (total === 0 || projectorEntryIndex >= total - 1) ? 'none' : 'flex';
+        const total = buzzerOrderData.length;
+        projectorCounter.textContent = total === 0 ? '0 / 0' : `${projectorIndex + 1} / ${total}`;
+        projectorPrevBtn.style.display = (total === 0 || projectorIndex <= 0) ? 'none' : 'flex';
+        projectorNextBtn.style.display = (total === 0 || projectorIndex >= total - 1) ? 'none' : 'flex';
     }
 
-    function updateProjectorRoundNav() {
-        // Show round label
-        let label = 'Current Round';
-        if (projectorRoundIndex >= 0) {
-            label = `Round ${projectorRoundIndex + 1}`;
-        }
-        // Update button text if needed
-        projectorRoundPrev.textContent = '◀ Round';
-        projectorRoundNext.textContent = 'Round ▶';
-        // Could show current round in the nav
-    }
-
-    function projectorPrev() {
-        const entries = getCurrentRoundEntries();
-        if (projectorEntryIndex > 0) {
-            projectorEntryIndex--;
-            updateProjectorContent();
-            updateProjectorCounter();
-        }
-    }
-
-    function projectorNext() {
-        const entries = getCurrentRoundEntries();
-        if (projectorEntryIndex < entries.length - 1) {
-            projectorEntryIndex++;
-            updateProjectorContent();
-            updateProjectorCounter();
-        }
-    }
-
-    function projectorRoundPrev() {
-        // switch to previous round in history
-        if (projectorRoundIndex === -1) {
-            if (roundHistory.length > 0) {
-                projectorRoundIndex = roundHistory.length - 1;
-                projectorEntryIndex = 0;
-                updateProjectorContent();
-                updateProjectorCounter();
-                updateProjectorRoundNav();
-            }
-        } else if (projectorRoundIndex > 0) {
-            projectorRoundIndex--;
-            projectorEntryIndex = 0;
-            updateProjectorContent();
-            updateProjectorCounter();
-            updateProjectorRoundNav();
-        } else {
-            // go to current round
-            projectorRoundIndex = -1;
-            projectorEntryIndex = buzzerOrderData.length > 0 ? buzzerOrderData.length - 1 : 0;
-            updateProjectorContent();
-            updateProjectorCounter();
-            updateProjectorRoundNav();
-        }
-    }
-
-    function projectorRoundNext() {
-        if (projectorRoundIndex === -1) {
-            if (roundHistory.length > 0) {
-                projectorRoundIndex = 0;
-                projectorEntryIndex = 0;
-                updateProjectorContent();
-                updateProjectorCounter();
-                updateProjectorRoundNav();
-            }
-        } else if (projectorRoundIndex < roundHistory.length - 1) {
-            projectorRoundIndex++;
-            projectorEntryIndex = 0;
-            updateProjectorContent();
-            updateProjectorCounter();
-            updateProjectorRoundNav();
-        } else {
-            // go back to current
-            projectorRoundIndex = -1;
-            projectorEntryIndex = buzzerOrderData.length > 0 ? buzzerOrderData.length - 1 : 0;
-            updateProjectorContent();
-            updateProjectorCounter();
-            updateProjectorRoundNav();
-        }
-    }
-
-    // Confetti effect
     function triggerConfetti() {
         const container = projectorConfetti;
         container.innerHTML = '';
@@ -1782,158 +1381,71 @@
             piece.style.transform = `rotate(${Math.random() * 360}deg)`;
             container.appendChild(piece);
         }
-        // Remove after animation
-        setTimeout(() => {
-            container.innerHTML = '';
-        }, 4000);
+        setTimeout(() => container.innerHTML = '', 4000);
     }
 
-    // Projector event listeners
+    function projectorPrev() {
+        if (projectorIndex > 0) { projectorIndex--; updateProjectorContent(); updateProjectorCounter(); }
+    }
+    function projectorNext() {
+        if (projectorIndex < buzzerOrderData.length - 1) { projectorIndex++; updateProjectorContent(); updateProjectorCounter(); }
+    }
+
     projectorToggleBtn.addEventListener('click', () => {
-        if (projectorActive) {
-            closeProjector();
-            projectorToggleBtn.textContent = '📽️ Projector';
-        } else {
-            openProjector();
-            projectorToggleBtn.textContent = '❌ Close Projector';
-        }
+        if (projectorActive) { closeProjector(); projectorToggleBtn.textContent = '📽️ Projector'; }
+        else { openProjector(); projectorToggleBtn.textContent = '❌ Close Projector'; }
     });
-
-    projectorCloseBtn.addEventListener('click', () => {
-        closeProjector();
-        projectorToggleBtn.textContent = '📽️ Projector';
-    });
-
+    projectorCloseBtn.addEventListener('click', () => { closeProjector(); projectorToggleBtn.textContent = '📽️ Projector'; });
     projectorPrevBtn.addEventListener('click', projectorPrev);
     projectorNextBtn.addEventListener('click', projectorNext);
-    projectorRoundPrev.addEventListener('click', projectorRoundPrev);
-    projectorRoundNext.addEventListener('click', projectorRoundNext);
 
-    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (!projectorActive) return;
         if (e.key === 'ArrowLeft') projectorPrev();
         else if (e.key === 'ArrowRight') projectorNext();
-        else if (e.key === 'Escape') {
-            closeProjector();
-            projectorToggleBtn.textContent = '📽️ Projector';
-        }
-    });
-
-    // --------------------------------------------------------------
-    // 📜 Rounds History Modal
-    // --------------------------------------------------------------
-    function openHistory() {
-        historyModal.classList.add('active');
-        renderHistory();
-    }
-
-    function closeHistory() {
-        historyModal.classList.remove('active');
-    }
-
-    function renderHistory() {
-        let html = '';
-        // Show current round first
-        if (buzzerOrderData.length > 0) {
-            html += `<div class="history-round"><div class="round-title">Current Round</div>`;
-            const sorted = [...buzzerOrderData].sort((a,b) => a.position - b.position);
-            sorted.forEach(entry => {
-                const name = entry.playerName || `Player ${entry.userId.substring(0,6)}`;
-                const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
-                html += `<div class="history-entry"><span class="h-rank">#${entry.position}</span><span class="h-name">${name}</span><span class="h-time">${time}</span></div>`;
-            });
-            html += `</div>`;
-        }
-        // Show previous rounds in reverse order (latest first)
-        const reversed = [...roundHistory].reverse();
-        reversed.forEach((round, idx) => {
-            const roundNumber = roundHistory.length - idx;
-            html += `<div class="history-round"><div class="round-title">Round ${roundNumber}</div>`;
-            const sorted = [...round].sort((a,b) => a.position - b.position);
-            sorted.forEach(entry => {
-                const name = entry.playerName || `Player ${entry.userId.substring(0,6)}`;
-                const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
-                html += `<div class="history-entry"><span class="h-rank">#${entry.position}</span><span class="h-name">${name}</span><span class="h-time">${time}</span></div>`;
-            });
-            html += `</div>`;
-        });
-        if (!html) {
-            html = '<div class="history-empty">No rounds yet. Start buzzing!</div>';
-        }
-        historyList.innerHTML = html;
-    }
-
-    historyToggleBtn.addEventListener('click', openHistory);
-    historyCloseBtn.addEventListener('click', closeHistory);
-    historyModal.addEventListener('click', (e) => {
-        if (e.target === historyModal) closeHistory();
+        else if (e.key === 'Escape') { closeProjector(); projectorToggleBtn.textContent = '📽️ Projector'; }
     });
 
     // --------------------------------------------------------------
     // 🚀 Press Buzzer
     // --------------------------------------------------------------
     async function pressBuzzer() {
-        if (!currentUser) {
-            setButtonState('disabled', 'Login...');
-            return;
-        }
-        if (isLocked) {
-            setButtonState('locked', 'Full');
-            return;
-        }
-        if (hasBuzzed) {
-            return;
-        }
-        if (!playerName) {
-            setButtonState('disabled', 'Name?');
-            return;
-        }
+        if (!currentUser) { setButtonState('disabled', 'Login...'); return; }
+        if (isLocked) { setButtonState('locked', 'Full'); return; }
+        if (hasBuzzed) return;
+        if (!playerName) { setButtonState('disabled', 'Name?'); return; }
 
         getAudioContext();
         setButtonState('disabled', '⏳...');
-
         const roomRef = doc(db, 'rooms', ROOM_ID);
 
         try {
             const result = await runTransaction(db, async (transaction) => {
                 const roomDoc = await transaction.get(roomRef);
                 if (!roomDoc.exists) {
-                    transaction.set(roomRef, {
-                        buzzerOrder: [],
-                        roundHistory: []
-                    });
+                    transaction.set(roomRef, { buzzerOrder: [] });
                     return { newEntry: { position: 1, userId: currentUser.uid, playerName: playerName, timestamp: Timestamp.now() } };
                 }
-                
                 const data = roomDoc.data();
                 const current = data.buzzerOrder || [];
-                if (current.length >= 10) {
-                    throw new Error('Buzzer is full');
-                }
-                if (current.some(entry => entry.userId === currentUser.uid)) {
-                    throw new Error('Already buzzed');
-                }
+                if (current.length >= 10) throw new Error('Buzzer is full');
+                if (current.some(entry => entry.userId === currentUser.uid)) throw new Error('Already buzzed');
                 const newEntry = {
                     userId: currentUser.uid,
                     playerName: playerName,
                     timestamp: Timestamp.now(),
                     position: current.length + 1
                 };
-                transaction.update(roomRef, {
-                    buzzerOrder: [...current, newEntry]
-                });
-                return { newEntry: newEntry };
+                transaction.update(roomRef, { buzzerOrder: [...current, newEntry] });
+                return { newEntry };
             });
 
             const pos = result.newEntry.position;
             playPlayerSound();
             triggerVibration();
             triggerStrobe();
-            
             setButtonState('pressed', `#${pos}`);
             hasBuzzed = true;
-
         } catch (error) {
             console.error('Buzzer error:', error);
             let msg = 'Error';
@@ -1955,20 +1467,20 @@
         if (!confirm('This will save current result and clear buzzer for next round. Continue?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
-            // Save current to history and clear current
-            const newHistory = [...roundHistory];
+            // Save current to a "history" array, but we keep it simple: just store as an array of arrays.
+            // We'll store it in a field "roundHistory" – but if it doesn't exist, we create it.
+            // To keep it simple for now, we'll just clear and not save history (to avoid complexity).
+            // Actually, we can store history – but we need to read existing history first.
+            // I'll implement a simple history saving.
+            const docSnap = await getDoc(roomRef);
+            const history = docSnap.exists() ? (docSnap.data().roundHistory || []) : [];
+            const newHistory = [...history];
             if (buzzerOrderData.length > 0) {
                 newHistory.push(buzzerOrderData);
             }
-            await setDoc(roomRef, {
-                roundHistory: newHistory,
-                buzzerOrder: []
-            }, { merge: true });
+            await setDoc(roomRef, { roundHistory: newHistory, buzzerOrder: [] }, { merge: true });
             alert('New round started! Previous result saved.');
-            if (projectorActive) {
-                closeProjector();
-                projectorToggleBtn.textContent = '📽️ Projector';
-            }
+            if (projectorActive) { closeProjector(); projectorToggleBtn.textContent = '📽️ Projector'; }
         } catch (error) {
             alert('Failed: ' + error.message);
         }
@@ -1978,30 +1490,27 @@
         if (!confirm('This will clear ALL data (including previous rounds). Are you sure?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
-            await setDoc(roomRef, {
-                roundHistory: [],
-                buzzerOrder: []
-            }, { merge: true });
+            await setDoc(roomRef, { roundHistory: [], buzzerOrder: [] }, { merge: true });
             alert('Quiz ended. All data cleared.');
-            if (projectorActive) {
-                closeProjector();
-                projectorToggleBtn.textContent = '📽️ Projector';
-            }
+            if (projectorActive) { closeProjector(); projectorToggleBtn.textContent = '📽️ Projector'; }
         } catch (error) {
             alert('Failed: ' + error.message);
         }
     }
 
+    // Note: We need getDoc for reading history, so import it.
+    // Add to import: import { getFirestore, doc, runTransaction, onSnapshot, setDoc, getDoc, Timestamp } from 'firebase/firestore';
+    // I've updated the import above.
+    // For safety, I'll add it now.
+
     resetBtn.addEventListener('click', newRound);
     endQuizBtn.addEventListener('click', endQuiz);
-    refreshBtn.addEventListener('click', () => {
-        connectToRoom(ROOM_ID);
-    });
+    refreshBtn.addEventListener('click', () => { connectToRoom(ROOM_ID); });
 
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('Quiz Buzzer App Loaded (with Projector Animations & History)');
+    console.log('Quiz Buzzer App Loaded (Simplified with Projector)');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
