@@ -1460,7 +1460,7 @@
     buzzerBtn.addEventListener('click', pressBuzzer);
 
     // --------------------------------------------------------------
-    // 🔄 Admin: New Round / End Quiz
+    // 🔄 Admin: New Round (FIXED – no nested arrays)
     // --------------------------------------------------------------
     async function newRound() {
         if (!confirm('This will save current result and clear buzzer for next round. Continue?')) return;
@@ -1471,7 +1471,8 @@
             const history = docSnap.exists() ? (docSnap.data().roundHistory || []) : [];
             const newHistory = [...history];
             if (buzzerOrderData.length > 0) {
-                newHistory.push(buzzerOrderData);
+                // ✅ Store as an object with an 'entries' array (no nested arrays)
+                newHistory.push({ entries: buzzerOrderData });
             }
             await setDoc(roomRef, { roundHistory: newHistory, buzzerOrder: [] }, { merge: true });
             alert('New round started! Previous result saved.');
@@ -1481,6 +1482,9 @@
         }
     }
 
+    // --------------------------------------------------------------
+    // 🔄 Admin: End Quiz
+    // --------------------------------------------------------------
     async function endQuiz() {
         if (!confirm('This will clear ALL data (including previous rounds). Are you sure?')) return;
         try {
@@ -1500,7 +1504,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('Quiz Buzzer App Loaded (Full Version – New Round Fix)');
+    console.log('Quiz Buzzer App Loaded (Full Version – Nested Array Fix)');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
