@@ -460,7 +460,9 @@
         .admin-actions .btn-projector { background: rgba(139, 92, 246, 0.4); color: #c4b5fd; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1); }
         .admin-actions .btn-projector:hover { transform: scale(1.02); background: rgba(139, 92, 246, 0.6); }
 
-        /* ----- Projector Overlay (with particle canvas) ----- */
+        /* ============================================================ */
+        /* PROJECTOR OVERLAY – with particles & scrolling background text */
+        /* ============================================================ */
         .projector-overlay {
             position: fixed;
             top: 0;
@@ -480,7 +482,7 @@
         }
         .projector-overlay.active { display: flex; }
 
-        /* Canvas for particles – placed behind content */
+        /* Canvas for particles – placed behind everything */
         #particleCanvas {
             position: absolute;
             top: 0;
@@ -489,6 +491,43 @@
             height: 100%;
             pointer-events: none;
             z-index: 0;
+        }
+
+        /* Scrolling Background Text (GRAND FINALE) */
+        .scrolling-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+            white-space: nowrap;
+            opacity: 0.15;
+        }
+        .scrolling-bg-text .scroll-track {
+            display: flex;
+            animation: scrollMarquee 30s linear infinite;
+            width: max-content;
+        }
+        .scrolling-bg-text .scroll-track span {
+            font-size: 22vw;
+            font-weight: 900;
+            font-family: 'Anek Malayalam', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            color: transparent;
+            -webkit-text-stroke: 3px rgba(250, 204, 21, 0.25);
+            text-stroke: 3px rgba(250, 204, 21, 0.25);
+            text-shadow: 0 0 60px rgba(250, 204, 21, 0.05);
+            padding-right: 2rem;
+            flex-shrink: 0;
+        }
+
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* Animated background gradient (overlay) */
@@ -512,7 +551,7 @@
             100% { transform: translate(-10%, -10%) scale(1.2); }
         }
 
-        /* Content – positioned above the canvas and gradient */
+        /* Content – positioned above the canvas and gradient and scrolling text */
         .projector-content {
             animation: projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             width: 100%;
@@ -566,7 +605,7 @@
             top: 0;
             left: 0;
             pointer-events: none;
-            z-index: 1;
+            z-index: 3;
             overflow: hidden;
         }
         .confetti-piece {
@@ -601,7 +640,7 @@
             align-items: center;
             transition: all 0.3s ease;
             user-select: none;
-            z-index: 3;
+            z-index: 4;
         }
         .projector-nav:hover {
             background: rgba(250, 204, 21, 0.15);
@@ -628,7 +667,7 @@
             justify-content: center;
             align-items: center;
             transition: all 0.3s ease;
-            z-index: 3;
+            z-index: 4;
         }
         .projector-close:hover {
             background: rgba(239, 68, 68, 0.2);
@@ -647,7 +686,7 @@
             padding: 6px 20px;
             border-radius: 30px;
             backdrop-filter: blur(4px);
-            z-index: 3;
+            z-index: 4;
         }
 
         /* ----- Admin Buzz Notification ----- */
@@ -808,6 +847,7 @@
             .projector-nav { width: 50px; height: 50px; font-size: 1.8rem; }
             .projector-nav-left { left: 10px; }
             .projector-nav-right { right: 10px; }
+            .scrolling-bg-text .scroll-track span { font-size: 15vw; -webkit-text-stroke: 2px rgba(250, 204, 21, 0.2); }
         }
     </style>
 </head>
@@ -826,13 +866,30 @@
 
 <!-- Projector Overlay -->
 <div class="projector-overlay" id="projectorOverlay">
-    <!-- Particle canvas (background) -->
+    <!-- Particle Canvas -->
     <canvas id="particleCanvas"></canvas>
 
+    <!-- Scrolling "GRAND FINALE" Background Text -->
+    <div class="scrolling-bg-text">
+        <div class="scroll-track">
+            <span>✦ GRAND FINALE ✦</span>
+            <span>✦ GRAND FINALE ✦</span>
+            <span>✦ GRAND FINALE ✦</span>
+            <span>✦ GRAND FINALE ✦</span>
+            <span>✦ GRAND FINALE ✦</span>
+            <span>✦ GRAND FINALE ✦</span>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
     <div class="projector-confetti" id="projectorConfetti"></div>
+
+    <!-- Navigation & Close Buttons -->
     <button class="projector-close" id="projectorCloseBtn">✕</button>
     <button class="projector-nav projector-nav-left" id="projectorPrevBtn">◀</button>
     <button class="projector-nav projector-nav-right" id="projectorNextBtn">▶</button>
+
+    <!-- Main Content -->
     <div class="projector-content" id="projectorContent">
         <div class="projector-rank" id="projectorRank">#1</div>
         <div class="projector-name" id="projectorName">Player Name</div>
@@ -1334,7 +1391,7 @@
     }
 
     // --------------------------------------------------------------
-    // 🌟 Particle System (for projector background)
+    // 🌟 Particle System
     // --------------------------------------------------------------
     let particles = [];
     let particleRunning = false;
@@ -1352,19 +1409,17 @@
             this.speedX = (Math.random() - 0.5) * 0.6;
             this.speedY = (Math.random() - 0.5) * 0.6;
             this.opacity = Math.random() * 0.5 + 0.2;
-            this.hue = Math.random() * 60 + 40; // yellow-green range
+            this.hue = Math.random() * 60 + 40;
         }
         update() {
             const canvasW = particleCanvas.width;
             const canvasH = particleCanvas.height;
             this.x += this.speedX;
             this.y += this.speedY;
-            // wrap around edges
             if (this.x < 0) this.x = canvasW;
             if (this.x > canvasW) this.x = 0;
             if (this.y < 0) this.y = canvasH;
             if (this.y > canvasH) this.y = 0;
-            // slight change in opacity and size for twinkle effect
             this.opacity += (Math.random() - 0.5) * 0.02;
             this.opacity = Math.min(0.8, Math.max(0.1, this.opacity));
             this.size += (Math.random() - 0.5) * 0.1;
@@ -1407,8 +1462,6 @@
             p.update();
             p.draw();
         });
-        // draw connecting lines (optional, for network effect)
-        // can be enabled for more visual richness
         particleAnimationId = requestAnimationFrame(animateParticles);
     }
 
@@ -1417,7 +1470,6 @@
             const canvas = particleCanvas;
             canvas.width = canvas.parentElement.clientWidth;
             canvas.height = canvas.parentElement.clientHeight;
-            // reposition particles
             particles.forEach(p => {
                 p.x = Math.random() * canvas.width;
                 p.y = Math.random() * canvas.height;
@@ -1426,7 +1478,7 @@
     }
 
     // --------------------------------------------------------------
-    // 📽️ Projector Functions (updated with particle start/stop)
+    // 📽️ Projector Functions
     // --------------------------------------------------------------
     function openProjector() {
         projectorActive = true;
@@ -1438,7 +1490,6 @@
         if (buzzerOrderData.length > 0 && buzzerOrderData[projectorIndex]?.position === 1) {
             triggerConfetti();
         }
-        // Start particles after a small delay to ensure canvas is visible
         setTimeout(() => {
             initParticles();
         }, 50);
@@ -1624,7 +1675,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('Quiz Buzzer App Loaded – with Particle Background for Projector');
+    console.log('Quiz Buzzer App Loaded – with Scrolling GRAND FINALE & Particles');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
