@@ -128,9 +128,7 @@
             padding: 20px;
             animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        #setupView.hidden {
-            display: none;
-        }
+        #setupView.hidden { display: none; }
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(40px) scale(0.96); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -210,9 +208,7 @@
             transform: scale(1.02);
             box-shadow: 0 8px 40px rgba(250, 204, 21, 0.35);
         }
-        .setup-name-area .enter-btn:active {
-            transform: scale(0.96);
-        }
+        .setup-name-area .enter-btn:active { transform: scale(0.96); }
         .setup-name-area .enter-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -228,9 +224,7 @@
             flex-direction: column;
             height: 100%;
         }
-        #buzzerView.active {
-            display: flex;
-        }
+        #buzzerView.active { display: flex; }
         .buzzer-wrapper {
             display: flex;
             justify-content: center;
@@ -240,7 +234,7 @@
             position: relative;
         }
 
-        /* ---- The Attractive Buzzer Button ---- */
+        /* ---- Attractive Buzzer Button ---- */
         .buzzer-btn {
             width: 78%;
             aspect-ratio: 1/1;
@@ -270,8 +264,6 @@
             font-family: 'Anek Malayalam', sans-serif;
             border: 3px solid rgba(255,255,255,0.06);
         }
-
-        /* 3D Ring effect */
         .buzzer-btn::before {
             content: '';
             position: absolute;
@@ -286,8 +278,6 @@
             50% { transform: scale(1.06); opacity: 0.1; }
             100% { transform: scale(1); opacity: 0.5; }
         }
-
-        /* Outer glow ring */
         .buzzer-btn::after {
             content: '';
             position: absolute;
@@ -302,8 +292,6 @@
             0%, 100% { opacity: 0.4; transform: scale(0.95); }
             50% { opacity: 1; transform: scale(1.05); }
         }
-
-        /* Ripple effect on press (CSS only) */
         .buzzer-btn:active:not(:disabled):not(.pressed) {
             transform: scale(0.94);
             box-shadow: 
@@ -312,8 +300,6 @@
                 inset 0 -4px 15px rgba(0,0,0,0.4),
                 inset 0 4px 15px rgba(255,255,255,0.1);
         }
-
-        /* Pressed state (after successful buzz) */
         .buzzer-btn.pressed {
             background: radial-gradient(circle at 40% 30%, #ff6b6b, #dc2626 60%, #991b1b);
             box-shadow: 
@@ -324,18 +310,13 @@
             animation: pressed-pulse 0.8s ease 3;
             color: #fff;
         }
-        .buzzer-btn.pressed::before {
-            border-color: rgba(239, 68, 68, 0.2);
-        }
-        .buzzer-btn.pressed::after {
-            box-shadow: 0 0 100px rgba(239, 68, 68, 0.15);
-        }
+        .buzzer-btn.pressed::before { border-color: rgba(239, 68, 68, 0.2); }
+        .buzzer-btn.pressed::after { box-shadow: 0 0 100px rgba(239, 68, 68, 0.15); }
         @keyframes pressed-pulse {
             0% { transform: scale(1); }
             50% { transform: scale(0.96); box-shadow: 0 0 120px rgba(239, 68, 68, 0.6); }
             100% { transform: scale(1); }
         }
-
         .buzzer-btn:disabled {
             opacity: 0.35;
             filter: grayscale(0.6);
@@ -343,11 +324,7 @@
             cursor: not-allowed;
             box-shadow: 0 0 30px rgba(100,100,100,0.08);
         }
-        .buzzer-btn:disabled::before, 
-        .buzzer-btn:disabled::after {
-            animation: none;
-        }
-
+        .buzzer-btn:disabled::before, .buzzer-btn:disabled::after { animation: none; }
         .buzzer-btn .sub-text {
             font-size: 1.1rem;
             font-weight: 400;
@@ -484,7 +461,6 @@
         .admin-item.top2 { border-left-color: #94a3b8; background: rgba(148, 163, 184, 0.05); }
         .admin-item.top3 { border-left-color: #cd7f32; background: rgba(205, 127, 50, 0.05); }
         .admin-item.previous-result { border-left-color: #8b5cf6; background: rgba(139, 92, 246, 0.06); }
-
         .admin-item.highlight {
             animation: buzzHighlight 1.2s ease;
             border-left-color: #facc15 !important;
@@ -523,8 +499,137 @@
         .admin-actions .btn-warning:hover { transform: scale(1.02); background: #d97706; }
         .admin-actions .btn-secondary { background: rgba(71, 85, 105, 0.5); color: #e2e8f0; box-shadow: 0 4px 20px rgba(71, 85, 105, 0.1); }
         .admin-actions .btn-secondary:hover { transform: scale(1.02); background: rgba(71, 85, 105, 0.7); }
+        .admin-actions .btn-projector { background: rgba(139, 92, 246, 0.4); color: #c4b5fd; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1); }
+        .admin-actions .btn-projector:hover { transform: scale(1.02); background: rgba(139, 92, 246, 0.6); }
 
-        /* Admin Buzz Notification – Clean & Modern */
+        /* ----- Projector Overlay (full‑screen slideshow) ----- */
+        .projector-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0a0e1a;
+            background-image: 
+                radial-gradient(ellipse at 50% 80%, rgba(250, 204, 21, 0.08) 0%, transparent 60%),
+                linear-gradient(135deg, #0a0e1a 0%, #111827 100%);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Anek Malayalam', sans-serif;
+        }
+        .projector-overlay.active { display: flex; }
+
+        .projector-content {
+            animation: projectorFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%;
+            max-width: 800px;
+        }
+        @keyframes projectorFade {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .projector-rank {
+            font-size: 8rem;
+            font-weight: 800;
+            color: #facc15;
+            text-shadow: 0 0 80px rgba(250, 204, 21, 0.3);
+            line-height: 1;
+            margin-bottom: 10px;
+            font-family: 'Anek Malayalam', sans-serif;
+        }
+        .projector-name {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 4px 40px rgba(255, 255, 255, 0.08);
+            margin-bottom: 10px;
+            font-family: 'Anek Malayalam', sans-serif;
+            word-break: break-word;
+        }
+        .projector-time {
+            font-size: 1.6rem;
+            color: #94a3b8;
+            font-weight: 300;
+            letter-spacing: 2px;
+            font-family: 'Anek Malayalam', sans-serif;
+        }
+        .projector-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            color: #facc15;
+            font-size: 2.5rem;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+            font-family: 'Anek Malayalam', sans-serif;
+        }
+        .projector-nav:hover {
+            background: rgba(250, 204, 21, 0.15);
+            border-color: #facc1550;
+            transform: translateY(-50%) scale(1.05);
+        }
+        .projector-nav-left {
+            left: 20px;
+        }
+        .projector-nav-right {
+            right: 20px;
+        }
+        .projector-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            color: #94a3b8;
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-family: 'Anek Malayalam', sans-serif;
+        }
+        .projector-close:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border-color: #f8717150;
+            transform: scale(1.05);
+        }
+
+        .projector-counter {
+            position: absolute;
+            bottom: 30px;
+            color: #64748b;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            font-family: 'Anek Malayalam', sans-serif;
+            background: rgba(0,0,0,0.3);
+            padding: 6px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ----- Admin Buzz Notification ----- */
         .buzz-notification {
             position: fixed;
             top: 0;
@@ -695,6 +800,11 @@
             .admin-item .time { font-size: 0.75rem; }
             .buzz-notification .buzz-rank { font-size: 5rem; }
             .buzz-notification .buzz-name { font-size: 3rem; }
+            .projector-rank { font-size: 5rem; }
+            .projector-name { font-size: 3rem; }
+            .projector-nav { width: 50px; height: 50px; font-size: 1.8rem; }
+            .projector-nav-left { left: 10px; }
+            .projector-nav-right { right: 10px; }
         }
     </style>
 </head>
@@ -709,6 +819,19 @@
     <div class="buzz-rank" id="notifRank">#1</div>
     <div class="buzz-label">Player</div>
     <div class="buzz-name" id="notifName">Player Name</div>
+</div>
+
+<!-- Projector Overlay -->
+<div class="projector-overlay" id="projectorOverlay">
+    <button class="projector-close" id="projectorCloseBtn">✕</button>
+    <button class="projector-nav projector-nav-left" id="projectorPrevBtn">◀</button>
+    <button class="projector-nav projector-nav-right" id="projectorNextBtn">▶</button>
+    <div class="projector-content" id="projectorContent">
+        <div class="projector-rank" id="projectorRank">#1</div>
+        <div class="projector-name" id="projectorName">Player Name</div>
+        <div class="projector-time" id="projectorTime">--:--:--</div>
+    </div>
+    <div class="projector-counter" id="projectorCounter">1 / 10</div>
 </div>
 
 <!-- Password Modal -->
@@ -776,6 +899,7 @@
         </div>
 
         <div class="admin-actions">
+            <button class="btn btn-projector" id="projectorToggleBtn">📽️ Projector</button>
             <button class="btn btn-warning" id="resetBtn">New Round</button>
             <button class="btn btn-danger" id="endQuizBtn">End Quiz</button>
             <button class="btn btn-secondary" id="refreshBtn">Refresh</button>
@@ -890,6 +1014,10 @@
     let playerName = '';
     let notifTimeout = null;
 
+    // Projector state
+    let projectorActive = false;
+    let projectorIndex = 0;
+
     // --------------------------------------------------------------
     // DOM Elements
     // --------------------------------------------------------------
@@ -923,6 +1051,18 @@
     const notifDiv = document.getElementById('buzzNotification');
     const notifRank = document.getElementById('notifRank');
     const notifName = document.getElementById('notifName');
+
+    // Projector elements
+    const projectorOverlay = document.getElementById('projectorOverlay');
+    const projectorRank = document.getElementById('projectorRank');
+    const projectorName = document.getElementById('projectorName');
+    const projectorTime = document.getElementById('projectorTime');
+    const projectorCounter = document.getElementById('projectorCounter');
+    const projectorPrevBtn = document.getElementById('projectorPrevBtn');
+    const projectorNextBtn = document.getElementById('projectorNextBtn');
+    const projectorCloseBtn = document.getElementById('projectorCloseBtn');
+    const projectorToggleBtn = document.getElementById('projectorToggleBtn');
+    const projectorContent = document.getElementById('projectorContent');
 
     roomBadge.textContent = `Room: ${ROOM_ID}`;
 
@@ -1063,6 +1203,10 @@
         adminToggleBtn.classList.add('active');
         adminToggleBtn.textContent = 'Player';
         renderAdminView();
+        // If projector was active, re‑show it
+        if (projectorActive) {
+            openProjector();
+        }
     }
 
     function switchToPlayerMode() {
@@ -1071,6 +1215,9 @@
         adminView.classList.remove('active');
         adminToggleBtn.classList.remove('active');
         adminToggleBtn.textContent = 'Admin';
+        if (projectorActive) {
+            closeProjector();
+        }
         if (buzzerView.classList.contains('active')) {
             updatePlayerStatus(buzzerOrderData);
         }
@@ -1136,6 +1283,17 @@
             
             buzzerOrderData = order;
             previousOrderData = previous;
+
+            // Update projector if active
+            if (projectorActive) {
+                // If new buzz came and projector is open, jump to latest
+                if (hasNewBuzz && order.length > 0) {
+                    projectorIndex = order.length - 1;
+                    updateProjectorContent();
+                }
+                // Also update counter
+                updateProjectorCounter();
+            }
 
             if (currentMode === 'admin') {
                 if (hasNewBuzz && order.length > 0) {
@@ -1258,6 +1416,107 @@
     }
 
     // --------------------------------------------------------------
+    // 📽️ Projector Functions
+    // --------------------------------------------------------------
+    function openProjector() {
+        projectorActive = true;
+        projectorOverlay.classList.add('active');
+        // If there are entries, show the latest by default
+        if (buzzerOrderData.length > 0) {
+            projectorIndex = buzzerOrderData.length - 1;
+        } else {
+            projectorIndex = 0;
+        }
+        updateProjectorContent();
+        updateProjectorCounter();
+        // Hide admin list and stats to avoid clutter? No, projector is overlay.
+    }
+
+    function closeProjector() {
+        projectorActive = false;
+        projectorOverlay.classList.remove('active');
+    }
+
+    function updateProjectorContent() {
+        const order = buzzerOrderData;
+        if (!order || order.length === 0 || projectorIndex >= order.length) {
+            projectorRank.textContent = '—';
+            projectorName.textContent = 'No buzz yet';
+            projectorTime.textContent = '';
+            return;
+        }
+        const entry = order[projectorIndex];
+        const rank = entry.position;
+        const name = entry.playerName || `Player ${entry.userId.substring(0, 6)}`;
+        const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
+        projectorRank.textContent = `#${rank}`;
+        projectorName.textContent = name;
+        projectorTime.textContent = time;
+        // Re-trigger animation
+        projectorContent.style.animation = 'none';
+        void projectorContent.offsetWidth;
+        projectorContent.style.animation = 'projectorFade 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+    }
+
+    function updateProjectorCounter() {
+        const total = buzzerOrderData.length;
+        if (total === 0) {
+            projectorCounter.textContent = '0 / 0';
+        } else {
+            projectorCounter.textContent = `${projectorIndex + 1} / ${total}`;
+        }
+        // Update navigation buttons visibility
+        projectorPrevBtn.style.display = (total === 0 || projectorIndex <= 0) ? 'none' : 'flex';
+        projectorNextBtn.style.display = (total === 0 || projectorIndex >= total - 1) ? 'none' : 'flex';
+    }
+
+    function projectorPrev() {
+        if (projectorIndex > 0) {
+            projectorIndex--;
+            updateProjectorContent();
+            updateProjectorCounter();
+        }
+    }
+
+    function projectorNext() {
+        if (projectorIndex < buzzerOrderData.length - 1) {
+            projectorIndex++;
+            updateProjectorContent();
+            updateProjectorCounter();
+        }
+    }
+
+    // Projector event listeners
+    projectorToggleBtn.addEventListener('click', () => {
+        if (projectorActive) {
+            closeProjector();
+            projectorToggleBtn.textContent = '📽️ Projector';
+        } else {
+            openProjector();
+            projectorToggleBtn.textContent = '❌ Close Projector';
+        }
+    });
+
+    projectorCloseBtn.addEventListener('click', () => {
+        closeProjector();
+        projectorToggleBtn.textContent = '📽️ Projector';
+    });
+
+    projectorPrevBtn.addEventListener('click', projectorPrev);
+    projectorNextBtn.addEventListener('click', projectorNext);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!projectorActive) return;
+        if (e.key === 'ArrowLeft') projectorPrev();
+        else if (e.key === 'ArrowRight') projectorNext();
+        else if (e.key === 'Escape') {
+            closeProjector();
+            projectorToggleBtn.textContent = '📽️ Projector';
+        }
+    });
+
+    // --------------------------------------------------------------
     // 🚀 Press Buzzer
     // --------------------------------------------------------------
     async function pressBuzzer() {
@@ -1347,6 +1606,11 @@
                 buzzerOrder: []
             }, { merge: true });
             alert('New round started! Previous result saved.');
+            // Close projector if open
+            if (projectorActive) {
+                closeProjector();
+                projectorToggleBtn.textContent = '📽️ Projector';
+            }
         } catch (error) {
             alert('Failed: ' + error.message);
         }
@@ -1361,6 +1625,10 @@
                 buzzerOrder: []
             }, { merge: true });
             alert('Quiz ended. All data cleared.');
+            if (projectorActive) {
+                closeProjector();
+                projectorToggleBtn.textContent = '📽️ Projector';
+            }
         } catch (error) {
             alert('Failed: ' + error.message);
         }
@@ -1375,7 +1643,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('Quiz Buzzer App Loaded (Professional Edition)');
+    console.log('Quiz Buzzer App Loaded (Professional Edition with Projector)');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
