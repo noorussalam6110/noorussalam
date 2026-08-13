@@ -899,7 +899,7 @@
     // --------------------------------------------------------------
     import { initializeApp } from 'firebase/app';
     import { getAuth, signInAnonymously, signOut, onAuthStateChanged } from 'firebase/auth';
-    import { getFirestore, doc, runTransaction, onSnapshot, setDoc, Timestamp } from 'firebase/firestore';
+    import { getFirestore, doc, runTransaction, onSnapshot, setDoc, getDoc, Timestamp } from 'firebase/firestore';
 
     const firebaseConfig = {
         apiKey: "AIzaSyBmPd-Ir4X_ZLmRqgZr53NuA_9wSgNIfsw",
@@ -1322,7 +1322,6 @@
         else projectorIndex = 0;
         updateProjectorContent();
         updateProjectorCounter();
-        // Confetti if #1
         if (buzzerOrderData.length > 0 && buzzerOrderData[projectorIndex]?.position === 1) {
             triggerConfetti();
         }
@@ -1467,11 +1466,7 @@
         if (!confirm('This will save current result and clear buzzer for next round. Continue?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
-            // Save current to a "history" array, but we keep it simple: just store as an array of arrays.
-            // We'll store it in a field "roundHistory" – but if it doesn't exist, we create it.
-            // To keep it simple for now, we'll just clear and not save history (to avoid complexity).
-            // Actually, we can store history – but we need to read existing history first.
-            // I'll implement a simple history saving.
+            // Read existing history
             const docSnap = await getDoc(roomRef);
             const history = docSnap.exists() ? (docSnap.data().roundHistory || []) : [];
             const newHistory = [...history];
@@ -1498,11 +1493,6 @@
         }
     }
 
-    // Note: We need getDoc for reading history, so import it.
-    // Add to import: import { getFirestore, doc, runTransaction, onSnapshot, setDoc, getDoc, Timestamp } from 'firebase/firestore';
-    // I've updated the import above.
-    // For safety, I'll add it now.
-
     resetBtn.addEventListener('click', newRound);
     endQuizBtn.addEventListener('click', endQuiz);
     refreshBtn.addEventListener('click', () => { connectToRoom(ROOM_ID); });
@@ -1510,7 +1500,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('Quiz Buzzer App Loaded (Simplified with Projector)');
+    console.log('Quiz Buzzer App Loaded (Full Version – New Round Fix)');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
