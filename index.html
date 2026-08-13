@@ -501,6 +501,76 @@
         .admin-actions .btn-secondary:hover { transform: scale(1.02); background: rgba(71, 85, 105, 0.7); }
         .admin-actions .btn-projector { background: rgba(139, 92, 246, 0.4); color: #c4b5fd; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1); }
         .admin-actions .btn-projector:hover { transform: scale(1.02); background: rgba(139, 92, 246, 0.6); }
+        .admin-actions .btn-history { background: rgba(52, 211, 153, 0.3); color: #6ee7b7; box-shadow: 0 4px 20px rgba(52, 211, 153, 0.1); }
+        .admin-actions .btn-history:hover { transform: scale(1.02); background: rgba(52, 211, 153, 0.5); }
+
+        /* ----- Rounds History Modal ----- */
+        .history-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(16px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9997;
+            padding: 20px;
+        }
+        .history-modal.active { display: flex; }
+        .history-modal-content {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 25px 30px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(51, 65, 85, 0.4);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            font-family: 'Anek Malayalam', sans-serif;
+        }
+        .history-modal-content h2 {
+            color: #facc15;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-modal-content h2 button {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .history-modal-content h2 button:hover { color: #f87171; transform: rotate(90deg); }
+        .history-round {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #facc15;
+        }
+        .history-round .round-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #facc15;
+            margin-bottom: 6px;
+        }
+        .history-entry {
+            display: flex;
+            padding: 4px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 1rem;
+            color: #e2e8f0;
+        }
+        .history-entry .h-rank { min-width: 50px; color: #94a3b8; }
+        .history-entry .h-name { flex: 1; margin-left: 10px; }
+        .history-entry .h-time { color: #64748b; font-size: 0.8rem; }
+        .history-empty { color: #64748b; text-align: center; padding: 20px; }
 
         /* ----- Projector Overlay (full‑screen slideshow) ----- */
         .projector-overlay {
@@ -521,44 +591,104 @@
             padding: 20px;
             text-align: center;
             font-family: 'Anek Malayalam', sans-serif;
+            overflow: hidden;
         }
         .projector-overlay.active { display: flex; }
 
+        /* Animated background gradient */
+        .projector-overlay::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(250,204,21,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(74,222,128,0.03) 0%, transparent 50%);
+            animation: projectorBg 20s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+        @keyframes projectorBg {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-10%, -10%) scale(1.2); }
+        }
+
         .projector-content {
-            animation: projectorFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             width: 100%;
             max-width: 800px;
+            position: relative;
+            z-index: 2;
         }
         @keyframes projectorFade {
-            0% { opacity: 0; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
+            0% { opacity: 0; transform: scale(0.92) rotate(-2deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0); }
         }
 
         .projector-rank {
-            font-size: 8rem;
+            font-size: 9rem;
             font-weight: 800;
             color: #facc15;
-            text-shadow: 0 0 80px rgba(250, 204, 21, 0.3);
+            text-shadow: 0 0 100px rgba(250, 204, 21, 0.4), 0 0 200px rgba(250, 204, 21, 0.1);
             line-height: 1;
             margin-bottom: 10px;
             font-family: 'Anek Malayalam', sans-serif;
+            animation: rankPopProjector 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+        @keyframes rankPopProjector {
+            0% { transform: scale(0.2); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         .projector-name {
-            font-size: 5rem;
+            font-size: 5.5rem;
             font-weight: 700;
             color: #ffffff;
-            text-shadow: 0 4px 40px rgba(255, 255, 255, 0.08);
+            text-shadow: 0 4px 50px rgba(255, 255, 255, 0.1);
             margin-bottom: 10px;
             font-family: 'Anek Malayalam', sans-serif;
             word-break: break-word;
+            animation: nameSlideProjector 0.5s ease 0.15s both;
         }
+        @keyframes nameSlideProjector {
+            0% { transform: translateY(40px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
         .projector-time {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             color: #94a3b8;
             font-weight: 300;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-family: 'Anek Malayalam', sans-serif;
+            animation: nameSlideProjector 0.5s ease 0.3s both;
         }
+
+        /* Confetti / Particle burst */
+        .projector-confetti {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            animation: confettiFall 2.5s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes confettiFall {
+            0% { opacity: 1; transform: translateY(-20px) rotate(0deg) scale(0); }
+            20% { opacity: 1; transform: translateY(20px) rotate(20deg) scale(1.2); }
+            100% { opacity: 0; transform: translateY(80vh) rotate(720deg) scale(0.5); }
+        }
+
         .projector-nav {
             position: absolute;
             top: 50%;
@@ -578,18 +708,16 @@
             transition: all 0.3s ease;
             user-select: none;
             font-family: 'Anek Malayalam', sans-serif;
+            z-index: 3;
         }
         .projector-nav:hover {
             background: rgba(250, 204, 21, 0.15);
             border-color: #facc1550;
             transform: translateY(-50%) scale(1.05);
         }
-        .projector-nav-left {
-            left: 20px;
-        }
-        .projector-nav-right {
-            right: 20px;
-        }
+        .projector-nav-left { left: 20px; }
+        .projector-nav-right { right: 20px; }
+
         .projector-close {
             position: absolute;
             top: 20px;
@@ -608,6 +736,7 @@
             align-items: center;
             transition: all 0.3s ease;
             font-family: 'Anek Malayalam', sans-serif;
+            z-index: 3;
         }
         .projector-close:hover {
             background: rgba(239, 68, 68, 0.2);
@@ -627,7 +756,37 @@
             padding: 6px 20px;
             border-radius: 30px;
             backdrop-filter: blur(4px);
+            z-index: 3;
         }
+
+        .projector-round-nav {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+            padding: 6px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            z-index: 3;
+        }
+        .projector-round-nav button {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1rem;
+            padding: 4px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Anek Malayalam', sans-serif;
+            font-weight: 600;
+        }
+        .projector-round-nav button:hover { background: rgba(250, 204, 21, 0.15); color: #facc15; }
+        .projector-round-nav button.active { background: rgba(250, 204, 21, 0.2); color: #facc15; }
 
         /* ----- Admin Buzz Notification ----- */
         .buzz-notification {
@@ -789,6 +948,9 @@
         .admin-list-container::-webkit-scrollbar-thumb { background: rgba(51, 65, 85, 0.5); border-radius: 10px; }
         .admin-list-container::-webkit-scrollbar-track { background: transparent; }
 
+        .history-modal-content::-webkit-scrollbar { width: 4px; }
+        .history-modal-content::-webkit-scrollbar-thumb { background: rgba(51, 65, 85, 0.5); border-radius: 10px; }
+
         /* Responsive adjustments */
         @media (max-width: 480px) {
             .splash-title { font-size: 1.5rem; }
@@ -805,6 +967,8 @@
             .projector-nav { width: 50px; height: 50px; font-size: 1.8rem; }
             .projector-nav-left { left: 10px; }
             .projector-nav-right { right: 10px; }
+            .projector-round-nav { font-size: 0.7rem; padding: 4px 10px; }
+            .projector-round-nav button { font-size: 0.7rem; padding: 2px 8px; }
         }
     </style>
 </head>
@@ -823,15 +987,29 @@
 
 <!-- Projector Overlay -->
 <div class="projector-overlay" id="projectorOverlay">
+    <div class="projector-confetti" id="projectorConfetti"></div>
     <button class="projector-close" id="projectorCloseBtn">✕</button>
     <button class="projector-nav projector-nav-left" id="projectorPrevBtn">◀</button>
     <button class="projector-nav projector-nav-right" id="projectorNextBtn">▶</button>
+    <div class="projector-round-nav" id="projectorRoundNav">
+        <button id="projectorRoundPrev">◀ Round</button>
+        <span style="color:#94a3b8; font-weight:300;">|</span>
+        <button id="projectorRoundNext">Round ▶</button>
+    </div>
     <div class="projector-content" id="projectorContent">
         <div class="projector-rank" id="projectorRank">#1</div>
         <div class="projector-name" id="projectorName">Player Name</div>
         <div class="projector-time" id="projectorTime">--:--:--</div>
     </div>
     <div class="projector-counter" id="projectorCounter">1 / 10</div>
+</div>
+
+<!-- Rounds History Modal -->
+<div class="history-modal" id="historyModal">
+    <div class="history-modal-content">
+        <h2>📜 Rounds History <button id="historyCloseBtn">✕</button></h2>
+        <div id="historyList"></div>
+    </div>
 </div>
 
 <!-- Password Modal -->
@@ -900,6 +1078,7 @@
 
         <div class="admin-actions">
             <button class="btn btn-projector" id="projectorToggleBtn">📽️ Projector</button>
+            <button class="btn btn-history" id="historyToggleBtn">📜 History</button>
             <button class="btn btn-warning" id="resetBtn">New Round</button>
             <button class="btn btn-danger" id="endQuizBtn">End Quiz</button>
             <button class="btn btn-secondary" id="refreshBtn">Refresh</button>
@@ -1009,14 +1188,15 @@
     let unsubscribeSnapshot = null;
     let isLocked = false;
     let hasBuzzed = false;
-    let buzzerOrderData = [];
-    let previousOrderData = [];
+    let buzzerOrderData = []; // current round buzzes
+    let roundHistory = []; // array of arrays (each array is a past round's buzzes)
     let playerName = '';
     let notifTimeout = null;
 
     // Projector state
     let projectorActive = false;
-    let projectorIndex = 0;
+    let projectorEntryIndex = 0;
+    let projectorRoundIndex = -1; // -1 means current round, 0,1,2... for history
 
     // --------------------------------------------------------------
     // DOM Elements
@@ -1063,6 +1243,16 @@
     const projectorCloseBtn = document.getElementById('projectorCloseBtn');
     const projectorToggleBtn = document.getElementById('projectorToggleBtn');
     const projectorContent = document.getElementById('projectorContent');
+    const projectorConfetti = document.getElementById('projectorConfetti');
+    const projectorRoundPrev = document.getElementById('projectorRoundPrev');
+    const projectorRoundNext = document.getElementById('projectorRoundNext');
+    const projectorRoundNav = document.getElementById('projectorRoundNav');
+
+    // History modal
+    const historyModal = document.getElementById('historyModal');
+    const historyCloseBtn = document.getElementById('historyCloseBtn');
+    const historyToggleBtn = document.getElementById('historyToggleBtn');
+    const historyList = document.getElementById('historyList');
 
     roomBadge.textContent = `Room: ${ROOM_ID}`;
 
@@ -1203,9 +1393,8 @@
         adminToggleBtn.classList.add('active');
         adminToggleBtn.textContent = 'Player';
         renderAdminView();
-        // If projector was active, re‑show it
         if (projectorActive) {
-            openProjector();
+            openProjector(); // re-open with updated data
         }
     }
 
@@ -1275,38 +1464,39 @@
             }
 
             const data = docSnap.data();
-            const order = data.buzzerOrder || [];
-            const previous = data.previousBuzzerOrder || [];
+            const current = data.buzzerOrder || [];
+            const history = data.roundHistory || [];
+            
             const oldLength = buzzerOrderData.length;
+            const hasNewBuzz = current.length > oldLength;
             
-            const hasNewBuzz = order.length > oldLength;
-            
-            buzzerOrderData = order;
-            previousOrderData = previous;
+            buzzerOrderData = current;
+            roundHistory = history;
 
-            // Update projector if active
             if (projectorActive) {
-                // If new buzz came and projector is open, jump to latest
-                if (hasNewBuzz && order.length > 0) {
-                    projectorIndex = order.length - 1;
+                // if new buzz came, jump to it (current round, last entry)
+                if (hasNewBuzz && current.length > 0) {
+                    projectorRoundIndex = -1;
+                    projectorEntryIndex = current.length - 1;
                     updateProjectorContent();
                 }
-                // Also update counter
                 updateProjectorCounter();
+                updateProjectorRoundNav();
             }
 
             if (currentMode === 'admin') {
-                if (hasNewBuzz && order.length > 0) {
-                    const newEntry = order[order.length - 1];
+                if (hasNewBuzz && current.length > 0) {
+                    const newEntry = current[current.length - 1];
                     playAdminSound();
                     showBuzzNotification(newEntry.playerName || `Player ${newEntry.userId.substring(0, 4)}`, newEntry.position);
                 }
                 renderAdminView();
+                // Update history modal if open? We'll refresh on open.
             }
 
             if (currentMode === 'player') {
                 if (buzzerView.classList.contains('active')) {
-                    updatePlayerStatus(order);
+                    updatePlayerStatus(current);
                 }
             }
 
@@ -1365,8 +1555,7 @@
     // 👑 Admin Render Functions
     // --------------------------------------------------------------
     function renderAdminView() {
-        const hasPrevious = previousOrderData && previousOrderData.length > 0;
-        const displayOrder = hasPrevious ? previousOrderData : buzzerOrderData;
+        const displayOrder = buzzerOrderData; // show current only in main list
         
         totalCount.textContent = buzzerOrderData.length;
         if (buzzerOrderData.length > 0) {
@@ -1377,8 +1566,8 @@
             lastBuzzer.textContent = '-';
         }
 
-        if (hasPrevious) {
-            adminListTitle.innerHTML = `Previous Round <span class="badge-prev">RESET</span>`;
+        if (roundHistory.length > 0) {
+            adminListTitle.innerHTML = `Current Round (${buzzerOrderData.length} buzzes) <span class="badge-prev">${roundHistory.length} previous</span>`;
         } else {
             adminListTitle.innerHTML = 'Current Round (Name & Timestamp)';
         }
@@ -1398,10 +1587,8 @@
             if (rank === 1) cls = 'top1';
             if (rank === 2) cls = 'top2';
             if (rank === 3) cls = 'top3';
-            if (hasPrevious) cls += ' previous-result';
-            
-            const isNew = !hasPrevious && entry.position === buzzerOrderData.length;
-            if (isNew) cls += ' highlight';
+            // highlight only the newest entry of current round
+            if (rank === displayOrder.length) cls += ' highlight';
             
             html += `
                 <div class="admin-item ${cls}">
@@ -1421,69 +1608,184 @@
     function openProjector() {
         projectorActive = true;
         projectorOverlay.classList.add('active');
-        // If there are entries, show the latest by default
+        // default: show current round (index -1) and latest buzz
+        projectorRoundIndex = -1;
         if (buzzerOrderData.length > 0) {
-            projectorIndex = buzzerOrderData.length - 1;
+            projectorEntryIndex = buzzerOrderData.length - 1;
         } else {
-            projectorIndex = 0;
+            projectorEntryIndex = 0;
         }
         updateProjectorContent();
         updateProjectorCounter();
-        // Hide admin list and stats to avoid clutter? No, projector is overlay.
+        updateProjectorRoundNav();
+        // Confetti for #1 if applicable
+        const currentRound = getCurrentRoundEntries();
+        if (currentRound.length > 0 && currentRound[projectorEntryIndex]?.position === 1) {
+            triggerConfetti();
+        }
     }
 
     function closeProjector() {
         projectorActive = false;
         projectorOverlay.classList.remove('active');
+        projectorToggleBtn.textContent = '📽️ Projector';
+        // Clear confetti
+        projectorConfetti.innerHTML = '';
+    }
+
+    function getCurrentRoundEntries() {
+        if (projectorRoundIndex === -1) return buzzerOrderData;
+        if (projectorRoundIndex >= 0 && projectorRoundIndex < roundHistory.length) {
+            return roundHistory[projectorRoundIndex];
+        }
+        return [];
     }
 
     function updateProjectorContent() {
-        const order = buzzerOrderData;
-        if (!order || order.length === 0 || projectorIndex >= order.length) {
+        const entries = getCurrentRoundEntries();
+        if (!entries || entries.length === 0 || projectorEntryIndex >= entries.length) {
             projectorRank.textContent = '—';
             projectorName.textContent = 'No buzz yet';
             projectorTime.textContent = '';
+            projectorContent.style.animation = 'none';
+            void projectorContent.offsetWidth;
+            projectorContent.style.animation = 'projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
             return;
         }
-        const entry = order[projectorIndex];
+        const entry = entries[projectorEntryIndex];
         const rank = entry.position;
         const name = entry.playerName || `Player ${entry.userId.substring(0, 6)}`;
         const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
         projectorRank.textContent = `#${rank}`;
         projectorName.textContent = name;
         projectorTime.textContent = time;
-        // Re-trigger animation
+        // Animate
         projectorContent.style.animation = 'none';
         void projectorContent.offsetWidth;
-        projectorContent.style.animation = 'projectorFade 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        projectorContent.style.animation = 'projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        // Confetti if rank #1 (only if current entry is rank 1)
+        if (rank === 1) {
+            triggerConfetti();
+        }
     }
 
     function updateProjectorCounter() {
-        const total = buzzerOrderData.length;
+        const entries = getCurrentRoundEntries();
+        const total = entries.length;
         if (total === 0) {
             projectorCounter.textContent = '0 / 0';
         } else {
-            projectorCounter.textContent = `${projectorIndex + 1} / ${total}`;
+            projectorCounter.textContent = `${projectorEntryIndex + 1} / ${total}`;
         }
-        // Update navigation buttons visibility
-        projectorPrevBtn.style.display = (total === 0 || projectorIndex <= 0) ? 'none' : 'flex';
-        projectorNextBtn.style.display = (total === 0 || projectorIndex >= total - 1) ? 'none' : 'flex';
+        // Update navigation buttons
+        projectorPrevBtn.style.display = (total === 0 || projectorEntryIndex <= 0) ? 'none' : 'flex';
+        projectorNextBtn.style.display = (total === 0 || projectorEntryIndex >= total - 1) ? 'none' : 'flex';
+    }
+
+    function updateProjectorRoundNav() {
+        // Show round label
+        let label = 'Current Round';
+        if (projectorRoundIndex >= 0) {
+            label = `Round ${projectorRoundIndex + 1}`;
+        }
+        // Update button text if needed
+        projectorRoundPrev.textContent = '◀ Round';
+        projectorRoundNext.textContent = 'Round ▶';
+        // Could show current round in the nav
     }
 
     function projectorPrev() {
-        if (projectorIndex > 0) {
-            projectorIndex--;
+        const entries = getCurrentRoundEntries();
+        if (projectorEntryIndex > 0) {
+            projectorEntryIndex--;
             updateProjectorContent();
             updateProjectorCounter();
         }
     }
 
     function projectorNext() {
-        if (projectorIndex < buzzerOrderData.length - 1) {
-            projectorIndex++;
+        const entries = getCurrentRoundEntries();
+        if (projectorEntryIndex < entries.length - 1) {
+            projectorEntryIndex++;
             updateProjectorContent();
             updateProjectorCounter();
         }
+    }
+
+    function projectorRoundPrev() {
+        // switch to previous round in history
+        if (projectorRoundIndex === -1) {
+            if (roundHistory.length > 0) {
+                projectorRoundIndex = roundHistory.length - 1;
+                projectorEntryIndex = 0;
+                updateProjectorContent();
+                updateProjectorCounter();
+                updateProjectorRoundNav();
+            }
+        } else if (projectorRoundIndex > 0) {
+            projectorRoundIndex--;
+            projectorEntryIndex = 0;
+            updateProjectorContent();
+            updateProjectorCounter();
+            updateProjectorRoundNav();
+        } else {
+            // go to current round
+            projectorRoundIndex = -1;
+            projectorEntryIndex = buzzerOrderData.length > 0 ? buzzerOrderData.length - 1 : 0;
+            updateProjectorContent();
+            updateProjectorCounter();
+            updateProjectorRoundNav();
+        }
+    }
+
+    function projectorRoundNext() {
+        if (projectorRoundIndex === -1) {
+            if (roundHistory.length > 0) {
+                projectorRoundIndex = 0;
+                projectorEntryIndex = 0;
+                updateProjectorContent();
+                updateProjectorCounter();
+                updateProjectorRoundNav();
+            }
+        } else if (projectorRoundIndex < roundHistory.length - 1) {
+            projectorRoundIndex++;
+            projectorEntryIndex = 0;
+            updateProjectorContent();
+            updateProjectorCounter();
+            updateProjectorRoundNav();
+        } else {
+            // go back to current
+            projectorRoundIndex = -1;
+            projectorEntryIndex = buzzerOrderData.length > 0 ? buzzerOrderData.length - 1 : 0;
+            updateProjectorContent();
+            updateProjectorCounter();
+            updateProjectorRoundNav();
+        }
+    }
+
+    // Confetti effect
+    function triggerConfetti() {
+        const container = projectorConfetti;
+        container.innerHTML = '';
+        const colors = ['#facc15', '#4ade80', '#f87171', '#60a5fa', '#c084fc', '#fb923c', '#f472b6'];
+        for (let i = 0; i < 40; i++) {
+            const piece = document.createElement('div');
+            piece.className = 'confetti-piece';
+            piece.style.left = Math.random() * 100 + '%';
+            piece.style.top = '-10px';
+            piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            piece.style.width = (6 + Math.random() * 12) + 'px';
+            piece.style.height = (6 + Math.random() * 12) + 'px';
+            piece.style.animationDuration = (1.5 + Math.random() * 1.5) + 's';
+            piece.style.animationDelay = (Math.random() * 0.5) + 's';
+            piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+            container.appendChild(piece);
+        }
+        // Remove after animation
+        setTimeout(() => {
+            container.innerHTML = '';
+        }, 4000);
     }
 
     // Projector event listeners
@@ -1504,6 +1806,8 @@
 
     projectorPrevBtn.addEventListener('click', projectorPrev);
     projectorNextBtn.addEventListener('click', projectorNext);
+    projectorRoundPrev.addEventListener('click', projectorRoundPrev);
+    projectorRoundNext.addEventListener('click', projectorRoundNext);
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -1514,6 +1818,56 @@
             closeProjector();
             projectorToggleBtn.textContent = '📽️ Projector';
         }
+    });
+
+    // --------------------------------------------------------------
+    // 📜 Rounds History Modal
+    // --------------------------------------------------------------
+    function openHistory() {
+        historyModal.classList.add('active');
+        renderHistory();
+    }
+
+    function closeHistory() {
+        historyModal.classList.remove('active');
+    }
+
+    function renderHistory() {
+        let html = '';
+        // Show current round first
+        if (buzzerOrderData.length > 0) {
+            html += `<div class="history-round"><div class="round-title">Current Round</div>`;
+            const sorted = [...buzzerOrderData].sort((a,b) => a.position - b.position);
+            sorted.forEach(entry => {
+                const name = entry.playerName || `Player ${entry.userId.substring(0,6)}`;
+                const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
+                html += `<div class="history-entry"><span class="h-rank">#${entry.position}</span><span class="h-name">${name}</span><span class="h-time">${time}</span></div>`;
+            });
+            html += `</div>`;
+        }
+        // Show previous rounds in reverse order (latest first)
+        const reversed = [...roundHistory].reverse();
+        reversed.forEach((round, idx) => {
+            const roundNumber = roundHistory.length - idx;
+            html += `<div class="history-round"><div class="round-title">Round ${roundNumber}</div>`;
+            const sorted = [...round].sort((a,b) => a.position - b.position);
+            sorted.forEach(entry => {
+                const name = entry.playerName || `Player ${entry.userId.substring(0,6)}`;
+                const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
+                html += `<div class="history-entry"><span class="h-rank">#${entry.position}</span><span class="h-name">${name}</span><span class="h-time">${time}</span></div>`;
+            });
+            html += `</div>`;
+        });
+        if (!html) {
+            html = '<div class="history-empty">No rounds yet. Start buzzing!</div>';
+        }
+        historyList.innerHTML = html;
+    }
+
+    historyToggleBtn.addEventListener('click', openHistory);
+    historyCloseBtn.addEventListener('click', closeHistory);
+    historyModal.addEventListener('click', (e) => {
+        if (e.target === historyModal) closeHistory();
     });
 
     // --------------------------------------------------------------
@@ -1547,27 +1901,27 @@
                 if (!roomDoc.exists) {
                     transaction.set(roomRef, {
                         buzzerOrder: [],
-                        previousBuzzerOrder: []
+                        roundHistory: []
                     });
                     return { newEntry: { position: 1, userId: currentUser.uid, playerName: playerName, timestamp: Timestamp.now() } };
                 }
                 
                 const data = roomDoc.data();
-                const buzzerOrder = data.buzzerOrder || [];
-                if (buzzerOrder.length >= 10) {
+                const current = data.buzzerOrder || [];
+                if (current.length >= 10) {
                     throw new Error('Buzzer is full');
                 }
-                if (buzzerOrder.some(entry => entry.userId === currentUser.uid)) {
+                if (current.some(entry => entry.userId === currentUser.uid)) {
                     throw new Error('Already buzzed');
                 }
                 const newEntry = {
                     userId: currentUser.uid,
                     playerName: playerName,
                     timestamp: Timestamp.now(),
-                    position: buzzerOrder.length + 1
+                    position: current.length + 1
                 };
                 transaction.update(roomRef, {
-                    buzzerOrder: [...buzzerOrder, newEntry]
+                    buzzerOrder: [...current, newEntry]
                 });
                 return { newEntry: newEntry };
             });
@@ -1601,12 +1955,16 @@
         if (!confirm('This will save current result and clear buzzer for next round. Continue?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
+            // Save current to history and clear current
+            const newHistory = [...roundHistory];
+            if (buzzerOrderData.length > 0) {
+                newHistory.push(buzzerOrderData);
+            }
             await setDoc(roomRef, {
-                previousBuzzerOrder: buzzerOrderData,
+                roundHistory: newHistory,
                 buzzerOrder: []
             }, { merge: true });
             alert('New round started! Previous result saved.');
-            // Close projector if open
             if (projectorActive) {
                 closeProjector();
                 projectorToggleBtn.textContent = '📽️ Projector';
@@ -1617,11 +1975,11 @@
     }
 
     async function endQuiz() {
-        if (!confirm('This will clear ALL data (including previous results). Are you sure?')) return;
+        if (!confirm('This will clear ALL data (including previous rounds). Are you sure?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
             await setDoc(roomRef, {
-                previousBuzzerOrder: [],
+                roundHistory: [],
                 buzzerOrder: []
             }, { merge: true });
             alert('Quiz ended. All data cleared.');
@@ -1643,7 +2001,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('Quiz Buzzer App Loaded (Professional Edition with Projector)');
+    console.log('Quiz Buzzer App Loaded (with Projector Animations & History)');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
