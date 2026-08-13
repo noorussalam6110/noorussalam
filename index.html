@@ -460,7 +460,7 @@
         .admin-actions .btn-projector { background: rgba(139, 92, 246, 0.4); color: #c4b5fd; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1); }
         .admin-actions .btn-projector:hover { transform: scale(1.02); background: rgba(139, 92, 246, 0.6); }
 
-        /* ----- Projector Overlay ----- */
+        /* ----- Projector Overlay (with particle canvas) ----- */
         .projector-overlay {
             position: fixed;
             top: 0;
@@ -468,9 +468,6 @@
             right: 0;
             bottom: 0;
             background: #0a0e1a;
-            background-image: 
-                radial-gradient(ellipse at 50% 80%, rgba(250, 204, 21, 0.08) 0%, transparent 60%),
-                linear-gradient(135deg, #0a0e1a 0%, #111827 100%);
             z-index: 9999;
             display: none;
             justify-content: center;
@@ -482,6 +479,19 @@
             overflow: hidden;
         }
         .projector-overlay.active { display: flex; }
+
+        /* Canvas for particles – placed behind content */
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animated background gradient (overlay) */
         .projector-overlay::before {
             content: '';
             position: absolute;
@@ -489,16 +499,20 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 30% 40%, rgba(250,204,21,0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(74,222,128,0.03) 0%, transparent 50%);
-            animation: projectorBg 20s ease-in-out infinite alternate;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(250,204,21,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(74,222,128,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, rgba(139,92,246,0.04) 0%, transparent 50%);
+            animation: projectorBg 25s ease-in-out infinite alternate;
             pointer-events: none;
+            z-index: 0;
         }
         @keyframes projectorBg {
             0% { transform: translate(0, 0) scale(1); }
             100% { transform: translate(-10%, -10%) scale(1.2); }
         }
 
+        /* Content – positioned above the canvas and gradient */
         .projector-content {
             animation: projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             width: 100%;
@@ -544,6 +558,7 @@
             animation: nameSlideProjector 0.5s ease 0.3s both;
         }
 
+        /* Confetti overlay */
         .projector-confetti {
             position: absolute;
             width: 100%;
@@ -811,6 +826,9 @@
 
 <!-- Projector Overlay -->
 <div class="projector-overlay" id="projectorOverlay">
+    <!-- Particle canvas (background) -->
+    <canvas id="particleCanvas"></canvas>
+
     <div class="projector-confetti" id="projectorConfetti"></div>
     <button class="projector-close" id="projectorCloseBtn">✕</button>
     <button class="projector-nav projector-nav-left" id="projectorPrevBtn">◀</button>
@@ -916,7 +934,7 @@
     const db = getFirestore(app);
 
     // --------------------------------------------------------------
-    // 🔉 Audio & Vibration
+    // 🔊 Audio & Vibration
     // --------------------------------------------------------------
     let audioCtx = null;
 
@@ -993,6 +1011,7 @@
     // Projector
     let projectorActive = false;
     let projectorIndex = 0;
+    let particleAnimationId = null;
 
     // --------------------------------------------------------------
     // DOM Elements
@@ -1039,6 +1058,8 @@
     const projectorToggleBtn = document.getElementById('projectorToggleBtn');
     const projectorContent = document.getElementById('projectorContent');
     const projectorConfetti = document.getElementById('projectorConfetti');
+    const particleCanvas = document.getElementById('particleCanvas');
+    const ctx = particleCanvas.getContext('2d');
 
     roomBadge.textContent = `Room: ${ROOM_ID}`;
     if (IS_MOBILE) adminToggleBtn.classList.add('mobile-hidden');
@@ -1313,7 +1334,99 @@
     }
 
     // --------------------------------------------------------------
-    // 📽️ Projector Functions
+    // 🌟 Particle System (for projector background)
+    // --------------------------------------------------------------
+    let particles = [];
+    let particleRunning = false;
+
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            const canvasW = particleCanvas.width;
+            const canvasH = particleCanvas.height;
+            this.x = Math.random() * canvasW;
+            this.y = Math.random() * canvasH;
+            this.size = Math.random() * 3 + 1.5;
+            this.speedX = (Math.random() - 0.5) * 0.6;
+            this.speedY = (Math.random() - 0.5) * 0.6;
+            this.opacity = Math.random() * 0.5 + 0.2;
+            this.hue = Math.random() * 60 + 40; // yellow-green range
+        }
+        update() {
+            const canvasW = particleCanvas.width;
+            const canvasH = particleCanvas.height;
+            this.x += this.speedX;
+            this.y += this.speedY;
+            // wrap around edges
+            if (this.x < 0) this.x = canvasW;
+            if (this.x > canvasW) this.x = 0;
+            if (this.y < 0) this.y = canvasH;
+            if (this.y > canvasH) this.y = 0;
+            // slight change in opacity and size for twinkle effect
+            this.opacity += (Math.random() - 0.5) * 0.02;
+            this.opacity = Math.min(0.8, Math.max(0.1, this.opacity));
+            this.size += (Math.random() - 0.5) * 0.1;
+            this.size = Math.min(4, Math.max(1.5, this.size));
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            const gradient = ctx.createRadialGradient(
+                this.x, this.y, 0,
+                this.x, this.y, this.size * 3
+            );
+            gradient.addColorStop(0, `hsla(${this.hue}, 80%, 70%, ${this.opacity})`);
+            gradient.addColorStop(0.5, `hsla(${this.hue + 30}, 80%, 50%, ${this.opacity * 0.5})`);
+            gradient.addColorStop(1, `hsla(${this.hue + 60}, 80%, 30%, 0)`);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        const canvas = particleCanvas;
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+        particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Particle());
+        }
+        if (particleRunning) {
+            cancelAnimationFrame(particleAnimationId);
+        }
+        particleRunning = true;
+        animateParticles();
+    }
+
+    function animateParticles() {
+        if (!particleRunning) return;
+        ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        // draw connecting lines (optional, for network effect)
+        // can be enabled for more visual richness
+        particleAnimationId = requestAnimationFrame(animateParticles);
+    }
+
+    function resizeParticles() {
+        if (projectorActive) {
+            const canvas = particleCanvas;
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            // reposition particles
+            particles.forEach(p => {
+                p.x = Math.random() * canvas.width;
+                p.y = Math.random() * canvas.height;
+            });
+        }
+    }
+
+    // --------------------------------------------------------------
+    // 📽️ Projector Functions (updated with particle start/stop)
     // --------------------------------------------------------------
     function openProjector() {
         projectorActive = true;
@@ -1325,6 +1438,11 @@
         if (buzzerOrderData.length > 0 && buzzerOrderData[projectorIndex]?.position === 1) {
             triggerConfetti();
         }
+        // Start particles after a small delay to ensure canvas is visible
+        setTimeout(() => {
+            initParticles();
+        }, 50);
+        window.addEventListener('resize', resizeParticles);
     }
 
     function closeProjector() {
@@ -1332,6 +1450,13 @@
         projectorOverlay.classList.remove('active');
         projectorToggleBtn.textContent = '📽️ Projector';
         projectorConfetti.innerHTML = '';
+        particleRunning = false;
+        if (particleAnimationId) {
+            cancelAnimationFrame(particleAnimationId);
+            particleAnimationId = null;
+        }
+        ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+        window.removeEventListener('resize', resizeParticles);
     }
 
     function updateProjectorContent() {
@@ -1466,12 +1591,10 @@
         if (!confirm('This will save current result and clear buzzer for next round. Continue?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
-            // Read existing history
             const docSnap = await getDoc(roomRef);
             const history = docSnap.exists() ? (docSnap.data().roundHistory || []) : [];
             const newHistory = [...history];
             if (buzzerOrderData.length > 0) {
-                // ✅ Store as an object with an 'entries' array (no nested arrays)
                 newHistory.push({ entries: buzzerOrderData });
             }
             await setDoc(roomRef, { roundHistory: newHistory, buzzerOrder: [] }, { merge: true });
@@ -1482,9 +1605,6 @@
         }
     }
 
-    // --------------------------------------------------------------
-    // 🔄 Admin: End Quiz
-    // --------------------------------------------------------------
     async function endQuiz() {
         if (!confirm('This will clear ALL data (including previous rounds). Are you sure?')) return;
         try {
@@ -1504,10 +1624,14 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('Quiz Buzzer App Loaded (Full Version – Nested Array Fix)');
+    console.log('Quiz Buzzer App Loaded – with Particle Background for Projector');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
+        if (particleRunning) {
+            particleRunning = false;
+            cancelAnimationFrame(particleAnimationId);
+        }
     });
 </script>
 </body>
