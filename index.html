@@ -416,6 +416,10 @@
             padding: 2px 14px;
             border-radius: 30px;
             font-weight: 400;
+            font-family: 'Anek Malayalam', monospace;
+            letter-spacing: 1px;
+            min-width: 90px;
+            text-align: center;
         }
         .admin-item.top1 { border-left-color: #facc15; background: rgba(250, 204, 21, 0.10); }
         .admin-item.top2 { border-left-color: #94a3b8; background: rgba(148, 163, 184, 0.05); }
@@ -461,7 +465,7 @@
         .admin-actions .btn-projector:hover { transform: scale(1.02); background: rgba(139, 92, 246, 0.6); }
 
         /* ============================================================ */
-        /* PROJECTOR OVERLAY – with particles & scrolling background text */
+        /* PROJECTOR OVERLAY – with Madrasa Name & Live Clock */
         /* ============================================================ */
         .projector-overlay {
             position: fixed;
@@ -482,7 +486,6 @@
         }
         .projector-overlay.active { display: flex; }
 
-        /* Canvas for particles – placed behind everything */
         #particleCanvas {
             position: absolute;
             top: 0;
@@ -524,13 +527,12 @@
             padding-right: 2rem;
             flex-shrink: 0;
         }
-
         @keyframes scrollMarquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        /* Animated background gradient (overlay) */
+        /* Animated background gradient */
         .projector-overlay::before {
             content: '';
             position: absolute;
@@ -551,13 +553,55 @@
             100% { transform: translate(-10%, -10%) scale(1.2); }
         }
 
-        /* Content – positioned above the canvas and gradient and scrolling text */
+        /* ---- Projector Header (Madrasa Name + Live Clock) ---- */
+        .projector-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .projector-madrasa {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #facc15;
+            text-shadow: 0 0 30px rgba(250, 204, 21, 0.3);
+            letter-spacing: 3px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(6px);
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: 1px solid rgba(250, 204, 21, 0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .projector-clock {
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: #facc15;
+            text-shadow: 0 0 30px rgba(250, 204, 21, 0.2);
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(6px);
+            padding: 10px 24px;
+            border-radius: 60px;
+            border: 1px solid rgba(250, 204, 21, 0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            font-family: 'Anek Malayalam', monospace;
+            letter-spacing: 2px;
+        }
+
+        /* ---- Main Projector Content (Rank, Name, Time) ---- */
         .projector-content {
             animation: projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             width: 100%;
             max-width: 800px;
             position: relative;
             z-index: 2;
+            margin-top: 20px;
         }
         @keyframes projectorFade {
             0% { opacity: 0; transform: scale(0.92) rotate(-2deg); }
@@ -590,14 +634,16 @@
             100% { transform: translateY(0); opacity: 1; }
         }
         .projector-time {
-            font-size: 1.8rem;
-            color: #94a3b8;
-            font-weight: 300;
-            letter-spacing: 3px;
+            font-size: 2.2rem;
+            color: #facc15;
+            font-weight: 500;
+            letter-spacing: 4px;
             animation: nameSlideProjector 0.5s ease 0.3s both;
+            font-family: 'Anek Malayalam', monospace;
+            text-shadow: 0 0 30px rgba(250, 204, 21, 0.2);
         }
 
-        /* Confetti overlay */
+        /* Confetti */
         .projector-confetti {
             position: absolute;
             width: 100%;
@@ -839,15 +885,19 @@
             .buzzer-btn .sub-text { font-size: 0.9rem; }
             .admin-item .pos { font-size: 1.3rem; min-width: 40px; }
             .admin-item .name { font-size: 1.2rem; }
-            .admin-item .time { font-size: 0.75rem; }
+            .admin-item .time { font-size: 0.7rem; min-width: 70px; }
             .buzz-notification .buzz-rank { font-size: 5rem; }
             .buzz-notification .buzz-name { font-size: 3rem; }
             .projector-rank { font-size: 5rem; }
             .projector-name { font-size: 3rem; }
+            .projector-time { font-size: 1.6rem; }
             .projector-nav { width: 50px; height: 50px; font-size: 1.8rem; }
             .projector-nav-left { left: 10px; }
             .projector-nav-right { right: 10px; }
             .scrolling-bg-text .scroll-track span { font-size: 15vw; -webkit-text-stroke: 2px rgba(250, 204, 21, 0.2); }
+            .projector-madrasa { font-size: 1.2rem; padding: 6px 16px; }
+            .projector-clock { font-size: 1.4rem; padding: 6px 16px; }
+            .projector-header { padding: 12px 16px; flex-direction: column; align-items: center; gap: 8px; }
         }
     </style>
 </head>
@@ -866,34 +916,35 @@
 
 <!-- Projector Overlay -->
 <div class="projector-overlay" id="projectorOverlay">
-    <!-- Particle Canvas -->
     <canvas id="particleCanvas"></canvas>
 
-    <!-- Scrolling "GRAND FINALE" Background Text -->
     <div class="scrolling-bg-text">
         <div class="scroll-track">
-            <span>✦ GRAND FINALE ✦</span>
-            <span>✦ GRAND FINALE ✦</span>
-            <span>✦ GRAND FINALE ✦</span>
-            <span>✦ GRAND FINALE ✦</span>
-            <span>✦ GRAND FINALE ✦</span>
-            <span>✦ GRAND FINALE ✦</span>
+            <span>✦ QUIZ GRAND FINALE ✦</span>
+            <span>✦ QUIZ GRAND FINALE ✦</span>
+            <span>✦ QUIZ GRAND FINALE ✦</span>
+            <span>✦ QUIZ GRAND FINALE ✦</span>
+            <span>✦ QUIZ GRAND FINALE ✦</span>
+            <span>✦ QUIZ GRAND FINALE ✦</span>
         </div>
     </div>
 
-    <!-- Confetti Container -->
+    <!-- Projector Header: Madrasa Name + Live Clock -->
+    <div class="projector-header">
+        <div class="projector-madrasa">🏫 NOORUSSALAM MADRASA</div>
+        <div class="projector-clock" id="projectorClock">12:00 AM</div>
+    </div>
+
     <div class="projector-confetti" id="projectorConfetti"></div>
 
-    <!-- Navigation & Close Buttons -->
     <button class="projector-close" id="projectorCloseBtn">✕</button>
     <button class="projector-nav projector-nav-left" id="projectorPrevBtn">◀</button>
     <button class="projector-nav projector-nav-right" id="projectorNextBtn">▶</button>
 
-    <!-- Main Content -->
     <div class="projector-content" id="projectorContent">
         <div class="projector-rank" id="projectorRank">#1</div>
         <div class="projector-name" id="projectorName">Player Name</div>
-        <div class="projector-time" id="projectorTime">--:--:--</div>
+        <div class="projector-time" id="projectorTime">00:00:00.00</div>
     </div>
     <div class="projector-counter" id="projectorCounter">1 / 10</div>
 </div>
@@ -948,10 +999,10 @@
     <div id="adminView">
         <div class="admin-stats">
             <div class="admin-stat-card"><label>Total Buzzes</label><span id="totalCount">0</span></div>
-            <div class="admin-stat-card"><label>Last Buzz</label><span id="lastBuzzer">-</span></div>
+            <div class="admin-stat-card"><label>Last Buzz</label><span id="lastBuzzer">--:--:--.--</span></div>
         </div>
         <div class="admin-list-container">
-            <h3 id="adminListTitle">Order (Name &amp; Timestamp)</h3>
+            <h3 id="adminListTitle">Order (Name &amp; Time)</h3>
             <div id="adminRankingList">
                 <div class="empty-state" style="text-align:center; color:#475569; padding:30px;">Loading...</div>
             </div>
@@ -1064,11 +1115,67 @@
     let buzzerOrderData = [];
     let playerName = '';
     let notifTimeout = null;
+    let roundStart = null;
 
     // Projector
     let projectorActive = false;
     let projectorIndex = 0;
     let particleAnimationId = null;
+    let clockInterval = null;
+
+    // --------------------------------------------------------------
+    // ⏱️ Elapsed Time Formatter
+    // --------------------------------------------------------------
+    function formatElapsedTime(timestamp, start) {
+        if (!start) {
+            const d = timestamp?.seconds ? new Date(timestamp.seconds * 1000) : new Date();
+            return d.toLocaleTimeString('en-IN', { hour12: false });
+        }
+        try {
+            const tsMs = timestamp.seconds * 1000 + (timestamp.nanoseconds || 0) / 1000000;
+            const startMs = start.seconds * 1000 + (start.nanoseconds || 0) / 1000000;
+            let elapsedMs = tsMs - startMs;
+            if (elapsedMs < 0) elapsedMs = 0;
+            
+            const totalSeconds = Math.floor(elapsedMs / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            const cs = Math.floor((elapsedMs % 1000) / 10);
+            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(cs).padStart(2, '0')}`;
+        } catch (e) {
+            return '--:--:--.--';
+        }
+    }
+
+    // --------------------------------------------------------------
+    // 🕒 Live Clock (12‑hour format)
+    // --------------------------------------------------------------
+    function updateClock() {
+        const now = new Date();
+        let hours = now.getHours();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const clockEl = document.getElementById('projectorClock');
+        if (clockEl) {
+            clockEl.textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+        }
+    }
+
+    function startClock() {
+        if (clockInterval) clearInterval(clockInterval);
+        updateClock();
+        clockInterval = setInterval(updateClock, 1000);
+    }
+
+    function stopClock() {
+        if (clockInterval) {
+            clearInterval(clockInterval);
+            clockInterval = null;
+        }
+    }
 
     // --------------------------------------------------------------
     // DOM Elements
@@ -1279,6 +1386,7 @@
                 if (currentMode === 'player' && buzzerView.classList.contains('active')) {
                     setButtonState('disabled', 'Waiting...');
                 }
+                roundStart = null;
                 return;
             }
             const data = docSnap.data();
@@ -1286,6 +1394,7 @@
             const oldLength = buzzerOrderData.length;
             const hasNewBuzz = order.length > oldLength;
             buzzerOrderData = order;
+            roundStart = data.roundStart || null;
 
             if (projectorActive) {
                 if (hasNewBuzz && order.length > 0) {
@@ -1358,11 +1467,13 @@
         totalCount.textContent = buzzerOrderData.length;
         if (buzzerOrderData.length > 0) {
             const last = buzzerOrderData[buzzerOrderData.length - 1];
-            const time = last.timestamp?.seconds ? new Date(last.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : 'N/A';
-            lastBuzzer.textContent = time;
-        } else { lastBuzzer.textContent = '-'; }
+            const timeDisplay = formatElapsedTime(last.timestamp, roundStart);
+            lastBuzzer.textContent = timeDisplay;
+        } else {
+            lastBuzzer.textContent = '--:--:--.--';
+        }
 
-        adminListTitle.innerHTML = 'Current Round (Name & Timestamp)';
+        adminListTitle.innerHTML = 'Current Round (Name & Time)';
         if (!displayOrder || displayOrder.length === 0) {
             adminRankingList.innerHTML = '<div class="empty-state" style="text-align:center; color:#475569; padding:30px;">No buzzes yet.</div>';
             return;
@@ -1372,7 +1483,7 @@
         sorted.forEach((entry, idx) => {
             const rank = idx + 1;
             const displayName = entry.playerName || `Anonymous (${entry.userId.substring(0, 6)})`;
-            const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
+            const timeDisplay = formatElapsedTime(entry.timestamp, roundStart);
             let cls = '';
             if (rank === 1) cls = 'top1';
             if (rank === 2) cls = 'top2';
@@ -1383,7 +1494,7 @@
                     <span class="pos">#${rank}</span>
                     <span class="name">${displayName}</span>
                     <span class="uid">(${entry.userId.substring(0, 6)})</span>
-                    <span class="time">${time}</span>
+                    <span class="time">${timeDisplay}</span>
                 </div>
             `;
         });
@@ -1478,7 +1589,7 @@
     }
 
     // --------------------------------------------------------------
-    // 📽️ Projector Functions
+    // 📽️ Projector Functions (with Clock & Madrasa)
     // --------------------------------------------------------------
     function openProjector() {
         projectorActive = true;
@@ -1494,6 +1605,8 @@
             initParticles();
         }, 50);
         window.addEventListener('resize', resizeParticles);
+        // Start live clock
+        startClock();
     }
 
     function closeProjector() {
@@ -1508,6 +1621,7 @@
         }
         ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
         window.removeEventListener('resize', resizeParticles);
+        stopClock();
     }
 
     function updateProjectorContent() {
@@ -1515,16 +1629,16 @@
         if (!entries || entries.length === 0 || projectorIndex >= entries.length) {
             projectorRank.textContent = '—';
             projectorName.textContent = 'No buzz yet';
-            projectorTime.textContent = '';
+            projectorTime.textContent = '--:--:--.--';
             return;
         }
         const entry = entries[projectorIndex];
         const rank = entry.position;
         const name = entry.playerName || `Player ${entry.userId.substring(0, 6)}`;
-        const time = entry.timestamp?.seconds ? new Date(entry.timestamp.seconds * 1000).toLocaleTimeString('en-IN', { hour12: false }) : '--:--:--';
+        const timeDisplay = formatElapsedTime(entry.timestamp, roundStart);
         projectorRank.textContent = `#${rank}`;
         projectorName.textContent = name;
-        projectorTime.textContent = time;
+        projectorTime.textContent = timeDisplay;
         projectorContent.style.animation = 'none';
         void projectorContent.offsetWidth;
         projectorContent.style.animation = 'projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -1598,7 +1712,10 @@
             const result = await runTransaction(db, async (transaction) => {
                 const roomDoc = await transaction.get(roomRef);
                 if (!roomDoc.exists) {
-                    transaction.set(roomRef, { buzzerOrder: [] });
+                    transaction.set(roomRef, { 
+                        buzzerOrder: [],
+                        roundStart: Timestamp.now()
+                    });
                     return { newEntry: { position: 1, userId: currentUser.uid, playerName: playerName, timestamp: Timestamp.now() } };
                 }
                 const data = roomDoc.data();
@@ -1611,7 +1728,10 @@
                     timestamp: Timestamp.now(),
                     position: current.length + 1
                 };
-                transaction.update(roomRef, { buzzerOrder: [...current, newEntry] });
+                transaction.update(roomRef, { 
+                    buzzerOrder: [...current, newEntry],
+                    roundStart: data.roundStart || Timestamp.now()
+                });
                 return { newEntry };
             });
 
@@ -1636,7 +1756,7 @@
     buzzerBtn.addEventListener('click', pressBuzzer);
 
     // --------------------------------------------------------------
-    // 🔄 Admin: New Round (FIXED – no nested arrays)
+    // 🔄 Admin: New Round
     // --------------------------------------------------------------
     async function newRound() {
         if (!confirm('This will save current result and clear buzzer for next round. Continue?')) return;
@@ -1648,19 +1768,30 @@
             if (buzzerOrderData.length > 0) {
                 newHistory.push({ entries: buzzerOrderData });
             }
-            await setDoc(roomRef, { roundHistory: newHistory, buzzerOrder: [] }, { merge: true });
-            alert('New round started! Previous result saved.');
+            await setDoc(roomRef, {
+                roundHistory: newHistory,
+                buzzerOrder: [],
+                roundStart: Timestamp.now()
+            }, { merge: true });
+            alert('New round started! Time reset to 00:00:00.00');
             if (projectorActive) { closeProjector(); projectorToggleBtn.textContent = '📽️ Projector'; }
         } catch (error) {
             alert('Failed: ' + error.message);
         }
     }
 
+    // --------------------------------------------------------------
+    // 🔄 Admin: End Quiz
+    // --------------------------------------------------------------
     async function endQuiz() {
         if (!confirm('This will clear ALL data (including previous rounds). Are you sure?')) return;
         try {
             const roomRef = doc(db, 'rooms', ROOM_ID);
-            await setDoc(roomRef, { roundHistory: [], buzzerOrder: [] }, { merge: true });
+            await setDoc(roomRef, { 
+                roundHistory: [], 
+                buzzerOrder: [],
+                roundStart: null
+            }, { merge: true });
             alert('Quiz ended. All data cleared.');
             if (projectorActive) { closeProjector(); projectorToggleBtn.textContent = '📽️ Projector'; }
         } catch (error) {
@@ -1675,7 +1806,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('Quiz Buzzer App Loaded – with Scrolling GRAND FINALE & Particles');
+    console.log('Quiz Buzzer App Loaded – with Madrasa Name & Live Clock');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
@@ -1683,6 +1814,7 @@
             particleRunning = false;
             cancelAnimationFrame(particleAnimationId);
         }
+        stopClock();
     });
 </script>
 </body>
