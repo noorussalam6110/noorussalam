@@ -465,7 +465,7 @@
         .admin-actions .btn-projector:hover { transform: scale(1.02); background: rgba(139, 92, 246, 0.6); }
 
         /* ============================================================ */
-        /* PROJECTOR OVERLAY – with Madrasa Name & Live Clock */
+        /* PROJECTOR OVERLAY – with Unified Top Box */
         /* ============================================================ */
         .projector-overlay {
             position: fixed;
@@ -553,55 +553,65 @@
             100% { transform: translate(-10%, -10%) scale(1.2); }
         }
 
-        /* ---- Projector Header (Madrasa Name + Live Clock) ---- */
+        /* ---- Projector Header: Unified Box ---- */
         .projector-header {
             position: absolute;
-            top: 0;
+            top: 20px;
             left: 0;
             right: 0;
-            padding: 20px 30px;
+            padding: 0 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            justify-content: center;
             z-index: 5;
             pointer-events: none;
         }
+        .projector-top-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(250, 204, 21, 0.2);
+            border-radius: 60px;
+            padding: 12px 35px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 40px rgba(250, 204, 21, 0.05);
+            animation: topBoxGlow 4s ease-in-out infinite;
+            width: fit-content;
+            max-width: 90%;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        @keyframes topBoxGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(250,204,21,0.05); border-color: rgba(250,204,21,0.15); }
+            50% { box-shadow: 0 0 60px rgba(250,204,21,0.15); border-color: rgba(250,204,21,0.35); }
+        }
         .projector-madrasa {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: #facc15;
-            text-shadow: 0 0 30px rgba(250, 204, 21, 0.3);
-            letter-spacing: 3px;
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(6px);
-            padding: 10px 24px;
-            border-radius: 60px;
-            border: 1px solid rgba(250, 204, 21, 0.15);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            text-shadow: 0 0 30px rgba(250, 204, 21, 0.2);
+            letter-spacing: 2px;
+            white-space: nowrap;
         }
         .projector-clock {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 500;
             color: #facc15;
-            text-shadow: 0 0 30px rgba(250, 204, 21, 0.2);
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(6px);
-            padding: 10px 24px;
-            border-radius: 60px;
-            border: 1px solid rgba(250, 204, 21, 0.15);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            text-shadow: 0 0 30px rgba(250, 204, 21, 0.15);
             font-family: 'Anek Malayalam', monospace;
             letter-spacing: 2px;
+            white-space: nowrap;
         }
 
-        /* ---- Main Projector Content (Rank, Name, Time) ---- */
+        /* ---- Main Projector Content ---- */
         .projector-content {
             animation: projectorFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             width: 100%;
             max-width: 800px;
             position: relative;
             z-index: 2;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         @keyframes projectorFade {
             0% { opacity: 0; transform: scale(0.92) rotate(-2deg); }
@@ -895,9 +905,9 @@
             .projector-nav-left { left: 10px; }
             .projector-nav-right { right: 10px; }
             .scrolling-bg-text .scroll-track span { font-size: 15vw; -webkit-text-stroke: 2px rgba(250, 204, 21, 0.2); }
-            .projector-madrasa { font-size: 1.2rem; padding: 6px 16px; }
-            .projector-clock { font-size: 1.4rem; padding: 6px 16px; }
-            .projector-header { padding: 12px 16px; flex-direction: column; align-items: center; gap: 8px; }
+            .projector-top-box { padding: 8px 16px; gap: 16px; flex-direction: column; align-items: center; }
+            .projector-madrasa { font-size: 1.2rem; white-space: normal; }
+            .projector-clock { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -929,10 +939,12 @@
         </div>
     </div>
 
-    <!-- Projector Header: Madrasa Name + Live Clock -->
+    <!-- Projector Header: Unified Box with Effects -->
     <div class="projector-header">
-        <div class="projector-madrasa">🏫 NOORUSSALAM MADRASA</div>
-        <div class="projector-clock" id="projectorClock">12:00 AM</div>
+        <div class="projector-top-box">
+            <div class="projector-madrasa">🏫 NOORUSSALAM MADRASA</div>
+            <div class="projector-clock" id="projectorClock">12:00:00 AM</div>
+        </div>
     </div>
 
     <div class="projector-confetti" id="projectorConfetti"></div>
@@ -1589,7 +1601,7 @@
     }
 
     // --------------------------------------------------------------
-    // 📽️ Projector Functions (with Clock & Madrasa)
+    // 📽️ Projector Functions
     // --------------------------------------------------------------
     function openProjector() {
         projectorActive = true;
@@ -1605,7 +1617,6 @@
             initParticles();
         }, 50);
         window.addEventListener('resize', resizeParticles);
-        // Start live clock
         startClock();
     }
 
@@ -1806,7 +1817,7 @@
     // --------------------------------------------------------------
     // 🚀 Initial Load
     // --------------------------------------------------------------
-    console.log('Quiz Buzzer App Loaded – with Madrasa Name & Live Clock');
+    console.log('Quiz Buzzer App Loaded – with Unified Top Box & Effects');
 
     window.addEventListener('beforeunload', () => {
         if (unsubscribeSnapshot) unsubscribeSnapshot();
