@@ -65,10 +65,26 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 .theme-toggle{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:40px;padding:6px 12px;display:flex;gap:8px;align-items:center;cursor:pointer}
 .theme-toggle .toggle-track{width:44px;height:24px;background:rgba(255,255,255,.2);border-radius:40px;position:relative}
 .theme-toggle .toggle-thumb{width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px;transition:.3s}
+
+/* ===== NEW: CLASS SELECTOR PANEL ===== */
+.class-selector-panel{background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(139,92,246,.1));border:2px solid rgba(59,130,246,.35);border-radius:2rem;padding:24px;margin-bottom:24px;text-align:center;box-shadow:0 15px 40px rgba(59,130,246,.15)}
+.class-selector-panel h3{color:#fff;font-weight:700;font-size:1.4rem;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:12px}
+.class-selector-panel h3 i{color:#fbbf24}
+.class-selector-panel p{color:rgba(255,255,255,.6);font-size:.9rem;margin-bottom:18px}
+.class-selector-panel select{background:rgba(15,25,55,.85);border:2px solid rgba(59,130,246,.5);border-radius:1.5rem;padding:16px 40px 16px 24px;color:#fff;font-size:1.3rem;font-weight:700;outline:none;cursor:pointer;min-width:280px;text-align:center;font-family:inherit;appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 15px center;background-size:20px}
+.class-selector-panel select:focus{border-color:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.15)}
+.class-selector-panel select option{background:#0b1a3a;color:#fff;padding:10px}
+.class-info-badge{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:12px 28px;border-radius:50px;font-weight:700;font-size:1.1rem;margin-top:12px;box-shadow:0 8px 24px rgba(16,185,129,.3)}
+.class-info-badge i{font-size:1.3rem}
+.no-class-message{background:rgba(255,255,255,.03);border:2px dashed rgba(255,255,255,.15);border-radius:2rem;padding:60px 20px;text-align:center;color:#94a3b8}
+.no-class-message i{font-size:4rem;opacity:.3;display:block;margin-bottom:16px;color:#3b82f6}
+.no-class-message h4{color:#fff;font-size:1.3rem;margin-bottom:8px}
+.no-class-message p{color:#94a3b8;font-size:.95rem}
+
 .admin-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.admin-tab{padding:8px 16px;border:none;border-radius:40px;background:rgba(255,255,255,.08);color:#94a3b8;font-weight:600;font-size:.75rem;cursor:pointer;font-family:inherit}
-.admin-tab.active{background:#2563eb;color:#fff}
-.admin-tab:hover{background:rgba(37,99,235,.2);color:#fff}
+.admin-tab{padding:10px 18px;border:none;border-radius:40px;background:rgba(255,255,255,.08);color:#94a3b8;font-weight:600;font-size:.78rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.admin-tab.active{background:#2563eb;color:#fff;box-shadow:0 6px 20px rgba(37,99,235,.4)}
+.admin-tab:hover{background:rgba(37,99,235,.25);color:#fff}
 .admin-tab .badge-count{background:#ef4444;color:#fff;border-radius:50%;padding:0 6px;font-size:.6rem;margin-left:4px;display:inline-block;min-width:18px;text-align:center}
 .admin-table-wrap{overflow-x:auto;margin:12px 0 16px;border:1px solid rgba(255,255,255,.06);border-radius:16px;background:rgba(255,255,255,.03)}
 .admin-table-wrap table{width:100%;border-collapse:collapse;font-size:.78rem;min-width:300px;color:#e8edf4}
@@ -136,8 +152,9 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 .empty-state i{font-size:2.5rem;opacity:.2;display:block;margin-bottom:10px}
 .modal-form-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:.8rem;padding:.6rem 1rem;color:#fff}
 .modal-form-input option{background:#0b1a3a}
-@media (max-width:768px){.stats-grid{grid-template-columns:1fr 1fr;gap:.8rem}.stat-value-xl{font-size:2rem}.wallet-balance-card .wallet-amount{font-size:2.4rem!important}.action-grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}.admin-toolbar{flex-direction:column;align-items:stretch}.admin-toolbar input,.admin-toolbar select{width:100%!important;min-width:unset!important}.login-panel{padding:1.5rem}.login-title{font-size:1.6rem}.avatar-neon{width:55px;height:55px;font-size:20px}}
-@media (max-width:480px){.stats-grid{grid-template-columns:1fr 1fr;gap:.6rem}.stat-card-neon{padding:.8rem}.stat-value-xl{font-size:1.6rem}.wallet-balance-card .wallet-amount{font-size:2rem!important}.action-grid{grid-template-columns:repeat(auto-fit,minmax(100px,1fr))}.admin-tab{font-size:.55rem;padding:4px 10px}.help-btn span{display:none}.help-btn i{font-size:1.1rem}}
+.class-subjects-info{padding:12px 16px;background:rgba(59,130,246,.08);border-radius:12px;margin-bottom:12px;border:1px solid rgba(59,130,246,.2)}
+@media (max-width:768px){.stats-grid{grid-template-columns:1fr 1fr;gap:.8rem}.stat-value-xl{font-size:2rem}.wallet-balance-card .wallet-amount{font-size:2.4rem!important}.action-grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}.admin-toolbar{flex-direction:column;align-items:stretch}.admin-toolbar input,.admin-toolbar select{width:100%!important;min-width:unset!important}.login-panel{padding:1.5rem}.login-title{font-size:1.6rem}.avatar-neon{width:55px;height:55px;font-size:20px}.class-selector-panel{padding:18px}.class-selector-panel h3{font-size:1.1rem}.class-selector-panel select{font-size:1.1rem;min-width:220px;padding:14px 36px 14px 20px}}
+@media (max-width:480px){.stats-grid{grid-template-columns:1fr 1fr;gap:.6rem}.stat-card-neon{padding:.8rem}.stat-value-xl{font-size:1.6rem}.wallet-balance-card .wallet-amount{font-size:2rem!important}.action-grid{grid-template-columns:repeat(auto-fit,minmax(100px,1fr))}.admin-tab{font-size:.6rem;padding:6px 12px}.help-btn span{display:none}.help-btn i{font-size:1.1rem}}
 </style>
 </head>
 <body>
@@ -187,27 +204,15 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 <button onclick="closeFindStudentId()" class="btn btn-sm btn-outline-light rounded-circle"><i class="fas fa-times"></i></button>
 </div>
 <form id="findStudentIdForm" onsubmit="findStudentId(event)">
-<div class="mb-3">
-<label class="text-white-50">Class</label>
-<select id="findClass" class="modal-form-input" required>
-<option value="">Select Class</option>
-<option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option>
-<option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option>
-<option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option>
-<option value="10">Class 10</option>
-</select>
-</div>
-<div class="mb-3">
-<label class="text-white-50">Name (First 3 Letters)</label>
-<input type="text" id="findName" class="modal-form-input" placeholder="e.g., SUH" oninput="this.value=this.value.toUpperCase().slice(0,3);" required>
-</div>
+<div class="mb-3"><label class="text-white-50">Class</label><select id="findClass" class="modal-form-input" required><option value="">Select Class</option><option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option></select></div>
+<div class="mb-3"><label class="text-white-50">Name (First 3 Letters)</label><input type="text" id="findName" class="modal-form-input" placeholder="e.g., SUH" oninput="this.value=this.value.toUpperCase().slice(0,3);" required></div>
 <button type="submit" class="btn-gradient w-100 text-white"><i class="fas fa-search me-2"></i> Find</button>
 </form>
 <div id="findResult" class="mt-3" style="display:none;"></div>
 </div>
 </div>
 
-<!-- STUDENT DASHBOARD -->
+<!-- STUDENT DASHBOARD (unchanged) -->
 <div id="dashboardSection" style="display:none;">
 <div class="container">
 <div class="dashboard-header-glow d-flex flex-wrap justify-content-between align-items-center">
@@ -246,32 +251,58 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 <div class="col-lg-6"><div class="activity-timeline"><h5 class="text-white mb-3"><i class="fas fa-waveform me-2 text-primary"></i>Live Feed</h5><ul class="list-unstyled" id="activityFeedList"><li class="text-white-50 text-center py-3"><i class="fas fa-spinner fa-pulse"></i> Loading...</li></ul></div></div>
 <div class="col-lg-6"><div class="activity-timeline"><h5 class="text-white mb-3"><i class="fas fa-calendar-alt me-2 text-warning"></i>Upcoming Events</h5><div id="calendarEventsList" class="d-flex flex-column gap-3"><div class="text-white-50 text-center">Loading...</div></div></div></div>
 </div>
-<div class="text-center text-white-50 mt-5 pb-4 small"><i class="fas fa-shield-alt me-1"></i> Noorussalam Madrasa v11.1</div>
+<div class="text-center text-white-50 mt-5 pb-4 small"><i class="fas fa-shield-alt me-1"></i> Noorussalam Madrasa v13.0</div>
 </div>
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ============ ADMIN PANEL (NEW: Class-First) ============ -->
 <div id="adminSection" style="display:none;">
 <div class="container">
 <div class="dashboard-header-glow d-flex flex-wrap justify-content-between align-items-center">
 <div><h2 class="text-white fw-bold"><i class="fas fa-user-shield text-warning"></i> Admin Panel</h2></div>
+<div class="d-flex gap-2">
+<button class="btn btn-outline-info rounded-pill px-4" onclick="switchAdminTab('settings')"><i class="fas fa-cog"></i> Settings</button>
 <button id="adminLogoutBtn" class="btn btn-danger rounded-pill px-4"><i class="fas fa-sign-out-alt"></i> Exit</button>
 </div>
+</div>
 
+<!-- ✅ STEP 1: CLASS SELECTOR -->
+<div class="class-selector-panel" id="classSelectorPanel">
+<h3><i class="fas fa-graduation-cap"></i> ക്ലാസ് തിരഞ്ഞെടുക്കുക</h3>
+<p>Manage ചെയ്യാൻ ആഗ്രഹിക്കുന്ന ക്ലാസ് select ചെയ്യുക</p>
+<select id="adminClassSelector" onchange="selectAdminClass(this.value)">
+<option value="">-- Select a Class --</option>
+<option value="1">📚 Class 1</option>
+<option value="2">📚 Class 2</option>
+<option value="3">📚 Class 3</option>
+<option value="4">📚 Class 4</option>
+<option value="5">📚 Class 5</option>
+<option value="6">📚 Class 6</option>
+<option value="7">📚 Class 7</option>
+<option value="8">📚 Class 8</option>
+<option value="9">📚 Class 9</option>
+<option value="10">📚 Class 10</option>
+</select>
+<div id="selectedClassBadge" style="display:none;">
+<div class="class-info-badge"><i class="fas fa-check-circle"></i> Managing Class <span id="classBadgeNumber">-</span> • <span id="classBadgeStudents">0</span> Students</div>
+</div>
+</div>
+
+<!-- ✅ STEP 2: MAIN ADMIN CONTENT (only shows after class selected) -->
+<div id="adminMainContent" style="display:none;">
 <div class="admin-tabs" id="adminTabs">
 <button class="admin-tab active" data-tab="payments" onclick="switchAdminTab('payments')">💰 Payments</button>
-<button class="admin-tab" data-tab="withdrawals" onclick="switchAdminTab('withdrawals')">📤 Withdrawals <span class="badge-count" id="withdrawalBadge" style="display:none;">0</span></button>
-<button class="admin-tab" data-tab="balances" onclick="switchAdminTab('balances')">💵 Balances</button>
-<button class="admin-tab" data-tab="transactions" onclick="switchAdminTab('transactions')">📊 Transactions</button>
-<button class="admin-tab" data-tab="summary" onclick="switchAdminTab('summary')">📈 Summary</button>
 <button class="admin-tab" data-tab="students" onclick="switchAdminTab('students')">👥 Students</button>
 <button class="admin-tab" data-tab="marks" onclick="switchAdminTab('marks')">📊 Marks</button>
-<button class="admin-tab" data-tab="moralvalues" onclick="switchAdminTab('moralvalues')">🌟 Moral</button>
-<button class="admin-tab" data-tab="events" onclick="switchAdminTab('events')">📅 Events</button>
-<button class="admin-tab" data-tab="attendance" onclick="switchAdminTab('attendance')">📆 Attendance</button>
 <button class="admin-tab" data-tab="grades" onclick="switchAdminTab('grades')">⭐ Grades</button>
+<button class="admin-tab" data-tab="moralvalues" onclick="switchAdminTab('moralvalues')">🌟 Moral</button>
+<button class="admin-tab" data-tab="attendance" onclick="switchAdminTab('attendance')">📆 Attendance</button>
+<button class="admin-tab" data-tab="balances" onclick="switchAdminTab('balances')">💵 Balances</button>
+<button class="admin-tab" data-tab="withdrawals" onclick="switchAdminTab('withdrawals')">📤 Withdrawals <span class="badge-count" id="withdrawalBadge" style="display:none;">0</span></button>
+<button class="admin-tab" data-tab="transactions" onclick="switchAdminTab('transactions')">📊 Transactions</button>
+<button class="admin-tab" data-tab="summary" onclick="switchAdminTab('summary')">📈 Summary</button>
+<button class="admin-tab" data-tab="events" onclick="switchAdminTab('events')">📅 Events</button>
 <button class="admin-tab" data-tab="feed" onclick="switchAdminTab('feed')">📢 Feed</button>
-<button class="admin-tab" data-tab="settings" onclick="switchAdminTab('settings')">⚙️ Settings</button>
 </div>
 
 <!-- PAYMENTS -->
@@ -279,7 +310,6 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 <div class="admin-toolbar">
 <label>Date</label><input type="date" id="adminDate" />
 <button class="btn-load" onclick="loadPaymentsForDate()"><i class="fas fa-sync-alt"></i> Load</button>
-<select id="classFilter" onchange="applyPaymentsFilters()"><option value="all">All Classes</option><option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option></select>
 <input type="text" id="adminSearch" placeholder="🔍 Search..." oninput="applyPaymentsFilters()" />
 <button class="btn-pdf" onclick="downloadPaymentsPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
 </div>
@@ -287,16 +317,69 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 <div class="d-flex gap-3 flex-wrap justify-content-end mt-3"><button class="btn-cancel" onclick="clearAdminForm()">Clear</button><button class="btn-update" id="adminUpdateBtn" onclick="bulkUpdate()"><i class="fas fa-save"></i> Update</button></div>
 </div>
 
-<!-- WITHDRAWALS -->
-<div id="adminWithdrawalsTab" class="admin-tab-content" style="display:none;">
-<div class="admin-toolbar"><button class="btn-load" onclick="loadAllWithdrawals()"><i class="fas fa-sync-alt"></i> Refresh</button><button class="btn-pdf" onclick="downloadWithdrawalsPDF()"><i class="fas fa-file-pdf"></i> PDF</button></div>
-<div class="admin-table-wrap" id="allWithdrawalsWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
+<!-- STUDENTS -->
+<div id="adminStudentsTab" class="admin-tab-content" style="display:none;">
+<div class="admin-toolbar">
+<button class="btn-load" onclick="loadStudentsForAdmin()"><i class="fas fa-sync-alt"></i> Refresh</button>
+<button class="btn-update" onclick="openStudentForm()"><i class="fas fa-plus"></i> Add Student</button>
+<input type="text" id="studentSearchAdmin" placeholder="🔍 Search..." oninput="filterStudentsAdmin()" />
+<button class="btn-pdf" onclick="downloadStudentsPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
+</div>
+<div class="admin-table-wrap" id="adminStudentsWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
+</div>
+
+<!-- MARKS -->
+<div id="adminMarksTab" class="admin-tab-content" style="display:none;">
+<div class="admin-toolbar">
+<label>Exam</label>
+<select id="marksExamName"><option value="">-- Select Exam --</option></select>
+<label>Term</label>
+<select id="marksTerm"><option value="First Term">First Term</option><option value="Second Term">Second Term</option><option value="Annual">Annual</option><option value="Monthly Test">Monthly Test</option></select>
+<button class="btn-load" onclick="loadMarksEntry()"><i class="fas fa-sync-alt"></i> Load</button>
+</div>
+<div class="admin-table-wrap" id="marksWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Select exam, then Load</p></div></div>
+<div class="d-flex gap-3 flex-wrap justify-content-end mt-3"><button class="btn-update" id="marksSaveBtn" onclick="saveMarksBulk()"><i class="fas fa-save"></i> Save Marks</button></div>
+</div>
+
+<!-- GRADES -->
+<div id="adminGradesTab" class="admin-tab-content" style="display:none;">
+<div class="admin-toolbar">
+<button class="btn-load" onclick="loadGradesForAdmin()"><i class="fas fa-sync-alt"></i> Refresh</button>
+<input type="text" id="gradesSearch" placeholder="🔍 Search..." oninput="filterGradesAdmin()" />
+<button class="btn-update" onclick="autoCalculateRanks()" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fas fa-sync-alt"></i> 🔄 Auto Rank</button>
+</div>
+<div class="admin-table-wrap" id="gradesWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
+<div class="d-flex gap-3 flex-wrap justify-content-end mt-3"><button class="btn-update" id="gradesUpdateBtn" onclick="bulkUpdateGrades()"><i class="fas fa-save"></i> Save</button></div>
+</div>
+
+<!-- MORAL VALUES -->
+<div id="adminMoralValuesTab" class="admin-tab-content" style="display:none;">
+<div class="admin-toolbar">
+<button class="btn-load" onclick="loadMoralValuesAdmin()"><i class="fas fa-sync-alt"></i> Refresh</button>
+<button class="btn-update" onclick="openMoralValueForm()"><i class="fas fa-plus"></i> Add Moral Value</button>
+<input type="text" id="moralValuesSearch" placeholder="🔍 Search..." oninput="filterMoralValuesAdmin()" />
+</div>
+<div class="admin-table-wrap" id="moralValuesAdminWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
+</div>
+
+<!-- ATTENDANCE -->
+<div id="adminAttendanceTab" class="admin-tab-content" style="display:none;">
+<div class="admin-toolbar"><label>Month</label><input type="month" id="attendanceMonth" />
+<button class="btn-load" onclick="loadAttendanceForAdmin()"><i class="fas fa-sync-alt"></i> Load</button></div>
+<div class="admin-table-wrap" id="attendanceWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Select month</p></div></div>
+<div class="d-flex gap-3 flex-wrap justify-content-end mt-3"><button class="btn-update" id="attendanceUpdateBtn" onclick="bulkUpdateAttendance()"><i class="fas fa-save"></i> Update</button></div>
 </div>
 
 <!-- BALANCES -->
 <div id="adminBalancesTab" class="admin-tab-content" style="display:none;">
 <div class="admin-toolbar"><button class="btn-load" onclick="loadBalances()"><i class="fas fa-sync-alt"></i> Refresh</button><button class="btn-pdf" onclick="downloadBalancesPDF()"><i class="fas fa-file-pdf"></i> PDF</button></div>
 <div class="admin-table-wrap" id="balancesWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
+</div>
+
+<!-- WITHDRAWALS -->
+<div id="adminWithdrawalsTab" class="admin-tab-content" style="display:none;">
+<div class="admin-toolbar"><button class="btn-load" onclick="loadAllWithdrawals()"><i class="fas fa-sync-alt"></i> Refresh</button><button class="btn-pdf" onclick="downloadWithdrawalsPDF()"><i class="fas fa-file-pdf"></i> PDF</button></div>
+<div class="admin-table-wrap" id="allWithdrawalsWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
 </div>
 
 <!-- TRANSACTIONS -->
@@ -320,68 +403,10 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 <div id="summaryContent" style="padding:20px;background:rgba(255,255,255,.02);border-radius:16px;"><div class="loading-tx"><div class="spinner-sm"></div><p>Select date</p></div></div>
 </div>
 
-<!-- STUDENTS -->
-<div id="adminStudentsTab" class="admin-tab-content" style="display:none;">
-<div class="admin-toolbar">
-<button class="btn-load" onclick="loadStudentsForAdmin()"><i class="fas fa-sync-alt"></i> Refresh</button>
-<button class="btn-update" onclick="openStudentForm()"><i class="fas fa-plus"></i> Add Student</button>
-<input type="text" id="studentSearchAdmin" placeholder="🔍 Search..." oninput="filterStudentsAdmin()" />
-<select id="studentClassFilter" onchange="filterStudentsAdmin()"><option value="all">All Classes</option><option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option></select>
-<button class="btn-pdf" onclick="downloadStudentsPDF()"><i class="fas fa-file-pdf"></i> PDF</button>
-</div>
-<div class="admin-table-wrap" id="adminStudentsWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
-</div>
-
-<!-- MARKS -->
-<div id="adminMarksTab" class="admin-tab-content" style="display:none;">
-<div class="admin-toolbar">
-<label>Exam</label>
-<select id="marksExamName"><option value="">-- Select Exam --</option></select>
-<label>Term</label>
-<select id="marksTerm"><option value="First Term">First Term</option><option value="Second Term">Second Term</option><option value="Annual">Annual</option><option value="Monthly Test">Monthly Test</option></select>
-<select id="marksClassFilter"><option value="all">All Classes</option><option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option></select>
-<button class="btn-load" onclick="loadMarksEntry()"><i class="fas fa-sync-alt"></i> Load</button>
-</div>
-<div class="admin-table-wrap" id="marksWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Select exam & load</p></div></div>
-<div class="d-flex gap-3 flex-wrap justify-content-end mt-3"><button class="btn-update" id="marksSaveBtn" onclick="saveMarksBulk()"><i class="fas fa-save"></i> Save Marks</button></div>
-</div>
-
-<!-- MORAL VALUES -->
-<div id="adminMoralValuesTab" class="admin-tab-content" style="display:none;">
-<div class="admin-toolbar">
-<button class="btn-load" onclick="loadMoralValuesAdmin()"><i class="fas fa-sync-alt"></i> Refresh</button>
-<button class="btn-update" onclick="openMoralValueForm()"><i class="fas fa-plus"></i> Add Moral Value</button>
-<select id="moralValuesClassFilter" onchange="filterMoralValuesAdmin()"><option value="all">All Classes</option><option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option></select>
-<input type="text" id="moralValuesSearch" placeholder="🔍 Search..." oninput="filterMoralValuesAdmin()" />
-</div>
-<div class="admin-table-wrap" id="moralValuesAdminWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
-</div>
-
 <!-- EVENTS -->
 <div id="adminEventsTab" class="admin-tab-content" style="display:none;">
 <div class="admin-toolbar"><button class="btn-load" onclick="loadAllEvents()"><i class="fas fa-sync-alt"></i> Refresh</button><button class="btn-update" onclick="openEventForm()"><i class="fas fa-plus"></i> Add Event</button></div>
 <div class="admin-table-wrap" id="eventsWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
-</div>
-
-<!-- ATTENDANCE -->
-<div id="adminAttendanceTab" class="admin-tab-content" style="display:none;">
-<div class="admin-toolbar"><label>Month</label><input type="month" id="attendanceMonth" />
-<select id="attendanceClassFilter"><option value="all">All Classes</option><option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option></select>
-<button class="btn-load" onclick="loadAttendanceForAdmin()"><i class="fas fa-sync-alt"></i> Load</button></div>
-<div class="admin-table-wrap" id="attendanceWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Select month</p></div></div>
-<div class="d-flex gap-3 flex-wrap justify-content-end mt-3"><button class="btn-update" id="attendanceUpdateBtn" onclick="bulkUpdateAttendance()"><i class="fas fa-save"></i> Update</button></div>
-</div>
-
-<!-- GRADES -->
-<div id="adminGradesTab" class="admin-tab-content" style="display:none;">
-<div class="admin-toolbar">
-<button class="btn-load" onclick="loadGradesForAdmin()"><i class="fas fa-sync-alt"></i> Refresh</button>
-<input type="text" id="gradesSearch" placeholder="🔍 Search..." oninput="filterGradesAdmin()" />
-<select id="gradesClassFilter" onchange="filterGradesAdmin()"><option value="all">All Classes</option><option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option></select>
-<button class="btn-update" onclick="autoCalculateRanks()" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fas fa-sync-alt"></i> 🔄 Auto Rank</button>
-</div>
-<div class="admin-table-wrap" id="gradesWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
-<div class="d-flex gap-3 flex-wrap justify-content-end mt-3"><button class="btn-update" id="gradesUpdateBtn" onclick="bulkUpdateGrades()"><i class="fas fa-save"></i> Save</button></div>
 </div>
 
 <!-- FEED -->
@@ -390,10 +415,22 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 <div class="admin-table-wrap" id="feedWrap"><div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div></div>
 </div>
 
-<!-- SETTINGS -->
-<div id="adminSettingsTab" class="admin-tab-content" style="display:none;">
-<div style="padding:20px;background:rgba(255,255,255,.02);border-radius:16px;max-width:800px;">
-<h4 class="text-white mb-4"><i class="fas fa-cog text-info"></i> Admin Settings</h4>
+</div>
+
+<!-- NO CLASS SELECTED MESSAGE -->
+<div id="noClassMsg" class="no-class-message">
+<i class="fas fa-hand-point-up"></i>
+<h4>മുകളിൽ ക്ലാസ് തിരഞ്ഞെടുക്കുക</h4>
+<p>Class select ചെയ്താൽ ആ ക്ലാസ്സിലെ കുട്ടികളുടെ എല്ലാ വിവരങ്ങളും manage ചെയ്യാം</p>
+</div>
+
+<!-- SETTINGS TAB (always visible) -->
+<div id="adminSettingsTab" class="admin-tab-content" style="display:none;margin-top:24px;">
+<div style="padding:20px;background:rgba(255,255,255,.02);border-radius:16px;max-width:900px;margin:0 auto;">
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h4 class="text-white mb-0"><i class="fas fa-cog text-info"></i> Admin Settings</h4>
+<button class="btn btn-outline-light rounded-pill px-3" onclick="closeSettingsTab()"><i class="fas fa-arrow-left"></i> Back</button>
+</div>
 
 <div class="mb-4" style="background:rgba(255,255,255,.03);padding:16px;border-radius:12px;">
 <h5 class="text-white mb-3">🔑 Admin Password</h5>
@@ -405,40 +442,36 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 </div>
 
 <div class="mb-4" style="background:rgba(255,255,255,.03);padding:16px;border-radius:12px;">
-<h5 class="text-white mb-3">📚 Subjects List (comma separated)</h5>
-<textarea id="settingsSubjects" class="modal-form-input" style="min-height:80px;" placeholder="Arabic,Malayalam,English..."></textarea>
-<small class="text-white-50">These subjects will appear in Marks entry</small>
-<button class="btn-update mt-2" onclick="saveSetting('subjectsList','settingsSubjects')">Save Subjects</button>
+<h5 class="text-white mb-3">📚 Class-wise Subjects</h5>
+<p class="text-white-50 small mb-2">Format: <code style="color:#fbbf24;">class: subject1,subject2,...</code></p>
+<textarea id="settingsClassSubjects" class="modal-form-input" style="min-height:220px;font-family:monospace;font-size:.85rem;line-height:1.6;" placeholder="1: Arabic,Malayalam,Maths"></textarea>
+<button class="btn-update mt-2" onclick="saveClassSubjects()"><i class="fas fa-save"></i> Save Class Subjects</button>
 </div>
 
 <div class="mb-4" style="background:rgba(255,255,255,.03);padding:16px;border-radius:12px;">
-<h5 class="text-white mb-3">📝 Exams List (comma separated)</h5>
-<textarea id="settingsExams" class="modal-form-input" style="min-height:80px;" placeholder="First Term,Second Term..."></textarea>
+<h5 class="text-white mb-3">📝 Exams List</h5>
+<textarea id="settingsExams" class="modal-form-input" style="min-height:80px;"></textarea>
 <button class="btn-update mt-2" onclick="saveSetting('examsList','settingsExams')">Save Exams</button>
 </div>
 
 <div class="mb-4" style="background:rgba(255,255,255,.03);padding:16px;border-radius:12px;">
-<h5 class="text-white mb-3">🌟 Moral Traits List (comma separated)</h5>
-<textarea id="settingsTraits" class="modal-form-input" style="min-height:80px;" placeholder="Discipline,Respect..."></textarea>
+<h5 class="text-white mb-3">🌟 Moral Traits List</h5>
+<textarea id="settingsTraits" class="modal-form-input" style="min-height:80px;"></textarea>
 <button class="btn-update mt-2" onclick="saveSetting('traitsList','settingsTraits')">Save Traits</button>
 </div>
 
 <div class="mb-4" style="background:rgba(255,255,255,.03);padding:16px;border-radius:12px;">
-<h5 class="text-white mb-3">⭐ Grades List (comma separated)</h5>
-<textarea id="settingsGrades" class="modal-form-input" style="min-height:60px;" placeholder="A+,A,B+,B..."></textarea>
+<h5 class="text-white mb-3">⭐ Grades List</h5>
+<textarea id="settingsGrades" class="modal-form-input" style="min-height:60px;"></textarea>
 <button class="btn-update mt-2" onclick="saveSetting('gradesList','settingsGrades')">Save Grades</button>
 </div>
 
 <div class="mb-4" style="background:rgba(255,255,255,.03);padding:16px;border-radius:12px;">
-<h5 class="text-white mb-3">💵 Wallet Settings</h5>
-<div class="mb-2">
-<label class="text-white-50 small">Minimum Withdrawal Amount (₹)</label>
+<h5 class="text-white mb-3">💵 Minimum Withdrawal (₹)</h5>
 <input type="number" id="settingsMinWithdraw" class="modal-form-input" placeholder="100" />
-</div>
-<button class="btn-update" onclick="saveSetting('minWithdraw','settingsMinWithdraw')">Save</button>
+<button class="btn-update mt-2" onclick="saveSetting('minWithdraw','settingsMinWithdraw')">Save</button>
 </div>
 
-<hr style="border-color:rgba(255,255,255,.1);">
 <h5 class="text-white mt-4 mb-3"><i class="fas fa-database text-warning"></i> Database Stats</h5>
 <div id="dbStatsContent" style="color:#94a3b8;">Loading...</div>
 <button class="btn-load mt-3" onclick="loadDBStats()"><i class="fas fa-sync-alt"></i> Refresh</button>
@@ -483,7 +516,7 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 
 <!-- GLOBAL MODAL -->
 <div id="globalModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(12px);z-index:1050;align-items:center;justify-content:center;">
-<div class="modal-glass rounded-4 p-4" style="max-width:650px;width:90%;max-height:95vh;overflow-y:auto;">
+<div class="modal-glass rounded-4 p-4" style="max-width:800px;width:90%;max-height:95vh;overflow-y:auto;">
 <div class="d-flex justify-content-between mb-3"><h3 id="modalTitle" class="text-white fw-bold">Title</h3><button id="closeModalBtn" class="btn btn-sm btn-outline-light rounded-circle"><i class="fas fa-times"></i></button></div>
 <div id="modalContentBody" class="text-white-50" style="max-height:70vh;overflow-y:auto;"></div>
 </div>
@@ -559,6 +592,7 @@ const DEFAULT_ADMIN_PASSWORD='MADRASA2026';
 // ============ GLOBALS ============
 let currentUser=null;
 let isAdminMode=false;
+let currentAdminClass=''; // ✅ NEW: Selected class in admin
 let cropperInstance=null;
 let topperPhotoData=null;
 let currentDatePayments=[],filteredPayments=[],allWithdrawals=[],balancesData=[],allTxData=[];
@@ -571,6 +605,18 @@ let TRAITS_LIST=['Discipline','Respect','Honesty','Punctuality','Cleanliness','P
 let GRADES_LIST=['A+','A','B+','B','C+','C','D','F'];
 let MIN_WITHDRAW=100;
 let SETTINGS_CACHE={};
+let CLASS_SUBJECTS = {
+  '1': ['Arabic','Malayalam','Maths'],
+  '2': ['Arabic','Malayalam','English','Maths'],
+  '3': ['Arabic','Malayalam','English','Maths'],
+  '4': ['Arabic','Malayalam','English','Maths','Science'],
+  '5': ['Arabic','Malayalam','English','Maths','Science'],
+  '6': ['Arabic','Malayalam','English','Maths','Science','Social Science'],
+  '7': ['Arabic','Malayalam','English','Maths','Science','Social Science'],
+  '8': ['Arabic','Malayalam','English','Maths','Science','Social Science'],
+  '9': ['Arabic','Malayalam','English','Maths','Science','Social Science'],
+  '10': ['Arabic','English','Maths','Science','Social Science']
+};
 
 const loginSection=document.getElementById('loginSection');
 const dashboardSection=document.getElementById('dashboardSection');
@@ -598,7 +644,58 @@ function fileToBase64(f){return new Promise((res,rej)=>{const r=new FileReader()
 function getAdminPassword(){return localStorage.getItem('admin_password')||DEFAULT_ADMIN_PASSWORD;}
 function classOptions(selected=''){let o='<option value="">Select Class</option>';for(let i=1;i<=10;i++){o+=`<option value="${i}" ${selected==String(i)?'selected':''}>Class ${i}</option>`;}return o;}
 
-// ============ SETTINGS ============
+// ============ CLASS SUBJECTS ============
+function parseClassSubjects(str){const result={};if(!str)return result;str.split('\n').forEach(line=>{line=line.trim();if(!line||!line.includes(':'))return;const idx=line.indexOf(':');const cls=line.substring(0,idx).trim();const subjects=line.substring(idx+1).split(',').map(s=>s.trim()).filter(Boolean);if(cls&&subjects.length>0)result[cls]=subjects;});return result;}
+function stringifyClassSubjects(obj){return Object.keys(obj).sort((a,b)=>parseInt(a)-parseInt(b)).map(k=>`${k}: ${obj[k].join(',')}`).join('\n');}
+function getSubjectsForClass(cls){const clsStr=String(cls);if(CLASS_SUBJECTS[clsStr]&&CLASS_SUBJECTS[clsStr].length>0)return CLASS_SUBJECTS[clsStr];return SUBJECTS_LIST;}
+async function saveClassSubjects(){const val=document.getElementById('settingsClassSubjects').value.trim();if(!val){showToast('Cannot be empty','error');return;}try{await supabaseClient.from('settings').upsert({key:'classSubjectsList',value:val},{onConflict:'key'});SETTINGS_CACHE['classSubjectsList']=val;CLASS_SUBJECTS=parseClassSubjects(val);showToast('✅ Class subjects saved','success');}catch(e){showToast('❌ '+e.message,'error');}}
+
+// ============ ✅ CLASS SELECTION (NEW) ============
+async function selectAdminClass(cls){
+  currentAdminClass = cls;
+  const mainContent = document.getElementById('adminMainContent');
+  const noClassMsg = document.getElementById('noClassMsg');
+  const badge = document.getElementById('selectedClassBadge');
+  
+  if(!cls){
+    mainContent.style.display = 'none';
+    noClassMsg.style.display = 'block';
+    badge.style.display = 'none';
+    return;
+  }
+  
+  // Show main content
+  mainContent.style.display = 'block';
+  noClassMsg.style.display = 'none';
+  badge.style.display = 'block';
+  document.getElementById('classBadgeNumber').textContent = 'Class ' + cls;
+  
+  // Get student count for this class
+  try{
+    const {data:s} = await supabaseClient.from('students').select('studentid').eq('class', cls);
+    document.getElementById('classBadgeStudents').textContent = (s||[]).length;
+  }catch(e){}
+  
+  showToast(`📚 Managing Class ${cls}`,'success');
+  
+  // Reload current active tab
+  const activeTab = document.querySelector('.admin-tab.active')?.dataset.tab || 'payments';
+  // Make sure settings tab is hidden
+  document.getElementById('adminSettingsTab').style.display = 'none';
+  switchAdminTab(activeTab);
+}
+
+function closeSettingsTab(){
+  document.getElementById('adminSettingsTab').style.display = 'none';
+  if(currentAdminClass){
+    document.getElementById('adminMainContent').style.display = 'block';
+    document.getElementById('noClassMsg').style.display = 'none';
+  } else {
+    document.getElementById('noClassMsg').style.display = 'block';
+  }
+}
+
+// ============ SETTINGS LOADER ============
 async function loadAllSettings(){
   try{
     const {data,error}=await supabaseClient.from('settings').select('*');
@@ -610,17 +707,18 @@ async function loadAllSettings(){
     if(SETTINGS_CACHE.traitsList)TRAITS_LIST=SETTINGS_CACHE.traitsList.split(',').map(s=>s.trim()).filter(Boolean);
     if(SETTINGS_CACHE.gradesList)GRADES_LIST=SETTINGS_CACHE.gradesList.split(',').map(s=>s.trim()).filter(Boolean);
     if(SETTINGS_CACHE.minWithdraw)MIN_WITHDRAW=parseInt(SETTINGS_CACHE.minWithdraw)||100;
+    if(SETTINGS_CACHE.classSubjectsList)CLASS_SUBJECTS=parseClassSubjects(SETTINGS_CACHE.classSubjectsList);
     populateSettingsForm();
     populateDynamicDropdowns();
   }catch(e){console.error('Settings load error:',e);}
 }
 function populateSettingsForm(){
-  const s1=document.getElementById('settingsSubjects');if(s1)s1.value=(SETTINGS_CACHE.subjectsList||SUBJECTS_LIST.join(','));
   const s2=document.getElementById('settingsExams');if(s2)s2.value=(SETTINGS_CACHE.examsList||EXAMS_LIST.join(','));
   const s3=document.getElementById('settingsTraits');if(s3)s3.value=(SETTINGS_CACHE.traitsList||TRAITS_LIST.join(','));
   const s4=document.getElementById('settingsGrades');if(s4)s4.value=(SETTINGS_CACHE.gradesList||GRADES_LIST.join(','));
   const s5=document.getElementById('settingsMinWithdraw');if(s5)s5.value=(SETTINGS_CACHE.minWithdraw||100);
   const s6=document.getElementById('swMinAmount');if(s6)s6.textContent=MIN_WITHDRAW;
+  const s7=document.getElementById('settingsClassSubjects');if(s7)s7.value=stringifyClassSubjects(CLASS_SUBJECTS);
 }
 function populateDynamicDropdowns(){
   const me=document.getElementById('marksExamName');
@@ -638,9 +736,17 @@ let adminPwd=localStorage.getItem('admin_password');
 if(!adminPwd){try{const {data:sdata}=await supabaseClient.from('settings').select('value').eq('key','adminPassword').single();if(sdata&&sdata.value){adminPwd=sdata.value;localStorage.setItem('admin_password',adminPwd);}}catch(e){}}
 if(!adminPwd)adminPwd=DEFAULT_ADMIN_PASSWORD;
 if(rawInput===adminPwd||rawInput===DEFAULT_ADMIN_PASSWORD){
-isAdminMode=true;loginSection.style.display='none';adminSection.style.display='block';dashboardSection.style.display='none';
+isAdminMode=true;
+currentAdminClass=''; // ✅ Reset class selection
+loginSection.style.display='none';adminSection.style.display='block';dashboardSection.style.display='none';
 await loadAllSettings();
-loadAdminData();showToast('🔐 Admin Panel Opened','success');showLoading(false);return;
+// Show class selector, hide main content
+document.getElementById('adminClassSelector').value='';
+document.getElementById('adminMainContent').style.display='none';
+document.getElementById('noClassMsg').style.display='block';
+document.getElementById('selectedClassBadge').style.display='none';
+document.getElementById('adminSettingsTab').style.display='none';
+showToast('🔐 Admin Panel Opened','success');showLoading(false);return;
 }
 const id=rawInput.toUpperCase();
 const {data:student,error}=await supabaseClient.from('students').select('*').eq('studentid',id).single();
@@ -656,10 +762,9 @@ updateDashboardUI();loadActivitiesAndCalendar();loadStudentBalance();showToast(`
 }catch(err){console.error(err);showToast('Network error','error');}
 showLoading(false);
 });
-
 document.getElementById('logoutBtn').addEventListener('click',logout);
 document.getElementById('adminLogoutBtn').addEventListener('click',logout);
-function logout(){currentUser=null;isAdminMode=false;localStorage.removeItem('noor_session');dashboardSection.style.display='none';adminSection.style.display='none';loginSection.style.display='flex';document.getElementById('studentId').value='';showToast('Logged out','info');}
+function logout(){currentUser=null;isAdminMode=false;currentAdminClass='';localStorage.removeItem('noor_session');dashboardSection.style.display='none';adminSection.style.display='none';loginSection.style.display='flex';document.getElementById('studentId').value='';showToast('Logged out','info');}
 function restoreSession(){const s=localStorage.getItem('noor_session');if(s){try{currentUser=JSON.parse(s);loginSection.style.display='none';adminSection.style.display='none';dashboardSection.style.display='block';updateDashboardUI();loadActivitiesAndCalendar();loadStudentBalance();}catch(e){}}}
 function toggleTheme(){dashboardSection.classList.toggle('dashboard-light');localStorage.setItem('noor_theme',dashboardSection.classList.contains('dashboard-light')?'light':'dark');}
 function restoreTheme(){const s=localStorage.getItem('noor_theme');if(s==='light'&&dashboardSection.style.display!=='none')dashboardSection.classList.add('dashboard-light');}
@@ -738,45 +843,63 @@ btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> അപേ�
 
 // ============ ADMIN TABS ============
 function switchAdminTab(tab){
-document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
-document.querySelector(`.admin-tab[data-tab="${tab}"]`)?.classList.add('active');
-document.querySelectorAll('.admin-tab-content').forEach(c=>c.style.display='none');
-const map={payments:'adminPaymentsTab',withdrawals:'adminWithdrawalsTab',balances:'adminBalancesTab',summary:'adminSummaryTab',transactions:'adminTransactionsTab',students:'adminStudentsTab',events:'adminEventsTab',attendance:'adminAttendanceTab',grades:'adminGradesTab',feed:'adminFeedTab',settings:'adminSettingsTab',marks:'adminMarksTab',moralvalues:'adminMoralValuesTab'};
-const el=document.getElementById(map[tab]);if(el)el.style.display='block';
-if(tab==='withdrawals')loadAllWithdrawals();
-if(tab==='balances')loadBalances();
-if(tab==='payments')loadPaymentsForDate();
-if(tab==='summary'){const t=new Date().toISOString().split('T')[0];document.getElementById('summaryDate').value=t;loadDailySummary();}
-if(tab==='transactions'){document.getElementById('txDate').value='';loadAllTransactions();}
-if(tab==='students')loadStudentsForAdmin();
-if(tab==='events')loadAllEvents();
-if(tab==='attendance'){const n=new Date();document.getElementById('attendanceMonth').value=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`;}
-if(tab==='grades')loadGradesForAdmin();
-if(tab==='feed')loadAllActivities();
-if(tab==='settings'){document.getElementById('currentAdminPwd').textContent=getAdminPassword();populateSettingsForm();loadDBStats();}
-if(tab==='moralvalues')loadMoralValuesAdmin();
-}
-async function loadAdminData(){
-try{const {data:s}=await supabaseClient.from('students').select('studentid,name,class');allStudents=s||[];
-const today=new Date().toISOString().split('T')[0];document.getElementById('adminDate').value=today;loadPaymentsForDate();}catch(e){}
+  // Settings tab is separate
+  if(tab === 'settings'){
+    document.getElementById('adminSettingsTab').style.display = 'block';
+    document.getElementById('adminMainContent').style.display = 'none';
+    document.getElementById('noClassMsg').style.display = 'none';
+    document.getElementById('currentAdminPwd').textContent = getAdminPassword();
+    populateSettingsForm();
+    loadDBStats();
+    return;
+  }
+  
+  // Other tabs require class selection
+  if(!currentAdminClass){
+    showToast('⚠️ ആദ്യം ഒരു ക്ലാസ് തിരഞ്ഞെടുക്കുക','error');
+    document.getElementById('adminClassSelector').focus();
+    return;
+  }
+  
+  document.getElementById('adminSettingsTab').style.display = 'none';
+  document.getElementById('adminMainContent').style.display = 'block';
+  
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector(`.admin-tab[data-tab="${tab}"]`)?.classList.add('active');
+  document.querySelectorAll('.admin-tab-content').forEach(c=>c.style.display='none');
+  const map={payments:'adminPaymentsTab',withdrawals:'adminWithdrawalsTab',balances:'adminBalancesTab',summary:'adminSummaryTab',transactions:'adminTransactionsTab',students:'adminStudentsTab',events:'adminEventsTab',attendance:'adminAttendanceTab',grades:'adminGradesTab',feed:'adminFeedTab',marks:'adminMarksTab',moralvalues:'adminMoralValuesTab'};
+  const el=document.getElementById(map[tab]);if(el)el.style.display='block';
+  
+  if(tab==='withdrawals')loadAllWithdrawals();
+  if(tab==='balances')loadBalances();
+  if(tab==='payments')loadPaymentsForDate();
+  if(tab==='summary'){const t=new Date().toISOString().split('T')[0];document.getElementById('summaryDate').value=t;loadDailySummary();}
+  if(tab==='transactions'){document.getElementById('txDate').value='';loadAllTransactions();}
+  if(tab==='students')loadStudentsForAdmin();
+  if(tab==='events')loadAllEvents();
+  if(tab==='attendance'){const n=new Date();document.getElementById('attendanceMonth').value=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`;}
+  if(tab==='grades')loadGradesForAdmin();
+  if(tab==='feed')loadAllActivities();
+  if(tab==='moralvalues')loadMoralValuesAdmin();
 }
 
 // ============ PAYMENTS ============
 async function loadPaymentsForDate(){
+if(!currentAdminClass){showToast('Select class first','error');return;}
 const date=document.getElementById('adminDate').value;if(!date){showToast('Select date','error');return;}
 const wrap=document.getElementById('adminTableWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{const {data:s}=await supabaseClient.from('students').select('studentid,name,class');
+try{const {data:s}=await supabaseClient.from('students').select('studentid,name,class').eq('class',currentAdminClass);
 const {data:p}=await supabaseClient.from('payments').select('*').eq('date',date).eq('type','fee');
 const merged=(s||[]).map(x=>{const pay=(p||[]).find(y=>y.studentid===x.studentid);return{studentId:x.studentid,name:x.name||'Unknown',class:x.class||'—',debit:pay?(pay.debit||0):0,credit:pay?(pay.credit||0):0,exists:!!pay,approved:pay?(pay.approved||false):false};});
 currentDatePayments=merged;applyPaymentsFilters();}catch(e){wrap.innerHTML=`<div class="empty-state">Error</div>`;}
 }
-function applyPaymentsFilters(){const cf=document.getElementById('classFilter').value;const st=document.getElementById('adminSearch').value.toLowerCase().trim();filteredPayments=currentDatePayments.filter(i=>{if(cf!=='all'&&String(i.class)!==cf)return false;if(st&&!i.name.toLowerCase().includes(st))return false;return true;});renderAdminTable();}
+function applyPaymentsFilters(){const st=document.getElementById('adminSearch').value.toLowerCase().trim();filteredPayments=currentDatePayments.filter(i=>{if(st&&!i.name.toLowerCase().includes(st))return false;return true;});renderAdminTable();}
 function renderAdminTable(){
-const wrap=document.getElementById('adminTableWrap');if(!filteredPayments||filteredPayments.length===0){wrap.innerHTML=`<div class="empty-state">No students</div>`;return;}
-let html=`<table><thead><tr><th>#</th><th>Student</th><th>Class</th><th>Debit (₹)</th><th>Credit (₹)</th><th>Status</th></tr></thead><tbody>`;
+const wrap=document.getElementById('adminTableWrap');if(!filteredPayments||filteredPayments.length===0){wrap.innerHTML=`<div class="empty-state">No students in Class ${currentAdminClass}</div>`;return;}
+let html=`<table><thead><tr><th>#</th><th>Student</th><th>Debit (₹)</th><th>Credit (₹)</th><th>Status</th></tr></thead><tbody>`;
 filteredPayments.forEach((item,idx)=>{const cid=String(item.studentId).replace(/[^a-zA-Z0-9]/g,'');
 const st=item.exists?`<span class="existing-badge ${item.approved?'':'pending'}">${item.approved?'✅':'⏳'}</span>`:`<span style="color:#94a3b8;font-size:.65rem;">—</span>`;
-html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(item.name)}</strong><br><small style="color:#6b7a8f;">${escapeHtml(item.studentId)}</small></td><td>${escapeHtml(item.class)}</td><td><input type="number" id="admin_debit_${cid}" value="${item.debit}" min="0" /></td><td><input type="number" id="admin_credit_${cid}" value="${item.credit}" min="0" /></td><td>${st}</td></tr>`;});
+html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(item.name)}</strong><br><small style="color:#6b7a8f;">${escapeHtml(item.studentId)}</small></td><td><input type="number" id="admin_debit_${cid}" value="${item.debit}" min="0" /></td><td><input type="number" id="admin_credit_${cid}" value="${item.credit}" min="0" /></td><td>${st}</td></tr>`;});
 html+=`</tbody></table>`;wrap.innerHTML=html;
 }
 function clearAdminForm(){currentDatePayments.forEach(i=>{const cid=String(i.studentId).replace(/[^a-zA-Z0-9]/g,'');const d=document.getElementById(`admin_debit_${cid}`);const c=document.getElementById(`admin_credit_${cid}`);if(d)d.value='0';if(c)c.value='0';});showToast('Cleared','info');}
@@ -787,7 +910,10 @@ const d=document.getElementById(`admin_debit_${cid}`);const c=document.getElemen
 if(d&&c){const debit=parseFloat(d.value)||0;const credit=parseFloat(c.value)||0;if(debit>0||credit>0||i.exists){data.push({studentid:i.studentId,date,debit,credit,approved:(debit>0||credit>0),reason:'',type:'fee'});}}});
 if(data.length===0){showToast('No data','error');return;}
 const btn=document.getElementById('adminUpdateBtn');btn.disabled=true;btn.innerHTML='<span class="spinner-sm"></span>...';
-try{await supabaseClient.from('payments').delete().eq('date',date).eq('type','fee');
+try{
+// Delete only for this class
+const studentIds=currentDatePayments.map(x=>x.studentId);
+if(studentIds.length>0) await supabaseClient.from('payments').delete().eq('date',date).eq('type','fee').in('studentid',studentIds);
 if(data.length>0){const {error}=await supabaseClient.from('payments').insert(data);if(error)throw error;}
 showToast('✅ Updated '+data.length,'success');await loadPaymentsForDate();}catch(e){showToast('❌ '+e.message,'error');}
 btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Update';
@@ -795,8 +921,13 @@ btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Update';
 
 // ============ WITHDRAWALS ============
 async function loadAllWithdrawals(){
+if(!currentAdminClass)return;
 const wrap=document.getElementById('allWithdrawalsWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{const {data:r,error}=await supabaseClient.from('withdrawals').select('*,students(name)').order('date',{ascending:false});if(error)throw error;
+try{
+const {data:studs}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
+const ids=(studs||[]).map(s=>s.studentid);
+if(ids.length===0){wrap.innerHTML=`<div class="empty-state">No students in Class ${currentAdminClass}</div>`;return;}
+const {data:r,error}=await supabaseClient.from('withdrawals').select('*,students(name)').in('studentid',ids).order('date',{ascending:false});if(error)throw error;
 allWithdrawals=(r||[]).map(x=>({...x,studentname:x.students?x.students.name:'Unknown'}));
 const badge=document.getElementById('withdrawalBadge');const pending=allWithdrawals.filter(x=>x.status==='pending').length;
 if(pending>0){badge.style.display='inline-block';badge.textContent=pending;}else{badge.style.display='none';}
@@ -804,11 +935,11 @@ renderAllWithdrawals();}catch(e){wrap.innerHTML=`<div class="empty-state">Error<
 }
 function renderAllWithdrawals(){
 const wrap=document.getElementById('allWithdrawalsWrap');if(allWithdrawals.length===0){wrap.innerHTML=`<div class="empty-state">No requests</div>`;return;}
-let html=`<table><thead><tr><th>Student</th><th>ID</th><th>Amount</th><th>Reason</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody>`;
+let html=`<table><thead><tr><th>Student</th><th>Amount</th><th>Reason</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody>`;
 allWithdrawals.forEach(r=>{const st=r.status||'pending';const c=st==='approved'?'#10b981':st==='rejected'?'#dc2626':'#f59e0b';
 let actions='';if(st==='pending'){actions=`<button class="btn-sm approve" onclick="approveWithdrawal(${r.id})">✅</button> <button class="btn-sm reject" onclick="rejectWithdrawal(${r.id})">❌</button>`;}
 actions+=` <button class="btn-sm reject" onclick="adminDeleteWithdrawal(${r.id})">🗑️</button>`;
-html+=`<tr><td><strong>${escapeHtml(r.studentname)}</strong></td><td>${escapeHtml(r.studentid)}</td><td>₹${(r.amount||0).toFixed(2)}</td><td>${escapeHtml(r.reason)}</td><td>${formatDate(r.date)}</td><td><span style="color:${c};font-weight:600;">${st.toUpperCase()}</span></td><td>${actions}</td></tr>`;});
+html+=`<tr><td><strong>${escapeHtml(r.studentname)}</strong></td><td>₹${(r.amount||0).toFixed(2)}</td><td>${escapeHtml(r.reason)}</td><td>${formatDate(r.date)}</td><td><span style="color:${c};font-weight:600;">${st.toUpperCase()}</span></td><td>${actions}</td></tr>`;});
 html+=`</tbody></table>`;wrap.innerHTML=html;
 }
 async function adminDeleteWithdrawal(id){if(!confirm('Delete?'))return;try{await supabaseClient.from('withdrawals').delete().eq('id',id);showToast('🗑️ Deleted','success');await loadAllWithdrawals();}catch(e){showToast('Failed','error');}}
@@ -822,27 +953,35 @@ async function rejectWithdrawal(id){if(!confirm('Reject?'))return;try{await supa
 
 // ============ BALANCES ============
 async function loadBalances(){
+if(!currentAdminClass)return;
 const wrap=document.getElementById('balancesWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{const {data:s}=await supabaseClient.from('students').select('studentid,name,class');
-const {data:p}=await supabaseClient.from('payments').select('studentid,credit,debit,approved');
+try{const {data:s}=await supabaseClient.from('students').select('studentid,name,class').eq('class',currentAdminClass);
+const ids=(s||[]).map(x=>x.studentid);
+if(ids.length===0){wrap.innerHTML=`<div class="empty-state">No students in Class ${currentAdminClass}</div>`;return;}
+const {data:p}=await supabaseClient.from('payments').select('studentid,credit,debit,approved').in('studentid',ids);
 const bm={};(p||[]).forEach(x=>{if(x.approved===true){if(!bm[x.studentid])bm[x.studentid]=0;bm[x.studentid]+=(x.debit||0)-(x.credit||0);}});
 balancesData=(s||[]).map(x=>({studentId:x.studentid,name:x.name||'Unknown',class:x.class||'—',balance:bm[x.studentid]||0}));renderBalances();}catch(e){wrap.innerHTML=`<div class="empty-state">Error</div>`;}
 }
 function renderBalances(){
 const wrap=document.getElementById('balancesWrap');if(balancesData.length===0){wrap.innerHTML=`<div class="empty-state">No students</div>`;return;}
 let total=0,pos=0,zero=0,neg=0;balancesData.forEach(i=>{total+=i.balance;if(i.balance>0)pos++;else if(i.balance===0)zero++;else neg++;});
-let html=`<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;background:rgba(255,255,255,.04);padding:12px 16px;border-radius:16px;"><div><strong>Total:</strong> ${balancesData.length}</div><div><span style="color:#10b981;">Positive (${pos})</span></div><div><span style="color:#6b7a8f;">Zero (${zero})</span></div><div><span style="color:#dc2626;">Negative (${neg})</span></div><div><strong>Total:</strong> <span style="color:#3b82f6;">₹${total.toLocaleString()}</span></div></div>`;
-html+=`<table><thead><tr><th>#</th><th>Student</th><th>ID</th><th>Class</th><th style="text-align:right;">Balance</th><th>Status</th></tr></thead><tbody>`;
+let html=`<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;background:rgba(255,255,255,.04);padding:12px 16px;border-radius:16px;"><div><strong>Class ${currentAdminClass}:</strong> ${balancesData.length}</div><div><span style="color:#10b981;">Positive (${pos})</span></div><div><span style="color:#6b7a8f;">Zero (${zero})</span></div><div><span style="color:#dc2626;">Negative (${neg})</span></div><div><strong>Total:</strong> <span style="color:#3b82f6;">₹${total.toLocaleString()}</span></div></div>`;
+html+=`<table><thead><tr><th>#</th><th>Student</th><th>ID</th><th style="text-align:right;">Balance</th><th>Status</th></tr></thead><tbody>`;
 balancesData.forEach((i,idx)=>{const b=i.balance;let cls='balance-zero',st='Zero';if(b>0){cls='balance-positive';st='✅';}else if(b<0){cls='balance-negative';st='⚠️';}
-html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(i.name)}</strong></td><td>${escapeHtml(i.studentId)}</td><td>${escapeHtml(i.class)}</td><td style="text-align:right;" class="${cls}">₹${b.toLocaleString()}</td><td>${st}</td></tr>`;});
+html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(i.name)}</strong></td><td>${escapeHtml(i.studentId)}</td><td style="text-align:right;" class="${cls}">₹${b.toLocaleString()}</td><td>${st}</td></tr>`;});
 html+=`</tbody></table>`;wrap.innerHTML=html;
 }
 
 // ============ TRANSACTIONS ============
 async function loadAllTransactions(){
+if(!currentAdminClass)return;
 const date=document.getElementById('txDate').value;const type=document.getElementById('txType').value;const search=document.getElementById('txSearch').value.trim();
 const wrap=document.getElementById('allTransactionsWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{let q=supabaseClient.from('payments').select('*,students(name,class)').order('date',{ascending:false});
+try{
+const {data:studs}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
+const ids=(studs||[]).map(s=>s.studentid);
+if(ids.length===0){wrap.innerHTML=`<div class="empty-state">No students in Class ${currentAdminClass}</div>`;return;}
+let q=supabaseClient.from('payments').select('*,students(name,class)').in('studentid',ids).order('date',{ascending:false});
 if(date)q=q.eq('date',date);if(type!=='all')q=q.eq('type',type);
 const {data:txs,error}=await q;if(error)throw error;
 let filtered=txs||[];if(search){const l=search.toLowerCase();filtered=filtered.filter(t=>(t.students&&t.students.name&&t.students.name.toLowerCase().includes(l))||(t.studentid&&t.studentid.toLowerCase().includes(l)));}
@@ -852,10 +991,10 @@ function renderAllTransactions(txs){
 const wrap=document.getElementById('allTransactionsWrap');const summary=document.getElementById('txSummary');
 if(!txs||txs.length===0){wrap.innerHTML=`<div class="empty-state">No transactions</div>`;summary.style.display='none';return;}
 let td=0,tc=0,tb=0;
-let html=`<table><thead><tr><th>#</th><th>Student</th><th>ID</th><th>Date</th><th>Debit</th><th>Credit</th><th>Reason</th><th>Status</th></tr></thead><tbody>`;
+let html=`<table><thead><tr><th>#</th><th>Student</th><th>Date</th><th>Debit</th><th>Credit</th><th>Reason</th><th>Status</th></tr></thead><tbody>`;
 txs.forEach((t,idx)=>{const d=t.debit||0,c=t.credit||0;if(t.approved){td+=d;tc+=c;tb+=(d-c);}
 const st=t.approved?'✅ Approved':'⏳ Pending';const sc=t.approved?'#10b981':'#f59e0b';
-html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(t.students?t.students.name:'Unknown')}</strong></td><td>${escapeHtml(t.studentid)}</td><td>${formatDate(t.date)}</td><td>₹${d}</td><td>₹${c}</td><td>${escapeHtml(t.reason||'—')}</td><td><span style="color:${sc};font-weight:600;">${st}</span></td></tr>`;});
+html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(t.students?t.students.name:'Unknown')}</strong></td><td>${formatDate(t.date)}</td><td>₹${d}</td><td>₹${c}</td><td>${escapeHtml(t.reason||'—')}</td><td><span style="color:${sc};font-weight:600;">${st}</span></td></tr>`;});
 html+=`</tbody></table>`;
 summary.style.display='grid';
 document.getElementById('txTotalDebit').textContent='₹'+td.toLocaleString();
@@ -867,39 +1006,45 @@ wrap.innerHTML=html;
 
 // ============ SUMMARY ============
 async function loadDailySummary(){
+if(!currentAdminClass)return;
 const date=document.getElementById('summaryDate').value;if(!date){showToast('Select date','error');return;}
 const wrap=document.getElementById('summaryContent');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{const {data:p,error}=await supabaseClient.from('payments').select('credit,debit,approved').eq('date',date);if(error)throw error;
+try{
+const {data:studs}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
+const ids=(studs||[]).map(s=>s.studentid);
+if(ids.length===0){wrap.innerHTML=`<div class="empty-state">No students</div>`;return;}
+const {data:p,error}=await supabaseClient.from('payments').select('credit,debit,approved').eq('date',date).in('studentid',ids);if(error)throw error;
 let td=0,tc=0;(p||[]).forEach(x=>{if(x.approved===true){td+=(x.debit||0);tc+=(x.credit||0);}});
 const tb=tc-td;
 wrap.innerHTML=`<div class="admin-summary"><div class="stat"><div class="num blue">₹${td.toLocaleString()}</div><div class="label">Total Debit</div></div><div class="stat"><div class="num green">₹${tc.toLocaleString()}</div><div class="label">Total Credit</div></div><div class="stat"><div class="num orange">₹${tb.toLocaleString()}</div><div class="label">Net Balance</div></div><div class="stat"><div class="num">${p?p.length:0}</div><div class="label">Transactions</div></div></div>
-<div style="margin-top:20px;padding:16px;background:rgba(255,255,255,.04);border-radius:12px;"><strong>Date:</strong> ${formatDate(date)}</div>`;}catch(e){wrap.innerHTML=`<div class="empty-state">Error</div>`;}
+<div style="margin-top:20px;padding:16px;background:rgba(255,255,255,.04);border-radius:12px;"><strong>Class ${currentAdminClass} | Date:</strong> ${formatDate(date)}</div>`;}catch(e){wrap.innerHTML=`<div class="empty-state">Error</div>`;}
 }
 
 // ============ STUDENTS ============
 async function loadStudentsForAdmin(){
+if(!currentAdminClass)return;
 const wrap=document.getElementById('adminStudentsWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{const {data,error}=await supabaseClient.from('students').select('*').order('class').order('name');if(error)throw error;
+try{const {data,error}=await supabaseClient.from('students').select('*').eq('class',currentAdminClass).order('roll').order('name');if(error)throw error;
 studentsAdminData=data||[];filterStudentsAdmin();}catch(e){wrap.innerHTML=`<div class="empty-state">Error</div>`;}
 }
-function filterStudentsAdmin(){const s=(document.getElementById('studentSearchAdmin')?.value||'').toLowerCase().trim();const c=document.getElementById('studentClassFilter')?.value||'all';
-filteredStudentsAdmin=studentsAdminData.filter(x=>{if(c!=='all'&&String(x.class)!==c)return false;if(s&&!(x.name||'').toLowerCase().includes(s)&&!(x.studentid||'').toLowerCase().includes(s))return false;return true;});
+function filterStudentsAdmin(){const s=(document.getElementById('studentSearchAdmin')?.value||'').toLowerCase().trim();
+filteredStudentsAdmin=studentsAdminData.filter(x=>{if(s&&!(x.name||'').toLowerCase().includes(s)&&!(x.studentid||'').toLowerCase().includes(s))return false;return true;});
 renderStudentsAdmin();}
 function renderStudentsAdmin(){
-const wrap=document.getElementById('adminStudentsWrap');if(filteredStudentsAdmin.length===0){wrap.innerHTML=`<div class="empty-state">No students</div>`;return;}
-let html=`<table><thead><tr><th>#</th><th>Photo</th><th>ID</th><th>Name</th><th>Class</th><th>Roll</th><th>Phone</th><th>Actions</th></tr></thead><tbody>`;
+const wrap=document.getElementById('adminStudentsWrap');if(filteredStudentsAdmin.length===0){wrap.innerHTML=`<div class="empty-state">No students in Class ${currentAdminClass}</div>`;return;}
+let html=`<table><thead><tr><th>#</th><th>Photo</th><th>ID</th><th>Name</th><th>Roll</th><th>Phone</th><th>Actions</th></tr></thead><tbody>`;
 filteredStudentsAdmin.forEach((s,idx)=>{const photo=s.photo&&s.photo.startsWith('data:image')?`<img src="${s.photo}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #3b82f6;">`:`<div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#f97316,#ef4444);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;">${(s.name||'?').charAt(0).toUpperCase()}</div>`;
-html+=`<tr><td>${idx+1}</td><td>${photo}</td><td><strong>${escapeHtml(s.studentid)}</strong></td><td>${escapeHtml(s.name||'—')}</td><td>${escapeHtml(s.class||'—')}</td><td>${escapeHtml(s.roll||'—')}</td><td>${escapeHtml(s.phone||'—')}</td><td><button class="btn-sm approve" onclick="editStudent('${s.studentid}')">✏️</button> <button class="btn-sm reject" onclick="deleteStudent('${s.studentid}')">🗑️</button></td></tr>`;});
+html+=`<tr><td>${idx+1}</td><td>${photo}</td><td><strong>${escapeHtml(s.studentid)}</strong></td><td>${escapeHtml(s.name||'—')}</td><td>${escapeHtml(s.roll||'—')}</td><td>${escapeHtml(s.phone||'—')}</td><td><button class="btn-sm approve" onclick="editStudent('${s.studentid}')">✏️</button> <button class="btn-sm reject" onclick="deleteStudent('${s.studentid}')">🗑️</button></td></tr>`;});
 html+=`</tbody></table>`;wrap.innerHTML=html;
 }
-function openStudentForm(sid=null){
+function openStudentForm(sid){
 const isEdit=!!sid;const s=isEdit?studentsAdminData.find(x=>x.studentid===sid):{};
-modalTitleSpan.innerText=isEdit?'✏️ Edit Student':'➕ Add Student';
+modalTitleSpan.innerText=isEdit?'✏️ Edit Student':'➕ Add Student to Class '+currentAdminClass;
 modalBodyDiv.innerHTML=`<form>
 <div class="row g-3">
 <div class="col-md-6"><label class="text-white-50 small">Student ID *</label><input type="text" id="sf_studentid" value="${s.studentid||''}" required ${isEdit?'readonly':''} class="modal-form-input"></div>
 <div class="col-md-6"><label class="text-white-50 small">Name *</label><input type="text" id="sf_name" value="${s.name||''}" required class="modal-form-input"></div>
-<div class="col-md-4"><label class="text-white-50 small">Class</label><select id="sf_class" class="modal-form-input">${classOptions(s.class)}</select></div>
+<div class="col-md-4"><label class="text-white-50 small">Class</label><input type="text" id="sf_class" value="${currentAdminClass}" readonly class="modal-form-input"></div>
 <div class="col-md-4"><label class="text-white-50 small">Roll</label><input type="text" id="sf_roll" value="${s.roll||''}" class="modal-form-input"></div>
 <div class="col-md-4"><label class="text-white-50 small">Password</label><input type="text" id="sf_password" value="${s.password||'noor123'}" class="modal-form-input"></div>
 <div class="col-md-6"><label class="text-white-50 small">Father</label><input type="text" id="sf_fathername" value="${s.fathername||''}" class="modal-form-input"></div>
@@ -919,89 +1064,113 @@ if(!obj.studentid||!obj.name){showToast('ID and Name required','error');return;}
 const pi=document.getElementById('sf_photo');showLoading(true);
 try{if(pi.files&&pi.files[0]){obj.photo=await fileToBase64(pi.files[0]);}
 if(existingId){await supabaseClient.from('students').update(obj).eq('studentid',existingId);}else{await supabaseClient.from('students').insert(obj);}
-showToast(existingId?'✅ Updated':'✅ Added','success');closeModal('globalModal');loadStudentsForAdmin();}catch(e){showToast('❌ '+e.message,'error');}showLoading(false);
+showToast(existingId?'✅ Updated':'✅ Added','success');closeModal('globalModal');loadStudentsForAdmin();
+// Update class count badge
+const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
+document.getElementById('classBadgeStudents').textContent=(s||[]).length;
+}catch(e){showToast('❌ '+e.message,'error');}showLoading(false);
 }
-async function deleteStudent(sid){if(!confirm('Delete student '+sid+'?'))return;try{await supabaseClient.from('students').delete().eq('studentid',sid);showToast('🗑️ Deleted','success');loadStudentsForAdmin();}catch(e){showToast('Failed','error');}}
+async function deleteStudent(sid){if(!confirm('Delete student '+sid+'?'))return;try{await supabaseClient.from('students').delete().eq('studentid',sid);showToast('🗑️ Deleted','success');loadStudentsForAdmin();
+const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
+document.getElementById('classBadgeStudents').textContent=(s||[]).length;
+}catch(e){showToast('Failed','error');}}
 
 // ============ MARKS ============
 async function loadMarksEntry(){
-const exam=document.getElementById('marksExamName').value.trim();
-const term=document.getElementById('marksTerm').value;
-const cls=document.getElementById('marksClassFilter').value;
-if(!exam){showToast('Select exam','error');return;}
-marksExamCache=exam;
-const wrap=document.getElementById('marksWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{
-let q=supabaseClient.from('students').select('studentid,name,class');
-if(cls!=='all')q=q.eq('class',cls);
-const {data:students}=await q;
-const {data:existing}=await supabaseClient.from('exam_marks').select('*').eq('exam_name',exam);
-marksEntryData=(students||[]).map(s=>({studentid:s.studentid,name:s.name,class:s.class,marks:SUBJECTS_LIST.reduce((acc,sub)=>{const rec=(existing||[]).find(e=>e.studentid===s.studentid&&e.subject===sub);acc[sub]=rec?rec.obtained_marks:0;return acc;},{})}));
-let html=`<table><thead><tr><th>#</th><th>Student</th><th>Class</th>`;
-SUBJECTS_LIST.forEach(sub=>{html+=`<th>${sub.substring(0,6)}</th>`;});
-html+=`</tr></thead><tbody>`;
-marksEntryData.forEach((s,idx)=>{const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong><br><small style="color:#6b7a8f;">${escapeHtml(s.studentid)}</small></td><td>${escapeHtml(s.class||'—')}</td>`;
-SUBJECTS_LIST.forEach(sub=>{const key=sub.replace(/[^a-zA-Z0-9]/g,'');html+=`<td><input type="number" id="mk_${cid}_${key}" value="${s.marks[sub]||0}" min="0" max="100" style="width:55px;" /></td>`;});
-html+=`</tr>`;});
-html+=`</tbody></table>`;
-wrap.innerHTML=html;wrap.dataset.subjects=JSON.stringify(SUBJECTS_LIST);wrap.dataset.term=term;
-}catch(e){wrap.innerHTML=`<div class="empty-state">Error: ${e.message}</div>`;}
+  if(!currentAdminClass){showToast('Select class first','error');return;}
+  const exam=document.getElementById('marksExamName').value.trim();
+  const term=document.getElementById('marksTerm').value;
+  if(!exam){showToast('Select exam','error');return;}
+  marksExamCache=exam;
+  const subjects=getSubjectsForClass(currentAdminClass);
+  const wrap=document.getElementById('marksWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
+  try{
+    const {data:students}=await supabaseClient.from('students').select('studentid,name,class').eq('class',currentAdminClass);
+    const {data:existing}=await supabaseClient.from('exam_marks').select('*').eq('exam_name',exam);
+    marksEntryData=(students||[]).map(s=>({studentid:s.studentid,name:s.name,class:s.class,marks:subjects.reduce((acc,sub)=>{const rec=(existing||[]).find(e=>e.studentid===s.studentid&&e.subject===sub);acc[sub]=rec?rec.obtained_marks:0;return acc;},{})}));
+    let html=`<div class="class-subjects-info"><strong class="text-white">📚 Class ${currentAdminClass} Subjects (${subjects.length}):</strong><br><span class="text-white-50">${subjects.join(' • ')}</span></div>`;
+    if(marksEntryData.length===0){html+=`<div class="empty-state">No students in this class</div>`;wrap.innerHTML=html;return;}
+    html+=`<table><thead><tr><th>#</th><th>Student</th>`;
+    subjects.forEach(sub=>{html+=`<th>${sub.substring(0,8)}</th>`;});
+    html+=`</tr></thead><tbody>`;
+    marksEntryData.forEach((s,idx)=>{
+      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
+      html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong><br><small style="color:#6b7a8f;">${escapeHtml(s.studentid)}</small></td>`;
+      subjects.forEach(sub=>{const key=sub.replace(/[^a-zA-Z0-9]/g,'');html+=`<td><input type="number" id="mk_${cid}_${key}" value="${s.marks[sub]||0}" min="0" max="100" style="width:55px;" /></td>`;});
+      html+=`</tr>`;
+    });
+    html+=`</tbody></table>`;
+    wrap.innerHTML=html;
+    wrap.dataset.subjects=JSON.stringify(subjects);
+    wrap.dataset.term=term;
+  }catch(e){wrap.innerHTML=`<div class="empty-state">Error: ${e.message}</div>`;}
 }
 async function saveMarksBulk(){
-const wrap=document.getElementById('marksWrap');const subjects=JSON.parse(wrap.dataset.subjects||'[]');const term=wrap.dataset.term||'First Term';const exam=marksExamCache;
-if(!exam||subjects.length===0){showToast('Load exam first','error');return;}
-const btn=document.getElementById('marksSaveBtn');btn.disabled=true;btn.innerHTML='<span class="spinner-sm"></span> Saving...';
-try{const rows=[];marksEntryData.forEach(s=>{const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');subjects.forEach(sub=>{const key=sub.replace(/[^a-zA-Z0-9]/g,'');const el=document.getElementById(`mk_${cid}_${key}`);if(el){rows.push({studentid:s.studentid,exam_name:exam,term:term,subject:sub,max_marks:100,obtained_marks:parseFloat(el.value)||0,exam_date:new Date().toISOString().split('T')[0]});}});});
-await supabaseClient.from('exam_marks').delete().eq('exam_name',exam);
-await supabaseClient.from('exam_marks').insert(rows);
-showToast(`✅ Saved ${rows.length} marks`,'success');
-btn.innerHTML='<span class="spinner-sm"></span> Updating ranks...';
-await autoCalculateRanks(true);}catch(e){showToast('❌ '+e.message,'error');}
-btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save Marks';
+  const wrap=document.getElementById('marksWrap');
+  const subjects=JSON.parse(wrap.dataset.subjects||'[]');
+  const term=wrap.dataset.term||'First Term';
+  const exam=marksExamCache;
+  if(!exam||subjects.length===0){showToast('Load exam first','error');return;}
+  const btn=document.getElementById('marksSaveBtn');btn.disabled=true;btn.innerHTML='<span class="spinner-sm"></span> Saving...';
+  try{
+    const rows=[];
+    marksEntryData.forEach(s=>{const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');subjects.forEach(sub=>{const key=sub.replace(/[^a-zA-Z0-9]/g,'');const el=document.getElementById(`mk_${cid}_${key}`);if(el){rows.push({studentid:s.studentid,exam_name:exam,term:term,subject:sub,max_marks:100,obtained_marks:parseFloat(el.value)||0,exam_date:new Date().toISOString().split('T')[0]});}});});
+    const studentIds=marksEntryData.map(s=>s.studentid);
+    if(studentIds.length>0) await supabaseClient.from('exam_marks').delete().eq('exam_name',exam).in('studentid',studentIds);
+    if(rows.length>0){const {error}=await supabaseClient.from('exam_marks').insert(rows);if(error)throw error;}
+    showToast(`✅ Saved ${rows.length} marks`,'success');
+    btn.innerHTML='<span class="spinner-sm"></span> Updating ranks...';
+    await autoCalculateRanks(true);
+  }catch(e){showToast('❌ '+e.message,'error');}
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save Marks';
 }
 
-// ============ AUTO RANK ============
+// ============ AUTO RANK (only for selected class) ============
 async function autoCalculateRanks(silent){
-if(!silent){if(!confirm('🔄 Auto-calculate ranks from exam marks?'))return;}
+if(!currentAdminClass){if(!silent)showToast('Select class first','error');return;}
+if(!silent){if(!confirm(`🔄 Auto-calculate ranks for Class ${currentAdminClass}?`))return;}
 if(!silent)showLoading(true);
-try{const {data:students,error:stuErr}=await supabaseClient.from('students').select('studentid,name,class');if(stuErr)throw stuErr;
+try{
+const {data:students,error:stuErr}=await supabaseClient.from('students').select('studentid,name,class').eq('class',currentAdminClass);if(stuErr)throw stuErr;
 if(!students||students.length===0){if(!silent)showToast('No students','error');if(!silent)showLoading(false);return;}
-const {data:marks,error:mkErr}=await supabaseClient.from('exam_marks').select('studentid,obtained_marks,max_marks');if(mkErr)throw mkErr;
-if(!marks||marks.length===0){if(!silent)showToast('No exam marks found','error');if(!silent)showLoading(false);return;}
+const ids=students.map(s=>s.studentid);
+const {data:marks,error:mkErr}=await supabaseClient.from('exam_marks').select('studentid,obtained_marks,max_marks').in('studentid',ids);if(mkErr)throw mkErr;
+if(!marks||marks.length===0){if(!silent)showToast('No exam marks found for this class','error');if(!silent)showLoading(false);return;}
 const studentTotals={};students.forEach(s=>{studentTotals[s.studentid]={obtained:0,max:0};});
 marks.forEach(m=>{if(studentTotals[m.studentid]){studentTotals[m.studentid].obtained+=Number(m.obtained_marks)||0;studentTotals[m.studentid].max+=Number(m.max_marks)||0;}});
-const byClass={};students.forEach(s=>{const cls=String(s.class||'N/A');if(!byClass[cls])byClass[cls]=[];const total=studentTotals[s.studentid];const pct=total.max>0?Math.round((total.obtained/total.max)*100):0;byClass[cls].push({studentid:s.studentid,name:s.name,percentage:pct});});
-const updates=[];
-for(const cls in byClass){byClass[cls].sort((a,b)=>b.percentage-a.percentage);let cr=0,pp=null;
-byClass[cls].forEach((s,idx)=>{if(pp===null||s.percentage!==pp){cr=idx+1;}pp=s.percentage;
+const list=students.map(s=>{const t=studentTotals[s.studentid];const pct=t.max>0?Math.round((t.obtained/t.max)*100):0;return{studentid:s.studentid,name:s.name,percentage:pct};});
+list.sort((a,b)=>b.percentage-a.percentage);
+const updates=[];let cr=0,pp=null;
+list.forEach((s,idx)=>{if(pp===null||s.percentage!==pp){cr=idx+1;}pp=s.percentage;
 let grade='D';if(s.percentage>=90)grade='A+';else if(s.percentage>=80)grade='A';else if(s.percentage>=70)grade='B+';else if(s.percentage>=60)grade='B';else if(s.percentage>=50)grade='C+';else if(s.percentage>=40)grade='C';
-updates.push({studentid:s.studentid,rank:cr,performance:s.percentage,overallgrade:grade});});}
+updates.push({studentid:s.studentid,rank:cr,performance:s.percentage,overallgrade:grade});});
 let updatedCount=0;
 for(const u of updates){const {error}=await supabaseClient.from('students').update({rank:u.rank,performance:u.performance,overallgrade:u.overallgrade}).eq('studentid',u.studentid);if(!error)updatedCount++;}
-if(!silent){showToast(`✅ Auto Rank done (${updatedCount})`,'success');await loadGradesForAdmin();}else{showToast(`✅ Ranks updated (${updatedCount})`,'success');}
+if(!silent){showToast(`✅ Class ${currentAdminClass} ranks updated (${updatedCount})`,'success');await loadGradesForAdmin();}else{showToast(`✅ Ranks updated (${updatedCount})`,'success');}
 }catch(e){console.error(e);if(!silent)showToast('❌ '+e.message,'error');}
 if(!silent)showLoading(false);
 }
 
 // ============ MORAL VALUES ============
 async function loadMoralValuesAdmin(){
+if(!currentAdminClass)return;
 const wrap=document.getElementById('moralValuesAdminWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{const {data:students,error:stuErr}=await supabaseClient.from('students').select('studentid,name,class,moralvaluesgrade,moralvaluessub').order('class').order('name');if(stuErr)throw stuErr;
-const {data:mvRecs,error:mvErr}=await supabaseClient.from('moral_values').select('*');if(mvErr)throw mvErr;
+try{const {data:students,error:stuErr}=await supabaseClient.from('students').select('studentid,name,class,moralvaluesgrade,moralvaluessub').eq('class',currentAdminClass).order('name');if(stuErr)throw stuErr;
+const ids=(students||[]).map(s=>s.studentid);
+let mvRecs=[];if(ids.length>0){const {data:mv,error:mvErr}=await supabaseClient.from('moral_values').select('*').in('studentid',ids);if(mvErr)throw mvErr;mvRecs=mv||[];}
 const mvByStudent={};(mvRecs||[]).forEach(mv=>{if(!mvByStudent[mv.studentid])mvByStudent[mv.studentid]=[];mvByStudent[mv.studentid].push(mv);});
 moralValuesData=(students||[]).map(s=>({studentid:s.studentid,name:s.name,class:s.class,overallgrade:s.moralvaluesgrade||'—',traits:mvByStudent[s.studentid]||[]}));
 filterMoralValuesAdmin();}catch(e){wrap.innerHTML=`<div class="empty-state">Error: ${e.message}</div>`;}
 }
-function filterMoralValuesAdmin(){const cls=document.getElementById('moralValuesClassFilter')?.value||'all';const search=(document.getElementById('moralValuesSearch')?.value||'').toLowerCase().trim();
-filteredMoralValues=moralValuesData.filter(s=>{if(cls!=='all'&&String(s.class)!==cls)return false;if(search&&!(s.name||'').toLowerCase().includes(search)&&!s.studentid.toLowerCase().includes(search))return false;return true;});
+function filterMoralValuesAdmin(){const search=(document.getElementById('moralValuesSearch')?.value||'').toLowerCase().trim();
+filteredMoralValues=moralValuesData.filter(s=>{if(search&&!(s.name||'').toLowerCase().includes(search)&&!s.studentid.toLowerCase().includes(search))return false;return true;});
 renderMoralValuesAdmin();}
 function renderMoralValuesAdmin(){
 const wrap=document.getElementById('moralValuesAdminWrap');if(filteredMoralValues.length===0){wrap.innerHTML=`<div class="empty-state">No students</div>`;return;}
-let html=`<table><thead><tr><th>#</th><th>Student</th><th>Class</th><th>Overall</th><th>Traits</th><th>Actions</th></tr></thead><tbody>`;
+let html=`<table><thead><tr><th>#</th><th>Student</th><th>Overall</th><th>Traits</th><th>Actions</th></tr></thead><tbody>`;
 filteredMoralValues.forEach((s,idx)=>{const traitsHtml=s.traits.length>0?s.traits.map(t=>{const gc=t.grade==='A+'?'#10b981':t.grade==='A'?'#06b6d4':t.grade==='B+'?'#3b82f6':'#f59e0b';return `<span style="display:inline-block;background:rgba(255,255,255,.08);padding:2px 8px;border-radius:20px;font-size:.65rem;margin:2px;">${escapeHtml(t.trait)}: <strong style="color:${gc};">${escapeHtml(t.grade||'—')}</strong></span>`;}).join(''):'<span style="color:#94a3b8;font-size:.7rem;">No traits</span>';
 const og=s.overallgrade;const ogc=og==='A+'?'#10b981':og==='A'?'#06b6d4':og==='B+'?'#3b82f6':og==='—'?'#94a3b8':'#f59e0b';
-html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong><br><small style="color:#6b7a8f;">${escapeHtml(s.studentid)}</small></td><td>${escapeHtml(s.class||'—')}</td><td><span style="color:${ogc};font-weight:700;">${escapeHtml(og)}</span></td><td style="max-width:300px;">${traitsHtml}</td><td><button class="btn-sm approve" onclick="openMoralValueForm('${s.studentid}')">✏️ Edit</button></td></tr>`;});
+html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong><br><small style="color:#6b7a8f;">${escapeHtml(s.studentid)}</small></td><td><span style="color:${ogc};font-weight:700;">${escapeHtml(og)}</span></td><td style="max-width:300px;">${traitsHtml}</td><td><button class="btn-sm approve" onclick="openMoralValueForm('${s.studentid}')">✏️ Edit</button></td></tr>`;});
 html+=`</tbody></table>`;wrap.innerHTML=html;
 }
 function renderTraitRow(idx,trait,grade,id){
@@ -1016,13 +1185,13 @@ return `<div class="trait-row d-flex gap-2 mb-2 align-items-center" data-id="${i
 function openMoralValueForm(studentid){
 const isEdit=!!studentid;const s=isEdit?moralValuesData.find(x=>x.studentid===studentid):null;
 let studentOptions='';
-if(!isEdit){studentOptions=`<div class="mb-3"><label class="text-white-50 small">Student *</label><select id="mv_student" class="modal-form-input" required><option value="">-- Select Student --</option>${moralValuesData.map(x=>`<option value="${x.studentid}">${escapeHtml(x.name)} (Class ${x.class} - ${x.studentid})</option>`).join('')}</select></div>`;}
+if(!isEdit){studentOptions=`<div class="mb-3"><label class="text-white-50 small">Student *</label><select id="mv_student" class="modal-form-input" required><option value="">-- Select Student --</option>${moralValuesData.map(x=>`<option value="${x.studentid}">${escapeHtml(x.name)} (${x.studentid})</option>`).join('')}</select></div>`;}
 let traitRows='';
 if(isEdit&&s){if(s.traits.length>0){s.traits.forEach((t,i)=>{traitRows+=renderTraitRow(i,t.trait,t.grade,t.id);});}traitRows+=renderTraitRow(s.traits.length,'','','');}else{traitRows+=renderTraitRow(0,'','','');}
 modalTitleSpan.innerText=isEdit?`🌟 Moral - ${s.name}`:'➕ Add Moral Values';
 modalBodyDiv.innerHTML=`<form id="mvForm" onsubmit="saveMoralValues(event, ${isEdit?`'${studentid}'`:'null'})">
 ${studentOptions}
-${isEdit?`<div class="mb-3"><div class="text-white"><strong>${escapeHtml(s.name)}</strong> (Class ${s.class})</div></div>`:''}
+${isEdit?`<div class="mb-3"><div class="text-white"><strong>${escapeHtml(s.name)}</strong></div></div>`:''}
 <div class="mb-3"><label class="text-white-50 small">Overall Moral Grade (Optional)</label><select id="mv_overall" class="modal-form-input"><option value="">-- None --</option>${GRADES_LIST.map(g=>`<option value="${g}" ${isEdit&&s.overallgrade===g?'selected':''}>${g}</option>`).join('')}</select></div>
 <hr style="border-color:rgba(255,255,255,.1);">
 <div class="d-flex justify-content-between align-items-center mb-2"><label class="text-white-50 small">Traits</label><button type="button" class="btn-load" onclick="addTraitRow()" style="padding:4px 12px;font-size:.7rem;"><i class="fas fa-plus"></i> Add Row</button></div>
@@ -1063,7 +1232,7 @@ html+=`</tbody></table>`;wrap.innerHTML=html;
 }
 function openEventForm(id){
 const isEdit=id!==null&&id!==undefined;const ev=isEdit?allEventsData.find(x=>x.id===id):{};
-modalTitleSpan.innerText=isEdit?'✏️ Edit Event':'➕ Add Event';
+modalTitleSpan.innerText=isEdit?'✏️ Edit Event':'➕ Add Event (School-wide)';
 modalBodyDiv.innerHTML=`<form>
 <div class="mb-3"><label class="text-white-50 small">Title *</label><input type="text" id="ev_title" value="${ev.title||''}" required class="modal-form-input"></div>
 <div class="mb-3"><label class="text-white-50 small">Description</label><textarea id="ev_desc" class="modal-form-input" style="min-height:70px;">${ev.description||''}</textarea></div>
@@ -1083,22 +1252,26 @@ async function deleteEvent(id){if(!confirm('Delete?'))return;try{await supabaseC
 
 // ============ ATTENDANCE ============
 async function loadAttendanceForAdmin(){
-const month=document.getElementById('attendanceMonth').value;const cls=document.getElementById('attendanceClassFilter').value;
+if(!currentAdminClass)return;
+const month=document.getElementById('attendanceMonth').value;
 if(!month){showToast('Select month','error');return;}
 const wrap=document.getElementById('attendanceWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{let q=supabaseClient.from('students').select('studentid,name,class');if(cls!=='all')q=q.eq('class',cls);
-const {data:s}=await q;const {data:r}=await supabaseClient.from('attendance_records').select('*').eq('month_year',month);
-attendanceData=(s||[]).map(x=>{const rec=(r||[]).find(y=>y.studentid===x.studentid);return{studentid:x.studentid,name:x.name,class:x.class,month_year:month,present_days:rec?rec.present_days:0,total_days:rec?rec.total_days:0,percentage:rec?rec.percentage:0,exists:!!rec};});
+try{
+const {data:s}=await supabaseClient.from('students').select('studentid,name,class').eq('class',currentAdminClass);
+const ids=(s||[]).map(x=>x.studentid);
+let r=[];if(ids.length>0){const {data:recs}=await supabaseClient.from('attendance_records').select('*').eq('month_year',month).in('studentid',ids);r=recs||[];}
+attendanceData=(s||[]).map(x=>{const rec=r.find(y=>y.studentid===x.studentid);return{studentid:x.studentid,name:x.name,class:x.class,month_year:month,present_days:rec?rec.present_days:0,total_days:rec?rec.total_days:0,percentage:rec?rec.percentage:0,exists:!!rec};});
 renderAttendance();}catch(e){wrap.innerHTML=`<div class="empty-state">Error</div>`;}
 }
 function renderAttendance(){
 const wrap=document.getElementById('attendanceWrap');if(attendanceData.length===0){wrap.innerHTML=`<div class="empty-state">No students</div>`;return;}
-let html=`<table><thead><tr><th>#</th><th>Student</th><th>ID</th><th>Class</th><th>Present</th><th>Total</th><th>%</th></tr></thead><tbody>`;
+let html=`<table><thead><tr><th>#</th><th>Student</th><th>Present</th><th>Total</th><th>%</th></tr></thead><tbody>`;
 attendanceData.forEach((s,idx)=>{const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td><td>${escapeHtml(s.studentid)}</td><td>${escapeHtml(s.class||'—')}</td><td><input type="number" id="att_present_${cid}" value="${s.present_days}" min="0" /></td><td><input type="number" id="att_total_${cid}" value="${s.total_days}" min="0" /></td><td><strong>${s.percentage}%</strong></td></tr>`;});
+html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td><td><input type="number" id="att_present_${cid}" value="${s.present_days}" min="0" /></td><td><input type="number" id="att_total_${cid}" value="${s.total_days}" min="0" /></td><td><strong>${s.percentage}%</strong></td></tr>`;});
 html+=`</tbody></table>`;wrap.innerHTML=html;
 }
 async function bulkUpdateAttendance(){
+if(!currentAdminClass)return;
 const month=document.getElementById('attendanceMonth').value;if(!month){showToast('Select month','error');return;}
 const btn=document.getElementById('attendanceUpdateBtn');btn.disabled=true;btn.innerHTML='<span class="spinner-sm"></span>...';
 try{for(const s of attendanceData){const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
@@ -1111,17 +1284,18 @@ btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Update';
 
 // ============ GRADES ============
 async function loadGradesForAdmin(){
+if(!currentAdminClass)return;
 const wrap=document.getElementById('gradesWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{const {data,error}=await supabaseClient.from('students').select('*').order('class').order('name');if(error)throw error;
+try{const {data,error}=await supabaseClient.from('students').select('*').eq('class',currentAdminClass).order('name');if(error)throw error;
 gradesData=data||[];filterGradesAdmin();}catch(e){wrap.innerHTML=`<div class="empty-state">Error</div>`;}
 }
-function filterGradesAdmin(){const s=(document.getElementById('gradesSearch')?.value||'').toLowerCase().trim();const c=(document.getElementById('gradesClassFilter')?.value||'all');
-filteredGrades=gradesData.filter(x=>{if(c!=='all'&&String(x.class)!==c)return false;if(s&&!(x.name||'').toLowerCase().includes(s)&&!(x.studentid||'').toLowerCase().includes(s))return false;return true;});renderGrades();}
+function filterGradesAdmin(){const s=(document.getElementById('gradesSearch')?.value||'').toLowerCase().trim();
+filteredGrades=gradesData.filter(x=>{if(s&&!(x.name||'').toLowerCase().includes(s)&&!(x.studentid||'').toLowerCase().includes(s))return false;return true;});renderGrades();}
 function renderGrades(){
 const wrap=document.getElementById('gradesWrap');if(filteredGrades.length===0){wrap.innerHTML=`<div class="empty-state">No students</div>`;return;}
-let html=`<table><thead><tr><th>#</th><th>Student</th><th>Class</th><th>Grade</th><th>Perf%</th><th>Rank</th><th>Moral</th></tr></thead><tbody>`;
+let html=`<table><thead><tr><th>#</th><th>Student</th><th>Grade</th><th>Perf%</th><th>Rank</th><th>Moral</th></tr></thead><tbody>`;
 filteredGrades.forEach((s,idx)=>{const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong><br><small style="color:#6b7a8f;">${escapeHtml(s.studentid)}</small></td><td>${escapeHtml(s.class||'—')}</td>
+html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong><br><small style="color:#6b7a8f;">${escapeHtml(s.studentid)}</small></td>
 <td><select id="gr_grade_${cid}" class="modal-form-input" style="width:70px;padding:4px;"><option value="">—</option>${GRADES_LIST.map(g=>`<option value="${g}" ${s.overallgrade===g?'selected':''}>${g}</option>`).join('')}</select></td>
 <td><input type="number" id="gr_perf_${cid}" value="${s.performance||0}" min="0" max="100" style="width:55px;" /></td>
 <td><input type="number" id="gr_rank_${cid}" value="${s.rank||''}" min="1" style="width:50px;" /></td>
@@ -1139,8 +1313,14 @@ btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save';
 
 // ============ FEED ============
 async function loadAllActivities(){
+if(!currentAdminClass)return;
 const wrap=document.getElementById('feedWrap');wrap.innerHTML=`<div class="loading-tx"><div class="spinner-sm"></div><p>Loading...</p></div>`;
-try{const {data,error}=await supabaseClient.from('activities').select('*').order('timestamp',{ascending:false}).limit(50);if(error)throw error;
+try{
+const {data:studs}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
+const ids=(studs||[]).map(s=>s.studentid);
+let q=supabaseClient.from('activities').select('*').order('timestamp',{ascending:false}).limit(50);
+if(ids.length>0) q=q.in('studentid',ids);
+const {data,error}=await q;if(error)throw error;
 activitiesData=data||[];renderActivities();}catch(e){wrap.innerHTML=`<div class="empty-state">Error</div>`;}
 }
 function renderActivities(){
@@ -1150,10 +1330,10 @@ activitiesData.forEach((a,idx)=>{html+=`<tr><td>${idx+1}</td><td>${escapeHtml(a.
 html+=`</tbody></table>`;wrap.innerHTML=html;
 }
 async function openActivityForm(){
-if(studentsAdminData.length===0){try{const {data}=await supabaseClient.from('students').select('studentid,name');studentsAdminData=data||[];}catch(e){}}
-modalTitleSpan.innerText='➕ Add Activity';
+if(studentsAdminData.length===0){await loadStudentsForAdmin();}
+modalTitleSpan.innerText='➕ Add Activity for Class '+currentAdminClass;
 modalBodyDiv.innerHTML=`<form>
-<div class="mb-3"><label class="text-white-50 small">Student (optional)</label><select id="act_sid" class="modal-form-input"><option value="">-- Everyone --</option>${studentsAdminData.map(s=>`<option value="${s.studentid}">${escapeHtml(s.name)}</option>`).join('')}</select></div>
+<div class="mb-3"><label class="text-white-50 small">Student</label><select id="act_sid" class="modal-form-input"><option value="">-- Everyone in Class ${currentAdminClass} --</option>${studentsAdminData.map(s=>`<option value="${s.studentid}">${escapeHtml(s.name)}</option>`).join('')}</select></div>
 <div class="mb-3"><label class="text-white-50 small">Title *</label><input type="text" id="act_title" required class="modal-form-input"></div>
 <div class="mb-3"><label class="text-white-50 small">Description</label><textarea id="act_desc" class="modal-form-input" style="min-height:70px;"></textarea></div>
 <div class="d-flex gap-2"><button type="button" class="btn-update flex-grow-1" onclick="saveActivity()">Add</button><button type="button" class="btn-load" onclick="closeModal('globalModal')">Cancel</button></div>
@@ -1172,7 +1352,6 @@ const val=document.getElementById(textareaId).value.trim();
 if(!val){showToast('Cannot be empty','error');return;}
 try{await supabaseClient.from('settings').upsert({key:key,value:val},{onConflict:'key'});
 SETTINGS_CACHE[key]=val;
-if(key==='subjectsList')SUBJECTS_LIST=val.split(',').map(s=>s.trim()).filter(Boolean);
 if(key==='examsList'){EXAMS_LIST=val.split(',').map(s=>s.trim()).filter(Boolean);populateDynamicDropdowns();}
 if(key==='traitsList')TRAITS_LIST=val.split(',').map(s=>s.trim()).filter(Boolean);
 if(key==='gradesList')GRADES_LIST=val.split(',').map(s=>s.trim()).filter(Boolean);
@@ -1209,12 +1388,12 @@ el.innerHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fit,min
 }
 
 // ============ PDF ============
-function downloadPaymentsPDF(){if(!filteredPayments||filteredPayments.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text('Payments',14,20);doc.autoTable({head:[['#','Student','Class','ID','Debit','Credit']],body:filteredPayments.map((i,x)=>[x+1,i.name,i.class,i.studentId,(i.debit||0).toFixed(2),(i.credit||0).toFixed(2)]),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save('Payments.pdf');showToast('PDF saved','success');}
-function downloadWithdrawalsPDF(){if(!allWithdrawals||allWithdrawals.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text('Withdrawals',14,20);doc.autoTable({head:[['Student','ID','Amount','Reason','Date','Status']],body:allWithdrawals.map(r=>[r.studentname,r.studentid,(r.amount||0).toFixed(2),r.reason,formatDate(r.date),r.status]),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save('Withdrawals.pdf');showToast('PDF saved','success');}
-function downloadBalancesPDF(){if(!balancesData||balancesData.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text('Balances',14,20);doc.autoTable({head:[['#','Student','ID','Class','Balance']],body:balancesData.map((i,x)=>[x+1,i.name,i.studentId,i.class,(i.balance||0).toFixed(2)]),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save('Balances.pdf');showToast('PDF saved','success');}
-function downloadAllTransactionsPDF(){if(!allTxData||allTxData.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text('Transactions',14,20);doc.autoTable({head:[['#','Student','ID','Date','Debit','Credit','Reason']],body:allTxData.map((t,x)=>[x+1,t.students?t.students.name:'?',t.studentid,formatDate(t.date),(t.debit||0).toFixed(2),(t.credit||0).toFixed(2),t.reason||'']),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save('Transactions.pdf');showToast('PDF saved','success');}
-function downloadSummaryPDF(){const date=document.getElementById('summaryDate').value;if(!date){showToast('Load first','error');return;}const nums=document.getElementById('summaryContent').querySelectorAll('.num');if(!nums||nums.length<3){showToast('No data','error');return;}const doc=new jspdf.jsPDF('p','mm','a4');doc.setFontSize(16);doc.text('Daily Summary',14,20);doc.setFontSize(12);doc.text(`Date: ${formatDate(date)}`,14,30);doc.text(`Debit: ₹${nums[0].textContent}`,14,40);doc.text(`Credit: ₹${nums[1].textContent}`,14,48);doc.text(`Balance: ₹${nums[2].textContent}`,14,56);doc.save('Summary.pdf');showToast('PDF saved','success');}
-function downloadStudentsPDF(){if(!filteredStudentsAdmin||filteredStudentsAdmin.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text('Students',14,20);doc.autoTable({head:[['#','ID','Name','Class','Roll','Phone']],body:filteredStudentsAdmin.map((s,x)=>[x+1,s.studentid,s.name,s.class,s.roll,s.phone]),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save('Students.pdf');showToast('PDF saved','success');}
+function downloadPaymentsPDF(){if(!filteredPayments||filteredPayments.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text(`Class ${currentAdminClass} Payments`,14,20);doc.autoTable({head:[['#','Student','ID','Debit','Credit']],body:filteredPayments.map((i,x)=>[x+1,i.name,i.studentId,(i.debit||0).toFixed(2),(i.credit||0).toFixed(2)]),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save(`Class${currentAdminClass}_Payments.pdf`);showToast('PDF saved','success');}
+function downloadWithdrawalsPDF(){if(!allWithdrawals||allWithdrawals.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text(`Class ${currentAdminClass} Withdrawals`,14,20);doc.autoTable({head:[['Student','Amount','Reason','Date','Status']],body:allWithdrawals.map(r=>[r.studentname,(r.amount||0).toFixed(2),r.reason,formatDate(r.date),r.status]),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save(`Class${currentAdminClass}_Withdrawals.pdf`);showToast('PDF saved','success');}
+function downloadBalancesPDF(){if(!balancesData||balancesData.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text(`Class ${currentAdminClass} Balances`,14,20);doc.autoTable({head:[['#','Student','ID','Balance']],body:balancesData.map((i,x)=>[x+1,i.name,i.studentId,(i.balance||0).toFixed(2)]),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save(`Class${currentAdminClass}_Balances.pdf`);showToast('PDF saved','success');}
+function downloadAllTransactionsPDF(){if(!allTxData||allTxData.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text(`Class ${currentAdminClass} Transactions`,14,20);doc.autoTable({head:[['#','Student','Date','Debit','Credit','Reason']],body:allTxData.map((t,x)=>[x+1,t.students?t.students.name:'?',formatDate(t.date),(t.debit||0).toFixed(2),(t.credit||0).toFixed(2),t.reason||'']),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save(`Class${currentAdminClass}_Transactions.pdf`);showToast('PDF saved','success');}
+function downloadSummaryPDF(){const date=document.getElementById('summaryDate').value;if(!date){showToast('Load first','error');return;}const nums=document.getElementById('summaryContent').querySelectorAll('.num');if(!nums||nums.length<3){showToast('No data','error');return;}const doc=new jspdf.jsPDF('p','mm','a4');doc.setFontSize(16);doc.text(`Class ${currentAdminClass} - Daily Summary`,14,20);doc.setFontSize(12);doc.text(`Date: ${formatDate(date)}`,14,30);doc.text(`Debit: ₹${nums[0].textContent}`,14,40);doc.text(`Credit: ₹${nums[1].textContent}`,14,48);doc.text(`Balance: ₹${nums[2].textContent}`,14,56);doc.save(`Class${currentAdminClass}_Summary.pdf`);showToast('PDF saved','success');}
+function downloadStudentsPDF(){if(!filteredStudentsAdmin||filteredStudentsAdmin.length===0){showToast('No data','error');return;}const doc=new jspdf.jsPDF('l','mm','a4');doc.text(`Class ${currentAdminClass} Students`,14,20);doc.autoTable({head:[['#','ID','Name','Roll','Phone']],body:filteredStudentsAdmin.map((s,x)=>[x+1,s.studentid,s.name,s.roll,s.phone]),startY:30,headStyles:{fillColor:[41,128,185]}});doc.save(`Class${currentAdminClass}_Students.pdf`);showToast('PDF saved','success');}
 
 // ============ FIND STUDENT ============
 async function findStudentId(e){e.preventDefault();const cls=document.getElementById('findClass').value;const name=document.getElementById('findName').value.trim();
@@ -1377,25 +1556,20 @@ findStudentId,copyToClipboard,loadStudentsForAdmin,filterStudentsAdmin,openStude
 deleteStudent,downloadStudentsPDF,loadAllEvents,openEventForm,editEvent,saveEvent,deleteEvent,loadAttendanceForAdmin,
 bulkUpdateAttendance,loadGradesForAdmin,filterGradesAdmin,bulkUpdateGrades,autoCalculateRanks,loadAllActivities,
 openActivityForm,saveActivity,deleteActivity,changeAdminPassword,loadDBStats,loadMarksEntry,saveMarksBulk,
-loadMoralValuesAdmin,filterMoralValuesAdmin,openMoralValueForm,addTraitRow,saveMoralValues,saveSetting
+loadMoralValuesAdmin,filterMoralValuesAdmin,openMoralValueForm,addTraitRow,saveMoralValues,saveSetting,saveClassSubjects,
+getSubjectsForClass,parseClassSubjects,stringifyClassSubjects,selectAdminClass,closeSettingsTab
 });
 
-// ============ INIT (FIXED: async function instead of IIFE) ============
+// ============ INIT ============
 async function initApp(){
-  try {
-    await loadAllSettings();
-  } catch(e) {
-    console.error('Settings load error:', e);
-  }
-  restoreSession();
-  restoreTheme();
+  try{ await loadAllSettings(); }catch(e){ console.error('Settings load error:',e); }
+  restoreSession(); restoreTheme();
   document.querySelectorAll('#globalModal,#passbookModal,#findStudentIdModal,#editProfileModal,#forgotModal,#topperModal,#topperCropModal,#studentWithdrawalModal').forEach(el=>{
     if(el)el.addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
   });
   if(closeModalBtn) closeModalBtn.addEventListener('click',()=>modal.style.display='none');
-  console.log('✅ Noorussalam Madrasa v11.1 loaded');
+  console.log('✅ Noorussalam Madrasa v13.0 loaded - Class-first admin panel');
   console.log('🔑 Admin Password: MADRASA2026');
-  console.log('📚 Auto Rank + Top 3 Poster + Full Dropdowns');
 }
 initApp();
 </script>
