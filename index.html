@@ -246,7 +246,7 @@ body::before{content:'';position:fixed;width:200%;height:200%;top:-50%;left:-50%
 <div class="col-lg-6"><div class="activity-timeline"><h5 class="text-white mb-3"><i class="fas fa-waveform me-2 text-primary"></i>Live Feed</h5><ul class="list-unstyled" id="activityFeedList"><li class="text-white-50 text-center py-3"><i class="fas fa-spinner fa-pulse"></i> Loading...</li></ul></div></div>
 <div class="col-lg-6"><div class="activity-timeline"><h5 class="text-white mb-3"><i class="fas fa-calendar-alt me-2 text-warning"></i>Upcoming Events</h5><div id="calendarEventsList" class="d-flex flex-column gap-3"><div class="text-white-50 text-center">Loading...</div></div></div></div>
 </div>
-<div class="text-center text-white-50 mt-5 pb-4 small"><i class="fas fa-shield-alt me-1"></i> Noorussalam Madrasa v11.0</div>
+<div class="text-center text-white-50 mt-5 pb-4 small"><i class="fas fa-shield-alt me-1"></i> Noorussalam Madrasa v11.1</div>
 </div>
 </div>
 
@@ -565,7 +565,6 @@ let currentDatePayments=[],filteredPayments=[],allWithdrawals=[],balancesData=[]
 let studentsAdminData=[],filteredStudentsAdmin=[],allEventsData=[],attendanceData=[];
 let gradesData=[],filteredGrades=[],activitiesData=[],marksEntryData=[],marksExamCache='';
 let moralValuesData=[],filteredMoralValues=[];
-// Dynamic dropdown lists
 let SUBJECTS_LIST=['Arabic','Malayalam','English','Maths','Science','Social Science','Islamic Studies'];
 let EXAMS_LIST=['First Term','Second Term','Annual','Monthly Test'];
 let TRAITS_LIST=['Discipline','Respect','Honesty','Punctuality','Cleanliness','Politeness','Helping Nature','Obedience','Teamwork','Leadership'];
@@ -599,7 +598,7 @@ function fileToBase64(f){return new Promise((res,rej)=>{const r=new FileReader()
 function getAdminPassword(){return localStorage.getItem('admin_password')||DEFAULT_ADMIN_PASSWORD;}
 function classOptions(selected=''){let o='<option value="">Select Class</option>';for(let i=1;i<=10;i++){o+=`<option value="${i}" ${selected==String(i)?'selected':''}>Class ${i}</option>`;}return o;}
 
-// ============ SETTINGS LOADER ============
+// ============ SETTINGS ============
 async function loadAllSettings(){
   try{
     const {data,error}=await supabaseClient.from('settings').select('*');
@@ -654,13 +653,14 @@ currentUser={studentId:student.studentid,name:student.name||'Student',class:stud
 isAdminMode=false;localStorage.setItem('noor_session',JSON.stringify(currentUser));
 loginSection.style.display='none';adminSection.style.display='none';dashboardSection.style.display='block';
 updateDashboardUI();loadActivitiesAndCalendar();loadStudentBalance();showToast(`Welcome ${currentUser.name} ✨`,'success');
-}catch(err){showToast('Network error','error');}
+}catch(err){console.error(err);showToast('Network error','error');}
 showLoading(false);
 });
+
 document.getElementById('logoutBtn').addEventListener('click',logout);
 document.getElementById('adminLogoutBtn').addEventListener('click',logout);
 function logout(){currentUser=null;isAdminMode=false;localStorage.removeItem('noor_session');dashboardSection.style.display='none';adminSection.style.display='none';loginSection.style.display='flex';document.getElementById('studentId').value='';showToast('Logged out','info');}
-function restoreSession(){const s=localStorage.getItem('noor_session');if(s){try{currentUser=JSON.parse(s);loginSection.style.display='none';dashboardSection.style.display='none';dashboardSection.style.display='block';updateDashboardUI();loadActivitiesAndCalendar();loadStudentBalance();loadAllSettings();}catch(e){}}}
+function restoreSession(){const s=localStorage.getItem('noor_session');if(s){try{currentUser=JSON.parse(s);loginSection.style.display='none';adminSection.style.display='none';dashboardSection.style.display='block';updateDashboardUI();loadActivitiesAndCalendar();loadStudentBalance();}catch(e){}}}
 function toggleTheme(){dashboardSection.classList.toggle('dashboard-light');localStorage.setItem('noor_theme',dashboardSection.classList.contains('dashboard-light')?'light':'dark');}
 function restoreTheme(){const s=localStorage.getItem('noor_theme');if(s==='light'&&dashboardSection.style.display!=='none')dashboardSection.classList.add('dashboard-light');}
 
@@ -727,7 +727,7 @@ if(!reason){showToast('Reason required','error');return;}
 const btn=document.getElementById('swSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner-sm"></span>...';
 try{const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',currentUser.studentId);
 let bal=0;if(p)p.forEach(x=>{if(x.approved===true)bal+=(x.debit||0)-(x.credit||0);});
-if(bal<MIN_WITHDRAW){showToast(`Minimum ₹${MIN_WITHDRAW} balance required`,'error');btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> അപേക്ഷ';return;}
+if(bal<MIN_WITHDRAW){showToast(`Minimum ₹${MIN_WITHDRAW} required`,'error');btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> അപേക്ഷ';return;}
 if(bal<amount){showToast('Insufficient: ₹'+bal,'error');btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> അപേക്ഷ';return;}
 const {error}=await supabaseClient.from('withdrawals').insert({studentid:currentUser.studentId,date:new Date().toISOString().split('T')[0],amount,reason,status:'pending'});
 if(error)throw error;showToast('✅ Request submitted','success');
@@ -736,7 +736,7 @@ await loadStudentWithdrawals();await loadStudentBalanceForWithdrawal();await loa
 btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> അപേക്ഷ സമർപ്പിക്കുക';
 });
 
-// ============ ADMIN TAB SWITCH ============
+// ============ ADMIN TABS ============
 function switchAdminTab(tab){
 document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
 document.querySelector(`.admin-tab[data-tab="${tab}"]`)?.classList.add('active');
@@ -923,7 +923,7 @@ showToast(existingId?'✅ Updated':'✅ Added','success');closeModal('globalModa
 }
 async function deleteStudent(sid){if(!confirm('Delete student '+sid+'?'))return;try{await supabaseClient.from('students').delete().eq('studentid',sid);showToast('🗑️ Deleted','success');loadStudentsForAdmin();}catch(e){showToast('Failed','error');}}
 
-// ============ MARKS (with dynamic dropdown) ============
+// ============ MARKS ============
 async function loadMarksEntry(){
 const exam=document.getElementById('marksExamName').value.trim();
 const term=document.getElementById('marksTerm').value;
@@ -962,7 +962,7 @@ btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save Marks';
 }
 
 // ============ AUTO RANK ============
-async function autoCalculateRanks(silent=false){
+async function autoCalculateRanks(silent){
 if(!silent){if(!confirm('🔄 Auto-calculate ranks from exam marks?'))return;}
 if(!silent)showLoading(true);
 try{const {data:students,error:stuErr}=await supabaseClient.from('students').select('studentid,name,class');if(stuErr)throw stuErr;
@@ -1008,12 +1008,12 @@ function renderTraitRow(idx,trait,grade,id){
 const traitOpts=TRAITS_LIST.map(t=>`<option value="${t}" ${t===trait?'selected':''}>${t}</option>`).join('');
 const gradeOpts=GRADES_LIST.map(g=>`<option value="${g}" ${g===grade?'selected':''}>${g}</option>`).join('');
 return `<div class="trait-row d-flex gap-2 mb-2 align-items-center" data-id="${id||''}">
-<select class="trait-name modal-form-input" style="flex:2;">${'<option value="">-- Trait --</option>'+traitOpts}</select>
-<select class="trait-grade modal-form-input" style="flex:1;">${'<option value="">-- Grade --</option>'+gradeOpts}</select>
+<select class="trait-name modal-form-input" style="flex:2;"><option value="">-- Trait --</option>${traitOpts}</select>
+<select class="trait-grade modal-form-input" style="flex:1;"><option value="">-- Grade --</option>${gradeOpts}</select>
 <button type="button" class="btn-sm reject" onclick="this.parentElement.remove()">🗑️</button>
 </div>`;
 }
-function openMoralValueForm(studentid=null){
+function openMoralValueForm(studentid){
 const isEdit=!!studentid;const s=isEdit?moralValuesData.find(x=>x.studentid===studentid):null;
 let studentOptions='';
 if(!isEdit){studentOptions=`<div class="mb-3"><label class="text-white-50 small">Student *</label><select id="mv_student" class="modal-form-input" required><option value="">-- Select Student --</option>${moralValuesData.map(x=>`<option value="${x.studentid}">${escapeHtml(x.name)} (Class ${x.class} - ${x.studentid})</option>`).join('')}</select></div>`;}
@@ -1061,8 +1061,8 @@ let html=`<table><thead><tr><th>#</th><th>Title</th><th>Description</th><th>Date
 allEventsData.forEach((ev,idx)=>{html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(ev.title)}</strong></td><td>${escapeHtml(ev.description||'')}</td><td>${formatDate(ev.date)}</td><td><button class="btn-sm approve" onclick="editEvent(${ev.id})">✏️</button> <button class="btn-sm reject" onclick="deleteEvent(${ev.id})">🗑️</button></td></tr>`;});
 html+=`</tbody></table>`;wrap.innerHTML=html;
 }
-function openEventForm(id=null){
-const isEdit=id!==null;const ev=isEdit?allEventsData.find(x=>x.id===id):{};
+function openEventForm(id){
+const isEdit=id!==null&&id!==undefined;const ev=isEdit?allEventsData.find(x=>x.id===id):{};
 modalTitleSpan.innerText=isEdit?'✏️ Edit Event':'➕ Add Event';
 modalBodyDiv.innerHTML=`<form>
 <div class="mb-3"><label class="text-white-50 small">Title *</label><input type="text" id="ev_title" value="${ev.title||''}" required class="modal-form-input"></div>
@@ -1149,16 +1149,16 @@ let html=`<table><thead><tr><th>#</th><th>Student ID</th><th>Activity</th><th>De
 activitiesData.forEach((a,idx)=>{html+=`<tr><td>${idx+1}</td><td>${escapeHtml(a.studentid||'—')}</td><td><strong>${escapeHtml(a.activity)}</strong></td><td>${escapeHtml(a.description||'')}</td><td>${formatDate(a.timestamp)}</td><td><button class="btn-sm reject" onclick="deleteActivity(${a.id})">🗑️</button></td></tr>`;});
 html+=`</tbody></table>`;wrap.innerHTML=html;
 }
-function openActivityForm(){
+async function openActivityForm(){
+if(studentsAdminData.length===0){try{const {data}=await supabaseClient.from('students').select('studentid,name');studentsAdminData=data||[];}catch(e){}}
 modalTitleSpan.innerText='➕ Add Activity';
 modalBodyDiv.innerHTML=`<form>
-<div class="mb-3"><label class="text-white-50 small">Student ID (blank = everyone)</label><select id="act_sid" class="modal-form-input"><option value="">-- Everyone --</option>${studentsAdminData.map(s=>`<option value="${s.studentid}">${escapeHtml(s.name)}</option>`).join('')}</select></div>
+<div class="mb-3"><label class="text-white-50 small">Student (optional)</label><select id="act_sid" class="modal-form-input"><option value="">-- Everyone --</option>${studentsAdminData.map(s=>`<option value="${s.studentid}">${escapeHtml(s.name)}</option>`).join('')}</select></div>
 <div class="mb-3"><label class="text-white-50 small">Title *</label><input type="text" id="act_title" required class="modal-form-input"></div>
 <div class="mb-3"><label class="text-white-50 small">Description</label><textarea id="act_desc" class="modal-form-input" style="min-height:70px;"></textarea></div>
 <div class="d-flex gap-2"><button type="button" class="btn-update flex-grow-1" onclick="saveActivity()">Add</button><button type="button" class="btn-load" onclick="closeModal('globalModal')">Cancel</button></div>
 </form>`;
 modal.style.display='flex';
-if(studentsAdminData.length===0){await loadStudentsForAdmin();}
 }
 async function saveActivity(){
 try{await supabaseClient.from('activities').insert({studentid:document.getElementById('act_sid').value.trim()||null,activity:document.getElementById('act_title').value.trim(),description:document.getElementById('act_desc').value.trim()});
@@ -1172,7 +1172,6 @@ const val=document.getElementById(textareaId).value.trim();
 if(!val){showToast('Cannot be empty','error');return;}
 try{await supabaseClient.from('settings').upsert({key:key,value:val},{onConflict:'key'});
 SETTINGS_CACHE[key]=val;
-// Update runtime lists
 if(key==='subjectsList')SUBJECTS_LIST=val.split(',').map(s=>s.trim()).filter(Boolean);
 if(key==='examsList'){EXAMS_LIST=val.split(',').map(s=>s.trim()).filter(Boolean);populateDynamicDropdowns();}
 if(key==='traitsList')TRAITS_LIST=val.split(',').map(s=>s.trim()).filter(Boolean);
@@ -1365,15 +1364,7 @@ else{document.getElementById('forgotResult2').innerHTML=`<div class="alert alert
 }catch(error){document.getElementById('forgotLoading').style.display='none';this.disabled=false;document.getElementById('forgotStep2').style.display='block';
 document.getElementById('forgotResult2').innerHTML=`<div class="alert alert-danger">Network error</div>`;}});
 
-// ============ INIT ============
-(async()=>{
-await loadAllSettings();
-restoreSession();restoreTheme();
-document.querySelectorAll('#globalModal,#passbookModal,#findStudentIdModal,#editProfileModal,#forgotModal,#topperModal,#topperCropModal,#studentWithdrawalModal').forEach(el=>{
-if(el)el.addEventListener('click',function(e){if(e.target===this)this.style.display='none';});});
-closeModalBtn.addEventListener('click',()=>modal.style.display='none');
-})();
-
+// ============ GLOBAL REGISTER ============
 Object.assign(window,{
 showResultsModal,showAttendanceReport,showMoralValuesModal,showProfileCard,closeModal,openEditProfile,closeEditProfile,
 showIdCard,downloadIdCard,openProfilePhotoUpload,toggleTheme,showTopperPoster,closeTopperModal,openTopperCrop,
@@ -1386,10 +1377,27 @@ findStudentId,copyToClipboard,loadStudentsForAdmin,filterStudentsAdmin,openStude
 deleteStudent,downloadStudentsPDF,loadAllEvents,openEventForm,editEvent,saveEvent,deleteEvent,loadAttendanceForAdmin,
 bulkUpdateAttendance,loadGradesForAdmin,filterGradesAdmin,bulkUpdateGrades,autoCalculateRanks,loadAllActivities,
 openActivityForm,saveActivity,deleteActivity,changeAdminPassword,loadDBStats,loadMarksEntry,saveMarksBulk,
-showExamMarks,loadMoralValuesAdmin,filterMoralValuesAdmin,openMoralValueForm,addTraitRow,saveMoralValues,saveSetting
+loadMoralValuesAdmin,filterMoralValuesAdmin,openMoralValueForm,addTraitRow,saveMoralValues,saveSetting
 });
-console.log('✅ Noorussalam Madrasa v11.0 – Full Admin + Dropdowns');
-console.log('🔑 Admin Password: MADRASA2026');
+
+// ============ INIT (FIXED: async function instead of IIFE) ============
+async function initApp(){
+  try {
+    await loadAllSettings();
+  } catch(e) {
+    console.error('Settings load error:', e);
+  }
+  restoreSession();
+  restoreTheme();
+  document.querySelectorAll('#globalModal,#passbookModal,#findStudentIdModal,#editProfileModal,#forgotModal,#topperModal,#topperCropModal,#studentWithdrawalModal').forEach(el=>{
+    if(el)el.addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
+  });
+  if(closeModalBtn) closeModalBtn.addEventListener('click',()=>modal.style.display='none');
+  console.log('✅ Noorussalam Madrasa v11.1 loaded');
+  console.log('🔑 Admin Password: MADRASA2026');
+  console.log('📚 Auto Rank + Top 3 Poster + Full Dropdowns');
+}
+initApp();
 </script>
 </body>
 </html>
