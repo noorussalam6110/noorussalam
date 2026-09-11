@@ -77,7 +77,6 @@ body::after{
 }
 @keyframes shimmer{0%{background-position:220% 0}100%{background-position:-220% 0}}
 @keyframes panelIn{from{opacity:0;transform:translateY(38px) scale(.94)}to{opacity:1;transform:none}}
-
 .logo-wrap{position:relative;width:108px;height:108px;margin:0 auto 18px}
 .logo-wrap::before{
   content:'';position:absolute;inset:-9px;border-radius:50%;
@@ -87,13 +86,11 @@ body::after{
 @keyframes spinSlow{to{transform:rotate(360deg)}}
 .logo-circle{
   position:relative;width:108px;height:108px;border-radius:50%;overflow:hidden;
-  background:#ffffff;
-  display:flex;align-items:center;justify-content:center;
+  background:#ffffff;display:flex;align-items:center;justify-content:center;
   border:3px solid rgba(169,205,255,.55);
   box-shadow:inset 0 0 24px rgba(59,139,255,.18),0 12px 32px -12px rgba(0,0,0,.6);
 }
 .logo-circle img{width:84px;height:84px;object-fit:contain;filter:drop-shadow(0 3px 8px rgba(21,71,168,.25));}
-
 .login-title{
   font-size:1.72rem;font-weight:800;text-align:center;letter-spacing:.5px;line-height:1.2;
   background:linear-gradient(100deg,#ffffff 10%,var(--b200) 45%,var(--cyan-soft) 90%);
@@ -644,9 +641,6 @@ body::after{
   color:#0a1a3f !important;
   border-color:rgba(21,71,168,.25) !important;
 }
-.dashboard-light .palathulli-hero{
-  background:linear-gradient(125deg,rgba(59,139,255,.28) 0%,rgba(125,179,255,.15) 50%,rgba(255,255,255,.85) 100%) !important;
-}
 .dashboard-light .feed-dot{
   background:#1547a8 !important;
   box-shadow:0 0 0 4px rgba(21,71,168,.2) !important;
@@ -684,6 +678,103 @@ body::after{
   background-repeat:no-repeat;background-position:right 14px center;background-size:18px;
 }
 .exam-selector-panel select option{background:#0a1a3f;color:#fff}
+
+/* ============ MARKS CONFIG PANEL ============ */
+.marks-config-panel{
+  background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(30,107,224,.18));
+  border:1.6px solid rgba(34,211,238,.4);
+  border-radius:18px;
+  padding:14px;
+  margin-bottom:16px;
+}
+.marks-config-title{
+  font-size:.85rem;color:#fff;font-weight:800;margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.marks-config-title i{color:#22d3ee}
+.marks-config-title small{
+  font-size:.68rem;color:#9db8dd;font-weight:600;margin-left:auto;
+}
+.marks-config-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:10px;
+}
+.subject-config-item{
+  background:rgba(8,20,48,.65);
+  border:1px solid var(--stroke);
+  border-radius:12px;
+  padding:9px 10px;
+  transition:.22s;
+}
+.subject-config-item.disabled{
+  opacity:.45;
+  background:rgba(8,20,48,.4);
+}
+.subject-config-item label{
+  display:flex;align-items:center;gap:7px;
+  font-size:.72rem;font-weight:800;color:#fff;
+  cursor:pointer;margin-bottom:7px;
+  user-select:none;
+}
+.subject-config-item label input[type="checkbox"]{
+  width:15px;height:15px;accent-color:#22d3ee;cursor:pointer;
+}
+.subject-config-item input[type="number"]{
+  width:100%;padding:6px 8px;
+  border-radius:9px;border:1.4px solid var(--stroke);
+  background:rgba(8,20,48,.85);color:#fff;
+  font-size:.78rem;font-weight:700;
+  text-align:center;outline:none;
+  font-family:inherit;transition:.2s;
+}
+.subject-config-item input[type="number"]:focus{
+  border-color:var(--cyan);
+  box-shadow:0 0 0 3px rgba(34,211,238,.15);
+}
+.marks-entry-table{
+  overflow-x:auto;border:1px solid var(--stroke);
+  border-radius:16px;background:rgba(8,20,48,.42);
+}
+.marks-entry-table table{
+  width:100%;border-collapse:collapse;
+  font-size:.78rem;color:var(--txt);
+}
+.marks-entry-table th{
+  padding:10px 12px;text-align:left;font-weight:800;
+  font-size:.62rem;text-transform:uppercase;color:var(--b300);
+  background:rgba(59,139,255,.10);
+  border-bottom:1.5px solid var(--stroke);
+  letter-spacing:.8px;white-space:nowrap;
+}
+.marks-entry-table td{
+  padding:8px 12px;
+  border-bottom:1px solid rgba(140,190,255,.05);
+  vertical-align:middle;
+}
+.marks-entry-table tr:last-child td{border-bottom:none}
+.marks-entry-table tr:hover td{background:rgba(59,139,255,.06)}
+.marks-entry-table input.mk-inp{
+  width:74px;padding:7px 8px;
+  border:1.5px solid var(--stroke);border-radius:30px;
+  font-size:.85rem;outline:none;
+  background:rgba(8,20,48,.75);color:#fff;
+  text-align:center;font-weight:700;
+  font-family:inherit;transition:.2s;
+}
+.marks-entry-table input.mk-inp:focus{
+  border-color:var(--cyan);
+  box-shadow:0 0 0 3px rgba(34,211,238,.15);
+}
+.marks-entry-table input.mk-inp.invalid{
+  border-color:#f87171;
+  box-shadow:0 0 0 3px rgba(248,113,113,.18);
+}
+.marks-entry-table input.mk-inp.skipped{
+  border-color:rgba(140,190,255,.35);
+  background:rgba(140,190,255,.06);
+  color:#9db8dd;
+}
 
 /* ============ AI CHAT ============ */
 .ai-fab{
@@ -809,7 +900,7 @@ body::after{
     </button>
   </form>
 
-  <div class="login-footer-note">v15.1 • Edition ©Suhail Kerala</div>
+  <div class="login-footer-note">v15.2 • Edition ©Suhail Kerala</div>
   <button class="help-btn" onclick="openHelpModal()">
     <i class="fas fa-circle-question"></i><span>സഹായം</span>
   </button>
@@ -980,7 +1071,7 @@ body::after{
   </div>
 
   <div class="text-center text-white-50 mt-5 pb-4" style="font-size:.72rem;opacity:.6;">
-    Noorussalam Madrasa • v15.1 Edition © Suhail Kerala
+    Noorussalam Madrasa • v15.2 Edition © Suhail Kerala
   </div>
 </div>
 </div>
@@ -1068,14 +1159,9 @@ body::after{
     <div id="adminMarksTab" class="admin-tab-content" style="display:none;">
       <div class="admin-toolbar">
         <label>Exam</label><select id="marksExamName"><option value="">-- Select --</option></select>
-        <label>Term</label>
-        <select id="marksTerm">
-          <option value="First Term">First Term</option><option value="Second Term">Second Term</option>
-          <option value="Annual">Annual</option><option value="Monthly Test">Monthly Test</option>
-        </select>
         <button class="btn-load" onclick="loadMarksEntry()"><i class="fas fa-sync-alt"></i> Load</button>
       </div>
-      <div class="admin-table-wrap" id="marksWrap"></div>
+      <div id="marksWrap"></div>
       <div class="d-flex gap-3 justify-content-end mt-3">
         <button class="btn-update" id="marksSaveBtn" onclick="saveMarksBulk()"><i class="fas fa-save"></i> Save Marks</button>
       </div>
@@ -1526,11 +1612,8 @@ let MIN_WITHDRAW=100,SETTINGS_CACHE={};
 let CLASS_SUBJECTS={'1':['Arabic','Malayalam','Maths'],'5':['Arabic','Malayalam','English','Maths','Science'],'10':['Arabic','English','Maths','Science','Social Science']};
 let lastReadNotifTime=parseInt(localStorage.getItem('lastReadNotifTime')||'0');
 
-/* Background Images */
 let ID_CARD_BG_URL=localStorage.getItem('id_card_bg')||'';
 let TOPPER_BG_URL=localStorage.getItem('topper_bg')||'';
-
-/* Realtime channel */
 let notifChannel=null;
 
 const loginSection=document.getElementById('loginSection'),
@@ -1593,10 +1676,18 @@ async function getFilteredStudentIds(){
   const {data}=await q;
   return (data||[]).map(s=>s.studentid);
 }
+function hasPhoto(u){return u && (u.startsWith('data:image') || u.startsWith('http'));}
 
-/* Photo validity check */
-function hasPhoto(u){
-  return u && (u.startsWith('data:image') || u.startsWith('http'));
+/* ============================================================
+   MARKS INPUT PARSER — "-" or empty = skip, "0" = save
+============================================================ */
+function parseMarksInput(raw){
+  if(raw === null || raw === undefined) return {skip:true};
+  const s = String(raw).trim();
+  if(s === '' || s === '-' || s === '–' || s === '—' || s === '−') return {skip:true};
+  const n = Number(s);
+  if(isNaN(n)) return {skip:true};
+  return {skip:false, value:n};
 }
 
 /* ============================================================
@@ -1780,7 +1871,7 @@ function showAIAssistant(){
 function toggleTheme(){dashboardSection.classList.toggle('dashboard-light');showToast('🎨 Theme toggled','info');}
 
 /* ============================================================
-   REALTIME NOTIFICATIONS
+   REALTIME
 ============================================================ */
 function subscribeNotifications(){
   if(notifChannel){supabaseClient.removeChannel(notifChannel);notifChannel=null;}
@@ -1789,18 +1880,10 @@ function subscribeNotifications(){
   try{
     notifChannel=supabaseClient
       .channel('notif_'+currentUser.studentId)
-      .on('postgres_changes',
-        {event:'INSERT',schema:'public',table:'notifications',
-         filter:`target_class=eq.${cls}`},
-        ()=>{loadStudentNotifications();showToast('🔔 പുതിയ അറിയിപ്പ്!','info');}
-      )
-      .on('postgres_changes',
-        {event:'INSERT',schema:'public',table:'notifications',
-         filter:`target_class=eq.all`},
-        ()=>{loadStudentNotifications();showToast('🔔 പുതിയ അറിയിപ്പ്!','info');}
-      )
+      .on('postgres_changes',{event:'INSERT',schema:'public',table:'notifications',filter:`target_class=eq.${cls}`},()=>{loadStudentNotifications();showToast('🔔 പുതിയ അറിയിപ്പ്!','info');})
+      .on('postgres_changes',{event:'INSERT',schema:'public',table:'notifications',filter:`target_class=eq.all`},()=>{loadStudentNotifications();showToast('🔔 പുതിയ അറിയിപ്പ്!','info');})
       .subscribe();
-  }catch(e){console.warn('Realtime subscribe error',e);}
+  }catch(e){console.warn('Realtime:',e);}
 }
 
 /* ============================================================
@@ -1965,7 +2048,7 @@ async function openNotificationsModal(){
 function closeNotificationsModal(){document.getElementById('notificationsModal').style.display='none';}
 
 /* ============================================================
-   BALANCE (Server-side RPC with fallback)
+   BALANCE
 ============================================================ */
 async function getStudentBalance(sid){
   try{
@@ -1973,7 +2056,6 @@ async function getStudentBalance(sid){
     if(error)throw error;
     return Number(data)||0;
   }catch(e){
-    /* Fallback: client-side sum */
     try{
       const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',sid);
       let b=0;if(p)p.forEach(x=>{if(x.approved===true)b+=(x.debit||0)-(x.credit||0);});
@@ -1981,7 +2063,6 @@ async function getStudentBalance(sid){
     }catch(e2){return 0;}
   }
 }
-
 async function loadStudentBalance(){
   if(!currentUser)return;
   try{
@@ -2060,8 +2141,6 @@ async function loadStudentWithdrawals(){
     }
   }catch(e){}
 }
-
-/* Withdrawal Submit */
 document.getElementById('studentWithdrawForm').addEventListener('submit',async function(e){
   e.preventDefault();
   if(!currentUser)return;
@@ -2073,21 +2152,10 @@ document.getElementById('studentWithdrawForm').addEventListener('submit',async f
   try{
     const bal=await getStudentBalance(currentUser.studentId);
     const MIN_BALANCE=MIN_WITHDRAW;
-    if(bal<MIN_BALANCE){
-      showToast(`⚠️ Minimum ₹${MIN_BALANCE} ബാലൻസ് വേണം. നിലവിൽ ₹${bal.toFixed(2)}`,'error');
-      btn.disabled=false;btn.innerHTML='Submit';return;
-    }
+    if(bal<MIN_BALANCE){showToast(`⚠️ Minimum ₹${MIN_BALANCE} ബാലൻസ് വേണം. നിലവിൽ ₹${bal.toFixed(2)}`,'error');btn.disabled=false;btn.innerHTML='Submit';return;}
     const maxWithdrawable=bal-MIN_BALANCE;
-    if(amount>maxWithdrawable){
-      showToast(`⚠️ പരമാവധി ₹${maxWithdrawable.toFixed(2)} പിൻവലിക്കാം (₹${MIN_BALANCE} നിലനിർത്തണം)`,'error');
-      btn.disabled=false;btn.innerHTML='Submit';return;
-    }
-
-    const {error}=await supabaseClient.from('withdrawals').insert({
-      studentid:currentUser.studentId,
-      date:new Date().toISOString().split('T')[0],
-      amount,reason,status:'pending'
-    });
+    if(amount>maxWithdrawable){showToast(`⚠️ പരമാവധി ₹${maxWithdrawable.toFixed(2)} പിൻവലിക്കാം (₹${MIN_BALANCE} നിലനിർത്തണം)`,'error');btn.disabled=false;btn.innerHTML='Submit';return;}
+    const {error}=await supabaseClient.from('withdrawals').insert({studentid:currentUser.studentId,date:new Date().toISOString().split('T')[0],amount,reason,status:'pending'});
     if(error)throw error;
     showToast(`✅ ₹${amount} request submitted. ബാക്കി: ₹${(bal-amount).toFixed(2)}`,'success');
     document.getElementById('swAmount').value='';
@@ -2100,7 +2168,7 @@ document.getElementById('studentWithdrawForm').addEventListener('submit',async f
 });
 
 /* ============================================================
-   PHOTO UPLOAD (Storage)
+   PHOTO UPLOAD
 ============================================================ */
 function openTopperCrop(){
   cropMode='topper';
@@ -2149,7 +2217,6 @@ async function uploadProfilePhoto(b64){
   if(!currentUser)return;
   showLoading(true);
   try{
-    /* Try Storage first */
     let photoUrl=null;
     try{
       const res=await fetch(b64);
@@ -2162,13 +2229,11 @@ async function uploadProfilePhoto(b64){
       const {data:pub}=supabaseClient.storage.from('student-photos').getPublicUrl(fileName);
       photoUrl=pub.publicUrl;
     }catch(storageErr){
-      console.warn('Storage upload failed, using base64 fallback:',storageErr);
-      photoUrl=b64; /* Fallback to base64 */
+      console.warn('Storage fallback to base64:',storageErr);
+      photoUrl=b64;
     }
-
     const {error}=await supabaseClient.from('students').update({photo:photoUrl}).eq('studentid',currentUser.studentId);
     if(error)throw error;
-
     currentUser.photo=photoUrl;
     localStorage.setItem('noor_session',JSON.stringify(currentUser));
     updateDashboardUI();
@@ -2178,10 +2243,7 @@ async function uploadProfilePhoto(b64){
       if(prev)prev.innerHTML=`<img src="${photoUrl}" style="width:100%;height:100%;object-fit:cover;">`;
     }
     showToast('✅ Photo updated','success');
-  }catch(e){
-    console.error(e);
-    showToast('❌ Photo upload failed: '+(e.message||''),'error');
-  }
+  }catch(e){console.error(e);showToast('❌ Photo upload failed','error');}
   showLoading(false);
 }
 
@@ -2242,17 +2304,12 @@ async function showHomework(){
     }).join('');
   }catch(e){modalBodyDiv.innerHTML='<div class="text-center py-3 text-white-50">Error</div>';}
 }
-
-/* ============================================================
-   EXAM MARKS (per-user exam selection)
-============================================================ */
 async function showExamMarks(){
   modalTitleSpan.innerText="📊 Exam Marks";
   modalBodyDiv.innerHTML='<div class="text-center py-4"><div class="spinner-border" style="color:#3b8bff"></div></div>';
   modal.style.display='flex';
   try{
-    const {data:marks,error}=await supabaseClient.from('exam_marks')
-      .select('*').eq('studentid',currentUser.studentId);
+    const {data:marks,error}=await supabaseClient.from('exam_marks').select('*').eq('studentid',currentUser.studentId);
     if(error)throw error;
     if(!marks||marks.length===0){
       modalBodyDiv.innerHTML=`<div class="text-center py-4">
@@ -2261,14 +2318,8 @@ async function showExamMarks(){
       </div>`;
       return;
     }
-
     const examList=[...new Set(marks.map(m=>m.exam_name).filter(Boolean))];
-    if(examList.length===0){
-      modalBodyDiv.innerHTML='<div class="text-center py-4 text-white-50">No exam records</div>';
-      return;
-    }
-
-    /* Per-user exam key */
+    if(examList.length===0){modalBodyDiv.innerHTML='<div class="text-center py-4 text-white-50">No exam records</div>';return;}
     const examKey='last_exam_'+currentUser.studentId;
     let selectedExam=localStorage.getItem(examKey)||'';
     if(!examList.includes(selectedExam))selectedExam=examList[0];
@@ -2281,28 +2332,21 @@ async function showExamMarks(){
     </div>`;
     const bodyHtml='<div id="studentMarksBody"></div>';
     modalBodyDiv.innerHTML=selectorHtml+bodyHtml;
-
     renderStudentExamMarks(marks,selectedExam);
   }catch(e){
     console.error(e);
     modalBodyDiv.innerHTML=`<div class="text-center py-4 text-white-50">
       <i class="fas fa-triangle-exclamation" style="font-size:2.5rem;opacity:.5;"></i>
       <p class="mt-2">Error loading marks</p>
-      <small>${escapeHtml(e.message||'')}</small>
     </div>`;
   }
 }
-
 function onStudentExamChange(exam){
   const examKey='last_exam_'+currentUser.studentId;
   localStorage.setItem(examKey,exam);
-  supabaseClient.from('exam_marks').select('*')
-    .eq('studentid',currentUser.studentId).eq('exam_name',exam)
-    .then(({data})=>{
-      renderStudentExamMarks(data||[],exam,true);
-    });
+  supabaseClient.from('exam_marks').select('*').eq('studentid',currentUser.studentId).eq('exam_name',exam)
+    .then(({data})=>{renderStudentExamMarks(data||[],exam,true);});
 }
-
 function renderStudentExamMarks(allMarks,exam,alreadyFiltered){
   const body=document.getElementById('studentMarksBody');
   if(!body)return;
@@ -2327,21 +2371,20 @@ function renderStudentExamMarks(allMarks,exam,alreadyFiltered){
     </div>
     <div class="table-responsive">
       <table class="table table-dark table-sm mb-0" style="background:transparent;">
-        <thead>
-          <tr>
-            <th style="font-size:.7rem;">Subject</th>
-            <th style="font-size:.7rem;text-align:center;">Marks</th>
-            <th style="font-size:.7rem;text-align:right;">%</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th style="font-size:.7rem;">Subject</th>
+          <th style="font-size:.7rem;text-align:center;">Marks</th>
+          <th style="font-size:.7rem;text-align:right;">%</th>
+        </tr></thead>
         <tbody>`;
 
   subs.forEach(s=>{
-    const sp=Number(s.max_marks)>0?Math.round((Number(s.obtained_marks)/Number(s.max_marks))*100):0;
+    const mx=Number(s.max_marks)||0;
+    const sp=mx>0?Math.round((Number(s.obtained_marks)/mx)*100):0;
     const sc=sp>=80?'#6ee7b7':sp>=60?'#67e8f9':sp>=40?'#fcd34d':'#fca5a5';
     html+=`<tr>
       <td class="text-white" style="font-size:.82rem;">${escapeHtml(s.subject||'')}</td>
-      <td style="text-align:center;font-weight:700;color:${sc};">${s.obtained_marks||0} / ${s.max_marks||100}</td>
+      <td style="text-align:center;font-weight:700;color:${sc};">${s.obtained_marks||0} / ${s.max_marks||0}</td>
       <td style="text-align:right;font-weight:700;color:${sc};">${sp}%</td>
     </tr>`;
   });
@@ -2353,10 +2396,8 @@ function renderStudentExamMarks(allMarks,exam,alreadyFiltered){
       </div>
     </div>
   </div>`;
-
   body.innerHTML=html;
 }
-
 async function showLibrary(){
   modalTitleSpan.innerText="📚 Library";
   modalBodyDiv.innerHTML='<div class="text-center py-4"><div class="spinner-border" style="color:#3b8bff"></div></div>';
@@ -2442,30 +2483,20 @@ function showProfileCard(){
     <div class="text-center mb-3">
       <div class="profile-photo-wrapper mx-auto mb-2">
         <div class="avatar-neon" style="width:130px;height:130px;border-radius:50%;">${photo}</div>
-        <div class="photo-edit-btn" onclick="openProfilePhotoPicker()" title="Change Photo">
-          <i class="fas fa-camera"></i>
-        </div>
+        <div class="photo-edit-btn" onclick="openProfilePhotoPicker()" title="Change Photo"><i class="fas fa-camera"></i></div>
       </div>
       <h4 class="text-white mb-1" style="font-size:1.08rem;">${escapeHtml(currentUser.name)}</h4>
       <small class="text-white-50">Class ${currentUser.class||'—'} • Roll ${currentUser.roll||'—'}</small>
     </div>
     <div class="row g-3">
-      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Student ID</small>
-        <p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.studentId)}</p></div>
-      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Roll No</small>
-        <p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.roll||'N/A')}</p></div>
-      <div class="col-12"><small class="text-white-50" style="font-size:.7rem;">Father's Name</small>
-        <p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.fatherName||'N/A')}</p></div>
-      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Phone</small>
-        <p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.phone||'N/A')}</p></div>
-      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Date of Birth</small>
-        <p class="text-white mb-0" style="font-size:.88rem;">${currentUser.dob?formatDate(currentUser.dob):'N/A'}</p></div>
-      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Blood Group</small>
-        <p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.bloodGroup||'N/A')}</p></div>
-      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Email</small>
-        <p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.email||'N/A')}</p></div>
-      <div class="col-12"><small class="text-white-50" style="font-size:.7rem;">Address</small>
-        <p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.address||'N/A')}</p></div>
+      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Student ID</small><p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.studentId)}</p></div>
+      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Roll No</small><p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.roll||'N/A')}</p></div>
+      <div class="col-12"><small class="text-white-50" style="font-size:.7rem;">Father's Name</small><p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.fatherName||'N/A')}</p></div>
+      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Phone</small><p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.phone||'N/A')}</p></div>
+      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Date of Birth</small><p class="text-white mb-0" style="font-size:.88rem;">${currentUser.dob?formatDate(currentUser.dob):'N/A'}</p></div>
+      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Blood Group</small><p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.bloodGroup||'N/A')}</p></div>
+      <div class="col-6"><small class="text-white-50" style="font-size:.7rem;">Email</small><p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.email||'N/A')}</p></div>
+      <div class="col-12"><small class="text-white-50" style="font-size:.7rem;">Address</small><p class="text-white mb-0" style="font-size:.88rem;">${escapeHtml(currentUser.address||'N/A')}</p></div>
     </div>
     <div class="d-flex gap-2 mt-4 flex-wrap">
       <button class="btn-load flex-grow-1" onclick="openProfilePhotoPicker()"><i class="fas fa-camera"></i> Change Photo</button>
@@ -2484,7 +2515,6 @@ function openEditProfile(){
   document.getElementById('editBloodGroup').value=currentUser.bloodGroup||'';
   document.getElementById('editAddress').value=currentUser.address||'';
   document.getElementById('editPassword').value='';
-
   const prev=document.getElementById('editPhotoPreview');
   if(hasPhoto(currentUser.photo)){
     prev.innerHTML=`<img src="${currentUser.photo}" style="width:100%;height:100%;object-fit:cover;">`;
@@ -2505,7 +2535,6 @@ document.getElementById('editProfileForm').addEventListener('submit',async funct
   const addr=document.getElementById('editAddress').value.trim();
   const pw=document.getElementById('editPassword').value.trim();
   if(!name){showToast('Name required','error');return;}
-
   const full={name,fathername:fn,dob,bloodgroup:bg,email:em,phone:ph,address:addr};
   if(pw)full.password=pw;
   showLoading(true);
@@ -2554,101 +2583,65 @@ async function renderIdCard(){
   if(!canvas)return;
   const ctx=canvas.getContext('2d');
   const w=500,h=800;
-
   let bgDrawn=false;
   if(ID_CARD_BG_URL){
-    try{
-      const bg=await loadImage(ID_CARD_BG_URL);
-      ctx.drawImage(bg,0,0,w,h);
-      bgDrawn=true;
-    }catch(e){console.warn('ID card bg image failed');}
+    try{const bg=await loadImage(ID_CARD_BG_URL);ctx.drawImage(bg,0,0,w,h);bgDrawn=true;}
+    catch(e){console.warn('ID bg failed');}
   }
   if(!bgDrawn){
     const g=ctx.createLinearGradient(0,0,w,h);
     g.addColorStop(0,'#eaf2ff');g.addColorStop(1,'#c9ddff');
     ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
   }
-  if(bgDrawn){
-    ctx.fillStyle='rgba(255,255,255,.35)';
-    ctx.fillRect(0,88,w,h-88-86);
-  }
-
-  ctx.fillStyle='rgba(21,71,168,.94)';
-  ctx.fillRect(0,0,w,88);
-  ctx.textAlign='center';
-  ctx.fillStyle='#fff';ctx.font='bold 21px Anek Malayalam';
+  if(bgDrawn){ctx.fillStyle='rgba(255,255,255,.35)';ctx.fillRect(0,88,w,h-88-86);}
+  ctx.fillStyle='rgba(21,71,168,.94)';ctx.fillRect(0,0,w,88);
+  ctx.textAlign='center';ctx.fillStyle='#fff';ctx.font='bold 21px Anek Malayalam';
   ctx.fillText('NOORUSSALAM MADRASA',w/2,40);
   ctx.font='600 12px Anek Malayalam';ctx.fillStyle='#a9cdff';
   ctx.fillText('STUDENT IDENTITY CARD',w/2,64);
-
   const px=w/2,py=205,pr=88;
-  ctx.save();
-  ctx.beginPath();ctx.arc(px,py,pr+5,0,Math.PI*2);
-  ctx.strokeStyle='#22d3ee';ctx.lineWidth=4;ctx.stroke();
-  ctx.restore();
-
+  ctx.save();ctx.beginPath();ctx.arc(px,py,pr+5,0,Math.PI*2);ctx.strokeStyle='#22d3ee';ctx.lineWidth=4;ctx.stroke();ctx.restore();
   if(hasPhoto(currentUser.photo)){
     try{
       const p=await loadImage(currentUser.photo);
-      ctx.save();
-      ctx.beginPath();ctx.arc(px,py,pr,0,Math.PI*2);ctx.clip();
+      ctx.save();ctx.beginPath();ctx.arc(px,py,pr,0,Math.PI*2);ctx.clip();
       const ia=p.width/p.height;let dw,dh,dx,dy;
       if(ia>1){dh=pr*2;dw=p.width*(dh/p.height);dx=px-dw/2;dy=py-pr;}
       else{dw=pr*2;dh=p.height*(dw/p.width);dx=px-pr;dy=py-dh/2;}
-      ctx.drawImage(p,dx,dy,dw,dh);
-      ctx.restore();
+      ctx.drawImage(p,dx,dy,dw,dh);ctx.restore();
     }catch(e){}
   }else{
-    ctx.save();
-    ctx.beginPath();ctx.arc(px,py,pr,0,Math.PI*2);ctx.clip();
-    ctx.fillStyle='#d0e0ff';ctx.fillRect(px-pr,py-pr,pr*2,pr*2);
-    ctx.restore();
-    ctx.fillStyle='#1547a8';
-    ctx.font='bold 78px Anek Malayalam';
+    ctx.save();ctx.beginPath();ctx.arc(px,py,pr,0,Math.PI*2);ctx.clip();
+    ctx.fillStyle='#d0e0ff';ctx.fillRect(px-pr,py-pr,pr*2,pr*2);ctx.restore();
+    ctx.fillStyle='#1547a8';ctx.font='bold 78px Anek Malayalam';
     ctx.textAlign='center';ctx.textBaseline='middle';
     ctx.fillText((currentUser.name||'S').charAt(0).toUpperCase(),px,py+4);
     ctx.textBaseline='alphabetic';
   }
-
-  ctx.textAlign='center';
-  ctx.fillStyle='#0a1a3f';
-  ctx.font='bold 25px Anek Malayalam';
+  ctx.textAlign='center';ctx.fillStyle='#0a1a3f';ctx.font='bold 25px Anek Malayalam';
   ctx.fillText(currentUser.name||'N/A',w/2,342);
-
   ctx.strokeStyle='rgba(21,71,168,.4)';ctx.lineWidth=1.5;
   ctx.beginPath();ctx.moveTo(55,362);ctx.lineTo(w-55,362);ctx.stroke();
-
   const rows=[
-    ['UID',        currentUser.studentId||'—'],
-    ['CLASS',      currentUser.class||'—'],
-    ['ROLL NO',    currentUser.roll||'—'],
-    ['FATHER',     currentUser.fatherName||'—'],
-    ['PHONE',      currentUser.phone||'—'],
-    ['DOB',        currentUser.dob?formatDate(currentUser.dob):'—'],
-    ['BLOOD GRP',  currentUser.bloodGroup||'—'],
-    ['ADDRESS',    currentUser.address||'—']
+    ['UID',currentUser.studentId||'—'],['CLASS',currentUser.class||'—'],['ROLL NO',currentUser.roll||'—'],
+    ['FATHER',currentUser.fatherName||'—'],['PHONE',currentUser.phone||'—'],
+    ['DOB',currentUser.dob?formatDate(currentUser.dob):'—'],
+    ['BLOOD GRP',currentUser.bloodGroup||'—'],['ADDRESS',currentUser.address||'—']
   ];
   let y=398;
   rows.forEach(([l,v])=>{
-    ctx.textAlign='left';
-    ctx.fillStyle='#1547a8';ctx.font='bold 13px Anek Malayalam';
-    ctx.fillText(l,55,y);
+    ctx.textAlign='left';ctx.fillStyle='#1547a8';ctx.font='bold 13px Anek Malayalam';ctx.fillText(l,55,y);
     ctx.fillStyle='#0a1a3f';ctx.font='600 14px Anek Malayalam';
-    let val=String(v);
-    const maxLen=l==='ADDRESS'?28:26;
+    let val=String(v);const maxLen=l==='ADDRESS'?28:26;
     if(val.length>maxLen)val=val.substring(0,maxLen-1)+'…';
     ctx.fillText(': '+val,168,y);
     y+=l==='ADDRESS'?30:32;
   });
-
-  ctx.fillStyle='rgba(21,71,168,.94)';
-  ctx.fillRect(0,h-86,w,86);
-  ctx.textAlign='center';
-  ctx.fillStyle='#a9cdff';ctx.font='11px Anek Malayalam';
+  ctx.fillStyle='rgba(21,71,168,.94)';ctx.fillRect(0,h-86,w,86);
+  ctx.textAlign='center';ctx.fillStyle='#a9cdff';ctx.font='11px Anek Malayalam';
   ctx.fillText('Academic Year 2025-2026',w/2,h-52);
   ctx.fillStyle='#22d3ee';ctx.font='bold 11px Anek Malayalam';
   ctx.fillText('Valid • Noorussalam Madrasa Portal',w/2,h-28);
-
   ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1;
   ctx.beginPath();ctx.moveTo(w-175,h-104);ctx.lineTo(w-45,h-104);ctx.stroke();
   ctx.fillStyle='#a9cdff';ctx.font='9px Anek Malayalam';ctx.textAlign='center';
@@ -2659,13 +2652,8 @@ function downloadIdCard(t){
   if(!c){showToast('ID card not ready','error');return;}
   const d=c.toDataURL('image/png');
   const fn=`ID_${currentUser.studentId}`;
-  if(t==='png'){
-    const a=document.createElement('a');a.href=d;a.download=fn+'.png';a.click();
-  }else{
-    const {jsPDF}=window.jspdf;
-    const p=new jsPDF({orientation:'portrait',unit:'px',format:[500,800]});
-    p.addImage(d,'PNG',0,0,500,800);p.save(fn+'.pdf');
-  }
+  if(t==='png'){const a=document.createElement('a');a.href=d;a.download=fn+'.png';a.click();}
+  else{const {jsPDF}=window.jspdf;const p=new jsPDF({orientation:'portrait',unit:'px',format:[500,800]});p.addImage(d,'PNG',0,0,500,800);p.save(fn+'.pdf');}
   showToast('✅ Downloaded','success');
 }
 function printIdCard(){
@@ -2682,7 +2670,7 @@ function printIdCard(){
 }
 
 /* ============================================================
-   TOPPER POSTER
+   TOPPER
 ============================================================ */
 function showTopperPoster(){
   if(!currentUser)return;
@@ -2695,31 +2683,22 @@ function closeTopperModal(){document.getElementById('topperModal').style.display
 function loadImageForPoster(src){return new Promise((res,rej)=>{const i=new Image();i.crossOrigin='anonymous';i.onload=()=>res(i);i.onerror=()=>rej();i.src=src;});}
 async function renderTopperCanvas(name,cls,rank,photo){
   const w=2400,h=3200;
-  const canvas=document.createElement('canvas');
-  canvas.width=w;canvas.height=h;
+  const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
   const ctx=canvas.getContext('2d');
-
   let bgDrawn=false;
   if(TOPPER_BG_URL){
-    try{
-      const bg=await loadImageForPoster(TOPPER_BG_URL);
-      ctx.drawImage(bg,0,0,w,h);
-      bgDrawn=true;
-    }catch(e){console.warn('Topper bg image failed');}
+    try{const bg=await loadImageForPoster(TOPPER_BG_URL);ctx.drawImage(bg,0,0,w,h);bgDrawn=true;}
+    catch(e){console.warn('Topper bg failed');}
   }
   if(!bgDrawn){
     const bg=ctx.createLinearGradient(0,0,0,h);
     bg.addColorStop(0,'#fdf6e3');bg.addColorStop(.5,'#fef9ef');bg.addColorStop(1,'#f5e6c3');
     ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
-    ctx.strokeStyle='#c9a227';ctx.lineWidth=18;
-    ctx.strokeRect(60,60,w-120,h-120);
-    ctx.strokeStyle='#e5c76b';ctx.lineWidth=6;
-    ctx.strokeRect(110,110,w-220,h-220);
+    ctx.strokeStyle='#c9a227';ctx.lineWidth=18;ctx.strokeRect(60,60,w-120,h-120);
+    ctx.strokeStyle='#e5c76b';ctx.lineWidth=6;ctx.strokeRect(110,110,w-220,h-220);
     ctx.strokeStyle='#c9a227';ctx.lineWidth=8;
     const corners=[[60,60,1,1],[w-60,60,-1,1],[60,h-60,1,-1],[w-60,h-60,-1,-1]];
-    corners.forEach(([cx,cy,sx,sy])=>{
-      ctx.beginPath();ctx.moveTo(cx+sx*120,cy);ctx.lineTo(cx,cy);ctx.lineTo(cx,cy+sy*120);ctx.stroke();
-    });
+    corners.forEach(([cx,cy,sx,sy])=>{ctx.beginPath();ctx.moveTo(cx+sx*120,cy);ctx.lineTo(cx,cy);ctx.lineTo(cx,cy+sy*120);ctx.stroke();});
     ctx.save();ctx.globalAlpha=.14;
     for(let i=0;i<36;i++){
       ctx.beginPath();ctx.moveTo(w/2,1600);
@@ -2728,76 +2707,39 @@ async function renderTopperCanvas(name,cls,rank,photo){
     }
     ctx.restore();
   }
-  if(bgDrawn){
-    ctx.fillStyle='rgba(255,253,245,.35)';
-    ctx.fillRect(0,0,w,h);
-  }
-
+  if(bgDrawn){ctx.fillStyle='rgba(255,253,245,.35)';ctx.fillRect(0,0,w,h);}
   const cx=w/2,cy=1600,r=400;
-  ctx.save();
-  ctx.beginPath();ctx.arc(cx,cy,r+18,0,Math.PI*2);
-  ctx.strokeStyle='#c9a227';ctx.lineWidth=14;ctx.stroke();
-  ctx.restore();
-
+  ctx.save();ctx.beginPath();ctx.arc(cx,cy,r+18,0,Math.PI*2);ctx.strokeStyle='#c9a227';ctx.lineWidth=14;ctx.stroke();ctx.restore();
   if(photo){
     try{
       const img=await loadImageForPoster(photo);
-      ctx.save();
-      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
+      ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
       let dw,dh;
       if(img.width>img.height){dh=r*2;dw=img.width*(dh/img.height);}
       else{dw=r*2;dh=img.height*(dw/img.width);}
-      ctx.drawImage(img,cx-dw/2,cy-dh/2,dw,dh);
-      ctx.restore();
+      ctx.drawImage(img,cx-dw/2,cy-dh/2,dw,dh);ctx.restore();
     }catch(e){}
   }else{
-    ctx.save();
-    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
-    ctx.fillStyle='#e6d3a3';ctx.fillRect(cx-r,cy-r,r*2,r*2);
-    ctx.restore();
-    ctx.fillStyle='#8b6914';
-    ctx.font='bold 300px Anek Malayalam';
+    ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
+    ctx.fillStyle='#e6d3a3';ctx.fillRect(cx-r,cy-r,r*2,r*2);ctx.restore();
+    ctx.fillStyle='#8b6914';ctx.font='bold 300px Anek Malayalam';
     ctx.textAlign='center';ctx.textBaseline='middle';
     ctx.fillText((name||'S').charAt(0).toUpperCase(),cx,cy+20);
     ctx.textBaseline='alphabetic';
   }
-
   ctx.textAlign='center';
-  if(bgDrawn){
-    ctx.fillStyle='rgba(255,255,255,.85)';
-    ctx.font='bold 130px Anek Malayalam';
-    ctx.fillText('🏆 TOPPER 🏆',cx+4,424);
-  }
-  ctx.fillStyle='#8b6914';
-  ctx.font='bold 130px Anek Malayalam';
-  ctx.fillText('🏆 TOPPER 🏆',cx,420);
-
+  if(bgDrawn){ctx.fillStyle='rgba(255,255,255,.85)';ctx.font='bold 130px Anek Malayalam';ctx.fillText('🏆 TOPPER 🏆',cx+4,424);}
+  ctx.fillStyle='#8b6914';ctx.font='bold 130px Anek Malayalam';ctx.fillText('🏆 TOPPER 🏆',cx,420);
   const nameGrad=ctx.createLinearGradient(0,2100,0,2260);
-  nameGrad.addColorStop(0,'#c9a227');
-  nameGrad.addColorStop(.5,'#f5d76e');
-  nameGrad.addColorStop(1,'#b8860b');
-  if(bgDrawn){
-    ctx.fillStyle='rgba(255,255,255,.85)';
-    ctx.font='bold 140px Anek Malayalam';
-    ctx.fillText(name||'Student',cx+4,2224);
-  }
-  ctx.fillStyle=nameGrad;
-  ctx.font='bold 140px Anek Malayalam';
-  ctx.fillText(name||'Student',cx,2220);
-
-  ctx.fillStyle=bgDrawn?'#3a2f14':'#5c4a1f';
-  ctx.font='bold 78px Anek Malayalam';
+  nameGrad.addColorStop(0,'#c9a227');nameGrad.addColorStop(.5,'#f5d76e');nameGrad.addColorStop(1,'#b8860b');
+  if(bgDrawn){ctx.fillStyle='rgba(255,255,255,.85)';ctx.font='bold 140px Anek Malayalam';ctx.fillText(name||'Student',cx+4,2224);}
+  ctx.fillStyle=nameGrad;ctx.font='bold 140px Anek Malayalam';ctx.fillText(name||'Student',cx,2220);
+  ctx.fillStyle=bgDrawn?'#3a2f14':'#5c4a1f';ctx.font='bold 78px Anek Malayalam';
   const pt=rank===1?'FIRST PLACE':rank===2?'SECOND PLACE':rank===3?'THIRD PLACE':'RANK '+(rank||'—');
   ctx.fillText(`Class ${cls||'?'} • ${pt}`,cx,2400);
-
-  ctx.fillStyle='rgba(201,162,39,.92)';
-  ctx.fillRect(0,h-260,w,260);
-  ctx.fillStyle='#fdf6e3';
-  ctx.font='bold 52px Anek Malayalam';
-  ctx.fillText('NOORUSSALAM MADRASA',cx,h-150);
-  ctx.font='600 40px Anek Malayalam';
-  ctx.fillText('Academic Year 2025-2026',cx,h-80);
-
+  ctx.fillStyle='rgba(201,162,39,.92)';ctx.fillRect(0,h-260,w,260);
+  ctx.fillStyle='#fdf6e3';ctx.font='bold 52px Anek Malayalam';ctx.fillText('NOORUSSALAM MADRASA',cx,h-150);
+  ctx.font='600 40px Anek Malayalam';ctx.fillText('Academic Year 2025-2026',cx,h-80);
   return canvas;
 }
 async function previewTopperPoster(){
@@ -2818,13 +2760,8 @@ async function downloadTopperPoster(type){
     const c=await renderTopperCanvas(currentUser.name,currentUser.class,currentUser.rank||0,topperPhotoData);
     const img=c.toDataURL('image/png');
     const fn=`Topper_${currentUser.name}`;
-    if(type==='png'){
-      const a=document.createElement('a');a.href=img;a.download=fn+'.png';a.click();
-    }else{
-      const {jsPDF}=window.jspdf;
-      const p=new jsPDF({orientation:'portrait',unit:'px',format:[2400,3200]});
-      p.addImage(img,'PNG',0,0,2400,3200);p.save(fn+'.pdf');
-    }
+    if(type==='png'){const a=document.createElement('a');a.href=img;a.download=fn+'.png';a.click();}
+    else{const {jsPDF}=window.jspdf;const p=new jsPDF({orientation:'portrait',unit:'px',format:[2400,3200]});p.addImage(img,'PNG',0,0,2400,3200);p.save(fn+'.pdf');}
     if(typeof confetti!=='undefined')confetti({particleCount:200,spread:100,origin:{y:.6}});
     hideTopperLoading();showToast('✅ Downloaded','success');
   }catch(e){hideTopperLoading();}
@@ -2855,15 +2792,13 @@ async function findStudentId(e){
     }else{
       rd.innerHTML='<div class="alert" style="background:rgba(248,113,113,.15);color:#fca5a5;border:none;border-radius:14px;">No students found</div>';
     }
-  }catch(e){
-    rd.innerHTML='<div class="alert" style="background:rgba(248,113,113,.15);color:#fca5a5;border:none;border-radius:14px;">Error searching</div>';
-  }
+  }catch(e){rd.innerHTML='<div class="alert" style="background:rgba(248,113,113,.15);color:#fca5a5;border:none;border-radius:14px;">Error searching</div>';}
 }
 function copyToClipboard(t){navigator.clipboard.writeText(t);showToast('Copied: '+t,'success');}
 function closeFindStudentId(){document.getElementById('findStudentIdModal').style.display='none';}
 
 /* ============================================================
-   FORGOT PASSWORD
+   FORGOT
 ============================================================ */
 document.getElementById('closeForgotModalBtn').addEventListener('click',()=>document.getElementById('forgotModal').style.display='none');
 document.getElementById('forgotCloseBtn').addEventListener('click',()=>document.getElementById('forgotModal').style.display='none');
@@ -2882,43 +2817,32 @@ document.getElementById('forgotSubmitBtn').addEventListener('click',async functi
           <strong>${escapeHtml(s.name)}</strong><br>Password: <strong>${escapeHtml(s.password||'noor123')}</strong>
         </div>`;
     }else{
-      document.getElementById('forgotResult2').innerHTML=
-        '<div class="alert" style="background:rgba(248,113,113,.15);color:#fca5a5;border:none;border-radius:14px;">Student not found</div>';
+      document.getElementById('forgotResult2').innerHTML='<div class="alert" style="background:rgba(248,113,113,.15);color:#fca5a5;border:none;border-radius:14px;">Student not found</div>';
     }
   }catch(e){
     document.getElementById('forgotLoading').style.display='none';
     document.getElementById('forgotStep2').style.display='block';
-    document.getElementById('forgotResult2').innerHTML=
-      '<div class="alert" style="background:rgba(248,113,113,.15);color:#fca5a5;border:none;border-radius:14px;">Error</div>';
+    document.getElementById('forgotResult2').innerHTML='<div class="alert" style="background:rgba(248,113,113,.15);color:#fca5a5;border:none;border-radius:14px;">Error</div>';
   }
 });
 
 /* ============================================================
-   ADMIN
+   ADMIN — CLASS SELECT & TABS
 ============================================================ */
 async function selectAdminClass(cls){
   currentAdminClass=cls;
   const mainContent=document.getElementById('adminMainContent'),
         noClassMsg=document.getElementById('noClassMsg'),
         badge=document.getElementById('selectedClassBadge');
-  if(!cls){
-    mainContent.style.display='none';noClassMsg.style.display='block';badge.style.display='none';return;
-  }
+  if(!cls){mainContent.style.display='none';noClassMsg.style.display='block';badge.style.display='none';return;}
   mainContent.style.display='block';noClassMsg.style.display='none';badge.style.display='block';
-
   if(cls==='all'){
     document.getElementById('classBadgeNumber').textContent='All Classes';
-    try{
-      const {data:s}=await supabaseClient.from('students').select('studentid');
-      document.getElementById('classBadgeStudents').textContent=(s||[]).length;
-    }catch(e){}
+    try{const {data:s}=await supabaseClient.from('students').select('studentid');document.getElementById('classBadgeStudents').textContent=(s||[]).length;}catch(e){}
     showToast('🌟 Managing All Classes','success');
   } else {
     document.getElementById('classBadgeNumber').textContent='Class '+cls;
-    try{
-      const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',cls);
-      document.getElementById('classBadgeStudents').textContent=(s||[]).length;
-    }catch(e){}
+    try{const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',cls);document.getElementById('classBadgeStudents').textContent=(s||[]).length;}catch(e){}
     showToast(`📚 Managing Class ${cls}`,'success');
   }
   document.getElementById('adminSettingsTab').style.display='none';
@@ -2940,10 +2864,7 @@ function switchAdminTab(tab){
     document.getElementById('adminMainContent').style.display='none';
     document.getElementById('noClassMsg').style.display='none';
     document.getElementById('currentAdminPwd').textContent=getAdminPassword();
-    populateSettingsForm();
-    loadBgUrlsIntoForm();
-    loadDBStats();
-    return;
+    populateSettingsForm();loadBgUrlsIntoForm();loadDBStats();return;
   }
   if(!currentAdminClass){showToast('⚠️ Select a class first','error');document.getElementById('adminClassSelector').focus();return;}
   document.getElementById('adminSettingsTab').style.display='none';
@@ -2979,6 +2900,264 @@ function switchAdminTab(tab){
 }
 
 /* ============================================================
+   ADMIN — MARKS (Variable max + optional subjects + "0" allowed)
+============================================================ */
+async function loadMarksEntry(){
+  if(!currentAdminClass)return;
+  if(currentAdminClass==='all'){
+    showToast('Marks-ന് specific class തിരഞ്ഞെടുക്കുക','error');
+    document.getElementById('marksWrap').innerHTML='<div class="empty-state">📚 Marks entry-ക്ക് ഒരു specific class തിരഞ്ഞെടുക്കുക</div>';
+    return;
+  }
+  const exam=document.getElementById('marksExamName').value.trim();
+  if(!exam){showToast('Select an exam','error');return;}
+  marksExamCache=exam;
+  const subjects=getSubjectsForClass(currentAdminClass);
+  const wrap=document.getElementById('marksWrap');
+  wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
+  try{
+    const {data:students}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
+    const {data:existing}=await supabaseClient.from('exam_marks').select('*').eq('exam_name',exam);
+
+    const subjectConfig={};
+    subjects.forEach(sub=>{
+      const ex=(existing||[]).filter(e=>e.subject===sub);
+      subjectConfig[sub]={
+        enabled:true,
+        max_marks: ex.length>0 ? (Number(ex[0].max_marks)||100) : 100
+      };
+    });
+
+    marksEntryData=(students||[]).map(s=>({
+      studentid:s.studentid,
+      name:s.name,
+      marks:subjects.reduce((a,sub)=>{
+        const r=(existing||[]).find(e=>e.studentid===s.studentid&&e.subject===sub);
+        /* 0 is valid → show "0"; no record → empty */
+        a[sub] = r && r.obtained_marks!==null && r.obtained_marks!==undefined ? r.obtained_marks : '';
+        return a;
+      },{})
+    }));
+
+    if(marksEntryData.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
+
+    let html=`<div class="class-subjects-info">
+      <strong class="text-white" style="font-size:.88rem;">📚 Class ${currentAdminClass} — ${exam}</strong>
+      <div style="font-size:.72rem;color:#9db8dd;margin-top:4px;">
+        💡 ഓരോ വിഷയത്തിനും Max Marks നൽകുക. പരീക്ഷയിൽ ഇല്ലാത്ത വിഷയം uncheck ചെയ്യുക.<br>
+        🎯 മാർക്ക് <b>0</b> = save ചെയ്യും • <b>-</b> അല്ലെങ്കിൽ ഒഴിച്ചിട്ടാൽ = skip
+      </div>
+    </div>`;
+
+    html+=`<div class="marks-config-panel">
+      <div class="marks-config-title">
+        <i class="fas fa-sliders"></i> വിഷയങ്ങളും Max Marks-ഉം
+        <small>0 = count • "-" / empty = skip</small>
+      </div>
+      <div class="marks-config-grid">
+        ${subjects.map(sub=>{
+          const k=sub.replace(/[^a-zA-Z0-9]/g,'');
+          const cfg=subjectConfig[sub];
+          return `<div class="subject-config-item" id="cfg_${k}">
+            <label>
+              <input type="checkbox" id="subj_en_${k}" ${cfg.enabled?'checked':''}
+                     onchange="toggleSubjectColumn('${k}', this.checked)">
+              ${escapeHtml(sub)}
+            </label>
+            <input type="number" id="subj_max_${k}" value="${cfg.max_marks}"
+                   min="1" max="500" placeholder="Max"
+                   oninput="validateMarksInputs()">
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+
+    html+='<div class="marks-entry-table"><table><thead><tr><th>#</th><th>Student</th>';
+    subjects.forEach(sub=>{
+      const k=sub.replace(/[^a-zA-Z0-9]/g,'');
+      html+=`<th class="col_${k}" style="text-align:center;">${escapeHtml(sub.substring(0,10))}</th>`;
+    });
+    html+='</tr></thead><tbody>';
+
+    marksEntryData.forEach((s,idx)=>{
+      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
+      html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
+      subjects.forEach(sub=>{
+        const k=sub.replace(/[^a-zA-Z0-9]/g,'');
+        const v=s.marks[sub];
+        html+=`<td class="col_${k}" style="text-align:center;">
+          <input type="text" inputmode="decimal" id="mk_${cid}_${k}" class="mk-inp" value="${v}"
+                 placeholder="—" oninput="validateMarksInputs()">
+        </td>`;
+      });
+      html+='</tr>';
+    });
+    html+='</tbody></table></div>';
+    wrap.innerHTML=html;
+
+    subjects.forEach(sub=>{
+      const k=sub.replace(/[^a-zA-Z0-9]/g,'');
+      toggleSubjectColumn(k, subjectConfig[sub].enabled);
+    });
+
+    wrap.dataset.subjects=JSON.stringify(subjects);
+    validateMarksInputs();
+  }catch(e){console.error(e);wrap.innerHTML='<div class="empty-state">Error loading</div>';}
+}
+function toggleSubjectColumn(k, show){
+  document.querySelectorAll(`.col_${k}`).forEach(el=>{el.style.display = show ? '' : 'none';});
+  const cfg=document.getElementById(`cfg_${k}`);
+  if(cfg)cfg.classList.toggle('disabled', !show);
+}
+function validateMarksInputs(){
+  if(!marksEntryData)return;
+  const subjects=JSON.parse(document.getElementById('marksWrap')?.dataset.subjects||'[]');
+  subjects.forEach(sub=>{
+    const k=sub.replace(/[^a-zA-Z0-9]/g,'');
+    const maxEl=document.getElementById(`subj_max_${k}`);
+    const enEl=document.getElementById(`subj_en_${k}`);
+    if(!enEl || !enEl.checked)return;
+    const mx=parseFloat(maxEl?.value)||0;
+    marksEntryData.forEach(s=>{
+      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
+      const inp=document.getElementById(`mk_${cid}_${k}`);
+      if(!inp)return;
+      const parsed=parseMarksInput(inp.value);
+      inp.classList.remove('invalid','skipped');
+      if(parsed.skip){
+        if(inp.value.trim()!=='')inp.classList.add('skipped');
+        else inp.classList.add('skipped');
+        return;
+      }
+      const v=parsed.value;
+      if(v<0 || (mx>0 && v>mx)){
+        inp.classList.add('invalid');
+      }
+    });
+  });
+}
+async function saveMarksBulk(){
+  const wrap=document.getElementById('marksWrap');
+  const subjects=JSON.parse(wrap.dataset.subjects||'[]');
+  const exam=marksExamCache;
+  if(!exam||subjects.length===0){showToast('Load marks first','error');return;}
+
+  const enabled=[];
+  for(const sub of subjects){
+    const k=sub.replace(/[^a-zA-Z0-9]/g,'');
+    const enEl=document.getElementById(`subj_en_${k}`);
+    const maxEl=document.getElementById(`subj_max_${k}`);
+    if(enEl && enEl.checked){
+      const mx=parseFloat(maxEl?.value)||100;
+      if(mx<=0){showToast(`⚠️ ${sub}: Max Marks > 0 ആയിരിക്കണം`,'error');return;}
+      enabled.push({subject:sub, max_marks:mx, k});
+    }
+  }
+  if(enabled.length===0){showToast('⚠️ കുറഞ്ഞത് ഒരു വിഷയം enable ചെയ്യുക','error');return;}
+
+  const btn=document.getElementById('marksSaveBtn');
+  btn.disabled=true;btn.innerHTML='Saving...';
+  try{
+    const rows=[];
+    let savedCount=0;
+    let skippedCount=0;
+    let zeroCount=0;
+    const errors=[];
+
+    marksEntryData.forEach(s=>{
+      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
+      enabled.forEach(({subject, max_marks, k})=>{
+        const el=document.getElementById(`mk_${cid}_${k}`);
+        if(!el)return;
+        const parsed=parseMarksInput(el.value);
+        if(parsed.skip){skippedCount++;return;}
+        const val=parsed.value;
+        if(val<0){errors.push(`${s.name} — ${subject}: negative`);return;}
+        if(val>max_marks){errors.push(`${s.name} — ${subject}: ${val} > ${max_marks}`);return;}
+        if(val===0)zeroCount++;
+        rows.push({
+          studentid:s.studentid,
+          exam_name:exam,
+          subject:subject,
+          max_marks:max_marks,
+          obtained_marks:val
+        });
+        savedCount++;
+      });
+    });
+
+    if(errors.length>0){
+      showToast(`❌ ${errors.length} error(s): ${errors[0]}`,'error');
+      btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save Marks';
+      return;
+    }
+
+    const ids=marksEntryData.map(s=>s.studentid);
+    await supabaseClient.from('exam_marks').delete().eq('exam_name',exam).in('studentid',ids);
+    if(rows.length>0)await supabaseClient.from('exam_marks').insert(rows);
+
+    let msg=`✅ Saved ${savedCount} entries`;
+    if(zeroCount>0)msg+=` • ${zeroCount} zero${zeroCount>1?'s':''}`;
+    if(skippedCount>0)msg+=` • ${skippedCount} skipped`;
+    showToast(msg,'success');
+    await autoCalculateRanks(true);
+  }catch(e){showToast('❌ '+(e.message||'Error'),'error');}
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save Marks';
+}
+async function autoCalculateRanks(silent){
+  if(!currentAdminClass)return;
+  if(currentAdminClass==='all'){showToast('Auto rank-ന് specific class തിരഞ്ഞെടുക്കുക','error');return;}
+  if(!silent&&!confirm('Recalculate ranks?'))return;
+  if(!silent)showLoading(true);
+  try{
+    const {data:students}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
+    if(!students||students.length===0){if(!silent)showToast('No students','error');if(!silent)showLoading(false);return;}
+    const ids=students.map(s=>s.studentid);
+    const {data:marks}=await supabaseClient.from('exam_marks')
+      .select('studentid,subject,obtained_marks,max_marks').in('studentid',ids);
+    if(!marks||marks.length===0){if(!silent)showToast('No marks found','error');if(!silent)showLoading(false);return;}
+
+    const subjMax={};
+    marks.forEach(m=>{
+      const sub=m.subject||'';
+      if(!sub)return;
+      const mx=Number(m.max_marks)||0;
+      if(!subjMax[sub] || mx>subjMax[sub])subjMax[sub]=mx;
+    });
+    const totalMaxAll=Object.values(subjMax).reduce((a,b)=>a+b,0);
+    if(totalMaxAll<=0){if(!silent)showToast('Invalid max marks','error');if(!silent)showLoading(false);return;}
+
+    const totals={};
+    students.forEach(s=>{totals[s.studentid]={o:0};});
+    marks.forEach(m=>{
+      if(totals[m.studentid])totals[m.studentid].o += Number(m.obtained_marks)||0;
+    });
+
+    const list=students.map(s=>{
+      const o=totals[s.studentid].o;
+      const pct=Math.round((o/totalMaxAll)*100);
+      return {studentid:s.studentid, pct};
+    });
+    list.sort((a,b)=>b.pct-a.pct);
+
+    let cr=0,pp=null;
+    for(let i=0;i<list.length;i++){
+      const s=list[i];
+      if(pp===null||s.pct!==pp)cr=i+1;
+      pp=s.pct;
+      let g='D';
+      if(s.pct>=90)g='A+';else if(s.pct>=80)g='A';
+      else if(s.pct>=70)g='B+';else if(s.pct>=60)g='B';
+      else if(s.pct>=50)g='C+';else if(s.pct>=40)g='C';
+      await supabaseClient.from('students').update({rank:cr,performance:s.pct,overallgrade:g}).eq('studentid',s.studentid);
+    }
+    showToast(`✅ Ranks updated (total max = ${totalMaxAll})`,'success');
+    if(!silent)loadGradesForAdmin();
+  }catch(e){console.error(e);if(!silent)showToast('❌ Error','error');}
+  if(!silent)showLoading(false);
+}
+
+/* ============================================================
    ADMIN — ATTENDANCE
 ============================================================ */
 async function loadAttendanceForAdmin(){
@@ -2992,12 +3171,10 @@ async function loadAttendanceForAdmin(){
     if(currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
     q=q.order('name');
     const {data:students}=await q;
-
     const ids=(students||[]).map(x=>x.studentid);
     let r=[];
     if(ids.length>0){
-      const {data:rec}=await supabaseClient.from('attendance_records')
-        .select('*').eq('month_year',month).in('studentid',ids);
+      const {data:rec}=await supabaseClient.from('attendance_records').select('*').eq('month_year',month).in('studentid',ids);
       r=rec||[];
     }
     let commonTotal=0;
@@ -3008,15 +3185,9 @@ async function loadAttendanceForAdmin(){
       Object.keys(counts).forEach(k=>{if(counts[k]>maxC){maxC=counts[k];commonTotal=Number(k);}});
     }
     document.getElementById('attendanceTotalDays').value=commonTotal||'';
-
     attendanceData=(students||[]).map(x=>{
       const rec=r.find(y=>y.studentid===x.studentid);
-      return {
-        studentid:x.studentid,name:x.name,class:x.class,
-        present_days:rec?rec.present_days:0,
-        percentage:rec?rec.percentage:0,
-        exists:!!rec
-      };
+      return {studentid:x.studentid,name:x.name,class:x.class,present_days:rec?rec.present_days:0,percentage:rec?rec.percentage:0,exists:!!rec};
     });
     renderAttendance();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
@@ -3025,9 +3196,7 @@ function renderAttendance(){
   const wrap=document.getElementById('attendanceWrap');
   if(attendanceData.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
   const showClass=currentAdminClass==='all';
-  let html='<table><thead><tr><th>#</th><th>Student</th>'
-    +(showClass?'<th>Class</th>':'')
-    +'<th>Present Days</th><th>Percentage</th></tr></thead><tbody>';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'+(showClass?'<th>Class</th>':'')+'<th>Present Days</th><th>Percentage</th></tr></thead><tbody>';
   attendanceData.forEach((s,idx)=>{
     const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
     html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
@@ -3036,9 +3205,7 @@ function renderAttendance(){
              oninput="recalcAttendancePercentages()" style="width:70px;"></td>
       <td><span id="att_pct_${cid}" style="color:#22d3ee;font-weight:800;">${s.percentage}%</span></td></tr>`;
   });
-  html+='</tbody></table>';
-  wrap.innerHTML=html;
-  recalcAttendancePercentages();
+  html+='</tbody></table>';wrap.innerHTML=html;recalcAttendancePercentages();
 }
 function recalcAttendancePercentages(){
   const total=parseInt(document.getElementById('attendanceTotalDays').value)||0;
@@ -3067,15 +3234,10 @@ async function bulkUpdateAttendance(){
       const p=parseInt(document.getElementById(`att_present_${cid}`).value)||0;
       const pct=total>0?Math.round(p/total*100):0;
       const row={studentid:s.studentid,month_year:month,present_days:p,total_days:total,percentage:pct};
-      if(s.exists){
-        await supabaseClient.from('attendance_records').update(row)
-          .eq('studentid',s.studentid).eq('month_year',month);
-      }else{
-        await supabaseClient.from('attendance_records').insert(row);
-      }
+      if(s.exists){await supabaseClient.from('attendance_records').update(row).eq('studentid',s.studentid).eq('month_year',month);}
+      else{await supabaseClient.from('attendance_records').insert(row);}
     }
-    showToast('✅ Attendance saved','success');
-    loadAttendanceForAdmin();
+    showToast('✅ Attendance saved','success');loadAttendanceForAdmin();
   }catch(e){showToast('❌ '+e.message,'error');}
   btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Update';
 }
@@ -3086,13 +3248,11 @@ async function bulkUpdateAttendance(){
 async function loadTimetableAdmin(){
   const wrap=document.getElementById('timetableWrap');
   if(currentAdminClass==='all'){
-    wrap.innerHTML='<div class="empty-state">📚 Timetable-ന് ഒരു specific class തിരഞ്ഞെടുക്കുക</div>';
-    return;
+    wrap.innerHTML='<div class="empty-state">📚 Timetable-ന് ഒരു specific class തിരഞ്ഞെടുക്കുക</div>';return;
   }
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data}=await supabaseClient.from('timetable').select('*')
-      .eq('class',currentAdminClass).order('day').order('period');
+    const {data}=await supabaseClient.from('timetable').select('*').eq('class',currentAdminClass).order('day').order('period');
     timetableData=data||[];
     if(timetableData.length===0){wrap.innerHTML='<div class="empty-state">No periods added</div>';return;}
     let html='<table><thead><tr><th>#</th><th>Day</th><th>Period</th><th>Subject</th><th>Teacher</th><th>Time</th><th>Actions</th></tr></thead><tbody>';
@@ -3161,13 +3321,11 @@ async function deleteTimetable(id){
 async function loadHomeworkAdmin(){
   const wrap=document.getElementById('homeworkWrap');
   if(currentAdminClass==='all'){
-    wrap.innerHTML='<div class="empty-state">📚 Homework-ന് ഒരു specific class തിരഞ്ഞെടുക്കുക</div>';
-    return;
+    wrap.innerHTML='<div class="empty-state">📚 Homework-ന് ഒരു specific class തിരഞ്ഞെടുക്കുക</div>';return;
   }
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data}=await supabaseClient.from('homework').select('*')
-      .eq('class',currentAdminClass).order('due_date',{ascending:false});
+    const {data}=await supabaseClient.from('homework').select('*').eq('class',currentAdminClass).order('due_date',{ascending:false});
     homeworkData=data||[];
     if(homeworkData.length===0){wrap.innerHTML='<div class="empty-state">No homework added</div>';return;}
     let html='<table><thead><tr><th>#</th><th>Subject</th><th>Title</th><th>Due</th><th>Actions</th></tr></thead><tbody>';
@@ -3394,9 +3552,7 @@ function renderAdminTable(){
   const wrap=document.getElementById('adminTableWrap');
   if(!filteredPayments||filteredPayments.length===0){wrap.innerHTML='<div class="empty-state">No students to show</div>';return;}
   const showClass=currentAdminClass==='all';
-  let html='<table><thead><tr><th>#</th><th>Student</th>'
-    +(showClass?'<th>Class</th>':'')
-    +'<th>Debit</th><th>Credit</th><th>Status</th></tr></thead><tbody>';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'+(showClass?'<th>Class</th>':'')+'<th>Debit</th><th>Credit</th><th>Status</th></tr></thead><tbody>';
   filteredPayments.forEach((item,idx)=>{
     const cid=String(item.studentId).replace(/[^a-zA-Z0-9]/g,'');
     const st=item.exists?`<span class="existing-badge ${item.approved?'':'pending'}">${item.approved?'✅':'⏳'}</span>`:'—';
@@ -3428,9 +3584,7 @@ async function bulkUpdate(){
     if(d&&c){
       const debit=parseFloat(d.value)||0;
       const credit=parseFloat(c.value)||0;
-      if(debit>0||credit>0||i.exists){
-        data.push({studentid:i.studentId,date,debit,credit,approved:(debit>0||credit>0),reason:'',type:'fee'});
-      }
+      if(debit>0||credit>0||i.exists){data.push({studentid:i.studentId,date,debit,credit,approved:(debit>0||credit>0),reason:'',type:'fee'});}
     }
   });
   if(data.length===0){showToast('No data to save','error');return;}
@@ -3456,13 +3610,8 @@ async function loadAllWithdrawals(){
   try{
     const ids=await getFilteredStudentIds();
     if(ids.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-    const {data:r}=await supabaseClient.from('withdrawals').select('*,students(name,class)')
-      .in('studentid',ids).order('date',{ascending:false});
-    allWithdrawals=(r||[]).map(x=>({
-      ...x,
-      studentname:x.students?x.students.name:'',
-      studentclass:x.students?x.students.class:''
-    }));
+    const {data:r}=await supabaseClient.from('withdrawals').select('*,students(name,class)').in('studentid',ids).order('date',{ascending:false});
+    allWithdrawals=(r||[]).map(x=>({...x,studentname:x.students?x.students.name:'',studentclass:x.students?x.students.class:''}));
     renderAllWithdrawals();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
 }
@@ -3470,9 +3619,7 @@ function renderAllWithdrawals(){
   const wrap=document.getElementById('allWithdrawalsWrap');
   if(allWithdrawals.length===0){wrap.innerHTML='<div class="empty-state">No withdrawal requests</div>';return;}
   const showClass=currentAdminClass==='all';
-  let html='<table><thead><tr><th>Student</th>'
-    +(showClass?'<th>Class</th>':'')
-    +'<th>Amount</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
+  let html='<table><thead><tr><th>Student</th>'+(showClass?'<th>Class</th>':'')+'<th>Amount</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
   allWithdrawals.forEach(r=>{
     const st=r.status||'pending';
     let a='';
@@ -3498,9 +3645,7 @@ async function approveWithdrawal(id){
   showLoading(true);
   try{
     const req=allWithdrawals.find(x=>x.id===id);
-    await supabaseClient.from('payments').insert({studentid:req.studentid,
-      date:new Date().toISOString().split('T')[0],
-      debit:0,credit:req.amount,approved:true,reason:'Withdrawal',type:'fee'});
+    await supabaseClient.from('payments').insert({studentid:req.studentid,date:new Date().toISOString().split('T')[0],debit:0,credit:req.amount,approved:true,reason:'Withdrawal',type:'fee'});
     await supabaseClient.from('withdrawals').update({status:'approved'}).eq('id',id);
     showToast('✅ Approved','success');loadAllWithdrawals();
   }catch(e){showToast('❌ Error','error');}
@@ -3511,7 +3656,6 @@ async function rejectWithdrawal(id){
   await supabaseClient.from('withdrawals').update({status:'rejected'}).eq('id',id);
   showToast('Rejected','info');loadAllWithdrawals();
 }
-
 async function loadBalances(){
   if(!currentAdminClass)return;
   const wrap=document.getElementById('balancesWrap');
@@ -3521,21 +3665,16 @@ async function loadBalances(){
     if(currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
     const {data:s}=await q;
     if(!s||s.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-
-    /* Try server-side RPC */
     const bm={};
     try{
       const {data:balData,error}=await supabaseClient.rpc('get_all_balances');
-      if(!error && balData){
-        balData.forEach(x=>{bm[x.studentid]=Number(x.balance)||0;});
-      }else throw error||new Error('no data');
+      if(!error && balData)balData.forEach(x=>{bm[x.studentid]=Number(x.balance)||0;});
+      else throw error||new Error('no data');
     }catch(rpcErr){
-      /* Fallback */
       const ids=s.map(x=>x.studentid);
       const {data:p}=await supabaseClient.from('payments').select('studentid,credit,debit,approved').in('studentid',ids);
       (p||[]).forEach(x=>{if(x.approved===true)bm[x.studentid]=(bm[x.studentid]||0)+(x.debit||0)-(x.credit||0);});
     }
-
     balancesData=s.map(x=>({studentId:x.studentid,name:x.name||'',class:x.class,balance:bm[x.studentid]||0}));
     renderBalances();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
@@ -3544,9 +3683,7 @@ function renderBalances(){
   const wrap=document.getElementById('balancesWrap');
   if(balancesData.length===0){wrap.innerHTML='<div class="empty-state">No data</div>';return;}
   const showClass=currentAdminClass==='all';
-  let html='<table><thead><tr><th>#</th><th>Student</th>'
-    +(showClass?'<th>Class</th>':'')
-    +'<th style="text-align:right;">Palathulli Balance</th></tr></thead><tbody>';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'+(showClass?'<th>Class</th>':'')+'<th style="text-align:right;">Palathulli Balance</th></tr></thead><tbody>';
   balancesData.forEach((i,idx)=>{
     const b=i.balance;
     const c=b>0?'balance-positive':b<0?'balance-negative':'balance-zero';
@@ -3563,17 +3700,13 @@ async function loadAllTransactions(){
   try{
     const ids=await getFilteredStudentIds();
     if(ids.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-    const {data:txs}=await supabaseClient.from('payments').select('*,students(name,class)')
-      .in('studentid',ids).order('date',{ascending:false}).limit(200);
+    const {data:txs}=await supabaseClient.from('payments').select('*,students(name,class)').in('studentid',ids).order('date',{ascending:false}).limit(200);
     allTxData=txs||[];
     if(allTxData.length===0){wrap.innerHTML='<div class="empty-state">No transactions</div>';return;}
     const showClass=currentAdminClass==='all';
-    let html='<table><thead><tr><th>Date</th><th>Student</th>'
-      +(showClass?'<th>Class</th>':'')
-      +'<th>Debit</th><th>Credit</th></tr></thead><tbody>';
+    let html='<table><thead><tr><th>Date</th><th>Student</th>'+(showClass?'<th>Class</th>':'')+'<th>Debit</th><th>Credit</th></tr></thead><tbody>';
     allTxData.forEach(t=>{
-      html+=`<tr><td>${formatDate(t.date)}</td>
-        <td>${escapeHtml(t.students?t.students.name:'')}</td>`;
+      html+=`<tr><td>${formatDate(t.date)}</td><td>${escapeHtml(t.students?t.students.name:'')}</td>`;
       if(showClass)html+=`<td>${escapeHtml(t.students?t.students.class:'')}</td>`;
       html+=`<td>₹${t.debit||0}</td><td>₹${t.credit||0}</td></tr>`;
     });
@@ -3589,8 +3722,7 @@ async function loadDailySummary(){
   try{
     const ids=await getFilteredStudentIds();
     if(ids.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-    const {data:p}=await supabaseClient.from('payments')
-      .select('credit,debit,approved').eq('date',date).in('studentid',ids);
+    const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('date',date).in('studentid',ids);
     let td=0,tc=0;
     (p||[]).forEach(x=>{if(x.approved===true){td+=(x.debit||0);tc+=(x.credit||0);}});
     wrap.innerHTML=`<div class="admin-summary">
@@ -3626,9 +3758,7 @@ function renderStudentsAdmin(){
   const wrap=document.getElementById('adminStudentsWrap');
   if(filteredStudentsAdmin.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
   const showClass=currentAdminClass==='all';
-  let html='<table><thead><tr><th>#</th><th>Photo</th><th>ID</th><th>Name</th>'
-    +(showClass?'<th>Class</th>':'')
-    +'<th>Roll</th><th>Actions</th></tr></thead><tbody>';
+  let html='<table><thead><tr><th>#</th><th>Photo</th><th>ID</th><th>Name</th>'+(showClass?'<th>Class</th>':'')+'<th>Roll</th><th>Actions</th></tr></thead><tbody>';
   filteredStudentsAdmin.forEach((s,idx)=>{
     const photo=hasPhoto(s.photo)
       ?`<img src="${s.photo}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid rgba(125,179,255,.4);">`
@@ -3693,16 +3823,13 @@ async function saveStudent(eid){
       const b64=await fileToBase64(pi.files[0]);
       let photoUrl=b64;
       try{
-        const res=await fetch(b64);
-        const blob=await res.blob();
+        const res=await fetch(b64);const blob=await res.blob();
         const fileName=`${obj.studentid}_${Date.now()}.jpg`;
-        const {data:up,error:upErr}=await supabaseClient.storage
-          .from('student-photos')
-          .upload(fileName,blob,{cacheControl:'3600',upsert:true,contentType:'image/jpeg'});
+        const {data:up,error:upErr}=await supabaseClient.storage.from('student-photos').upload(fileName,blob,{cacheControl:'3600',upsert:true,contentType:'image/jpeg'});
         if(upErr)throw upErr;
         const {data:pub}=supabaseClient.storage.from('student-photos').getPublicUrl(fileName);
         photoUrl=pub.publicUrl;
-      }catch(storageErr){console.warn('Storage fallback to base64',storageErr);}
+      }catch(storageErr){console.warn('Storage fallback',storageErr);}
       obj.photo=photoUrl;
     }
     if(eid)await supabaseClient.from('students').update(obj).eq('studentid',eid);
@@ -3720,111 +3847,6 @@ async function deleteStudent(sid){
   showToast('🗑️ Deleted','success');loadStudentsForAdmin();
   const {data:s}=await supabaseClient.from('students').select('studentid');
   document.getElementById('classBadgeStudents').textContent=(s||[]).length;
-}
-
-/* ============================================================
-   ADMIN — MARKS
-============================================================ */
-async function loadMarksEntry(){
-  if(!currentAdminClass)return;
-  if(currentAdminClass==='all'){
-    showToast('Marks-ന് specific class തിരഞ്ഞെടുക്കുക','error');
-    document.getElementById('marksWrap').innerHTML='<div class="empty-state">📚 Marks entry-ക്ക് ഒരു specific class തിരഞ്ഞെടുക്കുക</div>';
-    return;
-  }
-  const exam=document.getElementById('marksExamName').value.trim();
-  if(!exam){showToast('Select an exam','error');return;}
-  marksExamCache=exam;
-  const subjects=getSubjectsForClass(currentAdminClass);
-  const wrap=document.getElementById('marksWrap');
-  wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
-  try{
-    const {data:students}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
-    const {data:existing}=await supabaseClient.from('exam_marks').select('*').eq('exam_name',exam);
-    marksEntryData=(students||[]).map(s=>({studentid:s.studentid,name:s.name,
-      marks:subjects.reduce((a,sub)=>{
-        const r=(existing||[]).find(e=>e.studentid===s.studentid&&e.subject===sub);
-        a[sub]=r?r.obtained_marks:0;return a;
-      },{})
-    }));
-    if(marksEntryData.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-    let html=`<div class="class-subjects-info"><strong class="text-white" style="font-size:.86rem;">📚 Class ${currentAdminClass} — ${subjects.length} subjects</strong></div>`;
-    html+='<table><thead><tr><th>#</th><th>Student</th>';
-    subjects.forEach(sub=>html+=`<th>${sub.substring(0,8)}</th>`);
-    html+='</tr></thead><tbody>';
-    marksEntryData.forEach((s,idx)=>{
-      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-      html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
-      subjects.forEach(sub=>{
-        const k=sub.replace(/[^a-zA-Z0-9]/g,'');
-        html+=`<td><input type="number" id="mk_${cid}_${k}" value="${s.marks[sub]||0}" min="0" max="100" style="width:58px;"></td>`;
-      });
-      html+='</tr>';
-    });
-    html+='</tbody></table>';
-    wrap.innerHTML=html;
-    wrap.dataset.subjects=JSON.stringify(subjects);
-  }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
-}
-async function saveMarksBulk(){
-  const wrap=document.getElementById('marksWrap');
-  const subjects=JSON.parse(wrap.dataset.subjects||'[]');
-  const exam=marksExamCache;
-  if(!exam||subjects.length===0){showToast('Load marks first','error');return;}
-  const btn=document.getElementById('marksSaveBtn');
-  btn.disabled=true;btn.innerHTML='Saving...';
-  try{
-    const rows=[];
-    marksEntryData.forEach(s=>{
-      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-      subjects.forEach(sub=>{
-        const k=sub.replace(/[^a-zA-Z0-9]/g,'');
-        const el=document.getElementById(`mk_${cid}_${k}`);
-        if(el)rows.push({studentid:s.studentid,exam_name:exam,subject:sub,max_marks:100,obtained_marks:parseFloat(el.value)||0});
-      });
-    });
-    const ids=marksEntryData.map(s=>s.studentid);
-    await supabaseClient.from('exam_marks').delete().eq('exam_name',exam).in('studentid',ids);
-    if(rows.length>0)await supabaseClient.from('exam_marks').insert(rows);
-    showToast(`✅ Saved ${rows.length} marks`,'success');
-    await autoCalculateRanks(true);
-  }catch(e){showToast('❌ '+e.message,'error');}
-  btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save Marks';
-}
-
-/* ============================================================
-   ADMIN — AUTO RANK
-============================================================ */
-async function autoCalculateRanks(silent){
-  if(!currentAdminClass)return;
-  if(currentAdminClass==='all'){showToast('Auto rank-ന് specific class തിരഞ്ഞെടുക്കുക','error');return;}
-  if(!silent&&!confirm('Recalculate ranks?'))return;
-  if(!silent)showLoading(true);
-  try{
-    const {data:students}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
-    if(!students||students.length===0){if(!silent)showToast('No students','error');if(!silent)showLoading(false);return;}
-    const ids=students.map(s=>s.studentid);
-    const {data:marks}=await supabaseClient.from('exam_marks').select('studentid,obtained_marks,max_marks').in('studentid',ids);
-    if(!marks||marks.length===0){if(!silent)showToast('No marks found','error');if(!silent)showLoading(false);return;}
-    const totals={};students.forEach(s=>totals[s.studentid]={o:0,m:0});
-    marks.forEach(m=>{if(totals[m.studentid]){totals[m.studentid].o+=Number(m.obtained_marks)||0;totals[m.studentid].m+=Number(m.max_marks)||0;}});
-    const list=students.map(s=>{const t=totals[s.studentid];return {studentid:s.studentid,pct:t.m>0?Math.round(t.o/t.m*100):0};});
-    list.sort((a,b)=>b.pct-a.pct);
-    let cr=0,pp=null;
-    for(let i=0;i<list.length;i++){
-      const s=list[i];
-      if(pp===null||s.pct!==pp)cr=i+1;
-      pp=s.pct;
-      let g='D';
-      if(s.pct>=90)g='A+';else if(s.pct>=80)g='A';
-      else if(s.pct>=70)g='B+';else if(s.pct>=60)g='B';
-      else if(s.pct>=50)g='C+';else if(s.pct>=40)g='C';
-      await supabaseClient.from('students').update({rank:cr,performance:s.pct,overallgrade:g}).eq('studentid',s.studentid);
-    }
-    showToast('✅ Ranks updated','success');
-    if(!silent)loadGradesForAdmin();
-  }catch(e){if(!silent)showToast('❌ Error','error');}
-  if(!silent)showLoading(false);
 }
 
 /* ============================================================
@@ -3851,9 +3873,7 @@ function renderGrades(){
   const wrap=document.getElementById('gradesWrap');
   if(filteredGrades.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
   const showClass=currentAdminClass==='all';
-  let html='<table><thead><tr><th>#</th><th>Student</th>'
-    +(showClass?'<th>Class</th>':'')
-    +'<th>Grade</th><th>Perf%</th><th>Rank</th><th>Moral</th><th>Trend</th><th>Rank Δ</th></tr></thead><tbody>';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'+(showClass?'<th>Class</th>':'')+'<th>Grade</th><th>Perf%</th><th>Rank</th><th>Moral</th><th>Trend</th><th>Rank Δ</th></tr></thead><tbody>';
   filteredGrades.forEach((s,idx)=>{
     const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
     html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
@@ -3910,8 +3930,7 @@ async function loadMoralValuesAdmin(){
     }
     const byStudent={};
     mv.forEach(v=>{if(!byStudent[v.studentid])byStudent[v.studentid]=[];byStudent[v.studentid].push(v);});
-    moralValuesData=(students||[]).map(s=>({studentid:s.studentid,name:s.name,class:s.class,
-      overallgrade:s.moralvaluesgrade||'—',traits:byStudent[s.studentid]||[]}));
+    moralValuesData=(students||[]).map(s=>({studentid:s.studentid,name:s.name,class:s.class,overallgrade:s.moralvaluesgrade||'—',traits:byStudent[s.studentid]||[]}));
     renderMoralValuesAdmin();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
 }
@@ -3919,9 +3938,7 @@ function renderMoralValuesAdmin(){
   const wrap=document.getElementById('moralValuesAdminWrap');
   if(moralValuesData.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
   const showClass=currentAdminClass==='all';
-  let html='<table><thead><tr><th>#</th><th>Student</th>'
-    +(showClass?'<th>Class</th>':'')
-    +'<th>Overall</th><th>Traits</th><th>Actions</th></tr></thead><tbody>';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'+(showClass?'<th>Class</th>':'')+'<th>Overall</th><th>Traits</th><th>Actions</th></tr></thead><tbody>';
   moralValuesData.forEach((s,idx)=>{
     const t=s.traits.map(x=>`<span style="display:inline-block;background:rgba(120,180,255,.10);padding:3px 9px;border-radius:20px;font-size:.66rem;margin:2px;border:1px solid rgba(140,190,255,.15);">${escapeHtml(x.trait)}: <strong style="color:#22d3ee;">${escapeHtml(x.grade||'—')}</strong></span>`).join('')||'<span style="color:#6d88ad;">No traits</span>';
     html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
@@ -3992,11 +4009,8 @@ async function saveMoralValues(e,sid){
   try{
     await supabaseClient.from('moral_values').delete().eq('studentid',studentid);
     if(traits.length>0){await supabaseClient.from('moral_values').insert(traits.map(t=>({studentid,...t})));}
-    await supabaseClient.from('students').update({
-      moralvaluesgrade:og,moralvaluessub:traits.map(t=>t.trait).join(', ')||null
-    }).eq('studentid',studentid);
-    showToast('✅ Saved','success');
-    closeModal('globalModal');loadMoralValuesAdmin();
+    await supabaseClient.from('students').update({moralvaluesgrade:og,moralvaluessub:traits.map(t=>t.trait).join(', ')||null}).eq('studentid',studentid);
+    showToast('✅ Saved','success');closeModal('globalModal');loadMoralValuesAdmin();
   }catch(e){showToast('❌ Error','error');}
   showLoading(false);
 }
@@ -4139,8 +4153,7 @@ async function saveClassSubjects(){
   if(!val)return;
   try{
     await supabaseClient.from('settings').upsert({key:'classSubjectsList',value:val},{onConflict:'key'});
-    SETTINGS_CACHE.classSubjectsList=val;
-    CLASS_SUBJECTS=parseClassSubjects(val);
+    SETTINGS_CACHE.classSubjectsList=val;CLASS_SUBJECTS=parseClassSubjects(val);
     showToast('✅ Saved','success');
   }catch(e){showToast('❌ Error','error');}
 }
@@ -4158,25 +4171,16 @@ async function changeAdminPassword(){
 function saveBgUrl(type){
   const url=document.getElementById(type==='id'?'settingsIdBgUrl':'settingsTopperBgUrl').value.trim();
   if(!url){showToast('URL required','error');return;}
-  if(type==='id'){
-    ID_CARD_BG_URL=url;
-    localStorage.setItem('id_card_bg',url);
-    showToast('✅ ID Card background saved','success');
-  }else{
-    TOPPER_BG_URL=url;
-    localStorage.setItem('topper_bg',url);
-    showToast('✅ Topper background saved','success');
-  }
+  if(type==='id'){ID_CARD_BG_URL=url;localStorage.setItem('id_card_bg',url);showToast('✅ ID Card background saved','success');}
+  else{TOPPER_BG_URL=url;localStorage.setItem('topper_bg',url);showToast('✅ Topper background saved','success');}
 }
 function clearBgUrl(type){
   if(type==='id'){
-    ID_CARD_BG_URL='';
-    localStorage.removeItem('id_card_bg');
+    ID_CARD_BG_URL='';localStorage.removeItem('id_card_bg');
     const inp=document.getElementById('settingsIdBgUrl');if(inp)inp.value='';
     showToast('🗑️ ID Card background cleared','info');
   }else{
-    TOPPER_BG_URL='';
-    localStorage.removeItem('topper_bg');
+    TOPPER_BG_URL='';localStorage.removeItem('topper_bg');
     const inp=document.getElementById('settingsTopperBgUrl');if(inp)inp.value='';
     showToast('🗑️ Topper background cleared','info');
   }
@@ -4253,11 +4257,9 @@ function downloadBalancesPDF(){
 }
 
 /* ============================================================
-   AI CHAT ASSISTANT
+   AI CHAT
 ============================================================ */
-let aiOpen=false;
-let aiHistory=[];
-
+let aiOpen=false,aiHistory=[];
 function toggleAIChat(){
   if(!currentUser){showToast('Please login first','error');return;}
   aiOpen=!aiOpen;
@@ -4271,23 +4273,16 @@ function toggleAIChat(){
 function aiQuick(text){document.getElementById('aiInput').value=text;sendAIMessage();}
 function aiAddMsg(text,who){
   const body=document.getElementById('aiBody');
-  const d=document.createElement('div');
-  d.className='ai-msg '+who;
-  d.innerHTML=text;
-  body.appendChild(d);
-  body.scrollTop=body.scrollHeight;
-  return d;
+  const d=document.createElement('div');d.className='ai-msg '+who;d.innerHTML=text;
+  body.appendChild(d);body.scrollTop=body.scrollHeight;return d;
 }
 function aiTyping(){
   const body=document.getElementById('aiBody');
-  const d=document.createElement('div');
-  d.className='ai-typing';d.id='aiTypingIndicator';
+  const d=document.createElement('div');d.className='ai-typing';d.id='aiTypingIndicator';
   d.innerHTML='<span></span><span></span><span></span>';
-  body.appendChild(d);
-  body.scrollTop=body.scrollHeight;
+  body.appendChild(d);body.scrollTop=body.scrollHeight;
 }
 function aiStopTyping(){const t=document.getElementById('aiTypingIndicator');if(t)t.remove();}
-
 async function sendAIMessage(){
   if(!currentUser){showToast('Please login first','error');return;}
   const input=document.getElementById('aiInput');
@@ -4303,12 +4298,10 @@ async function sendAIMessage(){
   aiAddMsg(answer,'bot');
   aiHistory.push({role:'bot',text:answer});
 }
-
 async function aiRespond(q){
   const t=q.toLowerCase();
   if(!currentUser){return 'ദയവായി ആദ്യം login ചെയ്യൂ 😊';}
   const uname=escapeHtml(currentUser.name||'Student');
-
   if(/(balance|ബാലൻസ്|പലതുള്ളി|palathulli|money|പണം|wallet|സമ്പാദ്യം|savings)/.test(t)){
     try{
       const b=await getStudentBalance(currentUser.studentId);
@@ -4317,13 +4310,12 @@ async function aiRespond(q){
       return `💰 <b>${uname}, പലതുള്ളി ബാലൻസ്</b><br><br>
       ബാലൻസ്: <b>₹${b.toFixed(2)}</b><br>
       പരമാവധി പിൻവലിക്കാം: <b>₹${max>0?max.toFixed(2):'0.00'}</b><br>
-      <small>(Minimum ₹${MIN_WITHDRAW} അക്കൗണ്ടിൽ നിലനിർത്തണം)</small><br><br>
-      ${state}`;
+      <small>(Minimum ₹${MIN_WITHDRAW} അക്കൗണ്ടിൽ നിലനിർത്തണം)</small><br><br>${state}`;
     }catch(e){return 'ബാലൻസ് എടുക്കാൻ കഴിഞ്ഞില്ല 😕';}
   }
   if(/(attendance|ഹാജർ|present|absent|ഹാജര്)/.test(t)){
     const a=currentUser.attendance||0;
-    const msg=a>=90?'മികച്ച ഹാജർ! 🌟':a>=75?'നല്ലത് 👍':a>=60?'ശരാശരി — കൂടുതൽ ശ്രദ്ധിക്കൂ':'⚠️ ഹാജർ കുറവാണ്!';
+    const msg=a>=90?'മികച്ച ഹാജർ! 🌟':a>=75?'നല്ലത് 👍':a>=60?'ശരാശരി':'⚠️ ഹാജർ കുറവാണ്!';
     return `📆 <b>${uname}, ഹാജർ വിവരം</b><br><br>ഹാജർ: <b>${a}%</b><br>${msg}`;
   }
   if(/(result|റിസൾട്ട്|grade|ഗ്രേഡ്|mark|മാർക്സ്|score|പരീക്ഷ)/.test(t)){
@@ -4387,10 +4379,9 @@ async function aiRespond(q){
       👤 പ്രൊഫൈൽ<br>🔔 അറിയിപ്പുകൾ<br>📅 പരിപാടികൾ`;
   }
   if(/(hi|hello|hai|ഹായ്|ഹലോ|ഹലോ|സലാം|salam|അസ്സലാം)/.test(t)){
-    return `വ അലൈക്കും സലാം <b>${uname}</b>! 👋<br><br>എങ്ങനെ സഹായിക്കാം? ബാലൻസ്, ഹാജർ, റിസൾട്ട്, ടൈംടേബിൾ എന്നിവയെക്കുറിച്ച് ചോദിക്കാം 😊`;
+    return `വ അലൈക്കും സലാം <b>${uname}</b>! 👋<br><br>എങ്ങനെ സഹായിക്കാം?`;
   }
   if(/(thank|thanks|നന്ദി|shukriya)/.test(t)){return `ജസാക്കല്ലാഹു ഖൈർ ${uname}! 💙`;}
-
   return `🤔 ${uname}, ക്ഷമിക്കണം — അത് മനസ്സിലായില്ല.<br><br>
     <b>ഇതിൽ ഏതെങ്കിലും ചോദിക്കൂ:</b><br>
     • എന്റെ ബാലൻസ് എത്ര?<br>• എന്റെ ഹാജർ എത്ര?<br>
@@ -4398,7 +4389,7 @@ async function aiRespond(q){
 }
 
 /* ============================================================
-   GLOBAL EXPORTS
+   EXPORTS
 ============================================================ */
 Object.assign(window,{
   showResultsModal,showAttendanceReport,showMoralValuesModal,showProfileCard,closeModal,openEditProfile,closeEditProfile,
@@ -4419,7 +4410,8 @@ Object.assign(window,{
   getFilteredStudentIds,
   showExamMarks,onStudentExamChange,renderStudentExamMarks,
   saveBgUrl,clearBgUrl,loadBgUrlsIntoForm,
-  getStudentBalance,subscribeNotifications
+  getStudentBalance,subscribeNotifications,
+  toggleSubjectColumn,validateMarksInputs,parseMarksInput
 });
 
 /* ============================================================
@@ -4428,14 +4420,13 @@ Object.assign(window,{
 async function initApp(){
   try{await loadAllSettings();}catch(e){}
   restoreSession();
-
   document.querySelectorAll(
     '#globalModal,#passbookModal,#findStudentIdModal,#editProfileModal,#forgotModal,#topperModal,#topperCropModal,#studentWithdrawalModal,#notificationsModal'
   ).forEach(el=>{
     if(el)el.addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
   });
   if(closeModalBtn)closeModalBtn.addEventListener('click',()=>modal.style.display='none');
-  console.log('%c✅ Noorussalam Madrasa v15.1 — Phase 1+2','color:#22d3ee;font-weight:bold;font-size:14px;');
+  console.log('%c✅ Noorussalam Madrasa v15.2 — 0/-/empty support','color:#22d3ee;font-weight:bold;font-size:14px;');
 }
 initApp();
 </script>
