@@ -2813,7 +2813,7 @@ function switchAdminTab(tab){
   if(tab==='library')loadLibraryAdmin();
 }
 
-/* ==== ADMIN: MARKS ==== */
+/* ==== ADMIN: MARKS (FIXED) ==== */
 async function loadMarksEntry(){
   if(!currentAdminClass)return;
   if(currentAdminClass==='all'){
@@ -2828,42 +2828,41 @@ async function loadMarksEntry(){
   const wrap=document.getElementById('marksWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data:students}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
-    const {data:existing}=await supabaseClient.from('exam_marks').select('*').eq('exam_name',exam);
+    const {data:students}=await supabaseClient.from('students')
+      .select('studentid,name').eq('class',currentAdminClass).order('name');
+    const {data:existing}=await supabaseClient.from('exam_marks')
+      .select('studentid,subject,max_marks,obtained_marks')
+      .eq('exam_name',exam).limit(10000);
 
-    const subjectConfig={};
-    subjects.forEach(sub=>{
-      const ex=(existing||[]).filter(e=>e.subject===sub);
+    /* map: studentid||subject -> record  (avoids index collisions) */
+    const exMap={};
+    (existing||[]).forEach(e=>{exMap[`${e.studentid}||${e.subject}`]=e;});
+
+    /* per-subject max marks (from existing data, default 100) */
+    const subjectConfig=subjects.map((sub,si)=>{
       let mx=100;
-      if(ex.length>0){
-        mx=Number(ex[0].max_marks);
-        if(isNaN(mx) || mx<0) mx=100;
-      }
-      subjectConfig[sub]={enabled:true, max_marks:mx};
+      const found=(existing||[]).find(e=>e.subject===sub && e.max_marks!==null && e.max_marks!==undefined && Number(e.max_marks)>0);
+      if(found)mx=Number(found.max_marks);
+      return {subject:sub,max_marks:mx,enabled:true,si};
     });
 
+    /* per-student marks array (index aligned with subjects) */
     marksEntryData=(students||[]).map(s=>({
       studentid:s.studentid,
       name:s.name,
-      marks:subjects.reduce((a,sub)=>{
-        const r=(existing||[]).find(e=>e.studentid===s.studentid&&e.subject===sub);
-        if(r && r.obtained_marks!==null && r.obtained_marks!==undefined){
-          if(Number(r.max_marks)===0 && Number(r.obtained_marks)===0){
-            a[sub]='P';
-          } else {
-            a[sub]=r.obtained_marks;
-          }
-        } else {
-          a[sub]='';
-        }
-        return a;
-      },{})
+      marks:subjects.map(sub=>{
+        const r=exMap[`${s.studentid}||${sub}`];
+        if(!r)return '';
+        if(Number(r.max_marks)===0 && Number(r.obtained_marks)===0)return 'P';
+        if(r.obtained_marks===null||r.obtained_marks===undefined)return '';
+        return String(r.obtained_marks);
+      })
     }));
 
     if(marksEntryData.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
 
     let html=`<div class="class-subjects-info">
-      <strong class="text-white" style="font-size:.88rem;">📚 Class ${currentAdminClass} — ${exam}</strong>
+      <strong class="text-white" style="font-size:.88rem;">📚 Class ${escapeHtml(currentAdminClass)} — ${escapeHtml(exam)}</strong>
       <div style="font-size:.72rem;color:#9db8dd;margin-top:4px;line-height:1.6;">
         💡 ഓരോ വിഷയത്തിനും Max Marks നൽകുക. പരീക്ഷയിൽ ഇല്ലാത്ത വിഷയം uncheck ചെയ്യുക.<br>
         🎯 <b>0</b> = count • <b>-</b> / ഒഴിച്ചിട്ടാൽ = skip • <b>P</b> = Pass (count ചെയ്യില്ല)
@@ -2875,44 +2874,37 @@ async function loadMarksEntry(){
         <i class="fas fa-sliders"></i> വിഷയങ്ങളും Max Marks-ഉം
         <small>0 = count • "-" = skip • "P" = pass</small>
       </div>
-      <div class="marks-config-grid">
-        ${subjects.map(sub=>{
-          const k=sub.replace(/[^a-zA-Z0-9]/g,'');
-          const cfg=subjectConfig[sub];
-          return `<div class="subject-config-item" id="cfg_${k}">
-            <label>
-              <input type="checkbox" id="subj_en_${k}" ${cfg.enabled?'checked':''}
-                     onchange="toggleSubjectColumn('${k}', this.checked)">
-              ${escapeHtml(sub)}
-            </label>
-            <input type="number" id="subj_max_${k}" value="${cfg.max_marks}"
-                   min="1" max="500" placeholder="Max" autocomplete="off"
-                   onwheel="this.blur()"
-                   oninput="validateMarksInputs()">
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
+      <div class="marks-config-grid">`;
+    subjectConfig.forEach(cfg=>{
+      html+=`<div class="subject-config-item" id="cfg_s${cfg.si}">
+        <label>
+          <input type="checkbox" id="subj_en_s${cfg.si}" ${cfg.enabled?'checked':''}
+                 onchange="toggleSubjectColumn(${cfg.si}, this.checked)">
+          ${escapeHtml(cfg.subject)}
+        </label>
+        <input type="number" id="subj_max_s${cfg.si}" value="${cfg.max_marks}"
+               min="1" max="500" placeholder="Max" autocomplete="off"
+               onwheel="this.blur()" oninput="validateMarksInputs()">
+      </div>`;
+    });
+    html+=`</div></div>`;
 
     html+='<div class="marks-entry-table"><table><thead><tr><th>#</th><th>Student</th>';
-    subjects.forEach(sub=>{
-      const k=sub.replace(/[^a-zA-Z0-9]/g,'');
-      html+=`<th class="col_${k}" style="text-align:center;">${escapeHtml(sub.substring(0,10))}</th>`;
+    subjects.forEach((sub,si)=>{
+      html+=`<th class="col_s${si}" style="text-align:center;">${escapeHtml(sub.length>10?sub.substring(0,10):sub)}</th>`;
     });
     html+='</tr></thead><tbody>';
 
-    marksEntryData.forEach((s,idx)=>{
-      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-      html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
-      subjects.forEach(sub=>{
-        const k=sub.replace(/[^a-zA-Z0-9]/g,'');
-        html+=`<td class="col_${k}" style="text-align:center;">
-          <input type="text" inputmode="text" id="mk_${cid}_${k}" class="mk-inp"
-                 data-cid="${cid}" data-k="${k}"
+    marksEntryData.forEach((s,ri)=>{
+      html+=`<tr><td>${ri+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
+      subjects.forEach((sub,si)=>{
+        const v=(s.marks[si]===undefined||s.marks[si]===null)?'':String(s.marks[si]);
+        html+=`<td class="col_s${si}" style="text-align:center;">
+          <input type="text" inputmode="text" id="mk_${ri}_${si}" class="mk-inp"
+                 data-r="${ri}" data-k="${si}" value="${escapeHtml(v)}"
                  placeholder="—" autocapitalize="characters"
                  autocomplete="off" autocorrect="off" spellcheck="false"
-                 onwheel="this.blur()"
-                 oninput="validateMarksInputs()">
+                 onwheel="this.blur()" oninput="validateMarksInputs()">
         </td>`;
       });
       html+='</tr>';
@@ -2920,81 +2912,58 @@ async function loadMarksEntry(){
     html+='</tbody></table></div>';
     wrap.innerHTML=html;
 
-    /* Set values via JS after render */
-    const setValues=()=>{
-      wrap.querySelectorAll('.mk-inp').forEach(inp=>{
-        const cid=inp.dataset.cid;
-        const k=inp.dataset.k;
-        let val='';
-        for(const sub of subjects){
-          if(sub.replace(/[^a-zA-Z0-9]/g,'')!==k)continue;
-          const s=marksEntryData.find(x=>String(x.studentid).replace(/[^a-zA-Z0-9]/g,'')===cid);
-          if(s){
-            const v=s.marks[sub];
-            val=(v===undefined||v===null)?'':String(v);
-          }
-          break;
-        }
-        if(inp.value!==val)inp.value=val;
-      });
-    };
-    setValues();
-    setTimeout(setValues,80);
-    setTimeout(setValues,250);
-
-    subjects.forEach(sub=>{
-      const k=sub.replace(/[^a-zA-Z0-9]/g,'');
-      toggleSubjectColumn(k, subjectConfig[sub].enabled);
-    });
-
     wrap.dataset.subjects=JSON.stringify(subjects);
+    subjects.forEach((sub,si)=>toggleSubjectColumn(si,true));
     validateMarksInputs();
   }catch(e){console.error(e);wrap.innerHTML='<div class="empty-state">Error loading</div>';}
 }
-function toggleSubjectColumn(k, show){
-  document.querySelectorAll(`.col_${k}`).forEach(el=>{el.style.display = show ? '' : 'none';});
-  const cfg=document.getElementById(`cfg_${k}`);
+
+function toggleSubjectColumn(si, show){
+  document.querySelectorAll('.col_s'+si).forEach(el=>{el.style.display = show ? '' : 'none';});
+  const cfg=document.getElementById('cfg_s'+si);
   if(cfg)cfg.classList.toggle('disabled', !show);
 }
+
 function validateMarksInputs(){
-  if(!marksEntryData)return;
-  const subjects=JSON.parse(document.getElementById('marksWrap')?.dataset.subjects||'[]');
-  subjects.forEach(sub=>{
-    const k=sub.replace(/[^a-zA-Z0-9]/g,'');
-    const maxEl=document.getElementById(`subj_max_${k}`);
-    const enEl=document.getElementById(`subj_en_${k}`);
-    if(!enEl || !enEl.checked)return;
-    const mx=parseFloat(maxEl?.value)||0;
-    marksEntryData.forEach(s=>{
-      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-      const inp=document.getElementById(`mk_${cid}_${k}`);
+  const wrap=document.getElementById('marksWrap');
+  if(!wrap||!marksEntryData)return;
+  let subjects=[];
+  try{subjects=JSON.parse(wrap.dataset.subjects||'[]');}catch(e){return;}
+  subjects.forEach((sub,si)=>{
+    const enEl=document.getElementById('subj_en_s'+si);
+    if(!enEl||!enEl.checked)return;
+    const maxEl=document.getElementById('subj_max_s'+si);
+    const mx=parseFloat(maxEl?maxEl.value:0)||0;
+    marksEntryData.forEach((s,ri)=>{
+      const inp=document.getElementById('mk_'+ri+'_'+si);
       if(!inp)return;
       const parsed=parseMarksInput(inp.value);
       inp.classList.remove('invalid','skipped');
+      inp.style.borderColor='';inp.style.background='';
       if(parsed.skip){inp.classList.add('skipped');return;}
       if(parsed.isPass){inp.style.borderColor='rgba(52,211,153,.6)';inp.style.background='rgba(52,211,153,.10)';return;}
-      inp.style.borderColor='';inp.style.background='';
-      const v=parsed.value;
-      if(v<0 || (mx>0 && v>mx)){inp.classList.add('invalid');}
+      if(parsed.value<0||(mx>0&&parsed.value>mx))inp.classList.add('invalid');
     });
   });
 }
+
 async function saveMarksBulk(){
   const wrap=document.getElementById('marksWrap');
-  const subjects=JSON.parse(wrap.dataset.subjects||'[]');
+  if(!wrap)return;
+  let subjects=[];
+  try{subjects=JSON.parse(wrap.dataset.subjects||'[]');}catch(e){subjects=[];}
   const exam=marksExamCache;
   if(!exam||subjects.length===0){showToast('Load marks first','error');return;}
+  if(!marksEntryData||marksEntryData.length===0){showToast('No students','error');return;}
 
   const enabled=[];
-  for(const sub of subjects){
-    const k=sub.replace(/[^a-zA-Z0-9]/g,'');
-    const enEl=document.getElementById(`subj_en_${k}`);
-    const maxEl=document.getElementById(`subj_max_${k}`);
-    if(enEl && enEl.checked){
-      const mx=parseFloat(maxEl?.value)||100;
-      if(mx<=0){showToast(`⚠️ ${sub}: Max Marks > 0 ആയിരിക്കണം`,'error');return;}
-      enabled.push({subject:sub, max_marks:mx, k});
-    }
+  for(let si=0;si<subjects.length;si++){
+    const enEl=document.getElementById('subj_en_s'+si);
+    if(!enEl||!enEl.checked)continue;
+    const maxEl=document.getElementById('subj_max_s'+si);
+    const mx=parseFloat(maxEl?maxEl.value:'')||0;
+    if(mx<=0){showToast(`⚠️ ${subjects[si]}: Max Marks > 0 ആയിരിക്കണം`,'error');return;}
+    enabled.push({subject:subjects[si],max_marks:mx,si});
   }
   if(enabled.length===0){showToast('⚠️ കുറഞ്ഞത് ഒരു വിഷയം enable ചെയ്യുക','error');return;}
 
@@ -3005,10 +2974,9 @@ async function saveMarksBulk(){
     let savedCount=0,skippedCount=0,zeroCount=0,passCount=0;
     const errors=[];
 
-    marksEntryData.forEach(s=>{
-      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-      enabled.forEach(({subject, max_marks, k})=>{
-        const el=wrap.querySelector(`input.mk-inp[data-cid="${cid}"][data-k="${k}"]`);
+    marksEntryData.forEach((s,ri)=>{
+      enabled.forEach(({subject,max_marks,si})=>{
+        const el=document.getElementById('mk_'+ri+'_'+si);
         if(!el)return;
         const parsed=parseMarksInput(el.value);
         if(parsed.skip){skippedCount++;return;}
@@ -3032,15 +3000,12 @@ async function saveMarksBulk(){
     }
 
     const ids=marksEntryData.map(s=>s.studentid);
-    if(ids.length>0){
-      await supabaseClient.from('exam_marks').delete().eq('exam_name',exam).in('studentid',ids);
+    for(let i=0;i<ids.length;i+=200){
+      await supabaseClient.from('exam_marks').delete().eq('exam_name',exam).in('studentid',ids.slice(i,i+200));
     }
-    if(rows.length>0){
-      const CHUNK=200;
-      for(let i=0;i<rows.length;i+=CHUNK){
-        const {error}=await supabaseClient.from('exam_marks').insert(rows.slice(i,i+CHUNK));
-        if(error)throw error;
-      }
+    for(let i=0;i<rows.length;i+=200){
+      const {error}=await supabaseClient.from('exam_marks').insert(rows.slice(i,i+200));
+      if(error)throw error;
     }
 
     let msg=`✅ Saved ${savedCount}`;
@@ -3050,9 +3015,10 @@ async function saveMarksBulk(){
     showToast(msg,'success');
     await autoCalculateRanks(true);
     await loadMarksEntry();
-  }catch(e){showToast('❌ '+(e.message||'Error'),'error');}
+  }catch(e){console.error(e);showToast('❌ '+(e.message||'Error'),'error');}
   btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save Marks';
 }
+
 async function autoCalculateRanks(silent){
   if(!currentAdminClass)return;
   if(currentAdminClass==='all'){showToast('Auto rank-ന് specific class തിരഞ്ഞെടുക്കുക','error');return;}
@@ -3062,32 +3028,42 @@ async function autoCalculateRanks(silent){
     const {data:students}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
     if(!students||students.length===0){if(!silent)showToast('No students','error');if(!silent)showLoading(false);return;}
     const ids=students.map(s=>s.studentid);
-    const {data:marks}=await supabaseClient.from('exam_marks').select('studentid,subject,obtained_marks,max_marks').in('studentid',ids);
-    if(!marks||marks.length===0){if(!silent)showToast('No marks found','error');if(!silent)showLoading(false);return;}
+    let marks=[];
+    for(let i=0;i<ids.length;i+=200){
+      const {data:m}=await supabaseClient.from('exam_marks')
+        .select('studentid,exam_name,subject,obtained_marks,max_marks').in('studentid',ids.slice(i,i+200));
+      marks=marks.concat(m||[]);
+    }
+    if(marks.length===0){if(!silent)showToast('No marks found','error');if(!silent)showLoading(false);return;}
 
-    const subjMax={};
+    /* exam -> subject -> max */
+    const examSubMax={};
     marks.forEach(m=>{
-      const sub=m.subject||'';
-      if(!sub)return;
-      const mx=Number(m.max_marks)||0;
-      if(mx<=0)return;
-      if(!subjMax[sub] || mx>subjMax[sub])subjMax[sub]=mx;
+      const mx=Number(m.max_marks)||0;if(mx<=0)return;
+      const ex=m.exam_name||'Exam';
+      if(!examSubMax[ex])examSubMax[ex]={};
+      if(!examSubMax[ex][m.subject]||mx>examSubMax[ex][m.subject])examSubMax[ex][m.subject]=mx;
     });
-    const totalMaxAll=Object.values(subjMax).reduce((a,b)=>a+b,0);
-    if(totalMaxAll<=0){if(!silent)showToast('No standard subjects','error');if(!silent)showLoading(false);return;}
+    const examTotalMax={};
+    Object.keys(examSubMax).forEach(ex=>{
+      examTotalMax[ex]=Object.values(examSubMax[ex]).reduce((a,b)=>a+b,0);
+    });
 
-    const totals={};
-    students.forEach(s=>{totals[s.studentid]={o:0};});
+    /* student -> exam -> obtained */
+    const stuExam={};
     marks.forEach(m=>{
-      const mx=Number(m.max_marks)||0;
-      if(mx<=0)return;
-      if(totals[m.studentid])totals[m.studentid].o += Number(m.obtained_marks)||0;
+      const mx=Number(m.max_marks)||0;if(mx<=0)return;
+      const ex=m.exam_name||'Exam';
+      if(!stuExam[m.studentid])stuExam[m.studentid]={};
+      stuExam[m.studentid][ex]=(stuExam[m.studentid][ex]||0)+(Number(m.obtained_marks)||0);
     });
 
     const list=students.map(s=>{
-      const o=totals[s.studentid].o;
-      const pct=Math.round((o/totalMaxAll)*100);
-      return {studentid:s.studentid, pct};
+      const per=stuExam[s.studentid]||{};
+      const pcts=Object.keys(per).filter(ex=>examTotalMax[ex]>0)
+        .map(ex=>Math.min(100,Math.round(per[ex]/examTotalMax[ex]*100)));
+      const pct=pcts.length?Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length):0;
+      return {studentid:s.studentid,pct};
     });
     list.sort((a,b)=>b.pct-a.pct);
 
@@ -3102,7 +3078,7 @@ async function autoCalculateRanks(silent){
       else if(s.pct>=50)g='C+';else if(s.pct>=40)g='C';
       await supabaseClient.from('students').update({rank:cr,performance:s.pct,overallgrade:g}).eq('studentid',s.studentid);
     }
-    showToast(`✅ Ranks updated (total max = ${totalMaxAll})`,'success');
+    showToast(`✅ Ranks updated`,'success');
     if(!silent)loadGradesForAdmin();
   }catch(e){console.error(e);if(!silent)showToast('❌ Error','error');}
   if(!silent)showLoading(false);
@@ -4354,6 +4330,16 @@ async function initApp(){
     if(el)el.addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
   });
   if(closeModalBtn)closeModalBtn.addEventListener('click',()=>modal.style.display='none');
+
+  /* ---- Service Worker registration (was missing!) ---- */
+  if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>{
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(()=>console.log('✅ SW registered'))
+        .catch(err=>console.warn('SW registration failed:',err));
+    });
+  }
+
   console.log('%c✅ Noorussalam Madrasa v15.4 — Final','color:#22d3ee;font-weight:bold;font-size:14px;');
 }
 initApp();
