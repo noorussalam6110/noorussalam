@@ -261,6 +261,9 @@ body::after{
 .pala-btn.ghost{background:rgba(255,255,255,.10);color:#fff;border:1.4px solid rgba(255,255,255,.22);backdrop-filter:blur(8px)}
 .pala-btn.ghost:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
 .pala-drop-deco{position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:5.4rem;opacity:.11;color:var(--cyan-soft);pointer-events:none;z-index:1}
+.pala-minhint{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;
+  background:rgba(251,191,36,.15);color:#fcd34d;border:1px solid rgba(251,191,36,.35);
+  padding:5px 12px;border-radius:30px;margin-top:10px}
 @media(max-width:600px){
   .palathulli-hero{padding:20px 18px;border-radius:24px}
   .pala-drop-deco{font-size:3.6rem;right:12px}
@@ -772,6 +775,7 @@ body::after{
           <span class="pala-label"><i class="fas fa-droplet"></i> പലതുള്ളി</span>
           <div class="pala-title-ml">പലതുള്ളി സമ്പാദ്യം</div>
           <div class="pala-sub">Palathulli Savings Wallet</div>
+          <div class="pala-minhint"><i class="fas fa-shield-halved"></i> Minimum ₹100 എപ്പോഴും നിലനിർത്തണം</div>
         </div>
         <div class="text-end">
           <div class="pala-amount" id="studentBalance">₹0.00</div>
@@ -1119,7 +1123,8 @@ body::after{
         <button class="btn-update mt-3" onclick="saveSetting('gradesList','settingsGrades')">Save</button>
       </div>
       <div class="mb-4" style="background:rgba(120,180,255,.04);padding:16px;border-radius:16px;border:1px solid var(--stroke);">
-        <h5 class="text-white mb-3" style="font-size:.95rem;">💵 Min Withdrawal (പലതുള്ളി)</h5>
+        <h5 class="text-white mb-3" style="font-size:.95rem;">💵 Minimum Balance / Withdrawal (പലതുള്ളി)</h5>
+        <p class="text-white-50 small mb-2">ഈ തുക അക്കൗണ്ടിൽ എപ്പോഴും നിലനിർത്തണം</p>
         <input type="number" id="settingsMinWithdraw" class="modal-form-input" />
         <button class="btn-update mt-3" onclick="saveSetting('minWithdraw','settingsMinWithdraw')">Save</button>
       </div>
@@ -1160,8 +1165,14 @@ body::after{
       <h3 class="text-white fw-bold mb-0" style="font-size:1.1rem;">💰 പിൻവലിക്കൽ</h3>
       <button onclick="closeStudentWithdrawalModal()" class="btn btn-sm btn-outline-light rounded-circle"><i class="fas fa-times"></i></button>
     </div>
-    <div class="text-white mb-3" style="font-size:.88rem;">
-      ബാലൻസ്: ₹<span id="swBalance">0.00</span> &nbsp;•&nbsp; Min ₹<span id="swMinAmount">100</span>
+    <div class="mb-3" style="font-size:.88rem;">
+      <div class="text-white">ബാലൻസ്: ₹<span id="swBalance">0.00</span></div>
+      <small style="color:#fcd34d;display:block;margin-top:4px;">
+        <i class="fas fa-shield-halved"></i> Minimum ₹<span id="swMinAmount">100</span> അക്കൗണ്ടിൽ നിലനിർത്തണം
+      </small>
+      <small style="color:#6ee7b7;display:block;margin-top:2px;">
+        <i class="fas fa-arrow-up"></i> പരമാവധി പിൻവലിക്കാം: ₹<span id="swMaxAmount">0.00</span>
+      </small>
     </div>
     <form id="studentWithdrawForm">
       <div class="mb-3">
@@ -1403,7 +1414,7 @@ function showToast(msg,type='info'){
   const icon=type==='success'?'✅':type==='error'?'❌':'ℹ️';
   t.innerHTML=`<span>${icon}</span><span>${msg}</span>`;
   c.appendChild(t);
-  setTimeout(()=>{if(t.parentNode)t.remove();},3200);
+  setTimeout(()=>{if(t.parentNode)t.remove();},3500);
 }
 function formatDate(d){
   if(!d)return'—';
@@ -1434,7 +1445,6 @@ function getSubjectsForClass(cls){
   if(CLASS_SUBJECTS[cs]&&CLASS_SUBJECTS[cs].length>0)return CLASS_SUBJECTS[cs];
   return SUBJECTS_LIST;
 }
-/* Class filter helpers (support 'all') */
 async function getFilteredStudentIds(){
   let q=supabaseClient.from('students').select('studentid');
   if(currentAdminClass && currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
@@ -1793,7 +1803,10 @@ async function loadStudentBalance(){
     let b=0;
     if(p)p.forEach(x=>{if(x.approved===true)b+=(x.debit||0)-(x.credit||0);});
     document.getElementById('studentBalance').textContent='₹'+b.toLocaleString('en-IN',{minimumFractionDigits:2});
-    document.getElementById('balanceStatus').textContent=b>0?'Positive balance':b===0?'Zero balance':'Overdue';
+    const belowMin=b<MIN_WITHDRAW;
+    document.getElementById('balanceStatus').textContent=
+      b>0?(belowMin?`⚠️ ₹${MIN_WITHDRAW} ൽ താഴെ`:'Positive balance'):b===0?'Zero balance':'Overdue';
+    document.getElementById('balanceStatus').style.color=belowMin?'#fcd34d':'#67e8f9';
   }catch(e){}
 }
 function openPassbook(){if(!currentUser)return;openModal('passbookModal');loadPassbookData();}
@@ -1834,6 +1847,15 @@ async function loadStudentBalanceForWithdrawal(){
     const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',currentUser.studentId);
     let b=0;if(p)p.forEach(x=>{if(x.approved===true)b+=(x.debit||0)-(x.credit||0);});
     document.getElementById('swBalance').textContent=b.toFixed(2);
+    document.getElementById('swMinAmount').textContent=MIN_WITHDRAW;
+    const max=b-MIN_WITHDRAW;
+    const maxEl=document.getElementById('swMaxAmount');
+    if(maxEl){
+      maxEl.textContent=(max>0?max:0).toFixed(2);
+      maxEl.style.color=max>0?'#6ee7b7':'#fca5a5';
+    }
+    const amtInput=document.getElementById('swAmount');
+    if(amtInput)amtInput.max=max>0?max:0;
   }catch(e){}
 }
 async function loadStudentWithdrawals(){
@@ -1855,6 +1877,8 @@ async function loadStudentWithdrawals(){
     }
   }catch(e){}
 }
+
+/* ====== WITHDRAWAL SUBMIT — With Minimum ₹100 Maintain Rule ====== */
 document.getElementById('studentWithdrawForm').addEventListener('submit',async function(e){
   e.preventDefault();
   if(!currentUser)return;
@@ -1866,15 +1890,26 @@ document.getElementById('studentWithdrawForm').addEventListener('submit',async f
   try{
     const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',currentUser.studentId);
     let bal=0;if(p)p.forEach(x=>{if(x.approved===true)bal+=(x.debit||0)-(x.credit||0);});
-    if(bal<MIN_WITHDRAW){showToast(`Minimum ₹${MIN_WITHDRAW} required`,'error');btn.disabled=false;btn.innerHTML='Submit';return;}
-    if(bal<amount){showToast('Insufficient balance','error');btn.disabled=false;btn.innerHTML='Submit';return;}
+
+    /* ⭐ MINIMUM BALANCE RULE: ₹100 എപ്പോഴും നിലനിർത്തണം */
+    const MIN_BALANCE=MIN_WITHDRAW;
+    if(bal<MIN_BALANCE){
+      showToast(`⚠️ Minimum ₹${MIN_BALANCE} ബാലൻസ് വേണം. നിലവിൽ ₹${bal.toFixed(2)}`,'error');
+      btn.disabled=false;btn.innerHTML='Submit';return;
+    }
+    const maxWithdrawable=bal-MIN_BALANCE;
+    if(amount>maxWithdrawable){
+      showToast(`⚠️ പരമാവധി ₹${maxWithdrawable.toFixed(2)} പിൻവലിക്കാം (₹${MIN_BALANCE} നിലനിർത്തണം)`,'error');
+      btn.disabled=false;btn.innerHTML='Submit';return;
+    }
+
     const {error}=await supabaseClient.from('withdrawals').insert({
       studentid:currentUser.studentId,
       date:new Date().toISOString().split('T')[0],
       amount,reason,status:'pending'
     });
     if(error)throw error;
-    showToast('✅ Request submitted','success');
+    showToast(`✅ ₹${amount} request submitted. ബാക്കി: ₹${(bal-amount).toFixed(2)}`,'success');
     document.getElementById('swAmount').value='';
     document.getElementById('swReason').value='';
     await loadStudentWithdrawals();
@@ -3233,13 +3268,8 @@ async function saveStudent(eid){
     else await supabaseClient.from('students').insert(obj);
     showToast('✅ Saved','success');
     closeModal('globalModal');loadStudentsForAdmin();
-    if(currentAdminClass==='all'){
-      const {data:s}=await supabaseClient.from('students').select('studentid');
-      document.getElementById('classBadgeStudents').textContent=(s||[]).length;
-    }else{
-      const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
-      document.getElementById('classBadgeStudents').textContent=(s||[]).length;
-    }
+    const {data:s}=await supabaseClient.from('students').select('studentid');
+    document.getElementById('classBadgeStudents').textContent=(s||[]).length;
   }catch(e){showToast('❌ '+e.message,'error');}
   showLoading(false);
 }
@@ -3659,7 +3689,7 @@ async function saveSetting(key,elId){
     if(key==='examsList'){EXAMS_LIST=val.split(',').map(s=>s.trim());populateDynamicDropdowns();}
     if(key==='traitsList')TRAITS_LIST=val.split(',').map(s=>s.trim());
     if(key==='gradesList')GRADES_LIST=val.split(',').map(s=>s.trim());
-    if(key==='minWithdraw')MIN_WITHDRAW=parseInt(val)||100;
+    if(key==='minWithdraw'){MIN_WITHDRAW=parseInt(val)||100;const el=document.getElementById('swMinAmount');if(el)el.textContent=MIN_WITHDRAW;}
     showToast('✅ Saved','success');
   }catch(e){showToast('❌ Error','error');}
 }
@@ -3815,10 +3845,13 @@ async function aiRespond(q){
     try{
       const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',currentUser.studentId);
       let b=0;if(p)p.forEach(x=>{if(x.approved===true)b+=(x.debit||0)-(x.credit||0);});
+      const max=b-MIN_WITHDRAW;
       const state=b>0?'നല്ല സമ്പാദ്യം! 👏':b===0?'ഇപ്പോൾ ബാലൻസ് പൂജ്യമാണ്.':'⚠️ ബാലൻസ് കുറവാണ്.';
-      return `💰 <b>${uname}, നിങ്ങളുടെ പലതുള്ളി ബാലൻസ്</b><br><br>
-      നിലവിലെ ബാലൻസ്: <b>₹${b.toFixed(2)}</b><br>${state}<br><br>
-      📒 പാസ്ബുക്ക് കാണാൻ "പലതുള്ളി" tile ടാപ്പ് ചെയ്യൂ.`;
+      return `💰 <b>${uname}, പലതുള്ളി ബാലൻസ്</b><br><br>
+      ബാലൻസ്: <b>₹${b.toFixed(2)}</b><br>
+      പരമാവധി പിൻവലിക്കാം: <b>₹${max>0?max.toFixed(2):'0.00'}</b><br>
+      <small>(Minimum ₹${MIN_WITHDRAW} അക്കൗണ്ടിൽ നിലനിർത്തണം)</small><br><br>
+      ${state}`;
     }catch(e){return 'ബാലൻസ് എടുക്കാൻ കഴിഞ്ഞില്ല 😕';}
   }
   if(/(attendance|ഹാജർ|present|absent|ഹാജര്)/.test(t)){
