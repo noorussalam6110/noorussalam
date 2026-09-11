@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noorussalam-v11';
+const CACHE_NAME = 'noorussalam-v12';
 const urlsToCache = ['./', './index.html'];
 
 self.addEventListener('install', event => {
