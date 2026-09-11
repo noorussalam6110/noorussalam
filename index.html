@@ -2701,7 +2701,7 @@ function openTimetableForm(id=null){
     <div class="row g-3">
       <div class="col-md-6"><label class="text-white-50 small">Day *</label>
         <select id="tt_day" required class="modal-form-input"><option value="">--</option>
-        ${['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].map(d=>`<option value="${d}" ${t.day===d?'selected':''}>${d}</option>`).join('')}
+        ${['ശനി','ഞായർ','തിങ്കൾ','ചൊവ്വ','ബുധൻ','വ്യാഴം'].map(d=>`<option value="${d}" ${t.day===d?'selected':''}>${d}</option>`).join('')}
         </select></div>
       <div class="col-md-6"><label class="text-white-50 small">Period *</label>
         <input type="number" id="tt_period" value="${t.period||1}" min="1" max="10" required class="modal-form-input"></div>
