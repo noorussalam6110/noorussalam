@@ -77,20 +77,34 @@ body::after{
 }
 @keyframes shimmer{0%{background-position:220% 0}100%{background-position:-220% 0}}
 @keyframes panelIn{from{opacity:0;transform:translateY(38px) scale(.94)}to{opacity:1;transform:none}}
-.logo-wrap{position:relative;width:108px;height:108px;margin:0 auto 18px}
+
+/* ===== LOGO — WHITE RECTANGLE ===== */
+.logo-wrap{position:relative;width:124px;height:124px;margin:0 auto 20px}
 .logo-wrap::before{
-  content:'';position:absolute;inset:-9px;border-radius:50%;
+  content:'';position:absolute;inset:-9px;border-radius:28px;
   background:conic-gradient(from 0deg,var(--b400),var(--cyan),var(--b300),var(--b500),var(--b400));
   animation:spinSlow 7s linear infinite;filter:blur(7px);opacity:.75;
 }
 @keyframes spinSlow{to{transform:rotate(360deg)}}
 .logo-circle{
-  position:relative;width:108px;height:108px;border-radius:50%;overflow:hidden;
-  background:#ffffff;display:flex;align-items:center;justify-content:center;
+  position:relative;width:124px;height:124px;
+  border-radius:22px;overflow:hidden;
+  background:#ffffff;
+  display:flex;align-items:center;justify-content:center;
   border:3px solid rgba(169,205,255,.55);
-  box-shadow:inset 0 0 24px rgba(59,139,255,.18),0 12px 32px -12px rgba(0,0,0,.6);
+  box-shadow:inset 0 0 24px rgba(59,139,255,.15),
+             0 12px 32px -12px rgba(0,0,0,.6);
 }
-.logo-circle img{width:84px;height:84px;object-fit:contain;filter:drop-shadow(0 3px 8px rgba(21,71,168,.25));}
+.logo-circle img{
+  width:96px;height:96px;object-fit:contain;
+  filter:drop-shadow(0 3px 8px rgba(21,71,168,.25));
+}
+@media(max-width:420px){
+  .logo-wrap,.logo-circle{width:108px;height:108px}
+  .logo-circle img{width:82px;height:82px}
+  .logo-circle{border-radius:20px}
+}
+
 .login-title{
   font-size:1.72rem;font-weight:800;text-align:center;letter-spacing:.5px;line-height:1.2;
   background:linear-gradient(100deg,#ffffff 10%,var(--b200) 45%,var(--cyan-soft) 90%);
@@ -158,12 +172,8 @@ body::after{
   .login-title{font-size:1.42rem}
   .form-control-glass{font-size:1.02rem;letter-spacing:2px}
   .help-btn{padding:8px 12px;font-size:.68rem}
-  .logo-wrap{width:96px;height:96px}
-  .logo-circle{width:96px;height:96px}
-  .logo-circle img{width:74px;height:74px}
 }
 
-/* ============ HELP MODAL ============ */
 .help-modal{display:none;position:fixed;inset:0;background:rgba(3,8,28,.86);backdrop-filter:blur(16px);z-index:9999;align-items:center;justify-content:center;padding:18px}
 .help-modal.active{display:flex;animation:fadeIn .25s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -179,8 +189,6 @@ body::after{
 .help-modal-close:hover{background:rgba(248,113,113,.2);color:#fff}
 .video-wrapper{position:relative;padding-bottom:56.25%;height:0;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--stroke)}
 .video-wrapper iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-
-/* ============ DASHBOARD HEADER ============ */
 .dashboard-header-glow{
   background:linear-gradient(120deg,rgba(24,87,196,.30),rgba(10,26,63,.72));
   backdrop-filter:blur(20px);border-radius:24px;padding:16px 22px;margin-bottom:18px;
@@ -213,8 +221,6 @@ body::after{
   display:flex;align-items:center;gap:8px;box-shadow:0 12px 26px -12px rgba(239,68,68,.9);transition:.22s;
 }
 .btn-exit:hover{transform:translateY(-2px);box-shadow:0 18px 34px -12px rgba(239,68,68,1)}
-
-/* ============ PALATHULLI HERO ============ */
 .palathulli-hero{
   position:relative;overflow:hidden;border-radius:28px;margin-bottom:20px;padding:26px 24px;
   background:linear-gradient(125deg,rgba(30,107,224,.42) 0%,rgba(21,71,168,.55) 45%,rgba(10,26,63,.85) 100%);
@@ -266,8 +272,6 @@ body::after{
   .pala-drop-deco{font-size:3.6rem;right:12px}
   .pala-title-ml{font-size:1.22rem}
 }
-
-/* ============ STATS ============ */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:22px}
 .stat-card-neon{
   background:linear-gradient(150deg,rgba(120,180,255,.10),rgba(120,180,255,.03));
@@ -303,8 +307,6 @@ body::after{
   .avatar-neon{width:52px;height:52px;font-size:20px;border-radius:16px}
   #studentFullName{font-size:1rem}
 }
-
-/* ============ ACTION TILES ============ */
 .section-title{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.06rem;color:#fff;margin:22px 0 14px}
 .section-title i{color:var(--cyan)}
 .action-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:0 0 22px}
@@ -336,8 +338,6 @@ body::after{
   .action-tile h6{font-size:.72rem}
   .action-tile{padding:13px 6px;border-radius:16px}
 }
-
-/* ============ FEED / EVENTS ============ */
 .activity-timeline{
   background:linear-gradient(150deg,rgba(120,180,255,.07),rgba(10,26,63,.5));
   backdrop-filter:blur(14px);border-radius:20px;padding:18px;border:1px solid var(--stroke);height:100%;
@@ -354,8 +354,6 @@ body::after{
   border-left:3px solid var(--cyan);transition:.22s;
 }
 .event-card:hover{transform:translateX(4px);border-left-color:var(--b400)}
-
-/* ============ ADMIN ============ */
 .class-selector-panel{
   background:linear-gradient(135deg,rgba(30,107,224,.20),rgba(10,26,63,.7));
   border:1.6px solid rgba(125,179,255,.35);border-radius:26px;padding:26px;margin-bottom:22px;text-align:center;
@@ -452,8 +450,6 @@ body::after{
 .admin-summary .stat .num.green{color:#6ee7b7}
 .admin-summary .stat .num.orange{color:#fcd34d}
 .admin-summary .stat .label{font-size:.55rem;text-transform:uppercase;color:var(--txt-dim);margin-top:3px;letter-spacing:1px}
-
-/* ============ MODALS ============ */
 .modal-glass{
   background:linear-gradient(160deg,rgba(24,87,196,.26),rgba(5,14,43,.97));
   backdrop-filter:blur(26px);border:1px solid var(--stroke-2);border-radius:26px;
@@ -467,8 +463,6 @@ body::after{
 .modal-form-input:focus{border-color:var(--b400);box-shadow:0 0 0 3px rgba(59,139,255,.16)}
 .modal-form-input option{background:#0a1a3f;color:#fff}
 .modal-form-input::placeholder{color:rgba(169,205,255,.35)}
-
-/* ============ TOAST ============ */
 .toast-container{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:10050;width:92%;max-width:420px;
   display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .toast-item{
@@ -481,8 +475,6 @@ body::after{
 .toast-item.success{background:linear-gradient(100deg,rgba(5,150,105,.95),rgba(16,185,129,.9))}
 .toast-item.error{background:linear-gradient(100deg,rgba(153,27,27,.95),rgba(239,68,68,.9))}
 .toast-item.info{background:linear-gradient(100deg,rgba(21,71,168,.95),rgba(30,107,224,.9))}
-
-/* ============ MISC ============ */
 .spinner-sm{display:inline-block;width:18px;height:18px;border:2.5px solid rgba(255,255,255,.2);
   border-top-color:var(--cyan);border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -552,8 +544,6 @@ body::after{
 .profile-photo-wrapper .photo-edit-btn:hover{transform:scale(1.1) rotate(8deg)}
 .class-subjects-info{padding:12px 16px;background:rgba(59,139,255,.10);border-radius:14px;margin-bottom:12px;
   border:1px solid rgba(59,139,255,.28)}
-
-/* ============ LIGHT THEME ============ */
 .dashboard-light{
   background:linear-gradient(155deg,#f0f4ff 0%,#e8edf5 50%,#dde6f5 100%) !important;
   color:#1a2340;
@@ -649,8 +639,6 @@ body::after{
 .dashboard-light .progress{
   background:rgba(21,71,168,.12) !important;
 }
-
-/* ============ BLINKING NOTIFICATION BELL ============ */
 @keyframes bellBlink{
   0%,100%{transform:scale(1);color:#fbbf24;box-shadow:0 0 0 0 rgba(239,68,68,.75),0 0 0 0 rgba(251,191,36,.45);
     background:rgba(251,191,36,.14);border-color:rgba(251,191,36,.35)}
@@ -661,8 +649,6 @@ body::after{
 .icon-btn.has-unread i{color:#fbbf24 !important}
 @keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
 .notif-badge.pulse{animation:badgePulse 1s ease-in-out infinite}
-
-/* ============ EXAM SELECTOR ============ */
 .exam-selector-panel{
   background:linear-gradient(135deg,rgba(30,107,224,.22),rgba(34,211,238,.10));
   border:1.6px solid rgba(34,211,238,.42);border-radius:20px;padding:16px;margin-bottom:16px;
@@ -678,14 +664,10 @@ body::after{
   background-repeat:no-repeat;background-position:right 14px center;background-size:18px;
 }
 .exam-selector-panel select option{background:#0a1a3f;color:#fff}
-
-/* ============ MARKS CONFIG PANEL ============ */
 .marks-config-panel{
   background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(30,107,224,.18));
   border:1.6px solid rgba(34,211,238,.4);
-  border-radius:18px;
-  padding:14px;
-  margin-bottom:16px;
+  border-radius:18px;padding:14px;margin-bottom:16px;
 }
 .marks-config-title{
   font-size:.85rem;color:#fff;font-weight:800;margin-bottom:12px;
@@ -703,19 +685,13 @@ body::after{
 .subject-config-item{
   background:rgba(8,20,48,.65);
   border:1px solid var(--stroke);
-  border-radius:12px;
-  padding:9px 10px;
-  transition:.22s;
+  border-radius:12px;padding:9px 10px;transition:.22s;
 }
-.subject-config-item.disabled{
-  opacity:.45;
-  background:rgba(8,20,48,.4);
-}
+.subject-config-item.disabled{opacity:.45;background:rgba(8,20,48,.4);}
 .subject-config-item label{
   display:flex;align-items:center;gap:7px;
   font-size:.72rem;font-weight:800;color:#fff;
-  cursor:pointer;margin-bottom:7px;
-  user-select:none;
+  cursor:pointer;margin-bottom:7px;user-select:none;
 }
 .subject-config-item label input[type="checkbox"]{
   width:15px;height:15px;accent-color:#22d3ee;cursor:pointer;
@@ -775,8 +751,6 @@ body::after{
   background:rgba(140,190,255,.06);
   color:#9db8dd;
 }
-
-/* ============ AI CHAT ============ */
 .ai-fab{
   position:fixed;bottom:22px;right:20px;z-index:9000;width:62px;height:62px;border-radius:50%;border:none;
   cursor:pointer;display:none;align-items:center;justify-content:center;font-size:1.5rem;color:#03132e;
@@ -865,7 +839,6 @@ body::after{
 <p style="color:#d6e6ff;font-weight:700;letter-spacing:1px;">Loading...</p>
 </div>
 
-<!-- ============ LOGIN ============ -->
 <div id="loginSection" class="login-wrapper">
 <div class="login-panel">
   <div class="logo-wrap">
@@ -880,15 +853,12 @@ body::after{
     <span class="mini-chip"><i class="fas fa-bolt"></i> Fast</span>
     <span class="mini-chip"><i class="fas fa-robot"></i> AI Powered</span>
   </div>
-
   <form id="loginForm" autocomplete="on">
     <div class="mb-2">
       <div class="input-group-custom">
         <i class="fas fa-id-card"></i>
-        <input type="text" id="studentId" class="form-control-glass"
-               placeholder="Student ID"
-               autocomplete="username" autocapitalize="characters" spellcheck="false"
-               inputmode="text" autofocus>
+        <input type="text" id="studentId" class="form-control-glass" placeholder="Student ID"
+               autocomplete="username" autocapitalize="characters" spellcheck="false" inputmode="text" autofocus>
       </div>
       <div class="caps-hint"><i class="fas fa-keyboard"></i> ഡയറിയിലെ UID നമ്പർ ഉപയോഗിക്കുക,നമ്പർ സൂക്ഷിക്കുക </div>
     </div>
@@ -899,15 +869,13 @@ body::after{
       <i class="fas fa-question-circle"></i> Forgot Student ID?
     </button>
   </form>
-
-  <div class="login-footer-note">v15.2 • Edition ©Suhail Kerala</div>
+  <div class="login-footer-note">v15.4 • Edition ©Suhail Kerala</div>
   <button class="help-btn" onclick="openHelpModal()">
     <i class="fas fa-circle-question"></i><span>സഹായം</span>
   </button>
 </div>
 </div>
 
-<!-- ============ HELP MODAL ============ -->
 <div class="help-modal" id="helpModal">
   <div class="help-modal-box">
     <div class="help-modal-header">
@@ -920,7 +888,6 @@ body::after{
   </div>
 </div>
 
-<!-- ============ FIND STUDENT ID ============ -->
 <div id="findStudentIdModal" style="display:none;position:fixed;inset:0;background:rgba(3,8,28,.86);backdrop-filter:blur(14px);z-index:1061;align-items:center;justify-content:center;padding:18px;">
   <div class="modal-glass p-4" style="max-width:450px;width:100%;">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -949,7 +916,6 @@ body::after{
   </div>
 </div>
 
-<!-- ============ STUDENT DASHBOARD ============ -->
 <div id="dashboardSection" style="display:none;">
 <div class="container">
   <div class="dashboard-header-glow">
@@ -1057,9 +1023,7 @@ body::after{
     <div class="col-lg-6">
       <div class="activity-timeline">
         <h5><i class="fas fa-wave-square"></i> Live Feed</h5>
-        <ul class="list-unstyled mb-0" id="activityFeedList">
-          <li class="text-white-50 text-center py-3">Loading...</li>
-        </ul>
+        <ul class="list-unstyled mb-0" id="activityFeedList"><li class="text-white-50 text-center py-3">Loading...</li></ul>
       </div>
     </div>
     <div class="col-lg-6">
@@ -1071,12 +1035,11 @@ body::after{
   </div>
 
   <div class="text-center text-white-50 mt-5 pb-4" style="font-size:.72rem;opacity:.6;">
-    Noorussalam Madrasa • v15.2 Edition © Suhail Kerala
+    Noorussalam Madrasa • v15.4 Edition © Suhail Kerala
   </div>
 </div>
 </div>
 
-<!-- ============ ADMIN PANEL ============ -->
 <div id="adminSection" style="display:none;">
 <div class="container">
   <div class="dashboard-header-glow">
@@ -1192,9 +1155,7 @@ body::after{
         <label>Month</label>
         <input type="month" id="attendanceMonth" />
         <label>Total Working Days (all students)</label>
-        <input type="number" id="attendanceTotalDays" min="0" max="31"
-               style="width:110px;" placeholder="e.g. 24"
-               oninput="recalcAttendancePercentages()" />
+        <input type="number" id="attendanceTotalDays" min="0" max="31" style="width:110px;" placeholder="e.g. 24" autocomplete="off" onwheel="this.blur()" oninput="recalcAttendancePercentages()" />
         <button class="btn-load" onclick="loadAttendanceForAdmin()"><i class="fas fa-sync-alt"></i> Load</button>
       </div>
       <div class="admin-table-wrap" id="attendanceWrap"></div>
@@ -1221,9 +1182,7 @@ body::after{
     <div id="adminTransactionsTab" class="admin-tab-content" style="display:none;">
       <div class="admin-toolbar">
         <label>Date</label><input type="date" id="txDate" onchange="loadAllTransactions()" />
-        <select id="txType" onchange="loadAllTransactions()">
-          <option value="all">All</option><option value="fee">Fee</option>
-        </select>
+        <select id="txType" onchange="loadAllTransactions()"><option value="all">All</option><option value="fee">Fee</option></select>
         <input type="text" id="txSearch" placeholder="🔍" oninput="loadAllTransactions()" />
       </div>
       <div class="admin-table-wrap" id="allTransactionsWrap"></div>
@@ -1334,14 +1293,12 @@ body::after{
       <div class="mb-4" style="background:rgba(120,180,255,.04);padding:16px;border-radius:16px;border:1px solid var(--stroke);">
         <h5 class="text-white mb-3" style="font-size:.95rem;">🖼️ Background Images</h5>
         <p class="text-white-50 small mb-3">Link നൽകിയാൽ ID Card / Topper Poster background ആയി ഉപയോഗിക്കും. ഒഴിച്ചാൽ gradient background വരും.</p>
-
         <label class="text-white-50 small d-block mb-1">ID Card Background URL</label>
         <input type="url" id="settingsIdBgUrl" class="modal-form-input mb-2" placeholder="https://example.com/id-card.jpg">
         <div class="d-flex gap-2 mb-3">
           <button class="btn-update" style="padding:8px 20px;font-size:.8rem;" onclick="saveBgUrl('id')">Save</button>
           <button class="btn-cancel" style="padding:8px 20px;font-size:.8rem;" onclick="clearBgUrl('id')">Clear</button>
         </div>
-
         <label class="text-white-50 small d-block mb-1">Topper Poster Background URL</label>
         <input type="url" id="settingsTopperBgUrl" class="modal-form-input mb-2" placeholder="https://example.com/topper.jpg">
         <div class="d-flex gap-2">
@@ -1357,7 +1314,6 @@ body::after{
 </div>
 </div>
 
-<!-- ============ PASSBOOK ============ -->
 <div id="passbookModal" style="display:none;position:fixed;inset:0;background:rgba(3,8,28,.86);backdrop-filter:blur(14px);z-index:1200;align-items:center;justify-content:center;padding:18px;">
   <div class="modal-glass p-4" style="max-width:760px;width:100%;max-height:90vh;overflow-y:auto;">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1379,7 +1335,6 @@ body::after{
   </div>
 </div>
 
-<!-- ============ STUDENT WITHDRAWAL ============ -->
 <div id="studentWithdrawalModal" style="display:none;position:fixed;inset:0;background:rgba(3,8,28,.86);backdrop-filter:blur(14px);z-index:1201;align-items:center;justify-content:center;padding:18px;">
   <div class="modal-glass p-4" style="max-width:600px;width:100%;max-height:90vh;overflow-y:auto;">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1396,14 +1351,10 @@ body::after{
       </small>
     </div>
     <form id="studentWithdrawForm">
-      <div class="mb-3">
-        <label class="text-white-50 small">തുക *</label>
-        <input type="number" id="swAmount" class="modal-form-input" min="1" required />
-      </div>
-      <div class="mb-3">
-        <label class="text-white-50 small">കാരണം *</label>
-        <textarea id="swReason" class="modal-form-input" required style="min-height:80px;"></textarea>
-      </div>
+      <div class="mb-3"><label class="text-white-50 small">തുക *</label>
+        <input type="number" id="swAmount" class="modal-form-input" min="1" required /></div>
+      <div class="mb-3"><label class="text-white-50 small">കാരണം *</label>
+        <textarea id="swReason" class="modal-form-input" required style="min-height:80px;"></textarea></div>
       <button type="submit" class="btn-gradient text-white" id="swSubmitBtn">Submit</button>
     </form>
     <hr style="border-color:rgba(140,190,255,.12);margin:20px 0;">
@@ -1417,7 +1368,6 @@ body::after{
   </div>
 </div>
 
-<!-- ============ NOTIFICATIONS ============ -->
 <div id="notificationsModal" style="display:none;position:fixed;inset:0;background:rgba(3,8,28,.86);backdrop-filter:blur(14px);z-index:1300;align-items:center;justify-content:center;padding:18px;">
   <div class="modal-glass p-4" style="max-width:600px;width:100%;max-height:90vh;overflow-y:auto;">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1428,7 +1378,6 @@ body::after{
   </div>
 </div>
 
-<!-- ============ GLOBAL MODAL ============ -->
 <div id="globalModal" style="display:none;position:fixed;inset:0;background:rgba(3,8,28,.82);backdrop-filter:blur(14px);z-index:1050;align-items:center;justify-content:center;padding:16px;">
   <div class="modal-glass p-4" style="max-width:820px;width:100%;max-height:94vh;overflow-y:auto;">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1439,7 +1388,6 @@ body::after{
   </div>
 </div>
 
-<!-- ============ FORGOT ============ -->
 <div id="forgotModal" style="display:none;position:fixed;inset:0;background:rgba(3,8,28,.86);backdrop-filter:blur(14px);z-index:1060;align-items:center;justify-content:center;padding:18px;">
   <div class="modal-glass p-4" style="max-width:420px;width:100%;">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1461,7 +1409,6 @@ body::after{
   </div>
 </div>
 
-<!-- ============ EDIT PROFILE ============ -->
 <div id="editProfileModal" style="display:none;position:fixed;inset:0;background:rgba(3,8,28,.86);backdrop-filter:blur(14px);z-index:1070;align-items:center;justify-content:center;padding:18px;">
   <div class="modal-glass p-4" style="max-width:500px;width:100%;max-height:94vh;overflow-y:auto;">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1471,11 +1418,8 @@ body::after{
     <form id="editProfileForm">
       <div class="text-center mb-3">
         <div class="profile-photo-wrapper mx-auto">
-          <div class="avatar-neon" id="editPhotoPreview"
-               style="width:110px;height:110px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;"></div>
-          <div class="photo-edit-btn" onclick="openProfilePhotoPicker()" title="Change Photo">
-            <i class="fas fa-camera"></i>
-          </div>
+          <div class="avatar-neon" id="editPhotoPreview" style="width:110px;height:110px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;"></div>
+          <div class="photo-edit-btn" onclick="openProfilePhotoPicker()" title="Change Photo"><i class="fas fa-camera"></i></div>
         </div>
         <small class="text-white-50 d-block mt-2" style="font-size:.72rem;">Tap camera to change photo</small>
       </div>
@@ -1506,7 +1450,6 @@ body::after{
   </div>
 </div>
 
-<!-- ============ TOPPER ============ -->
 <div id="topperModal" style="display:none;position:fixed;inset:0;background:rgba(3,8,28,.9);backdrop-filter:blur(14px);z-index:1051;align-items:center;justify-content:center;padding:18px;">
   <div class="modal-glass p-4" style="max-width:800px;width:100%;max-height:94vh;overflow-y:auto;">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1555,7 +1498,6 @@ body::after{
 
 <input type="file" id="profilePhotoInput" accept="image/*" style="display:none">
 
-<!-- ============ AI CHAT ============ -->
 <button class="ai-fab" id="aiFab" onclick="toggleAIChat()" title="AI Assistant">
   <i class="fas fa-robot"></i>
 </button>
@@ -1584,8 +1526,7 @@ body::after{
     <button class="ai-chip" onclick="aiQuick('ഇന്നത്തെ ടൈംടേബിൾ')">⏰ ടൈംടേബിൾ</button>
   </div>
   <div class="ai-foot">
-    <input type="text" class="ai-input" id="aiInput" placeholder="എന്തെങ്കിലും ചോദിക്കൂ..."
-           onkeydown="if(event.key==='Enter')sendAIMessage()">
+    <input type="text" class="ai-input" id="aiInput" placeholder="എന്തെങ്കിലും ചോദിക്കൂ..." onkeydown="if(event.key==='Enter')sendAIMessage()">
     <button class="ai-send" onclick="sendAIMessage()"><i class="fas fa-paper-plane"></i></button>
   </div>
 </div>
@@ -1593,9 +1534,7 @@ body::after{
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
-/* ============================================================
-   CONFIG
-============================================================ */
+/* ==== CONFIG ==== */
 const SUPABASE_URL='https://dmjjtmimrozzqknduqas.supabase.co';
 const SUPABASE_ANON_KEY='sb_publishable_e7EXyQvriYYgw9KDlu-5dA_Jcjdw9bg';
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
@@ -1611,7 +1550,6 @@ let TRAITS_LIST=['Discipline','Respect','Honesty','Punctuality','Cleanliness'],G
 let MIN_WITHDRAW=100,SETTINGS_CACHE={};
 let CLASS_SUBJECTS={'1':['Arabic','Malayalam','Maths'],'5':['Arabic','Malayalam','English','Maths','Science'],'10':['Arabic','English','Maths','Science','Social Science']};
 let lastReadNotifTime=parseInt(localStorage.getItem('lastReadNotifTime')||'0');
-
 let ID_CARD_BG_URL=localStorage.getItem('id_card_bg')||'';
 let TOPPER_BG_URL=localStorage.getItem('topper_bg')||'';
 let notifChannel=null;
@@ -1625,9 +1563,7 @@ const loadingOverlay=document.getElementById('loadingOverlay'),
 const modalTitleSpan=document.getElementById('modalTitle'),
       modalBodyDiv=document.getElementById('modalContentBody');
 
-/* ============================================================
-   HELPERS
-============================================================ */
+/* ==== HELPERS ==== */
 function openHelpModal(){document.getElementById('helpModal').classList.add('active');document.body.style.overflow='hidden';}
 function closeHelpModal(){document.getElementById('helpModal').classList.remove('active');document.body.style.overflow='';}
 document.getElementById('helpModal').addEventListener('click',function(e){if(e.target===this)closeHelpModal();});
@@ -1638,8 +1574,7 @@ function showToast(msg,type='info'){
   t.className=`toast-item ${type}`;
   const icon=type==='success'?'✅':type==='error'?'❌':'ℹ️';
   t.innerHTML=`<span>${icon}</span><span>${msg}</span>`;
-  c.appendChild(t);
-  setTimeout(()=>{if(t.parentNode)t.remove();},3500);
+  c.appendChild(t);setTimeout(()=>{if(t.parentNode)t.remove();},3500);
 }
 function formatDate(d){
   if(!d)return'—';
@@ -1678,21 +1613,18 @@ async function getFilteredStudentIds(){
 }
 function hasPhoto(u){return u && (u.startsWith('data:image') || u.startsWith('http'));}
 
-/* ============================================================
-   MARKS INPUT PARSER — "-" or empty = skip, "0" = save
-============================================================ */
+/* Marks parser — empty/- = skip, P = pass, number = value */
 function parseMarksInput(raw){
   if(raw === null || raw === undefined) return {skip:true};
   const s = String(raw).trim();
   if(s === '' || s === '-' || s === '–' || s === '—' || s === '−') return {skip:true};
+  if(s.toUpperCase() === 'P') return {skip:false, value:0, isPass:true};
   const n = Number(s);
   if(isNaN(n)) return {skip:true};
-  return {skip:false, value:n};
+  return {skip:false, value:n, isPass:false};
 }
 
-/* ============================================================
-   SETTINGS
-============================================================ */
+/* ==== SETTINGS ==== */
 async function loadAllSettings(){
   try{
     const {data,error}=await supabaseClient.from('settings').select('*');
@@ -1721,9 +1653,7 @@ function populateDynamicDropdowns(){
   if(me)me.innerHTML='<option value="">-- Select --</option>'+EXAMS_LIST.map(e=>`<option value="${e}">${e}</option>`).join('');
 }
 
-/* ============================================================
-   LOGIN
-============================================================ */
+/* ==== LOGIN ==== */
 const studentIdInput=document.getElementById('studentId');
 (function autoFillLogin(){
   const saved=localStorage.getItem('noor_last_id');
@@ -1786,19 +1716,10 @@ document.getElementById('loginForm').addEventListener('submit',async function(e)
     if(error||!student){showToast('Invalid Student ID','error');showLoading(false);return;}
 
     await loadAllSettings();
-    let attendance=student.attendance||0;
-    try{
-      const {data:attRecs}=await supabaseClient.from('attendance_records').select('present_days,total_days').eq('studentid',id);
-      if(attRecs&&attRecs.length>0){
-        let tp=0,td=0;
-        attRecs.forEach(r=>{tp+=Number(r.present_days)||0;td+=Number(r.total_days)||0;});
-        if(td>0)attendance=Math.round((tp/td)*100);
-      }
-    }catch(e){}
 
     currentUser={
       studentId:student.studentid,name:student.name||'Student',class:student.class||'N/A',
-      roll:student.roll||'',overallGrade:student.overallgrade||null,attendance:attendance,
+      roll:student.roll||'',overallGrade:student.overallgrade||null,attendance:0,
       rank:student.rank||null,moralValuesGrade:student.moralvaluesgrade||null,
       moralValuesSub:student.moralvaluessub||null,performance:student.performance||0,
       avatar:student.name?student.name.charAt(0).toUpperCase():'S',
@@ -1818,6 +1739,7 @@ document.getElementById('loginForm').addEventListener('submit',async function(e)
     loadActivitiesAndCalendar();
     loadStudentBalance();
     loadStudentNotifications();
+    await refreshStudentAttendance();
     showAIAssistant();
     subscribeNotifications();
     showToast(`Welcome ${currentUser.name} ✨`,'success');
@@ -1840,7 +1762,7 @@ function logout(){
   studentIdInput.value=localStorage.getItem('noor_last_id')||'';
   showToast('Logged out','info');
 }
-function restoreSession(){
+async function restoreSession(){
   const s=localStorage.getItem('noor_session');
   if(s){
     try{
@@ -1851,9 +1773,10 @@ function restoreSession(){
       loadActivitiesAndCalendar();
       loadStudentBalance();
       loadStudentNotifications();
+      await refreshStudentAttendance();
       showAIAssistant();
       subscribeNotifications();
-    }catch(e){}
+    }catch(e){console.error('restoreSession',e);}
   }
 }
 function showAIAssistant(){
@@ -1870,9 +1793,7 @@ function showAIAssistant(){
 }
 function toggleTheme(){dashboardSection.classList.toggle('dashboard-light');showToast('🎨 Theme toggled','info');}
 
-/* ============================================================
-   REALTIME
-============================================================ */
+/* ==== REALTIME ==== */
 function subscribeNotifications(){
   if(notifChannel){supabaseClient.removeChannel(notifChannel);notifChannel=null;}
   if(!currentUser||isAdminMode)return;
@@ -1886,17 +1807,12 @@ function subscribeNotifications(){
   }catch(e){console.warn('Realtime:',e);}
 }
 
-/* ============================================================
-   DASHBOARD UI
-============================================================ */
+/* ==== DASHBOARD UI ==== */
 function getGradeDetails(g){
   const map={
-    'A+':{icon:'fa-star',color:'#34d399'},
-    'A':{icon:'fa-star',color:'#22d3ee'},
-    'B+':{icon:'fa-star-half-alt',color:'#5a9eff'},
-    'B':{icon:'fa-star-half-alt',color:'#3b8bff'},
-    'C+':{icon:'fa-circle',color:'#fbbf24'},
-    'C':{icon:'fa-circle',color:'#fb923c'},
+    'A+':{icon:'fa-star',color:'#34d399'},'A':{icon:'fa-star',color:'#22d3ee'},
+    'B+':{icon:'fa-star-half-alt',color:'#5a9eff'},'B':{icon:'fa-star-half-alt',color:'#3b8bff'},
+    'C+':{icon:'fa-circle',color:'#fbbf24'},'C':{icon:'fa-circle',color:'#fb923c'},
     'D':{icon:'fa-circle',color:'#f87171'}
   };
   return map[g]||{icon:'fa-question',color:'#6d88ad'};
@@ -1947,9 +1863,32 @@ function updateDashboardUI(){
   if(nameEl)nameEl.textContent=currentUser.name||'Student';
 }
 
-/* ============================================================
-   FEED & EVENTS
-============================================================ */
+/* ==== ATTENDANCE CUMULATIVE REFRESH ==== */
+async function refreshStudentAttendance(){
+  if(!currentUser)return 0;
+  try{
+    const {data:recs}=await supabaseClient.from('attendance_records')
+      .select('present_days,total_days').eq('studentid',currentUser.studentId);
+    let tp=0,td=0;
+    (recs||[]).forEach(r=>{
+      tp+=Number(r.present_days)||0;
+      td+=Number(r.total_days)||0;
+    });
+    const att=td>0?Math.round((tp/td)*100):0;
+    currentUser.attendance=att;
+    localStorage.setItem('noor_session',JSON.stringify(currentUser));
+    const rateEl=document.getElementById('attendanceRateLabel');
+    const fillEl=document.getElementById('attendanceProgressFill');
+    const trendEl=document.getElementById('attendanceTrend');
+    if(rateEl)rateEl.innerHTML=att+'%';
+    if(fillEl)fillEl.style.width=att+'%';
+    if(trendEl)trendEl.innerHTML=
+      currentUser.trendAttendance||(att>=75?'✅ Good':'⚠️ Needs improvement');
+    return att;
+  }catch(e){console.error('refreshStudentAttendance',e);return 0;}
+}
+
+/* ==== FEED & EVENTS ==== */
 async function loadActivitiesAndCalendar(){
   try{
     const {data:feed}=await supabaseClient.from('activities').select('*')
@@ -1969,7 +1908,6 @@ async function loadActivitiesAndCalendar(){
   }catch(e){
     document.getElementById('activityFeedList').innerHTML='<li class="text-white-50 text-center py-3">No feed available</li>';
   }
-
   try{
     const {data:events}=await supabaseClient.from('events').select('*').order('date',{ascending:true}).limit(5);
     if(events&&events.length>0){
@@ -1987,9 +1925,7 @@ async function loadActivitiesAndCalendar(){
   }catch(e){}
 }
 
-/* ============================================================
-   NOTIFICATIONS
-============================================================ */
+/* ==== NOTIFICATIONS ==== */
 async function loadStudentNotifications(){
   if(!currentUser)return;
   try{
@@ -2002,12 +1938,10 @@ async function loadStudentNotifications(){
     const bellBtn=document.getElementById('notifBell');
     if(unread>0){
       badge.textContent=unread>9?'9+':unread;
-      badge.style.display='flex';
-      badge.classList.add('pulse');
+      badge.style.display='flex';badge.classList.add('pulse');
       if(bellBtn)bellBtn.classList.add('has-unread');
     }else{
-      badge.style.display='none';
-      badge.classList.remove('pulse');
+      badge.style.display='none';badge.classList.remove('pulse');
       if(bellBtn)bellBtn.classList.remove('has-unread');
     }
   }catch(e){}
@@ -2018,10 +1952,8 @@ async function openNotificationsModal(){
   localStorage.setItem('lastReadNotifTime',lastReadNotifTime.toString());
   const badge=document.getElementById('notifBadge');
   const bellBtn=document.getElementById('notifBell');
-  badge.style.display='none';
-  badge.classList.remove('pulse');
+  badge.style.display='none';badge.classList.remove('pulse');
   if(bellBtn)bellBtn.classList.remove('has-unread');
-
   const list=document.getElementById('notificationsList');
   list.innerHTML='<div class="text-center py-3 text-white-50">Loading...</div>';
   try{
@@ -2047,9 +1979,7 @@ async function openNotificationsModal(){
 }
 function closeNotificationsModal(){document.getElementById('notificationsModal').style.display='none';}
 
-/* ============================================================
-   BALANCE
-============================================================ */
+/* ==== BALANCE ==== */
 async function getStudentBalance(sid){
   try{
     const {data,error}=await supabaseClient.rpc('get_student_balance',{sid});
@@ -2103,8 +2033,7 @@ async function loadPassbookData(){
 function openStudentWithdrawalModal(){
   if(!currentUser)return;
   document.getElementById('studentWithdrawalModal').style.display='flex';
-  loadStudentBalanceForWithdrawal();
-  loadStudentWithdrawals();
+  loadStudentBalanceForWithdrawal();loadStudentWithdrawals();
 }
 function closeStudentWithdrawalModal(){document.getElementById('studentWithdrawalModal').style.display='none';}
 async function loadStudentBalanceForWithdrawal(){
@@ -2154,34 +2083,23 @@ document.getElementById('studentWithdrawForm').addEventListener('submit',async f
     const MIN_BALANCE=MIN_WITHDRAW;
     if(bal<MIN_BALANCE){showToast(`⚠️ Minimum ₹${MIN_BALANCE} ബാലൻസ് വേണം. നിലവിൽ ₹${bal.toFixed(2)}`,'error');btn.disabled=false;btn.innerHTML='Submit';return;}
     const maxWithdrawable=bal-MIN_BALANCE;
-    if(amount>maxWithdrawable){showToast(`⚠️ പരമാവധി ₹${maxWithdrawable.toFixed(2)} പിൻവലിക്കാം (₹${MIN_BALANCE} നിലനിർത്തണം)`,'error');btn.disabled=false;btn.innerHTML='Submit';return;}
-    const {error}=await supabaseClient.from('withdrawals').insert({studentid:currentUser.studentId,date:new Date().toISOString().split('T')[0],amount,reason,status:'pending'});
+    if(amount>maxWithdrawable){showToast(`⚠️ പരമാവധി ₹${maxWithdrawable.toFixed(2)} പിൻവലിക്കാം`,'error');btn.disabled=false;btn.innerHTML='Submit';return;}
+    const {error}=await supabaseClient.from('withdrawals').insert({
+      studentid:currentUser.studentId,date:new Date().toISOString().split('T')[0],
+      amount,reason,status:'pending'
+    });
     if(error)throw error;
-    showToast(`✅ ₹${amount} request submitted. ബാക്കി: ₹${(bal-amount).toFixed(2)}`,'success');
+    showToast(`✅ ₹${amount} request submitted`,'success');
     document.getElementById('swAmount').value='';
     document.getElementById('swReason').value='';
-    await loadStudentWithdrawals();
-    await loadStudentBalanceForWithdrawal();
-    await loadStudentBalance();
+    await loadStudentWithdrawals();await loadStudentBalanceForWithdrawal();await loadStudentBalance();
   }catch(e){showToast('❌ '+e.message,'error');}
   btn.disabled=false;btn.innerHTML='Submit';
 });
 
-/* ============================================================
-   PHOTO UPLOAD
-============================================================ */
-function openTopperCrop(){
-  cropMode='topper';
-  const fi=document.getElementById('topperPhotoUpload');
-  fi.value='';fi.click();
-  fi.onchange=handleCropFile;
-}
-function openProfilePhotoPicker(){
-  cropMode='profile';
-  const fi=document.getElementById('profilePhotoInput');
-  fi.value='';fi.click();
-  fi.onchange=handleCropFile;
-}
+/* ==== PHOTO UPLOAD ==== */
+function openTopperCrop(){cropMode='topper';const fi=document.getElementById('topperPhotoUpload');fi.value='';fi.click();fi.onchange=handleCropFile;}
+function openProfilePhotoPicker(){cropMode='profile';const fi=document.getElementById('profilePhotoInput');fi.value='';fi.click();fi.onchange=handleCropFile;}
 function handleCropFile(e){
   const f=e.target.files[0];if(!f)return;
   const r=new FileReader();
@@ -2195,10 +2113,7 @@ function handleCropFile(e){
   };
   r.readAsDataURL(f);
 }
-function closeTopperCrop(){
-  if(cropperInstance){cropperInstance.destroy();cropperInstance=null;}
-  document.getElementById('topperCropModal').style.display='none';
-}
+function closeTopperCrop(){if(cropperInstance){cropperInstance.destroy();cropperInstance=null;}document.getElementById('topperCropModal').style.display='none';}
 function saveTopperCrop(){
   if(!cropperInstance)return;
   if(cropMode==='topper'){
@@ -2209,8 +2124,7 @@ function saveTopperCrop(){
   } else {
     const cc=cropperInstance.getCroppedCanvas({width:500,height:500});
     const small=cc.toDataURL('image/jpeg',0.85);
-    closeTopperCrop();
-    uploadProfilePhoto(small);
+    closeTopperCrop();uploadProfilePhoto(small);
   }
 }
 async function uploadProfilePhoto(b64){
@@ -2219,19 +2133,13 @@ async function uploadProfilePhoto(b64){
   try{
     let photoUrl=null;
     try{
-      const res=await fetch(b64);
-      const blob=await res.blob();
+      const res=await fetch(b64);const blob=await res.blob();
       const fileName=`${currentUser.studentId}_${Date.now()}.jpg`;
-      const {data:up,error:upErr}=await supabaseClient.storage
-        .from('student-photos')
-        .upload(fileName,blob,{cacheControl:'3600',upsert:true,contentType:'image/jpeg'});
+      const {data:up,error:upErr}=await supabaseClient.storage.from('student-photos').upload(fileName,blob,{cacheControl:'3600',upsert:true,contentType:'image/jpeg'});
       if(upErr)throw upErr;
       const {data:pub}=supabaseClient.storage.from('student-photos').getPublicUrl(fileName);
       photoUrl=pub.publicUrl;
-    }catch(storageErr){
-      console.warn('Storage fallback to base64:',storageErr);
-      photoUrl=b64;
-    }
+    }catch(storageErr){console.warn('Storage fallback',storageErr);photoUrl=b64;}
     const {error}=await supabaseClient.from('students').update({photo:photoUrl}).eq('studentid',currentUser.studentId);
     if(error)throw error;
     currentUser.photo=photoUrl;
@@ -2247,9 +2155,7 @@ async function uploadProfilePhoto(b64){
   showLoading(false);
 }
 
-/* ============================================================
-   STUDENT MODALS
-============================================================ */
+/* ==== STUDENT MODALS ==== */
 async function showTimetable(){
   modalTitleSpan.innerText="⏰ Class Timetable";
   modalBodyDiv.innerHTML='<div class="text-center py-4"><div class="spinner-border" style="color:#22d3ee"></div></div>';
@@ -2257,9 +2163,7 @@ async function showTimetable(){
   try{
     const {data}=await supabaseClient.from('timetable').select('*')
       .eq('class',currentUser.class).order('day').order('period');
-    if(!data||data.length===0){
-      modalBodyDiv.innerHTML='<div class="text-center py-3 text-white-50">No timetable available</div>';return;
-    }
+    if(!data||data.length===0){modalBodyDiv.innerHTML='<div class="text-center py-3 text-white-50">No timetable available</div>';return;}
     const byDay={};
     data.forEach(t=>{if(!byDay[t.day])byDay[t.day]=[];byDay[t.day].push(t);});
     const days=['ശനി','ഞായർ','തിങ്കൾ','ചൊവ്വ','ബുധൻ','വ്യാഴം'];
@@ -2288,9 +2192,7 @@ async function showHomework(){
   try{
     const {data}=await supabaseClient.from('homework').select('*')
       .eq('class',currentUser.class).order('due_date',{ascending:true});
-    if(!data||data.length===0){
-      modalBodyDiv.innerHTML='<div class="text-center py-3 text-white-50">No homework 🎉</div>';return;
-    }
+    if(!data||data.length===0){modalBodyDiv.innerHTML='<div class="text-center py-3 text-white-50">No homework 🎉</div>';return;}
     const today=new Date().toISOString().split('T')[0];
     modalBodyDiv.innerHTML=data.map(h=>{
       const overdue=h.due_date&&h.due_date<today;
@@ -2314,8 +2216,7 @@ async function showExamMarks(){
     if(!marks||marks.length===0){
       modalBodyDiv.innerHTML=`<div class="text-center py-4">
         <i class="fas fa-file-circle-xmark" style="font-size:3rem;color:#6d88ad;opacity:.5;"></i>
-        <p class="text-white-50 mt-3">ഇപ്പോൾ മാർക്സ് ലഭ്യമല്ല</p>
-      </div>`;
+        <p class="text-white-50 mt-3">ഇപ്പോൾ മാർക്സ് ലഭ്യമല്ല</p></div>`;
       return;
     }
     const examList=[...new Set(marks.map(m=>m.exam_name).filter(Boolean))];
@@ -2324,21 +2225,18 @@ async function showExamMarks(){
     let selectedExam=localStorage.getItem(examKey)||'';
     if(!examList.includes(selectedExam))selectedExam=examList[0];
 
-    const selectorHtml=`<div class="exam-selector-panel">
+    modalBodyDiv.innerHTML=`<div class="exam-selector-panel">
       <label><i class="fas fa-file-pen"></i> പരീക്ഷ തിരഞ്ഞെടുക്കുക</label>
       <select id="studentExamSelector" onchange="onStudentExamChange(this.value)">
         ${examList.map(e=>`<option value="${escapeHtml(e)}" ${e===selectedExam?'selected':''}>${escapeHtml(e)}</option>`).join('')}
       </select>
-    </div>`;
-    const bodyHtml='<div id="studentMarksBody"></div>';
-    modalBodyDiv.innerHTML=selectorHtml+bodyHtml;
+    </div><div id="studentMarksBody"></div>`;
     renderStudentExamMarks(marks,selectedExam);
   }catch(e){
     console.error(e);
     modalBodyDiv.innerHTML=`<div class="text-center py-4 text-white-50">
       <i class="fas fa-triangle-exclamation" style="font-size:2.5rem;opacity:.5;"></i>
-      <p class="mt-2">Error loading marks</p>
-    </div>`;
+      <p class="mt-2">Error loading marks</p></div>`;
   }
 }
 function onStudentExamChange(exam){
@@ -2351,13 +2249,23 @@ function renderStudentExamMarks(allMarks,exam,alreadyFiltered){
   const body=document.getElementById('studentMarksBody');
   if(!body)return;
   const subs=alreadyFiltered?allMarks:allMarks.filter(m=>m.exam_name===exam);
-  if(subs.length===0){
-    body.innerHTML='<div class="text-center py-4 text-white-50">ഈ പരീക്ഷയുടെ മാർക്സ് ലഭ്യമല്ല</div>';
+  if(subs.length===0){body.innerHTML='<div class="text-center py-4 text-white-50">ഈ പരീക്ഷയുടെ മാർക്സ് ലഭ്യമല്ല</div>';return;}
+
+  let totalObt=0,totalMax=0;
+  subs.forEach(s=>{
+    const mx=Number(s.max_marks)||0;
+    if(mx<=0)return;
+    totalMax+=mx;totalObt+=Number(s.obtained_marks)||0;
+  });
+
+  if(totalMax===0){
+    body.innerHTML=`<div class="text-center py-4" style="color:#6ee7b7;">
+      <i class="fas fa-circle-check" style="font-size:2.5rem;"></i>
+      <p class="mt-2 fw-bold">✅ എല്ലാ വിഷയങ്ങളും Passed</p></div>`;
     return;
   }
-  let totalObt=0,totalMax=0;
-  subs.forEach(s=>{totalObt+=Number(s.obtained_marks)||0;totalMax+=Number(s.max_marks)||0;});
-  const pct=totalMax>0?Math.round(totalObt/totalMax*100):0;
+
+  const pct=Math.round(totalObt/totalMax*100);
   const grade=pct>=90?'A+':pct>=80?'A':pct>=70?'B+':pct>=60?'B':pct>=50?'C+':pct>=40?'C':'D';
   const gcolor=pct>=80?'#34d399':pct>=60?'#22d3ee':pct>=40?'#fbbf24':'#f87171';
 
@@ -2375,12 +2283,19 @@ function renderStudentExamMarks(allMarks,exam,alreadyFiltered){
           <th style="font-size:.7rem;">Subject</th>
           <th style="font-size:.7rem;text-align:center;">Marks</th>
           <th style="font-size:.7rem;text-align:right;">%</th>
-        </tr></thead>
-        <tbody>`;
+        </tr></thead><tbody>`;
 
   subs.forEach(s=>{
     const mx=Number(s.max_marks)||0;
-    const sp=mx>0?Math.round((Number(s.obtained_marks)/mx)*100):0;
+    if(mx<=0){
+      html+=`<tr>
+        <td class="text-white" style="font-size:.82rem;">${escapeHtml(s.subject||'')}</td>
+        <td style="text-align:center;font-weight:800;color:#6ee7b7;">P</td>
+        <td style="text-align:right;font-weight:700;color:#6ee7b7;font-size:.72rem;">Passed</td>
+      </tr>`;
+      return;
+    }
+    const sp=Math.round((Number(s.obtained_marks)/mx)*100);
     const sc=sp>=80?'#6ee7b7':sp>=60?'#67e8f9':sp>=40?'#fcd34d':'#fca5a5';
     html+=`<tr>
       <td class="text-white" style="font-size:.82rem;">${escapeHtml(s.subject||'')}</td>
@@ -2388,14 +2303,12 @@ function renderStudentExamMarks(allMarks,exam,alreadyFiltered){
       <td style="text-align:right;font-weight:700;color:${sc};">${sp}%</td>
     </tr>`;
   });
-
   html+=`</tbody></table></div>
     <div class="mt-3">
       <div class="progress" style="height:8px;background:rgba(255,255,255,.08);">
         <div class="progress-bar" style="width:${pct}%;background:linear-gradient(90deg,${gcolor},#22d3ee);"></div>
       </div>
-    </div>
-  </div>`;
+    </div></div>`;
   body.innerHTML=html;
 }
 async function showLibrary(){
@@ -2406,9 +2319,7 @@ async function showLibrary(){
     const {data}=await supabaseClient.from('library').select('*')
       .or(`class.eq.all,class.eq.${currentUser.class}`)
       .order('uploaded_at',{ascending:false});
-    if(!data||data.length===0){
-      modalBodyDiv.innerHTML='<div class="text-center py-3 text-white-50">No materials available</div>';return;
-    }
+    if(!data||data.length===0){modalBodyDiv.innerHTML='<div class="text-center py-3 text-white-50">No materials available</div>';return;}
     const bySub={};
     data.forEach(l=>{const k=l.subject||'General';if(!bySub[k])bySub[k]=[];bySub[k].push(l);});
     let html='';
@@ -2436,22 +2347,37 @@ function showResultsModal(){
   </div>`;
   modal.style.display='flex';
 }
-function showAttendanceReport(){
+async function showAttendanceReport(){
   modalTitleSpan.innerText="📆 Attendance Report";
   modalBodyDiv.innerHTML='<div class="text-center py-4"><div class="spinner-border" style="color:#34d399"></div></div>';
   modal.style.display='flex';
-  fetchAttendanceRecords();
+  await refreshStudentAttendance();
+  await fetchAttendanceRecords();
 }
 async function fetchAttendanceRecords(){
   try{
     const {data:records}=await supabaseClient.from('attendance_records').select('*')
       .eq('studentid',currentUser.studentId).order('month_year',{ascending:false});
     if(records&&records.length>0){
-      modalBodyDiv.innerHTML=`<h6 class="text-white mb-3">Overall: ${currentUser.attendance||0}%</h6>
+      let tp=0,td=0;
+      records.forEach(r=>{tp+=Number(r.present_days)||0;td+=Number(r.total_days)||0;});
+      const cumPct=td>0?Math.round((tp/td)*100):0;
+      modalBodyDiv.innerHTML=`
+        <div style="background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(30,107,224,.18));
+                    border:1.6px solid rgba(34,211,238,.4);border-radius:16px;padding:14px;margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+            <div>
+              <div style="font-size:.72rem;color:#9db8dd;font-weight:700;letter-spacing:.5px;">ആകെ ഹാജർ (Cumulative)</div>
+              <div style="font-size:.85rem;color:#fff;font-weight:800;margin-top:4px;">${tp} / ${td} days</div>
+            </div>
+            <div style="font-size:1.8rem;font-weight:900;color:#22d3ee;">${cumPct}%</div>
+          </div>
+        </div>
+        <h6 class="text-white mb-3" style="font-size:.9rem;">📅 Monthly Breakdown</h6>
         <ul class="list-unstyled mb-0">${records.map(r=>`
           <li class="d-flex justify-content-between py-2" style="border-bottom:1px solid rgba(140,190,255,.08);">
             <span class="text-white" style="font-size:.86rem;">${r.month_year}</span>
-            <span style="color:#22d3ee;font-weight:800;">${r.percentage}%</span>
+            <span style="color:#22d3ee;font-weight:800;">${r.percentage}% <small style="color:#9db8dd;">(${r.present_days}/${r.total_days})</small></span>
           </li>`).join('')}</ul>`;
     }else{
       modalBodyDiv.innerHTML='<div class="text-center text-white-50 py-3">No attendance records</div>';
@@ -2553,15 +2479,12 @@ document.getElementById('editProfileForm').addEventListener('submit',async funct
     updateDashboardUI();
     const nameEl=document.getElementById('aiStudentNameText');
     if(nameEl)nameEl.textContent=name;
-    closeEditProfile();
-    showToast('✅ Profile updated','success');
+    closeEditProfile();showToast('✅ Profile updated','success');
   }catch(err){showToast('❌ Update failed','error');}
   showLoading(false);
 });
 
-/* ============================================================
-   ID CARD
-============================================================ */
+/* ==== ID CARD ==== */
 function showIdCard(){
   modalTitleSpan.innerText="🪪 Student ID Card";
   modalBodyDiv.innerHTML=`<div class="text-center py-2">
@@ -2572,8 +2495,7 @@ function showIdCard(){
       <button class="btn-load" onclick="downloadIdCard('png')"><i class="fas fa-download"></i> PNG</button>
       <button class="btn-pdf" onclick="downloadIdCard('pdf')"><i class="fas fa-file-pdf"></i> PDF</button>
       <button class="btn-update" onclick="printIdCard()"><i class="fas fa-print"></i> Print</button>
-    </div>
-  </div>`;
+    </div></div>`;
   modal.style.display='flex';
   setTimeout(renderIdCard,250);
 }
@@ -2669,9 +2591,7 @@ function printIdCard(){
   win.document.close();
 }
 
-/* ============================================================
-   TOPPER
-============================================================ */
+/* ==== TOPPER ==== */
 function showTopperPoster(){
   if(!currentUser)return;
   document.getElementById('topperNameDisplay').textContent=currentUser.name||'Student';
@@ -2769,9 +2689,7 @@ async function downloadTopperPoster(type){
 function showTopperLoading(t){document.getElementById('topperLoadingText').textContent=t;document.getElementById('topperLoading').style.display='flex';}
 function hideTopperLoading(){document.getElementById('topperLoading').style.display='none';}
 
-/* ============================================================
-   FIND STUDENT ID
-============================================================ */
+/* ==== FIND STUDENT ID ==== */
 async function findStudentId(e){
   e.preventDefault();
   const cls=document.getElementById('findClass').value;
@@ -2797,9 +2715,7 @@ async function findStudentId(e){
 function copyToClipboard(t){navigator.clipboard.writeText(t);showToast('Copied: '+t,'success');}
 function closeFindStudentId(){document.getElementById('findStudentIdModal').style.display='none';}
 
-/* ============================================================
-   FORGOT
-============================================================ */
+/* ==== FORGOT ==== */
 document.getElementById('closeForgotModalBtn').addEventListener('click',()=>document.getElementById('forgotModal').style.display='none');
 document.getElementById('forgotCloseBtn').addEventListener('click',()=>document.getElementById('forgotModal').style.display='none');
 document.getElementById('forgotSubmitBtn').addEventListener('click',async function(){
@@ -2826,9 +2742,7 @@ document.getElementById('forgotSubmitBtn').addEventListener('click',async functi
   }
 });
 
-/* ============================================================
-   ADMIN — CLASS SELECT & TABS
-============================================================ */
+/* ==== ADMIN: CLASS SELECT & TABS ==== */
 async function selectAdminClass(cls){
   currentAdminClass=cls;
   const mainContent=document.getElementById('adminMainContent'),
@@ -2899,9 +2813,7 @@ function switchAdminTab(tab){
   if(tab==='library')loadLibraryAdmin();
 }
 
-/* ============================================================
-   ADMIN — MARKS (Variable max + optional subjects + "0" allowed)
-============================================================ */
+/* ==== ADMIN: MARKS ==== */
 async function loadMarksEntry(){
   if(!currentAdminClass)return;
   if(currentAdminClass==='all'){
@@ -2922,10 +2834,12 @@ async function loadMarksEntry(){
     const subjectConfig={};
     subjects.forEach(sub=>{
       const ex=(existing||[]).filter(e=>e.subject===sub);
-      subjectConfig[sub]={
-        enabled:true,
-        max_marks: ex.length>0 ? (Number(ex[0].max_marks)||100) : 100
-      };
+      let mx=100;
+      if(ex.length>0){
+        mx=Number(ex[0].max_marks);
+        if(isNaN(mx) || mx<0) mx=100;
+      }
+      subjectConfig[sub]={enabled:true, max_marks:mx};
     });
 
     marksEntryData=(students||[]).map(s=>({
@@ -2933,8 +2847,15 @@ async function loadMarksEntry(){
       name:s.name,
       marks:subjects.reduce((a,sub)=>{
         const r=(existing||[]).find(e=>e.studentid===s.studentid&&e.subject===sub);
-        /* 0 is valid → show "0"; no record → empty */
-        a[sub] = r && r.obtained_marks!==null && r.obtained_marks!==undefined ? r.obtained_marks : '';
+        if(r && r.obtained_marks!==null && r.obtained_marks!==undefined){
+          if(Number(r.max_marks)===0 && Number(r.obtained_marks)===0){
+            a[sub]='P';
+          } else {
+            a[sub]=r.obtained_marks;
+          }
+        } else {
+          a[sub]='';
+        }
         return a;
       },{})
     }));
@@ -2943,16 +2864,16 @@ async function loadMarksEntry(){
 
     let html=`<div class="class-subjects-info">
       <strong class="text-white" style="font-size:.88rem;">📚 Class ${currentAdminClass} — ${exam}</strong>
-      <div style="font-size:.72rem;color:#9db8dd;margin-top:4px;">
+      <div style="font-size:.72rem;color:#9db8dd;margin-top:4px;line-height:1.6;">
         💡 ഓരോ വിഷയത്തിനും Max Marks നൽകുക. പരീക്ഷയിൽ ഇല്ലാത്ത വിഷയം uncheck ചെയ്യുക.<br>
-        🎯 മാർക്ക് <b>0</b> = save ചെയ്യും • <b>-</b> അല്ലെങ്കിൽ ഒഴിച്ചിട്ടാൽ = skip
+        🎯 <b>0</b> = count • <b>-</b> / ഒഴിച്ചിട്ടാൽ = skip • <b>P</b> = Pass (count ചെയ്യില്ല)
       </div>
     </div>`;
 
     html+=`<div class="marks-config-panel">
       <div class="marks-config-title">
         <i class="fas fa-sliders"></i> വിഷയങ്ങളും Max Marks-ഉം
-        <small>0 = count • "-" / empty = skip</small>
+        <small>0 = count • "-" = skip • "P" = pass</small>
       </div>
       <div class="marks-config-grid">
         ${subjects.map(sub=>{
@@ -2965,7 +2886,8 @@ async function loadMarksEntry(){
               ${escapeHtml(sub)}
             </label>
             <input type="number" id="subj_max_${k}" value="${cfg.max_marks}"
-                   min="1" max="500" placeholder="Max"
+                   min="1" max="500" placeholder="Max" autocomplete="off"
+                   onwheel="this.blur()"
                    oninput="validateMarksInputs()">
           </div>`;
         }).join('')}
@@ -2984,16 +2906,41 @@ async function loadMarksEntry(){
       html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
       subjects.forEach(sub=>{
         const k=sub.replace(/[^a-zA-Z0-9]/g,'');
-        const v=s.marks[sub];
         html+=`<td class="col_${k}" style="text-align:center;">
-          <input type="text" inputmode="decimal" id="mk_${cid}_${k}" class="mk-inp" value="${v}"
-                 placeholder="—" oninput="validateMarksInputs()">
+          <input type="text" inputmode="text" id="mk_${cid}_${k}" class="mk-inp"
+                 data-cid="${cid}" data-k="${k}"
+                 placeholder="—" autocapitalize="characters"
+                 autocomplete="off" autocorrect="off" spellcheck="false"
+                 onwheel="this.blur()"
+                 oninput="validateMarksInputs()">
         </td>`;
       });
       html+='</tr>';
     });
     html+='</tbody></table></div>';
     wrap.innerHTML=html;
+
+    /* Set values via JS after render */
+    const setValues=()=>{
+      wrap.querySelectorAll('.mk-inp').forEach(inp=>{
+        const cid=inp.dataset.cid;
+        const k=inp.dataset.k;
+        let val='';
+        for(const sub of subjects){
+          if(sub.replace(/[^a-zA-Z0-9]/g,'')!==k)continue;
+          const s=marksEntryData.find(x=>String(x.studentid).replace(/[^a-zA-Z0-9]/g,'')===cid);
+          if(s){
+            const v=s.marks[sub];
+            val=(v===undefined||v===null)?'':String(v);
+          }
+          break;
+        }
+        if(inp.value!==val)inp.value=val;
+      });
+    };
+    setValues();
+    setTimeout(setValues,80);
+    setTimeout(setValues,250);
 
     subjects.forEach(sub=>{
       const k=sub.replace(/[^a-zA-Z0-9]/g,'');
@@ -3024,15 +2971,11 @@ function validateMarksInputs(){
       if(!inp)return;
       const parsed=parseMarksInput(inp.value);
       inp.classList.remove('invalid','skipped');
-      if(parsed.skip){
-        if(inp.value.trim()!=='')inp.classList.add('skipped');
-        else inp.classList.add('skipped');
-        return;
-      }
+      if(parsed.skip){inp.classList.add('skipped');return;}
+      if(parsed.isPass){inp.style.borderColor='rgba(52,211,153,.6)';inp.style.background='rgba(52,211,153,.10)';return;}
+      inp.style.borderColor='';inp.style.background='';
       const v=parsed.value;
-      if(v<0 || (mx>0 && v>mx)){
-        inp.classList.add('invalid');
-      }
+      if(v<0 || (mx>0 && v>mx)){inp.classList.add('invalid');}
     });
   });
 }
@@ -3059,29 +3002,25 @@ async function saveMarksBulk(){
   btn.disabled=true;btn.innerHTML='Saving...';
   try{
     const rows=[];
-    let savedCount=0;
-    let skippedCount=0;
-    let zeroCount=0;
+    let savedCount=0,skippedCount=0,zeroCount=0,passCount=0;
     const errors=[];
 
     marksEntryData.forEach(s=>{
       const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
       enabled.forEach(({subject, max_marks, k})=>{
-        const el=document.getElementById(`mk_${cid}_${k}`);
+        const el=wrap.querySelector(`input.mk-inp[data-cid="${cid}"][data-k="${k}"]`);
         if(!el)return;
         const parsed=parseMarksInput(el.value);
         if(parsed.skip){skippedCount++;return;}
+        if(parsed.isPass){
+          rows.push({studentid:s.studentid,exam_name:exam,subject:subject,max_marks:0,obtained_marks:0});
+          passCount++;savedCount++;return;
+        }
         const val=parsed.value;
         if(val<0){errors.push(`${s.name} — ${subject}: negative`);return;}
         if(val>max_marks){errors.push(`${s.name} — ${subject}: ${val} > ${max_marks}`);return;}
         if(val===0)zeroCount++;
-        rows.push({
-          studentid:s.studentid,
-          exam_name:exam,
-          subject:subject,
-          max_marks:max_marks,
-          obtained_marks:val
-        });
+        rows.push({studentid:s.studentid,exam_name:exam,subject:subject,max_marks:max_marks,obtained_marks:val});
         savedCount++;
       });
     });
@@ -3093,14 +3032,24 @@ async function saveMarksBulk(){
     }
 
     const ids=marksEntryData.map(s=>s.studentid);
-    await supabaseClient.from('exam_marks').delete().eq('exam_name',exam).in('studentid',ids);
-    if(rows.length>0)await supabaseClient.from('exam_marks').insert(rows);
+    if(ids.length>0){
+      await supabaseClient.from('exam_marks').delete().eq('exam_name',exam).in('studentid',ids);
+    }
+    if(rows.length>0){
+      const CHUNK=200;
+      for(let i=0;i<rows.length;i+=CHUNK){
+        const {error}=await supabaseClient.from('exam_marks').insert(rows.slice(i,i+CHUNK));
+        if(error)throw error;
+      }
+    }
 
-    let msg=`✅ Saved ${savedCount} entries`;
-    if(zeroCount>0)msg+=` • ${zeroCount} zero${zeroCount>1?'s':''}`;
+    let msg=`✅ Saved ${savedCount}`;
+    if(zeroCount>0)msg+=` • ${zeroCount} zero`;
+    if(passCount>0)msg+=` • ${passCount} pass`;
     if(skippedCount>0)msg+=` • ${skippedCount} skipped`;
     showToast(msg,'success');
     await autoCalculateRanks(true);
+    await loadMarksEntry();
   }catch(e){showToast('❌ '+(e.message||'Error'),'error');}
   btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save Marks';
 }
@@ -3113,8 +3062,7 @@ async function autoCalculateRanks(silent){
     const {data:students}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
     if(!students||students.length===0){if(!silent)showToast('No students','error');if(!silent)showLoading(false);return;}
     const ids=students.map(s=>s.studentid);
-    const {data:marks}=await supabaseClient.from('exam_marks')
-      .select('studentid,subject,obtained_marks,max_marks').in('studentid',ids);
+    const {data:marks}=await supabaseClient.from('exam_marks').select('studentid,subject,obtained_marks,max_marks').in('studentid',ids);
     if(!marks||marks.length===0){if(!silent)showToast('No marks found','error');if(!silent)showLoading(false);return;}
 
     const subjMax={};
@@ -3122,14 +3070,17 @@ async function autoCalculateRanks(silent){
       const sub=m.subject||'';
       if(!sub)return;
       const mx=Number(m.max_marks)||0;
+      if(mx<=0)return;
       if(!subjMax[sub] || mx>subjMax[sub])subjMax[sub]=mx;
     });
     const totalMaxAll=Object.values(subjMax).reduce((a,b)=>a+b,0);
-    if(totalMaxAll<=0){if(!silent)showToast('Invalid max marks','error');if(!silent)showLoading(false);return;}
+    if(totalMaxAll<=0){if(!silent)showToast('No standard subjects','error');if(!silent)showLoading(false);return;}
 
     const totals={};
     students.forEach(s=>{totals[s.studentid]={o:0};});
     marks.forEach(m=>{
+      const mx=Number(m.max_marks)||0;
+      if(mx<=0)return;
       if(totals[m.studentid])totals[m.studentid].o += Number(m.obtained_marks)||0;
     });
 
@@ -3157,9 +3108,7 @@ async function autoCalculateRanks(silent){
   if(!silent)showLoading(false);
 }
 
-/* ============================================================
-   ADMIN — ATTENDANCE
-============================================================ */
+/* ==== ADMIN: ATTENDANCE ==== */
 async function loadAttendanceForAdmin(){
   if(!currentAdminClass)return;
   const month=document.getElementById('attendanceMonth').value;
@@ -3202,6 +3151,7 @@ function renderAttendance(){
     html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
     if(showClass)html+=`<td>${escapeHtml(s.class||'')}</td>`;
     html+=`<td><input type="number" id="att_present_${cid}" value="${s.present_days}" min="0"
+             autocomplete="off" onwheel="this.blur()"
              oninput="recalcAttendancePercentages()" style="width:70px;"></td>
       <td><span id="att_pct_${cid}" style="color:#22d3ee;font-weight:800;">${s.percentage}%</span></td></tr>`;
   });
@@ -3229,22 +3179,33 @@ async function bulkUpdateAttendance(){
   const btn=document.getElementById('attendanceUpdateBtn');
   btn.disabled=true;btn.innerHTML='Saving...';
   try{
+    const rows=[];
+    const ids=[];
     for(const s of attendanceData){
       const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-      const p=parseInt(document.getElementById(`att_present_${cid}`).value)||0;
+      const el=document.getElementById(`att_present_${cid}`);
+      if(!el)continue;
+      const p=parseInt(el.value)||0;
       const pct=total>0?Math.round(p/total*100):0;
-      const row={studentid:s.studentid,month_year:month,present_days:p,total_days:total,percentage:pct};
-      if(s.exists){await supabaseClient.from('attendance_records').update(row).eq('studentid',s.studentid).eq('month_year',month);}
-      else{await supabaseClient.from('attendance_records').insert(row);}
+      rows.push({studentid:s.studentid,month_year:month,present_days:p,total_days:total,percentage:pct});
+      ids.push(s.studentid);
     }
-    showToast('✅ Attendance saved','success');loadAttendanceForAdmin();
-  }catch(e){showToast('❌ '+e.message,'error');}
+    if(rows.length===0){showToast('No data','error');btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Update';return;}
+
+    await supabaseClient.from('attendance_records').delete().eq('month_year', month).in('studentid', ids);
+
+    const CHUNK=200;
+    for(let i=0;i<rows.length;i+=CHUNK){
+      const {error}=await supabaseClient.from('attendance_records').insert(rows.slice(i,i+CHUNK));
+      if(error)throw error;
+    }
+    showToast(`✅ Attendance saved (${rows.length} students)`,'success');
+    loadAttendanceForAdmin();
+  }catch(e){console.error(e);showToast('❌ '+(e.message||'Error'),'error');}
   btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Update';
 }
 
-/* ============================================================
-   ADMIN — TIMETABLE
-============================================================ */
+/* ==== ADMIN: TIMETABLE ==== */
 async function loadTimetableAdmin(){
   const wrap=document.getElementById('timetableWrap');
   if(currentAdminClass==='all'){
@@ -3277,7 +3238,7 @@ function openTimetableForm(id=null){
         ${['ശനി','ഞായർ','തിങ്കൾ','ചൊവ്വ','ബുധൻ','വ്യാഴം'].map(d=>`<option value="${d}" ${t.day===d?'selected':''}>${d}</option>`).join('')}
         </select></div>
       <div class="col-md-6"><label class="text-white-50 small">Period *</label>
-        <input type="number" id="tt_period" value="${t.period||1}" min="1" max="10" required class="modal-form-input"></div>
+        <input type="number" id="tt_period" value="${t.period||1}" min="1" max="10" required class="modal-form-input" autocomplete="off" onwheel="this.blur()"></div>
       <div class="col-md-6"><label class="text-white-50 small">Subject</label>
         <input type="text" id="tt_subject" value="${escapeHtml(t.subject||'')}" class="modal-form-input"></div>
       <div class="col-md-6"><label class="text-white-50 small">Teacher</label>
@@ -3315,9 +3276,7 @@ async function deleteTimetable(id){
   showToast('🗑️ Deleted','success');loadTimetableAdmin();
 }
 
-/* ============================================================
-   ADMIN — HOMEWORK
-============================================================ */
+/* ==== ADMIN: HOMEWORK ==== */
 async function loadHomeworkAdmin(){
   const wrap=document.getElementById('homeworkWrap');
   if(currentAdminClass==='all'){
@@ -3383,9 +3342,7 @@ async function deleteHomework(id){
   showToast('🗑️ Deleted','success');loadHomeworkAdmin();
 }
 
-/* ============================================================
-   ADMIN — NOTIFICATIONS
-============================================================ */
+/* ==== ADMIN: NOTIFICATIONS ==== */
 async function loadNotificationsAdmin(){
   const wrap=document.getElementById('notificationsAdminWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
@@ -3416,9 +3373,7 @@ function openNotificationForm(){
     <div class="row g-3">
       <div class="col-md-6"><label class="text-white-50 small">Type</label>
         <select id="notif_type" class="modal-form-input">
-          <option value="general">General</option>
-          <option value="important">Important</option>
-          <option value="urgent">Urgent</option>
+          <option value="general">General</option><option value="important">Important</option><option value="urgent">Urgent</option>
         </select></div>
       <div class="col-md-6"><label class="text-white-50 small">Target</label>
         <select id="notif_class" class="modal-form-input">
@@ -3450,9 +3405,7 @@ async function deleteNotification(id){
   showToast('🗑️ Deleted','success');loadNotificationsAdmin();
 }
 
-/* ============================================================
-   ADMIN — LIBRARY
-============================================================ */
+/* ==== ADMIN: LIBRARY ==== */
 async function loadLibraryAdmin(){
   const wrap=document.getElementById('libraryAdminWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
@@ -3519,9 +3472,7 @@ async function deleteLibrary(id){
   showToast('🗑️ Deleted','success');loadLibraryAdmin();
 }
 
-/* ============================================================
-   ADMIN — PAYMENTS
-============================================================ */
+/* ==== ADMIN: PAYMENTS ==== */
 async function loadPaymentsForDate(){
   if(!currentAdminClass)return;
   const date=document.getElementById('adminDate').value;
@@ -3558,8 +3509,8 @@ function renderAdminTable(){
     const st=item.exists?`<span class="existing-badge ${item.approved?'':'pending'}">${item.approved?'✅':'⏳'}</span>`:'—';
     html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(item.name)}</strong></td>`;
     if(showClass)html+=`<td>${escapeHtml(item.class||'')}</td>`;
-    html+=`<td><input type="number" id="admin_debit_${cid}" value="${item.debit}" min="0"></td>
-      <td><input type="number" id="admin_credit_${cid}" value="${item.credit}" min="0"></td>
+    html+=`<td><input type="number" id="admin_debit_${cid}" value="${item.debit}" min="0" autocomplete="off" onwheel="this.blur()"></td>
+      <td><input type="number" id="admin_credit_${cid}" value="${item.credit}" min="0" autocomplete="off" onwheel="this.blur()"></td>
       <td>${st}</td></tr>`;
   });
   html+='</tbody></table>';wrap.innerHTML=html;
@@ -3600,9 +3551,7 @@ async function bulkUpdate(){
   btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Update';
 }
 
-/* ============================================================
-   ADMIN — WITHDRAWALS / BALANCES / TXNS / SUMMARY
-============================================================ */
+/* ==== ADMIN: WITHDRAWALS / BALANCES / TXNS / SUMMARY ==== */
 async function loadAllWithdrawals(){
   if(!currentAdminClass)return;
   const wrap=document.getElementById('allWithdrawalsWrap');
@@ -3733,9 +3682,7 @@ async function loadDailySummary(){
   }catch(e){wrap.innerHTML='<div class="empty-state">Error</div>';}
 }
 
-/* ============================================================
-   ADMIN — STUDENTS
-============================================================ */
+/* ==== ADMIN: STUDENTS ==== */
 async function loadStudentsForAdmin(){
   if(!currentAdminClass)return;
   const wrap=document.getElementById('adminStudentsWrap');
@@ -3849,9 +3796,7 @@ async function deleteStudent(sid){
   document.getElementById('classBadgeStudents').textContent=(s||[]).length;
 }
 
-/* ============================================================
-   ADMIN — GRADES
-============================================================ */
+/* ==== ADMIN: GRADES ==== */
 async function loadGradesForAdmin(){
   if(!currentAdminClass)return;
   const wrap=document.getElementById('gradesWrap');
@@ -3881,8 +3826,8 @@ function renderGrades(){
     html+=`<td><select id="gr_grade_${cid}" class="modal-form-input" style="width:70px;padding:5px;font-size:.75rem;">
         <option value="">—</option>${GRADES_LIST.map(g=>`<option value="${g}" ${s.overallgrade===g?'selected':''}>${g}</option>`).join('')}
       </select></td>
-      <td><input type="number" id="gr_perf_${cid}" value="${s.performance||0}" min="0" max="100" style="width:58px;"></td>
-      <td><input type="number" id="gr_rank_${cid}" value="${s.rank||''}" min="1" style="width:52px;"></td>
+      <td><input type="number" id="gr_perf_${cid}" value="${s.performance||0}" min="0" max="100" style="width:58px;" autocomplete="off" onwheel="this.blur()"></td>
+      <td><input type="number" id="gr_rank_${cid}" value="${s.rank||''}" min="1" style="width:52px;" autocomplete="off" onwheel="this.blur()"></td>
       <td><select id="gr_moral_${cid}" class="modal-form-input" style="width:70px;padding:5px;font-size:.75rem;">
         <option value="">—</option>${GRADES_LIST.map(g=>`<option value="${g}" ${s.moralvaluesgrade===g?'selected':''}>${g}</option>`).join('')}
       </select></td>
@@ -3910,9 +3855,7 @@ async function bulkUpdateGrades(){
   btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Save';
 }
 
-/* ============================================================
-   ADMIN — MORAL VALUES
-============================================================ */
+/* ==== ADMIN: MORAL VALUES ==== */
 async function loadMoralValuesAdmin(){
   if(!currentAdminClass)return;
   const wrap=document.getElementById('moralValuesAdminWrap');
@@ -3952,10 +3895,8 @@ function renderTraitRow(idx,trait,grade,id){
   const to=TRAITS_LIST.map(t=>`<option value="${t}" ${t===trait?'selected':''}>${t}</option>`).join('');
   const go=GRADES_LIST.map(g=>`<option value="${g}" ${g===grade?'selected':''}>${g}</option>`).join('');
   return `<div class="trait-row d-flex gap-2 mb-2 align-items-center">
-    <select class="trait-name modal-form-input" style="flex:2;">
-      <option value="">-- Trait --</option>${to}</select>
-    <select class="trait-grade modal-form-input" style="flex:1;">
-      <option value="">-- Grade --</option>${go}</select>
+    <select class="trait-name modal-form-input" style="flex:2;"><option value="">-- Trait --</option>${to}</select>
+    <select class="trait-grade modal-form-input" style="flex:1;"><option value="">-- Grade --</option>${go}</select>
     <button type="button" class="btn-sm reject" onclick="this.parentElement.remove()">🗑️</button>
   </div>`;
 }
@@ -4015,9 +3956,7 @@ async function saveMoralValues(e,sid){
   showLoading(false);
 }
 
-/* ============================================================
-   ADMIN — EVENTS
-============================================================ */
+/* ==== ADMIN: EVENTS ==== */
 async function loadAllEvents(){
   const wrap=document.getElementById('eventsWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
@@ -4070,9 +4009,7 @@ async function deleteEvent(id){
   showToast('🗑️ Deleted','success');loadAllEvents();
 }
 
-/* ============================================================
-   ADMIN — FEED
-============================================================ */
+/* ==== ADMIN: FEED ==== */
 async function loadAllActivities(){
   if(!currentAdminClass)return;
   const wrap=document.getElementById('feedWrap');
@@ -4132,9 +4069,7 @@ async function deleteActivity(id){
   showToast('🗑️ Deleted','success');loadAllActivities();
 }
 
-/* ============================================================
-   SETTINGS ACTIONS
-============================================================ */
+/* ==== SETTINGS ACTIONS ==== */
 async function saveSetting(key,elId){
   const val=document.getElementById(elId).value.trim();
   if(!val){showToast('Value required','error');return;}
@@ -4171,18 +4106,18 @@ async function changeAdminPassword(){
 function saveBgUrl(type){
   const url=document.getElementById(type==='id'?'settingsIdBgUrl':'settingsTopperBgUrl').value.trim();
   if(!url){showToast('URL required','error');return;}
-  if(type==='id'){ID_CARD_BG_URL=url;localStorage.setItem('id_card_bg',url);showToast('✅ ID Card background saved','success');}
-  else{TOPPER_BG_URL=url;localStorage.setItem('topper_bg',url);showToast('✅ Topper background saved','success');}
+  if(type==='id'){ID_CARD_BG_URL=url;localStorage.setItem('id_card_bg',url);showToast('✅ ID Card bg saved','success');}
+  else{TOPPER_BG_URL=url;localStorage.setItem('topper_bg',url);showToast('✅ Topper bg saved','success');}
 }
 function clearBgUrl(type){
   if(type==='id'){
     ID_CARD_BG_URL='';localStorage.removeItem('id_card_bg');
     const inp=document.getElementById('settingsIdBgUrl');if(inp)inp.value='';
-    showToast('🗑️ ID Card background cleared','info');
+    showToast('🗑️ ID Card bg cleared','info');
   }else{
     TOPPER_BG_URL='';localStorage.removeItem('topper_bg');
     const inp=document.getElementById('settingsTopperBgUrl');if(inp)inp.value='';
-    showToast('🗑️ Topper background cleared','info');
+    showToast('🗑️ Topper bg cleared','info');
   }
 }
 function loadBgUrlsIntoForm(){
@@ -4220,9 +4155,7 @@ async function loadDBStats(){
   }catch(e){el.innerHTML='<div class="empty-state">Error loading stats</div>';}
 }
 
-/* ============================================================
-   PDF EXPORTS
-============================================================ */
+/* ==== PDF EXPORTS ==== */
 function downloadPaymentsPDF(){
   if(!filteredPayments||filteredPayments.length===0){showToast('No data','error');return;}
   const {jsPDF}=window.jspdf;
@@ -4256,9 +4189,7 @@ function downloadBalancesPDF(){
   doc.save(`balances_${currentAdminClass}.pdf`);
 }
 
-/* ============================================================
-   AI CHAT
-============================================================ */
+/* ==== AI CHAT ==== */
 let aiOpen=false,aiHistory=[];
 function toggleAIChat(){
   if(!currentUser){showToast('Please login first','error');return;}
@@ -4316,7 +4247,7 @@ async function aiRespond(q){
   if(/(attendance|ഹാജർ|present|absent|ഹാജര്)/.test(t)){
     const a=currentUser.attendance||0;
     const msg=a>=90?'മികച്ച ഹാജർ! 🌟':a>=75?'നല്ലത് 👍':a>=60?'ശരാശരി':'⚠️ ഹാജർ കുറവാണ്!';
-    return `📆 <b>${uname}, ഹാജർ വിവരം</b><br><br>ഹാജർ: <b>${a}%</b><br>${msg}`;
+    return `📆 <b>${uname}, ഹാജർ വിവരം (Cumulative)</b><br><br>ആകെ ഹാജർ: <b>${a}%</b><br>${msg}`;
   }
   if(/(result|റിസൾട്ട്|grade|ഗ്രേഡ്|mark|മാർക്സ്|score|പരീക്ഷ)/.test(t)){
     return `📊 <b>${uname}, അക്കാദമിക് വിവരം</b><br><br>
@@ -4355,7 +4286,7 @@ async function aiRespond(q){
       റോൾ: <b>${escapeHtml(currentUser.roll||'—')}</b>`;
   }
   if(/(library|ലൈബ്രറി|book|പുസ്തകം|pdf|material)/.test(t)){
-    return '📚 <b>ലൈബ്രറി</b><br><br>dashboard-ൽ "ലൈബ്രറി" tile ടാപ്പ് ചെയ്യൂ — PDF, വീഡിയോ, ലിങ്കുകൾ ലഭ്യമാണ്.';
+    return '📚 <b>ലൈബ്രറി</b><br><br>dashboard-ൽ "ലൈബ്രറി" tile ടാപ്പ് ചെയ്യൂ.';
   }
   if(/(notification|notify|അറിയിപ്പ്|message)/.test(t)){
     return '🔔 <b>അറിയിപ്പുകൾ</b><br><br>മുകളിലെ 🔔 ബെൽ ഐക്കൺ ടാപ്പ് ചെയ്താൽ എല്ലാ അറിയിപ്പുകളും കാണാം.';
@@ -4388,9 +4319,7 @@ async function aiRespond(q){
     • എന്റെ റിസൾട്ട്<br>• ഇന്നത്തെ ടൈംടേബിൾ<br>• ഹോംവർക്ക്<br>• സഹായം`;
 }
 
-/* ============================================================
-   EXPORTS
-============================================================ */
+/* ==== EXPORTS ==== */
 Object.assign(window,{
   showResultsModal,showAttendanceReport,showMoralValuesModal,showProfileCard,closeModal,openEditProfile,closeEditProfile,
   showIdCard,downloadIdCard,printIdCard,toggleTheme,showTopperPoster,closeTopperModal,openTopperCrop,closeTopperCrop,saveTopperCrop,
@@ -4411,22 +4340,21 @@ Object.assign(window,{
   showExamMarks,onStudentExamChange,renderStudentExamMarks,
   saveBgUrl,clearBgUrl,loadBgUrlsIntoForm,
   getStudentBalance,subscribeNotifications,
-  toggleSubjectColumn,validateMarksInputs,parseMarksInput
+  toggleSubjectColumn,validateMarksInputs,parseMarksInput,
+  refreshStudentAttendance
 });
 
-/* ============================================================
-   INIT
-============================================================ */
+/* ==== INIT ==== */
 async function initApp(){
   try{await loadAllSettings();}catch(e){}
-  restoreSession();
+  await restoreSession();
   document.querySelectorAll(
     '#globalModal,#passbookModal,#findStudentIdModal,#editProfileModal,#forgotModal,#topperModal,#topperCropModal,#studentWithdrawalModal,#notificationsModal'
   ).forEach(el=>{
     if(el)el.addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
   });
   if(closeModalBtn)closeModalBtn.addEventListener('click',()=>modal.style.display='none');
-  console.log('%c✅ Noorussalam Madrasa v15.2 — 0/-/empty support','color:#22d3ee;font-weight:bold;font-size:14px;');
+  console.log('%c✅ Noorussalam Madrasa v15.4 — Final','color:#22d3ee;font-weight:bold;font-size:14px;');
 }
 initApp();
 </script>
