@@ -556,6 +556,106 @@ body::after{
 .class-subjects-info{padding:12px 16px;background:rgba(59,139,255,.10);border-radius:14px;margin-bottom:12px;
   border:1px solid rgba(59,139,255,.28)}
 
+/* ============ LIGHT THEME ============ */
+.dashboard-light{
+  background:linear-gradient(155deg,#f0f4ff 0%,#e8edf5 50%,#dde6f5 100%) !important;
+  color:#1a2340;
+}
+.dashboard-light::before,
+.dashboard-light::after{opacity:.15 !important;}
+.dashboard-light .dashboard-header-glow,
+.dashboard-light .stat-card-neon,
+.dashboard-light .action-tile,
+.dashboard-light .activity-timeline,
+.dashboard-light .event-card,
+.dashboard-light .palathulli-hero,
+.dashboard-light .feed-item,
+.dashboard-light .timetable-item,
+.dashboard-light .homework-item,
+.dashboard-light .library-item{
+  background:rgba(255,255,255,.78) !important;
+  border-color:rgba(21,71,168,.15) !important;
+  color:#1a2340 !important;
+  box-shadow:0 15px 35px -18px rgba(30,107,224,.25) !important;
+}
+.dashboard-light .palathulli-hero{
+  background:linear-gradient(125deg,rgba(59,139,255,.22) 0%,rgba(125,179,255,.15) 50%,rgba(255,255,255,.75) 100%) !important;
+  border-color:rgba(34,211,238,.4) !important;
+}
+.dashboard-light .text-white,
+.dashboard-light #studentFullName,
+.dashboard-light .stat-value-xl,
+.dashboard-light .action-tile h6,
+.dashboard-light .activity-timeline h5,
+.dashboard-light .section-title,
+.dashboard-light .feed-item .text-white,
+.dashboard-light .event-card .text-white,
+.dashboard-light .timetable-item strong,
+.dashboard-light .homework-item strong{
+  color:#1a2340 !important;
+  background:none !important;
+  -webkit-text-fill-color:initial !important;
+}
+.dashboard-light .stat-value-xl,
+.dashboard-light .pala-amount{
+  background:linear-gradient(120deg,#1547a8,#22d3ee) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  color:transparent !important;
+  -webkit-text-fill-color:transparent !important;
+}
+.dashboard-light .pala-title-ml{
+  background:linear-gradient(100deg,#1547a8,#0a1a3f) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  color:transparent !important;
+  -webkit-text-fill-color:transparent !important;
+}
+.dashboard-light .text-white-50,
+.dashboard-light .stat-label,
+.dashboard-light .header-meta,
+.dashboard-light small.text-white-50{
+  color:rgba(26,35,64,.65) !important;
+}
+.dashboard-light .header-meta i,
+.dashboard-light .header-meta span,
+.dashboard-light .header-meta i.fas{color:#1547a8 !important;}
+.dashboard-light .icon-btn{
+  background:rgba(255,255,255,.9) !important;
+  border-color:rgba(21,71,168,.2) !important;
+  color:#1547a8 !important;
+}
+.dashboard-light .icon-btn:hover{
+  background:rgba(59,139,255,.15) !important;
+  color:#0a1a3f !important;
+}
+.dashboard-light .palathulli-hero .pala-label{
+  background:rgba(34,211,238,.2) !important;
+  color:#0a1a3f !important;
+  border-color:rgba(34,211,238,.5) !important;
+}
+.dashboard-light .pala-minhint{
+  background:rgba(251,191,36,.25) !important;
+  color:#7a5500 !important;
+  border-color:rgba(251,191,36,.55) !important;
+}
+.dashboard-light .pala-btn.ghost{
+  background:rgba(21,71,168,.12) !important;
+  color:#0a1a3f !important;
+  border-color:rgba(21,71,168,.25) !important;
+}
+.dashboard-light .palathulli-hero{
+  background:linear-gradient(125deg,rgba(59,139,255,.28) 0%,rgba(125,179,255,.15) 50%,rgba(255,255,255,.85) 100%) !important;
+}
+.dashboard-light .feed-dot{
+  background:#1547a8 !important;
+  box-shadow:0 0 0 4px rgba(21,71,168,.2) !important;
+}
+.dashboard-light .grade-bar,
+.dashboard-light .progress{
+  background:rgba(21,71,168,.12) !important;
+}
+
 /* ============ BLINKING NOTIFICATION BELL ============ */
 @keyframes bellBlink{
   0%,100%{transform:scale(1);color:#fbbf24;box-shadow:0 0 0 0 rgba(239,68,68,.75),0 0 0 0 rgba(251,191,36,.45);
@@ -567,6 +667,23 @@ body::after{
 .icon-btn.has-unread i{color:#fbbf24 !important}
 @keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
 .notif-badge.pulse{animation:badgePulse 1s ease-in-out infinite}
+
+/* ============ EXAM SELECTOR ============ */
+.exam-selector-panel{
+  background:linear-gradient(135deg,rgba(30,107,224,.22),rgba(34,211,238,.10));
+  border:1.6px solid rgba(34,211,238,.42);border-radius:20px;padding:16px;margin-bottom:16px;
+  display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+}
+.exam-selector-panel label{color:#fff;font-weight:800;font-size:.92rem;display:flex;align-items:center;gap:8px}
+.exam-selector-panel label i{color:var(--cyan)}
+.exam-selector-panel select{
+  background:rgba(8,20,48,.9);border:2px solid rgba(34,211,238,.5);border-radius:14px;
+  padding:10px 42px 10px 16px;color:#fff;font-size:.95rem;font-weight:700;outline:none;cursor:pointer;
+  font-family:inherit;appearance:none;min-width:180px;
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322d3ee' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat:no-repeat;background-position:right 14px center;background-size:18px;
+}
+.exam-selector-panel select option{background:#0a1a3f;color:#fff}
 
 /* ============ AI CHAT ============ */
 .ai-fab{
@@ -692,7 +809,7 @@ body::after{
     </button>
   </form>
 
-  <div class="login-footer-note">v15.0 • Edition ©Suhail Kerala</div>
+  <div class="login-footer-note">v15.1 • Edition ©Suhail Kerala</div>
   <button class="help-btn" onclick="openHelpModal()">
     <i class="fas fa-circle-question"></i><span>സഹായം</span>
   </button>
@@ -863,7 +980,7 @@ body::after{
   </div>
 
   <div class="text-center text-white-50 mt-5 pb-4" style="font-size:.72rem;opacity:.6;">
-    Noorussalam Madrasa • v15.0 Edition © Suhail Kerala
+    Noorussalam Madrasa • v15.1 Edition © Suhail Kerala
   </div>
 </div>
 </div>
@@ -1128,6 +1245,24 @@ body::after{
         <input type="number" id="settingsMinWithdraw" class="modal-form-input" />
         <button class="btn-update mt-3" onclick="saveSetting('minWithdraw','settingsMinWithdraw')">Save</button>
       </div>
+      <div class="mb-4" style="background:rgba(120,180,255,.04);padding:16px;border-radius:16px;border:1px solid var(--stroke);">
+        <h5 class="text-white mb-3" style="font-size:.95rem;">🖼️ Background Images</h5>
+        <p class="text-white-50 small mb-3">Link നൽകിയാൽ ID Card / Topper Poster background ആയി ഉപയോഗിക്കും. ഒഴിച്ചാൽ gradient background വരും.</p>
+
+        <label class="text-white-50 small d-block mb-1">ID Card Background URL</label>
+        <input type="url" id="settingsIdBgUrl" class="modal-form-input mb-2" placeholder="https://example.com/id-card.jpg">
+        <div class="d-flex gap-2 mb-3">
+          <button class="btn-update" style="padding:8px 20px;font-size:.8rem;" onclick="saveBgUrl('id')">Save</button>
+          <button class="btn-cancel" style="padding:8px 20px;font-size:.8rem;" onclick="clearBgUrl('id')">Clear</button>
+        </div>
+
+        <label class="text-white-50 small d-block mb-1">Topper Poster Background URL</label>
+        <input type="url" id="settingsTopperBgUrl" class="modal-form-input mb-2" placeholder="https://example.com/topper.jpg">
+        <div class="d-flex gap-2">
+          <button class="btn-update" style="padding:8px 20px;font-size:.8rem;" onclick="saveBgUrl('topper')">Save</button>
+          <button class="btn-cancel" style="padding:8px 20px;font-size:.8rem;" onclick="clearBgUrl('topper')">Clear</button>
+        </div>
+      </div>
       <h5 class="text-white mt-4 mb-3" style="font-size:.95rem;"><i class="fas fa-database" style="color:#22d3ee"></i> Database Stats</h5>
       <div id="dbStatsContent"></div>
       <button class="btn-load mt-3" onclick="loadDBStats()"><i class="fas fa-sync-alt"></i> Refresh</button>
@@ -1391,6 +1526,13 @@ let MIN_WITHDRAW=100,SETTINGS_CACHE={};
 let CLASS_SUBJECTS={'1':['Arabic','Malayalam','Maths'],'5':['Arabic','Malayalam','English','Maths','Science'],'10':['Arabic','English','Maths','Science','Social Science']};
 let lastReadNotifTime=parseInt(localStorage.getItem('lastReadNotifTime')||'0');
 
+/* Background Images */
+let ID_CARD_BG_URL=localStorage.getItem('id_card_bg')||'';
+let TOPPER_BG_URL=localStorage.getItem('topper_bg')||'';
+
+/* Realtime channel */
+let notifChannel=null;
+
 const loginSection=document.getElementById('loginSection'),
       dashboardSection=document.getElementById('dashboardSection'),
       adminSection=document.getElementById('adminSection');
@@ -1451,11 +1593,10 @@ async function getFilteredStudentIds(){
   const {data}=await q;
   return (data||[]).map(s=>s.studentid);
 }
-async function getFilteredStudents(){
-  let q=supabaseClient.from('students').select('studentid,name,class,roll');
-  if(currentAdminClass && currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
-  const {data}=await q;
-  return data||[];
+
+/* Photo validity check */
+function hasPhoto(u){
+  return u && (u.startsWith('data:image') || u.startsWith('http'));
 }
 
 /* ============================================================
@@ -1537,6 +1678,7 @@ document.getElementById('loginForm').addEventListener('submit',async function(e)
       loginSection.style.display='none';adminSection.style.display='block';dashboardSection.style.display='none';
       document.getElementById('aiFab').classList.remove('show');
       document.getElementById('aiPanel').classList.remove('open');
+      if(notifChannel){supabaseClient.removeChannel(notifChannel);notifChannel=null;}
       await loadAllSettings();
       document.getElementById('adminClassSelector').value='';
       document.getElementById('adminMainContent').style.display='none';
@@ -1586,6 +1728,7 @@ document.getElementById('loginForm').addEventListener('submit',async function(e)
     loadStudentBalance();
     loadStudentNotifications();
     showAIAssistant();
+    subscribeNotifications();
     showToast(`Welcome ${currentUser.name} ✨`,'success');
   }catch(err){console.error(err);showToast('Network error','error');}
   showLoading(false);
@@ -1602,6 +1745,7 @@ function logout(){
   document.getElementById('aiFab').classList.remove('show');
   document.getElementById('aiPanel').classList.remove('open');
   aiOpen=false;
+  if(notifChannel){supabaseClient.removeChannel(notifChannel);notifChannel=null;}
   studentIdInput.value=localStorage.getItem('noor_last_id')||'';
   showToast('Logged out','info');
 }
@@ -1617,6 +1761,7 @@ function restoreSession(){
       loadStudentBalance();
       loadStudentNotifications();
       showAIAssistant();
+      subscribeNotifications();
     }catch(e){}
   }
 }
@@ -1632,7 +1777,31 @@ function showAIAssistant(){
       നിങ്ങളുടെ പലതുള്ളി ബാലൻസ്, ഹാജർ, റിസൾട്ട്, ടൈംടേബിൾ, ഹോംവർക്ക് എന്നിവയെക്കുറിച്ച് എന്നോട് ചോദിക്കാം 😊`;
   }
 }
-function toggleTheme(){dashboardSection.classList.toggle('dashboard-light');showToast('Theme mode toggled','info');}
+function toggleTheme(){dashboardSection.classList.toggle('dashboard-light');showToast('🎨 Theme toggled','info');}
+
+/* ============================================================
+   REALTIME NOTIFICATIONS
+============================================================ */
+function subscribeNotifications(){
+  if(notifChannel){supabaseClient.removeChannel(notifChannel);notifChannel=null;}
+  if(!currentUser||isAdminMode)return;
+  const cls=(currentUser.class && currentUser.class!=='N/A')?currentUser.class:'__none__';
+  try{
+    notifChannel=supabaseClient
+      .channel('notif_'+currentUser.studentId)
+      .on('postgres_changes',
+        {event:'INSERT',schema:'public',table:'notifications',
+         filter:`target_class=eq.${cls}`},
+        ()=>{loadStudentNotifications();showToast('🔔 പുതിയ അറിയിപ്പ്!','info');}
+      )
+      .on('postgres_changes',
+        {event:'INSERT',schema:'public',table:'notifications',
+         filter:`target_class=eq.all`},
+        ()=>{loadStudentNotifications();showToast('🔔 പുതിയ അറിയിപ്പ്!','info');}
+      )
+      .subscribe();
+  }catch(e){console.warn('Realtime subscribe error',e);}
+}
 
 /* ============================================================
    DASHBOARD UI
@@ -1656,7 +1825,7 @@ function updateDashboardUI(){
   document.getElementById('studentClassText').innerText=currentUser.class?'Class '+currentUser.class:'N/A';
 
   const ai=document.getElementById('avatarPhoto'),at=document.getElementById('avatarText');
-  if(currentUser.photo&&currentUser.photo.startsWith('data:image')){
+  if(hasPhoto(currentUser.photo)){
     ai.src=currentUser.photo;ai.style.display='block';at.style.display='none';
   }else{
     ai.style.display='none';at.style.display='block';at.innerText=currentUser.avatar||'S';
@@ -1736,13 +1905,14 @@ async function loadActivitiesAndCalendar(){
 }
 
 /* ============================================================
-   NOTIFICATIONS (with blinking bell)
+   NOTIFICATIONS
 ============================================================ */
 async function loadStudentNotifications(){
   if(!currentUser)return;
   try{
+    const cls=(currentUser.class && currentUser.class!=='N/A')?currentUser.class:'__none__';
     const {data}=await supabaseClient.from('notifications').select('*')
-      .or(`target_class.eq.all,target_class.eq.${currentUser.class}`)
+      .or(`target_class.eq.all,target_class.eq.${cls}`)
       .order('created_at',{ascending:false}).limit(20);
     const unread=(data||[]).filter(n=>new Date(n.created_at).getTime()>lastReadNotifTime).length;
     const badge=document.getElementById('notifBadge');
@@ -1772,16 +1942,17 @@ async function openNotificationsModal(){
   const list=document.getElementById('notificationsList');
   list.innerHTML='<div class="text-center py-3 text-white-50">Loading...</div>';
   try{
+    const cls=(currentUser.class && currentUser.class!=='N/A')?currentUser.class:'__none__';
     const {data}=await supabaseClient.from('notifications').select('*')
-      .or(`target_class.eq.all,target_class.eq.${currentUser.class}`)
+      .or(`target_class.eq.all,target_class.eq.${cls}`)
       .order('created_at',{ascending:false}).limit(30);
     if(!data||data.length===0){
       list.innerHTML='<div class="text-center py-4 text-white-50">🔕 No notifications</div>';return;
     }
     list.innerHTML=data.map(n=>{
-      const cls=n.type==='urgent'?'urgent':n.type==='important'?'important':'';
+      const cls2=n.type==='urgent'?'urgent':n.type==='important'?'important':'';
       const icon=n.type==='urgent'?'fa-exclamation-triangle':n.type==='important'?'fa-exclamation-circle':'fa-info-circle';
-      return `<div class="notif-item ${cls}">
+      return `<div class="notif-item ${cls2}">
         <div class="d-flex justify-content-between mb-2 flex-wrap gap-2">
           <strong class="text-white" style="font-size:.88rem;"><i class="fas ${icon} me-2"></i>${escapeHtml(n.title)}</strong>
           <small class="text-white-50" style="font-size:.7rem;">${formatDate(n.created_at)}</small>
@@ -1794,14 +1965,27 @@ async function openNotificationsModal(){
 function closeNotificationsModal(){document.getElementById('notificationsModal').style.display='none';}
 
 /* ============================================================
-   PALATHULLI / BALANCE
+   BALANCE (Server-side RPC with fallback)
 ============================================================ */
+async function getStudentBalance(sid){
+  try{
+    const {data,error}=await supabaseClient.rpc('get_student_balance',{sid});
+    if(error)throw error;
+    return Number(data)||0;
+  }catch(e){
+    /* Fallback: client-side sum */
+    try{
+      const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',sid);
+      let b=0;if(p)p.forEach(x=>{if(x.approved===true)b+=(x.debit||0)-(x.credit||0);});
+      return b;
+    }catch(e2){return 0;}
+  }
+}
+
 async function loadStudentBalance(){
   if(!currentUser)return;
   try{
-    const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',currentUser.studentId);
-    let b=0;
-    if(p)p.forEach(x=>{if(x.approved===true)b+=(x.debit||0)-(x.credit||0);});
+    const b=await getStudentBalance(currentUser.studentId);
     document.getElementById('studentBalance').textContent='₹'+b.toLocaleString('en-IN',{minimumFractionDigits:2});
     const belowMin=b<MIN_WITHDRAW;
     document.getElementById('balanceStatus').textContent=
@@ -1844,8 +2028,7 @@ function openStudentWithdrawalModal(){
 function closeStudentWithdrawalModal(){document.getElementById('studentWithdrawalModal').style.display='none';}
 async function loadStudentBalanceForWithdrawal(){
   try{
-    const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',currentUser.studentId);
-    let b=0;if(p)p.forEach(x=>{if(x.approved===true)b+=(x.debit||0)-(x.credit||0);});
+    const b=await getStudentBalance(currentUser.studentId);
     document.getElementById('swBalance').textContent=b.toFixed(2);
     document.getElementById('swMinAmount').textContent=MIN_WITHDRAW;
     const max=b-MIN_WITHDRAW;
@@ -1878,7 +2061,7 @@ async function loadStudentWithdrawals(){
   }catch(e){}
 }
 
-/* ====== WITHDRAWAL SUBMIT — With Minimum ₹100 Maintain Rule ====== */
+/* Withdrawal Submit */
 document.getElementById('studentWithdrawForm').addEventListener('submit',async function(e){
   e.preventDefault();
   if(!currentUser)return;
@@ -1888,10 +2071,7 @@ document.getElementById('studentWithdrawForm').addEventListener('submit',async f
   const btn=document.getElementById('swSubmitBtn');
   btn.disabled=true;btn.innerHTML='Submitting...';
   try{
-    const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',currentUser.studentId);
-    let bal=0;if(p)p.forEach(x=>{if(x.approved===true)bal+=(x.debit||0)-(x.credit||0);});
-
-    /* ⭐ MINIMUM BALANCE RULE: ₹100 എപ്പോഴും നിലനിർത്തണം */
+    const bal=await getStudentBalance(currentUser.studentId);
     const MIN_BALANCE=MIN_WITHDRAW;
     if(bal<MIN_BALANCE){
       showToast(`⚠️ Minimum ₹${MIN_BALANCE} ബാലൻസ് വേണം. നിലവിൽ ₹${bal.toFixed(2)}`,'error');
@@ -1920,7 +2100,7 @@ document.getElementById('studentWithdrawForm').addEventListener('submit',async f
 });
 
 /* ============================================================
-   PHOTO UPLOAD (Cropper)
+   PHOTO UPLOAD (Storage)
 ============================================================ */
 function openTopperCrop(){
   cropMode='topper';
@@ -1969,18 +2149,39 @@ async function uploadProfilePhoto(b64){
   if(!currentUser)return;
   showLoading(true);
   try{
-    const {error}=await supabaseClient.from('students').update({photo:b64}).eq('studentid',currentUser.studentId);
+    /* Try Storage first */
+    let photoUrl=null;
+    try{
+      const res=await fetch(b64);
+      const blob=await res.blob();
+      const fileName=`${currentUser.studentId}_${Date.now()}.jpg`;
+      const {data:up,error:upErr}=await supabaseClient.storage
+        .from('student-photos')
+        .upload(fileName,blob,{cacheControl:'3600',upsert:true,contentType:'image/jpeg'});
+      if(upErr)throw upErr;
+      const {data:pub}=supabaseClient.storage.from('student-photos').getPublicUrl(fileName);
+      photoUrl=pub.publicUrl;
+    }catch(storageErr){
+      console.warn('Storage upload failed, using base64 fallback:',storageErr);
+      photoUrl=b64; /* Fallback to base64 */
+    }
+
+    const {error}=await supabaseClient.from('students').update({photo:photoUrl}).eq('studentid',currentUser.studentId);
     if(error)throw error;
-    currentUser.photo=b64;
+
+    currentUser.photo=photoUrl;
     localStorage.setItem('noor_session',JSON.stringify(currentUser));
     updateDashboardUI();
     if(document.getElementById('globalModal').style.display==='flex')showProfileCard();
     if(document.getElementById('editProfileModal').style.display==='flex'){
       const prev=document.getElementById('editPhotoPreview');
-      if(prev)prev.innerHTML=`<img src="${b64}" style="width:100%;height:100%;object-fit:cover;">`;
+      if(prev)prev.innerHTML=`<img src="${photoUrl}" style="width:100%;height:100%;object-fit:cover;">`;
     }
     showToast('✅ Photo updated','success');
-  }catch(e){showToast('❌ Photo upload failed','error');}
+  }catch(e){
+    console.error(e);
+    showToast('❌ Photo upload failed: '+(e.message||''),'error');
+  }
   showLoading(false);
 }
 
@@ -2041,6 +2242,121 @@ async function showHomework(){
     }).join('');
   }catch(e){modalBodyDiv.innerHTML='<div class="text-center py-3 text-white-50">Error</div>';}
 }
+
+/* ============================================================
+   EXAM MARKS (per-user exam selection)
+============================================================ */
+async function showExamMarks(){
+  modalTitleSpan.innerText="📊 Exam Marks";
+  modalBodyDiv.innerHTML='<div class="text-center py-4"><div class="spinner-border" style="color:#3b8bff"></div></div>';
+  modal.style.display='flex';
+  try{
+    const {data:marks,error}=await supabaseClient.from('exam_marks')
+      .select('*').eq('studentid',currentUser.studentId);
+    if(error)throw error;
+    if(!marks||marks.length===0){
+      modalBodyDiv.innerHTML=`<div class="text-center py-4">
+        <i class="fas fa-file-circle-xmark" style="font-size:3rem;color:#6d88ad;opacity:.5;"></i>
+        <p class="text-white-50 mt-3">ഇപ്പോൾ മാർക്സ് ലഭ്യമല്ല</p>
+      </div>`;
+      return;
+    }
+
+    const examList=[...new Set(marks.map(m=>m.exam_name).filter(Boolean))];
+    if(examList.length===0){
+      modalBodyDiv.innerHTML='<div class="text-center py-4 text-white-50">No exam records</div>';
+      return;
+    }
+
+    /* Per-user exam key */
+    const examKey='last_exam_'+currentUser.studentId;
+    let selectedExam=localStorage.getItem(examKey)||'';
+    if(!examList.includes(selectedExam))selectedExam=examList[0];
+
+    const selectorHtml=`<div class="exam-selector-panel">
+      <label><i class="fas fa-file-pen"></i> പരീക്ഷ തിരഞ്ഞെടുക്കുക</label>
+      <select id="studentExamSelector" onchange="onStudentExamChange(this.value)">
+        ${examList.map(e=>`<option value="${escapeHtml(e)}" ${e===selectedExam?'selected':''}>${escapeHtml(e)}</option>`).join('')}
+      </select>
+    </div>`;
+    const bodyHtml='<div id="studentMarksBody"></div>';
+    modalBodyDiv.innerHTML=selectorHtml+bodyHtml;
+
+    renderStudentExamMarks(marks,selectedExam);
+  }catch(e){
+    console.error(e);
+    modalBodyDiv.innerHTML=`<div class="text-center py-4 text-white-50">
+      <i class="fas fa-triangle-exclamation" style="font-size:2.5rem;opacity:.5;"></i>
+      <p class="mt-2">Error loading marks</p>
+      <small>${escapeHtml(e.message||'')}</small>
+    </div>`;
+  }
+}
+
+function onStudentExamChange(exam){
+  const examKey='last_exam_'+currentUser.studentId;
+  localStorage.setItem(examKey,exam);
+  supabaseClient.from('exam_marks').select('*')
+    .eq('studentid',currentUser.studentId).eq('exam_name',exam)
+    .then(({data})=>{
+      renderStudentExamMarks(data||[],exam,true);
+    });
+}
+
+function renderStudentExamMarks(allMarks,exam,alreadyFiltered){
+  const body=document.getElementById('studentMarksBody');
+  if(!body)return;
+  const subs=alreadyFiltered?allMarks:allMarks.filter(m=>m.exam_name===exam);
+  if(subs.length===0){
+    body.innerHTML='<div class="text-center py-4 text-white-50">ഈ പരീക്ഷയുടെ മാർക്സ് ലഭ്യമല്ല</div>';
+    return;
+  }
+  let totalObt=0,totalMax=0;
+  subs.forEach(s=>{totalObt+=Number(s.obtained_marks)||0;totalMax+=Number(s.max_marks)||0;});
+  const pct=totalMax>0?Math.round(totalObt/totalMax*100):0;
+  const grade=pct>=90?'A+':pct>=80?'A':pct>=70?'B+':pct>=60?'B':pct>=50?'C+':pct>=40?'C':'D';
+  const gcolor=pct>=80?'#34d399':pct>=60?'#22d3ee':pct>=40?'#fbbf24':'#f87171';
+
+  let html=`<div style="background:rgba(120,180,255,.06);border-radius:16px;padding:14px;border:1px solid rgba(140,190,255,.18);">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+      <div><strong class="text-white" style="font-size:1rem;">${escapeHtml(exam)}</strong></div>
+      <div class="text-end">
+        <div style="font-size:1.4rem;font-weight:900;color:${gcolor};">${grade}</div>
+        <small class="text-white-50">${totalObt}/${totalMax} (${pct}%)</small>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-dark table-sm mb-0" style="background:transparent;">
+        <thead>
+          <tr>
+            <th style="font-size:.7rem;">Subject</th>
+            <th style="font-size:.7rem;text-align:center;">Marks</th>
+            <th style="font-size:.7rem;text-align:right;">%</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+  subs.forEach(s=>{
+    const sp=Number(s.max_marks)>0?Math.round((Number(s.obtained_marks)/Number(s.max_marks))*100):0;
+    const sc=sp>=80?'#6ee7b7':sp>=60?'#67e8f9':sp>=40?'#fcd34d':'#fca5a5';
+    html+=`<tr>
+      <td class="text-white" style="font-size:.82rem;">${escapeHtml(s.subject||'')}</td>
+      <td style="text-align:center;font-weight:700;color:${sc};">${s.obtained_marks||0} / ${s.max_marks||100}</td>
+      <td style="text-align:right;font-weight:700;color:${sc};">${sp}%</td>
+    </tr>`;
+  });
+
+  html+=`</tbody></table></div>
+    <div class="mt-3">
+      <div class="progress" style="height:8px;background:rgba(255,255,255,.08);">
+        <div class="progress-bar" style="width:${pct}%;background:linear-gradient(90deg,${gcolor},#22d3ee);"></div>
+      </div>
+    </div>
+  </div>`;
+
+  body.innerHTML=html;
+}
+
 async function showLibrary(){
   modalTitleSpan.innerText="📚 Library";
   modalBodyDiv.innerHTML='<div class="text-center py-4"><div class="spinner-border" style="color:#3b8bff"></div></div>';
@@ -2119,7 +2435,7 @@ async function showMoralValuesModal(){
 }
 function showProfileCard(){
   modalTitleSpan.innerText="👤 Student Profile";
-  const photo=currentUser.photo
+  const photo=hasPhoto(currentUser.photo)
     ?`<img src="${currentUser.photo}" style="width:100%;height:100%;object-fit:cover;">`
     :`<span style="font-size:2.4rem;font-weight:800;color:#fff;">${currentUser.avatar||'S'}</span>`;
   modalBodyDiv.innerHTML=`
@@ -2170,7 +2486,7 @@ function openEditProfile(){
   document.getElementById('editPassword').value='';
 
   const prev=document.getElementById('editPhotoPreview');
-  if(currentUser.photo&&currentUser.photo.startsWith('data:image')){
+  if(hasPhoto(currentUser.photo)){
     prev.innerHTML=`<img src="${currentUser.photo}" style="width:100%;height:100%;object-fit:cover;">`;
   }else{
     prev.innerHTML=`<span style="font-size:2rem;font-weight:800;color:#fff;">${currentUser.avatar||'S'}</span>`;
@@ -2217,7 +2533,6 @@ document.getElementById('editProfileForm').addEventListener('submit',async funct
 /* ============================================================
    ID CARD
 ============================================================ */
-const ID_BG_IMAGE="https://i.postimg.cc/7hKq739C/ID-CARD.jpg";
 function showIdCard(){
   modalTitleSpan.innerText="🪪 Student ID Card";
   modalBodyDiv.innerHTML=`<div class="text-center py-2">
@@ -2240,11 +2555,22 @@ async function renderIdCard(){
   const ctx=canvas.getContext('2d');
   const w=500,h=800;
 
-  try{const bg=await loadImage(ID_BG_IMAGE);ctx.drawImage(bg,0,0,w,h);}
-  catch(e){
+  let bgDrawn=false;
+  if(ID_CARD_BG_URL){
+    try{
+      const bg=await loadImage(ID_CARD_BG_URL);
+      ctx.drawImage(bg,0,0,w,h);
+      bgDrawn=true;
+    }catch(e){console.warn('ID card bg image failed');}
+  }
+  if(!bgDrawn){
     const g=ctx.createLinearGradient(0,0,w,h);
     g.addColorStop(0,'#eaf2ff');g.addColorStop(1,'#c9ddff');
     ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  }
+  if(bgDrawn){
+    ctx.fillStyle='rgba(255,255,255,.35)';
+    ctx.fillRect(0,88,w,h-88-86);
   }
 
   ctx.fillStyle='rgba(21,71,168,.94)';
@@ -2261,7 +2587,7 @@ async function renderIdCard(){
   ctx.strokeStyle='#22d3ee';ctx.lineWidth=4;ctx.stroke();
   ctx.restore();
 
-  if(currentUser.photo&&currentUser.photo.startsWith('data:image')){
+  if(hasPhoto(currentUser.photo)){
     try{
       const p=await loadImage(currentUser.photo);
       ctx.save();
@@ -2369,25 +2695,109 @@ function closeTopperModal(){document.getElementById('topperModal').style.display
 function loadImageForPoster(src){return new Promise((res,rej)=>{const i=new Image();i.crossOrigin='anonymous';i.onload=()=>res(i);i.onerror=()=>rej();i.src=src;});}
 async function renderTopperCanvas(name,cls,rank,photo){
   const w=2400,h=3200;
-  const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+  const canvas=document.createElement('canvas');
+  canvas.width=w;canvas.height=h;
   const ctx=canvas.getContext('2d');
-  try{const bg=await loadImageForPoster("https://i.postimg.cc/vBJs8jT4/topper.jpg");ctx.drawImage(bg,0,0,w,h);}catch(e){}
+
+  let bgDrawn=false;
+  if(TOPPER_BG_URL){
+    try{
+      const bg=await loadImageForPoster(TOPPER_BG_URL);
+      ctx.drawImage(bg,0,0,w,h);
+      bgDrawn=true;
+    }catch(e){console.warn('Topper bg image failed');}
+  }
+  if(!bgDrawn){
+    const bg=ctx.createLinearGradient(0,0,0,h);
+    bg.addColorStop(0,'#fdf6e3');bg.addColorStop(.5,'#fef9ef');bg.addColorStop(1,'#f5e6c3');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#c9a227';ctx.lineWidth=18;
+    ctx.strokeRect(60,60,w-120,h-120);
+    ctx.strokeStyle='#e5c76b';ctx.lineWidth=6;
+    ctx.strokeRect(110,110,w-220,h-220);
+    ctx.strokeStyle='#c9a227';ctx.lineWidth=8;
+    const corners=[[60,60,1,1],[w-60,60,-1,1],[60,h-60,1,-1],[w-60,h-60,-1,-1]];
+    corners.forEach(([cx,cy,sx,sy])=>{
+      ctx.beginPath();ctx.moveTo(cx+sx*120,cy);ctx.lineTo(cx,cy);ctx.lineTo(cx,cy+sy*120);ctx.stroke();
+    });
+    ctx.save();ctx.globalAlpha=.14;
+    for(let i=0;i<36;i++){
+      ctx.beginPath();ctx.moveTo(w/2,1600);
+      ctx.arc(w/2,1600,1200,i*Math.PI/18,(i+1)*Math.PI/18);
+      ctx.closePath();ctx.fillStyle=i%2===0?'#c9a227':'#f5e6c3';ctx.fill();
+    }
+    ctx.restore();
+  }
+  if(bgDrawn){
+    ctx.fillStyle='rgba(255,253,245,.35)';
+    ctx.fillRect(0,0,w,h);
+  }
+
   const cx=w/2,cy=1600,r=400;
+  ctx.save();
+  ctx.beginPath();ctx.arc(cx,cy,r+18,0,Math.PI*2);
+  ctx.strokeStyle='#c9a227';ctx.lineWidth=14;ctx.stroke();
+  ctx.restore();
+
   if(photo){
     try{
       const img=await loadImageForPoster(photo);
-      ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
+      ctx.save();
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
       let dw,dh;
       if(img.width>img.height){dh=r*2;dw=img.width*(dh/img.height);}
       else{dw=r*2;dh=img.height*(dw/img.width);}
-      ctx.drawImage(img,cx-dw/2,cy-dh/2,dw,dh);ctx.restore();
+      ctx.drawImage(img,cx-dw/2,cy-dh/2,dw,dh);
+      ctx.restore();
     }catch(e){}
+  }else{
+    ctx.save();
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
+    ctx.fillStyle='#e6d3a3';ctx.fillRect(cx-r,cy-r,r*2,r*2);
+    ctx.restore();
+    ctx.fillStyle='#8b6914';
+    ctx.font='bold 300px Anek Malayalam';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText((name||'S').charAt(0).toUpperCase(),cx,cy+20);
+    ctx.textBaseline='alphabetic';
   }
-  ctx.fillStyle='#000';ctx.font='bold 95px Anek Malayalam';ctx.textAlign='center';
-  ctx.fillText(name||'Student',cx,2180);
-  const pt=rank===1?'TOPPER':rank===2?'SECOND PLACE':rank===3?'THIRD PLACE':'RANK '+(rank||'—');
-  ctx.font='bold 70px Anek Malayalam';
-  ctx.fillText(`Class ${cls||'?'} - ${pt}`,cx,2360);
+
+  ctx.textAlign='center';
+  if(bgDrawn){
+    ctx.fillStyle='rgba(255,255,255,.85)';
+    ctx.font='bold 130px Anek Malayalam';
+    ctx.fillText('🏆 TOPPER 🏆',cx+4,424);
+  }
+  ctx.fillStyle='#8b6914';
+  ctx.font='bold 130px Anek Malayalam';
+  ctx.fillText('🏆 TOPPER 🏆',cx,420);
+
+  const nameGrad=ctx.createLinearGradient(0,2100,0,2260);
+  nameGrad.addColorStop(0,'#c9a227');
+  nameGrad.addColorStop(.5,'#f5d76e');
+  nameGrad.addColorStop(1,'#b8860b');
+  if(bgDrawn){
+    ctx.fillStyle='rgba(255,255,255,.85)';
+    ctx.font='bold 140px Anek Malayalam';
+    ctx.fillText(name||'Student',cx+4,2224);
+  }
+  ctx.fillStyle=nameGrad;
+  ctx.font='bold 140px Anek Malayalam';
+  ctx.fillText(name||'Student',cx,2220);
+
+  ctx.fillStyle=bgDrawn?'#3a2f14':'#5c4a1f';
+  ctx.font='bold 78px Anek Malayalam';
+  const pt=rank===1?'FIRST PLACE':rank===2?'SECOND PLACE':rank===3?'THIRD PLACE':'RANK '+(rank||'—');
+  ctx.fillText(`Class ${cls||'?'} • ${pt}`,cx,2400);
+
+  ctx.fillStyle='rgba(201,162,39,.92)';
+  ctx.fillRect(0,h-260,w,260);
+  ctx.fillStyle='#fdf6e3';
+  ctx.font='bold 52px Anek Malayalam';
+  ctx.fillText('NOORUSSALAM MADRASA',cx,h-150);
+  ctx.font='600 40px Anek Malayalam';
+  ctx.fillText('Academic Year 2025-2026',cx,h-80);
+
   return canvas;
 }
 async function previewTopperPoster(){
@@ -2484,7 +2894,7 @@ document.getElementById('forgotSubmitBtn').addEventListener('click',async functi
 });
 
 /* ============================================================
-   ADMIN — CLASS SELECT & TABS
+   ADMIN
 ============================================================ */
 async function selectAdminClass(cls){
   currentAdminClass=cls;
@@ -2530,7 +2940,10 @@ function switchAdminTab(tab){
     document.getElementById('adminMainContent').style.display='none';
     document.getElementById('noClassMsg').style.display='none';
     document.getElementById('currentAdminPwd').textContent=getAdminPassword();
-    populateSettingsForm();loadDBStats();return;
+    populateSettingsForm();
+    loadBgUrlsIntoForm();
+    loadDBStats();
+    return;
   }
   if(!currentAdminClass){showToast('⚠️ Select a class first','error');document.getElementById('adminClassSelector').focus();return;}
   document.getElementById('adminSettingsTab').style.display='none';
@@ -2566,7 +2979,7 @@ function switchAdminTab(tab){
 }
 
 /* ============================================================
-   ADMIN — ATTENDANCE (single total days, auto %)
+   ADMIN — ATTENDANCE
 ============================================================ */
 async function loadAttendanceForAdmin(){
   if(!currentAdminClass)return;
@@ -3098,6 +3511,7 @@ async function rejectWithdrawal(id){
   await supabaseClient.from('withdrawals').update({status:'rejected'}).eq('id',id);
   showToast('Rejected','info');loadAllWithdrawals();
 }
+
 async function loadBalances(){
   if(!currentAdminClass)return;
   const wrap=document.getElementById('balancesWrap');
@@ -3106,11 +3520,23 @@ async function loadBalances(){
     let q=supabaseClient.from('students').select('studentid,name,class');
     if(currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
     const {data:s}=await q;
-    const ids=(s||[]).map(x=>x.studentid);
-    if(ids.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-    const {data:p}=await supabaseClient.from('payments').select('studentid,credit,debit,approved').in('studentid',ids);
-    const bm={};(p||[]).forEach(x=>{if(x.approved===true)bm[x.studentid]=(bm[x.studentid]||0)+(x.debit||0)-(x.credit||0);});
-    balancesData=(s||[]).map(x=>({studentId:x.studentid,name:x.name||'',class:x.class,balance:bm[x.studentid]||0}));
+    if(!s||s.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
+
+    /* Try server-side RPC */
+    const bm={};
+    try{
+      const {data:balData,error}=await supabaseClient.rpc('get_all_balances');
+      if(!error && balData){
+        balData.forEach(x=>{bm[x.studentid]=Number(x.balance)||0;});
+      }else throw error||new Error('no data');
+    }catch(rpcErr){
+      /* Fallback */
+      const ids=s.map(x=>x.studentid);
+      const {data:p}=await supabaseClient.from('payments').select('studentid,credit,debit,approved').in('studentid',ids);
+      (p||[]).forEach(x=>{if(x.approved===true)bm[x.studentid]=(bm[x.studentid]||0)+(x.debit||0)-(x.credit||0);});
+    }
+
+    balancesData=s.map(x=>({studentId:x.studentid,name:x.name||'',class:x.class,balance:bm[x.studentid]||0}));
     renderBalances();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
 }
@@ -3204,7 +3630,7 @@ function renderStudentsAdmin(){
     +(showClass?'<th>Class</th>':'')
     +'<th>Roll</th><th>Actions</th></tr></thead><tbody>';
   filteredStudentsAdmin.forEach((s,idx)=>{
-    const photo=s.photo&&s.photo.startsWith('data:image')
+    const photo=hasPhoto(s.photo)
       ?`<img src="${s.photo}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid rgba(125,179,255,.4);">`
       :`<div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,#1e6be0,#22d3ee);display:flex;align-items:center;justify-content:center;color:#03132e;font-weight:800;font-size:.85rem;">${(s.name||'?').charAt(0).toUpperCase()}</div>`;
     html+=`<tr><td>${idx+1}</td><td>${photo}</td>
@@ -3263,7 +3689,22 @@ async function saveStudent(eid){
   const pi=document.getElementById('sf_photo');
   showLoading(true);
   try{
-    if(pi.files&&pi.files[0])obj.photo=await fileToBase64(pi.files[0]);
+    if(pi.files&&pi.files[0]){
+      const b64=await fileToBase64(pi.files[0]);
+      let photoUrl=b64;
+      try{
+        const res=await fetch(b64);
+        const blob=await res.blob();
+        const fileName=`${obj.studentid}_${Date.now()}.jpg`;
+        const {data:up,error:upErr}=await supabaseClient.storage
+          .from('student-photos')
+          .upload(fileName,blob,{cacheControl:'3600',upsert:true,contentType:'image/jpeg'});
+        if(upErr)throw upErr;
+        const {data:pub}=supabaseClient.storage.from('student-photos').getPublicUrl(fileName);
+        photoUrl=pub.publicUrl;
+      }catch(storageErr){console.warn('Storage fallback to base64',storageErr);}
+      obj.photo=photoUrl;
+    }
     if(eid)await supabaseClient.from('students').update(obj).eq('studentid',eid);
     else await supabaseClient.from('students').insert(obj);
     showToast('✅ Saved','success');
@@ -3714,6 +4155,36 @@ async function changeAdminPassword(){
     document.getElementById('newAdminPassword').value='';
   }catch(e){showToast('❌ Error','error');}
 }
+function saveBgUrl(type){
+  const url=document.getElementById(type==='id'?'settingsIdBgUrl':'settingsTopperBgUrl').value.trim();
+  if(!url){showToast('URL required','error');return;}
+  if(type==='id'){
+    ID_CARD_BG_URL=url;
+    localStorage.setItem('id_card_bg',url);
+    showToast('✅ ID Card background saved','success');
+  }else{
+    TOPPER_BG_URL=url;
+    localStorage.setItem('topper_bg',url);
+    showToast('✅ Topper background saved','success');
+  }
+}
+function clearBgUrl(type){
+  if(type==='id'){
+    ID_CARD_BG_URL='';
+    localStorage.removeItem('id_card_bg');
+    const inp=document.getElementById('settingsIdBgUrl');if(inp)inp.value='';
+    showToast('🗑️ ID Card background cleared','info');
+  }else{
+    TOPPER_BG_URL='';
+    localStorage.removeItem('topper_bg');
+    const inp=document.getElementById('settingsTopperBgUrl');if(inp)inp.value='';
+    showToast('🗑️ Topper background cleared','info');
+  }
+}
+function loadBgUrlsIntoForm(){
+  const i1=document.getElementById('settingsIdBgUrl');if(i1)i1.value=ID_CARD_BG_URL||'';
+  const i2=document.getElementById('settingsTopperBgUrl');if(i2)i2.value=TOPPER_BG_URL||'';
+}
 async function loadDBStats(){
   const el=document.getElementById('dbStatsContent');
   el.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
@@ -3797,10 +4268,7 @@ function toggleAIChat(){
     setTimeout(()=>document.getElementById('aiInput').focus(),200);
   }
 }
-function aiQuick(text){
-  document.getElementById('aiInput').value=text;
-  sendAIMessage();
-}
+function aiQuick(text){document.getElementById('aiInput').value=text;sendAIMessage();}
 function aiAddMsg(text,who){
   const body=document.getElementById('aiBody');
   const d=document.createElement('div');
@@ -3843,8 +4311,7 @@ async function aiRespond(q){
 
   if(/(balance|ബാലൻസ്|പലതുള്ളി|palathulli|money|പണം|wallet|സമ്പാദ്യം|savings)/.test(t)){
     try{
-      const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('studentid',currentUser.studentId);
-      let b=0;if(p)p.forEach(x=>{if(x.approved===true)b+=(x.debit||0)-(x.credit||0);});
+      const b=await getStudentBalance(currentUser.studentId);
       const max=b-MIN_WITHDRAW;
       const state=b>0?'നല്ല സമ്പാദ്യം! 👏':b===0?'ഇപ്പോൾ ബാലൻസ് പൂജ്യമാണ്.':'⚠️ ബാലൻസ് കുറവാണ്.';
       return `💰 <b>${uname}, പലതുള്ളി ബാലൻസ്</b><br><br>
@@ -3949,7 +4416,10 @@ Object.assign(window,{
   downloadPaymentsPDF,downloadStudentsPDF,downloadBalancesPDF,
   toggleAIChat,aiQuick,sendAIMessage,
   openProfilePhotoPicker,uploadProfilePhoto,handleCropFile,recalcAttendancePercentages,
-  getFilteredStudentIds,getFilteredStudents
+  getFilteredStudentIds,
+  showExamMarks,onStudentExamChange,renderStudentExamMarks,
+  saveBgUrl,clearBgUrl,loadBgUrlsIntoForm,
+  getStudentBalance,subscribeNotifications
 });
 
 /* ============================================================
@@ -3965,8 +4435,7 @@ async function initApp(){
     if(el)el.addEventListener('click',function(e){if(e.target===this)this.style.display='none';});
   });
   if(closeModalBtn)closeModalBtn.addEventListener('click',()=>modal.style.display='none');
-  setInterval(()=>{if(currentUser&&!isAdminMode)loadStudentNotifications();},30000);
-  console.log('%c✅ Noorussalam Madrasa v15.0 — Edition','color:#22d3ee;font-weight:bold;font-size:14px;');
+  console.log('%c✅ Noorussalam Madrasa v15.1 — Phase 1+2','color:#22d3ee;font-weight:bold;font-size:14px;');
 }
 initApp();
 </script>
