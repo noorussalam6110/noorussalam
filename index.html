@@ -61,10 +61,7 @@ body::after{
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--b400),var(--b600));border-radius:8px}
 
 /* ============ LOGIN ============ */
-.login-wrapper{
-  min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;
-  padding:20px;position:relative;z-index:2;
-}
+.login-wrapper{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;z-index:2}
 .login-panel{
   max-width:460px;width:100%;position:relative;padding:2.4rem 1.9rem 5.4rem;
   background:linear-gradient(160deg,rgba(24,87,196,.30),rgba(10,26,63,.78));
@@ -81,7 +78,6 @@ body::after{
 @keyframes shimmer{0%{background-position:220% 0}100%{background-position:-220% 0}}
 @keyframes panelIn{from{opacity:0;transform:translateY(38px) scale(.94)}to{opacity:1;transform:none}}
 
-/* ====== LOGO WITH WHITE BACKGROUND ====== */
 .logo-wrap{position:relative;width:108px;height:108px;margin:0 auto 18px}
 .logo-wrap::before{
   content:'';position:absolute;inset:-9px;border-radius:50%;
@@ -91,16 +87,12 @@ body::after{
 @keyframes spinSlow{to{transform:rotate(360deg)}}
 .logo-circle{
   position:relative;width:108px;height:108px;border-radius:50%;overflow:hidden;
-  background:#ffffff;              /* ⭐ WHITE BACKGROUND */
+  background:#ffffff;
   display:flex;align-items:center;justify-content:center;
   border:3px solid rgba(169,205,255,.55);
   box-shadow:inset 0 0 24px rgba(59,139,255,.18),0 12px 32px -12px rgba(0,0,0,.6);
 }
-.logo-circle img{
-  width:84px;height:84px;object-fit:contain;
-  filter:drop-shadow(0 3px 8px rgba(21,71,168,.25));
-}
-/* ========================================= */
+.logo-circle img{width:84px;height:84px;object-fit:contain;filter:drop-shadow(0 3px 8px rgba(21,71,168,.25));}
 
 .login-title{
   font-size:1.72rem;font-weight:800;text-align:center;letter-spacing:.5px;line-height:1.2;
@@ -159,8 +151,7 @@ body::after{
   position:absolute;bottom:16px;right:18px;background:rgba(120,180,255,.08);
   border:1px solid var(--stroke);border-radius:40px;padding:9px 16px;
   color:var(--b200);font-weight:700;font-size:.76rem;cursor:pointer;
-  display:flex;align-items:center;gap:7px;font-family:inherit;transition:.22s;
-  backdrop-filter:blur(8px);
+  display:flex;align-items:center;gap:7px;font-family:inherit;transition:.22s;backdrop-filter:blur(8px);
 }
 .help-btn:hover{background:rgba(59,139,255,.22);color:#fff;border-color:var(--b400)}
 .help-btn i{color:var(--cyan)}
@@ -562,11 +553,22 @@ body::after{
 .class-subjects-info{padding:12px 16px;background:rgba(59,139,255,.10);border-radius:14px;margin-bottom:12px;
   border:1px solid rgba(59,139,255,.28)}
 
+/* ============ BLINKING NOTIFICATION BELL ============ */
+@keyframes bellBlink{
+  0%,100%{transform:scale(1);color:#fbbf24;box-shadow:0 0 0 0 rgba(239,68,68,.75),0 0 0 0 rgba(251,191,36,.45);
+    background:rgba(251,191,36,.14);border-color:rgba(251,191,36,.35)}
+  50%{transform:scale(1.14);color:#ef4444;box-shadow:0 0 0 8px rgba(239,68,68,0),0 0 24px 4px rgba(251,191,36,.55);
+    background:rgba(239,68,68,.22);border-color:rgba(251,191,36,.7)}
+}
+.icon-btn.has-unread{animation:bellBlink 1.05s ease-in-out infinite}
+.icon-btn.has-unread i{color:#fbbf24 !important}
+@keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+.notif-badge.pulse{animation:badgePulse 1s ease-in-out infinite}
+
 /* ============ AI CHAT ============ */
 .ai-fab{
   position:fixed;bottom:22px;right:20px;z-index:9000;width:62px;height:62px;border-radius:50%;border:none;
-  cursor:pointer;display:none;              /* ⭐ Hidden by default — shown after login */
-  align-items:center;justify-content:center;font-size:1.5rem;color:#03132e;
+  cursor:pointer;display:none;align-items:center;justify-content:center;font-size:1.5rem;color:#03132e;
   background:linear-gradient(140deg,var(--cyan),var(--b450));
   box-shadow:0 18px 42px -14px rgba(34,211,238,1),0 0 0 0 rgba(34,211,238,.7);
   animation:fabPulse 2.6s infinite;transition:.25s;
@@ -602,8 +604,7 @@ body::after{
 .ai-head h6{margin:0;font-weight:800;font-size:.92rem;color:#fff;line-height:1.15}
 .ai-head small{font-size:.66rem;color:var(--b200);display:flex;align-items:center;gap:5px;margin-top:2px}
 .ai-student-name{font-size:.68rem;color:var(--cyan-soft);font-weight:700;display:flex;align-items:center;gap:5px;margin-top:2px}
-.ai-dot{width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 0 3px rgba(52,211,153,.22);
-  animation:blink 1.6s infinite}
+.ai-dot{width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 0 3px rgba(52,211,153,.22);animation:blink 1.6s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
 .ai-close{background:rgba(255,255,255,.12);border:none;color:#fff;width:34px;height:34px;border-radius:50%;
   cursor:pointer;font-size:.9rem;transition:.2s}
@@ -628,8 +629,7 @@ body::after{
   padding:6px 12px;border-radius:30px;cursor:pointer;font-family:inherit;transition:.2s;white-space:nowrap;
 }
 .ai-chip:hover{background:rgba(59,139,255,.28);color:#fff;border-color:var(--b400)}
-.ai-foot{padding:11px 13px;border-top:1px solid var(--stroke);display:flex;gap:9px;align-items:center;
-  background:rgba(5,14,43,.6)}
+.ai-foot{padding:11px 13px;border-top:1px solid var(--stroke);display:flex;gap:9px;align-items:center;background:rgba(5,14,43,.6)}
 .ai-input{
   flex:1;background:rgba(8,20,48,.8);border:1.5px solid var(--stroke);border-radius:30px;
   padding:11px 17px;color:#fff;font-family:inherit;font-size:.86rem;outline:none;transition:.2s;
@@ -756,7 +756,7 @@ body::after{
       </div>
     </div>
     <div class="hdr-actions">
-      <div class="icon-btn" onclick="openNotificationsModal()" title="Notifications">
+      <div class="icon-btn" id="notifBell" onclick="openNotificationsModal()" title="Notifications">
         <i class="fas fa-bell"></i>
         <span id="notifBadge" class="notif-badge" style="display:none;">0</span>
       </div>
@@ -789,10 +789,7 @@ body::after{
   <div class="stats-grid">
     <div class="stat-card-neon">
       <div class="d-flex justify-content-between align-items-start">
-        <div>
-          <span class="stat-value-xl" id="overallGradeDisplay">—</span>
-          <div class="stat-label">Academic Grade</div>
-        </div>
+        <div><span class="stat-value-xl" id="overallGradeDisplay">—</span><div class="stat-label">Academic Grade</div></div>
         <div class="stat-ico" id="gradeIconContainer"><i id="gradeIcon" class="fas fa-graduation-cap"></i></div>
       </div>
       <div class="grade-bar"><div id="gradeLineFill" class="grade-bar-fill" style="width:0%;"></div></div>
@@ -803,10 +800,7 @@ body::after{
     </div>
     <div class="stat-card-neon">
       <div class="d-flex justify-content-between align-items-start">
-        <div>
-          <span class="stat-value-xl" id="attendanceRateLabel">—</span>
-          <div class="stat-label">Attendance</div>
-        </div>
+        <div><span class="stat-value-xl" id="attendanceRateLabel">—</span><div class="stat-label">Attendance</div></div>
         <div class="stat-ico"><i class="fas fa-calendar-check"></i></div>
       </div>
       <div class="progress mt-3" style="height:7px;">
@@ -816,20 +810,14 @@ body::after{
     </div>
     <div class="stat-card-neon">
       <div class="d-flex justify-content-between align-items-start">
-        <div>
-          <span class="stat-value-xl" id="rankNumber">—</span>
-          <div class="stat-label">Class Rank</div>
-        </div>
+        <div><span class="stat-value-xl" id="rankNumber">—</span><div class="stat-label">Class Rank</div></div>
         <div class="stat-ico"><i class="fas fa-trophy"></i></div>
       </div>
       <div class="mt-3"><span id="rankBadge" class="badge-rank">No data</span></div>
     </div>
     <div class="stat-card-neon">
       <div class="d-flex justify-content-between align-items-start">
-        <div>
-          <span class="stat-value-xl" id="moralValuesDisplay">—</span>
-          <div class="stat-label">Moral Values</div>
-        </div>
+        <div><span class="stat-value-xl" id="moralValuesDisplay">—</span><div class="stat-label">Moral Values</div></div>
         <div class="stat-ico"><i class="fas fa-hand-holding-heart"></i></div>
       </div>
       <div class="mt-3"><small class="text-white-50" style="font-size:.68rem;" id="moralValuesSub">N/A</small></div>
@@ -898,6 +886,7 @@ body::after{
     <p>Manage ചെയ്യാൻ ഒരു class select ചെയ്യുക</p>
     <select id="adminClassSelector" onchange="selectAdminClass(this.value)">
       <option value="">-- Select a Class --</option>
+      <option value="all">🌟 All Classes</option>
       <option value="1">📚 Class 1</option><option value="2">📚 Class 2</option>
       <option value="3">📚 Class 3</option><option value="4">📚 Class 4</option>
       <option value="5">📚 Class 5</option><option value="6">📚 Class 6</option>
@@ -906,7 +895,7 @@ body::after{
     </select>
     <div id="selectedClassBadge" style="display:none;">
       <div class="class-info-badge">
-        <i class="fas fa-check-circle"></i> Class <span id="classBadgeNumber">-</span> • <span id="classBadgeStudents">0</span> Students
+        <i class="fas fa-check-circle"></i> <span id="classBadgeNumber">-</span> • <span id="classBadgeStudents">0</span> Students
       </div>
     </div>
   </div>
@@ -993,7 +982,12 @@ body::after{
 
     <div id="adminAttendanceTab" class="admin-tab-content" style="display:none;">
       <div class="admin-toolbar">
-        <label>Month</label><input type="month" id="attendanceMonth" />
+        <label>Month</label>
+        <input type="month" id="attendanceMonth" />
+        <label>Total Working Days (all students)</label>
+        <input type="number" id="attendanceTotalDays" min="0" max="31"
+               style="width:110px;" placeholder="e.g. 24"
+               oninput="recalcAttendancePercentages()" />
         <button class="btn-load" onclick="loadAttendanceForAdmin()"><i class="fas fa-sync-alt"></i> Load</button>
       </div>
       <div class="admin-table-wrap" id="attendanceWrap"></div>
@@ -1327,10 +1321,9 @@ body::after{
   <div class="spinner"></div><p id="topperLoadingText" style="color:#d6e6ff;">Generating...</p>
 </div>
 
-<!-- Hidden file inputs -->
 <input type="file" id="profilePhotoInput" accept="image/*" style="display:none">
 
-<!-- ============ AI CHAT (Hidden until login) ============ -->
+<!-- ============ AI CHAT ============ -->
 <button class="ai-fab" id="aiFab" onclick="toggleAIChat()" title="AI Assistant">
   <i class="fas fa-robot"></i>
 </button>
@@ -1342,7 +1335,7 @@ body::after{
       <div>
         <h6>NSM AI Assistant</h6>
         <small><span class="ai-dot"></span> Online • Powered by AI</small>
-        <div class="ai-student-name" id="aiStudentName">
+        <div class="ai-student-name">
           <i class="fas fa-user-graduate"></i> <span id="aiStudentNameText">Student</span>
         </div>
       </div>
@@ -1441,6 +1434,19 @@ function getSubjectsForClass(cls){
   if(CLASS_SUBJECTS[cs]&&CLASS_SUBJECTS[cs].length>0)return CLASS_SUBJECTS[cs];
   return SUBJECTS_LIST;
 }
+/* Class filter helpers (support 'all') */
+async function getFilteredStudentIds(){
+  let q=supabaseClient.from('students').select('studentid');
+  if(currentAdminClass && currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
+  const {data}=await q;
+  return (data||[]).map(s=>s.studentid);
+}
+async function getFilteredStudents(){
+  let q=supabaseClient.from('students').select('studentid,name,class,roll');
+  if(currentAdminClass && currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
+  const {data}=await q;
+  return data||[];
+}
 
 /* ============================================================
    SETTINGS
@@ -1519,7 +1525,6 @@ document.getElementById('loginForm').addEventListener('submit',async function(e)
     if(rawInput===adminPwd||rawInput===DEFAULT_ADMIN_PASSWORD){
       isAdminMode=true;currentAdminClass='';
       loginSection.style.display='none';adminSection.style.display='block';dashboardSection.style.display='none';
-      /* ⭐ Hide AI for admin */
       document.getElementById('aiFab').classList.remove('show');
       document.getElementById('aiPanel').classList.remove('open');
       await loadAllSettings();
@@ -1570,8 +1575,6 @@ document.getElementById('loginForm').addEventListener('submit',async function(e)
     loadActivitiesAndCalendar();
     loadStudentBalance();
     loadStudentNotifications();
-
-    /* ⭐ Show AI assistant + set student name */
     showAIAssistant();
     showToast(`Welcome ${currentUser.name} ✨`,'success');
   }catch(err){console.error(err);showToast('Network error','error');}
@@ -1586,7 +1589,6 @@ function logout(){
   dashboardSection.style.display='none';
   adminSection.style.display='none';
   loginSection.style.display='flex';
-  /* ⭐ Hide AI on logout */
   document.getElementById('aiFab').classList.remove('show');
   document.getElementById('aiPanel').classList.remove('open');
   aiOpen=false;
@@ -1604,12 +1606,10 @@ function restoreSession(){
       loadActivitiesAndCalendar();
       loadStudentBalance();
       loadStudentNotifications();
-      showAIAssistant();   /* ⭐ show AI if session restored */
+      showAIAssistant();
     }catch(e){}
   }
 }
-
-/* ⭐ AI Assistant show/hide helpers */
 function showAIAssistant(){
   if(!currentUser)return;
   document.getElementById('aiFab').classList.add('show');
@@ -1622,11 +1622,7 @@ function showAIAssistant(){
       നിങ്ങളുടെ പലതുള്ളി ബാലൻസ്, ഹാജർ, റിസൾട്ട്, ടൈംടേബിൾ, ഹോംവർക്ക് എന്നിവയെക്കുറിച്ച് എന്നോട് ചോദിക്കാം 😊`;
   }
 }
-
-function toggleTheme(){
-  dashboardSection.classList.toggle('dashboard-light');
-  showToast('Theme mode toggled','info');
-}
+function toggleTheme(){dashboardSection.classList.toggle('dashboard-light');showToast('Theme mode toggled','info');}
 
 /* ============================================================
    DASHBOARD UI
@@ -1730,7 +1726,7 @@ async function loadActivitiesAndCalendar(){
 }
 
 /* ============================================================
-   NOTIFICATIONS
+   NOTIFICATIONS (with blinking bell)
 ============================================================ */
 async function loadStudentNotifications(){
   if(!currentUser)return;
@@ -1740,15 +1736,29 @@ async function loadStudentNotifications(){
       .order('created_at',{ascending:false}).limit(20);
     const unread=(data||[]).filter(n=>new Date(n.created_at).getTime()>lastReadNotifTime).length;
     const badge=document.getElementById('notifBadge');
-    if(unread>0){badge.textContent=unread;badge.style.display='flex';}
-    else{badge.style.display='none';}
+    const bellBtn=document.getElementById('notifBell');
+    if(unread>0){
+      badge.textContent=unread>9?'9+':unread;
+      badge.style.display='flex';
+      badge.classList.add('pulse');
+      if(bellBtn)bellBtn.classList.add('has-unread');
+    }else{
+      badge.style.display='none';
+      badge.classList.remove('pulse');
+      if(bellBtn)bellBtn.classList.remove('has-unread');
+    }
   }catch(e){}
 }
 async function openNotificationsModal(){
   document.getElementById('notificationsModal').style.display='flex';
   lastReadNotifTime=Date.now();
   localStorage.setItem('lastReadNotifTime',lastReadNotifTime.toString());
-  document.getElementById('notifBadge').style.display='none';
+  const badge=document.getElementById('notifBadge');
+  const bellBtn=document.getElementById('notifBell');
+  badge.style.display='none';
+  badge.classList.remove('pulse');
+  if(bellBtn)bellBtn.classList.remove('has-unread');
+
   const list=document.getElementById('notificationsList');
   list.innerHTML='<div class="text-center py-3 text-white-50">Loading...</div>';
   try{
@@ -2072,10 +2082,6 @@ async function showMoralValuesModal(){
     }
   }catch(e){modalBodyDiv.innerHTML='Error';}
 }
-
-/* ============================================================
-   PROFILE CARD
-============================================================ */
 function showProfileCard(){
   modalTitleSpan.innerText="👤 Student Profile";
   const photo=currentUser.photo
@@ -2174,7 +2180,7 @@ document.getElementById('editProfileForm').addEventListener('submit',async funct
 });
 
 /* ============================================================
-   ID CARD — full details
+   ID CARD
 ============================================================ */
 const ID_BG_IMAGE="https://i.postimg.cc/7hKq739C/ID-CARD.jpg";
 function showIdCard(){
@@ -2450,14 +2456,26 @@ async function selectAdminClass(cls){
   const mainContent=document.getElementById('adminMainContent'),
         noClassMsg=document.getElementById('noClassMsg'),
         badge=document.getElementById('selectedClassBadge');
-  if(!cls){mainContent.style.display='none';noClassMsg.style.display='block';badge.style.display='none';return;}
+  if(!cls){
+    mainContent.style.display='none';noClassMsg.style.display='block';badge.style.display='none';return;
+  }
   mainContent.style.display='block';noClassMsg.style.display='none';badge.style.display='block';
-  document.getElementById('classBadgeNumber').textContent='Class '+cls;
-  try{
-    const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',cls);
-    document.getElementById('classBadgeStudents').textContent=(s||[]).length;
-  }catch(e){}
-  showToast(`📚 Managing Class ${cls}`,'success');
+
+  if(cls==='all'){
+    document.getElementById('classBadgeNumber').textContent='All Classes';
+    try{
+      const {data:s}=await supabaseClient.from('students').select('studentid');
+      document.getElementById('classBadgeStudents').textContent=(s||[]).length;
+    }catch(e){}
+    showToast('🌟 Managing All Classes','success');
+  } else {
+    document.getElementById('classBadgeNumber').textContent='Class '+cls;
+    try{
+      const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',cls);
+      document.getElementById('classBadgeStudents').textContent=(s||[]).length;
+    }catch(e){}
+    showToast(`📚 Managing Class ${cls}`,'success');
+  }
   document.getElementById('adminSettingsTab').style.display='none';
   const activeTab=document.querySelector('.admin-tab.active')?.dataset.tab||'payments';
   switchAdminTab(activeTab);
@@ -2513,10 +2531,116 @@ function switchAdminTab(tab){
 }
 
 /* ============================================================
+   ADMIN — ATTENDANCE (single total days, auto %)
+============================================================ */
+async function loadAttendanceForAdmin(){
+  if(!currentAdminClass)return;
+  const month=document.getElementById('attendanceMonth').value;
+  if(!month){showToast('Select a month','error');return;}
+  const wrap=document.getElementById('attendanceWrap');
+  wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
+  try{
+    let q=supabaseClient.from('students').select('studentid,name,class,roll');
+    if(currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
+    q=q.order('name');
+    const {data:students}=await q;
+
+    const ids=(students||[]).map(x=>x.studentid);
+    let r=[];
+    if(ids.length>0){
+      const {data:rec}=await supabaseClient.from('attendance_records')
+        .select('*').eq('month_year',month).in('studentid',ids);
+      r=rec||[];
+    }
+    let commonTotal=0;
+    if(r.length>0){
+      const counts={};
+      r.forEach(x=>{const t=Number(x.total_days)||0;counts[t]=(counts[t]||0)+1;});
+      let maxC=0;
+      Object.keys(counts).forEach(k=>{if(counts[k]>maxC){maxC=counts[k];commonTotal=Number(k);}});
+    }
+    document.getElementById('attendanceTotalDays').value=commonTotal||'';
+
+    attendanceData=(students||[]).map(x=>{
+      const rec=r.find(y=>y.studentid===x.studentid);
+      return {
+        studentid:x.studentid,name:x.name,class:x.class,
+        present_days:rec?rec.present_days:0,
+        percentage:rec?rec.percentage:0,
+        exists:!!rec
+      };
+    });
+    renderAttendance();
+  }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
+}
+function renderAttendance(){
+  const wrap=document.getElementById('attendanceWrap');
+  if(attendanceData.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
+  const showClass=currentAdminClass==='all';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'
+    +(showClass?'<th>Class</th>':'')
+    +'<th>Present Days</th><th>Percentage</th></tr></thead><tbody>';
+  attendanceData.forEach((s,idx)=>{
+    const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
+    html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
+    if(showClass)html+=`<td>${escapeHtml(s.class||'')}</td>`;
+    html+=`<td><input type="number" id="att_present_${cid}" value="${s.present_days}" min="0"
+             oninput="recalcAttendancePercentages()" style="width:70px;"></td>
+      <td><span id="att_pct_${cid}" style="color:#22d3ee;font-weight:800;">${s.percentage}%</span></td></tr>`;
+  });
+  html+='</tbody></table>';
+  wrap.innerHTML=html;
+  recalcAttendancePercentages();
+}
+function recalcAttendancePercentages(){
+  const total=parseInt(document.getElementById('attendanceTotalDays').value)||0;
+  attendanceData.forEach(s=>{
+    const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
+    const el=document.getElementById(`att_present_${cid}`);
+    const pctEl=document.getElementById(`att_pct_${cid}`);
+    if(el&&pctEl){
+      const p=parseInt(el.value)||0;
+      const pct=total>0?Math.round(p/total*100):0;
+      pctEl.textContent=pct+'%';
+      pctEl.style.color=pct>=75?'#6ee7b7':pct>=50?'#fcd34d':'#fca5a5';
+    }
+  });
+}
+async function bulkUpdateAttendance(){
+  const month=document.getElementById('attendanceMonth').value;
+  const total=parseInt(document.getElementById('attendanceTotalDays').value)||0;
+  if(!month){showToast('Select a month','error');return;}
+  if(total<=0){showToast('Enter total working days','error');return;}
+  const btn=document.getElementById('attendanceUpdateBtn');
+  btn.disabled=true;btn.innerHTML='Saving...';
+  try{
+    for(const s of attendanceData){
+      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
+      const p=parseInt(document.getElementById(`att_present_${cid}`).value)||0;
+      const pct=total>0?Math.round(p/total*100):0;
+      const row={studentid:s.studentid,month_year:month,present_days:p,total_days:total,percentage:pct};
+      if(s.exists){
+        await supabaseClient.from('attendance_records').update(row)
+          .eq('studentid',s.studentid).eq('month_year',month);
+      }else{
+        await supabaseClient.from('attendance_records').insert(row);
+      }
+    }
+    showToast('✅ Attendance saved','success');
+    loadAttendanceForAdmin();
+  }catch(e){showToast('❌ '+e.message,'error');}
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Update';
+}
+
+/* ============================================================
    ADMIN — TIMETABLE
 ============================================================ */
 async function loadTimetableAdmin(){
   const wrap=document.getElementById('timetableWrap');
+  if(currentAdminClass==='all'){
+    wrap.innerHTML='<div class="empty-state">📚 Timetable-ന് ഒരു specific class തിരഞ്ഞെടുക്കുക</div>';
+    return;
+  }
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
     const {data}=await supabaseClient.from('timetable').select('*')
@@ -2588,6 +2712,10 @@ async function deleteTimetable(id){
 ============================================================ */
 async function loadHomeworkAdmin(){
   const wrap=document.getElementById('homeworkWrap');
+  if(currentAdminClass==='all'){
+    wrap.innerHTML='<div class="empty-state">📚 Homework-ന് ഒരു specific class തിരഞ്ഞെടുക്കുക</div>';
+    return;
+  }
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
     const {data}=await supabaseClient.from('homework').select('*')
@@ -2689,8 +2817,7 @@ function openNotificationForm(){
       <div class="col-md-6"><label class="text-white-50 small">Target</label>
         <select id="notif_class" class="modal-form-input">
           <option value="all">All Classes</option>
-          <option value="${currentAdminClass}" selected>Class ${currentAdminClass}</option>
-          ${[1,2,3,4,5,6,7,8,9,10].filter(c=>String(c)!==currentAdminClass).map(c=>`<option value="${c}">Class ${c}</option>`).join('')}
+          ${[1,2,3,4,5,6,7,8,9,10].map(c=>`<option value="${c}" ${currentAdminClass==String(c)?'selected':''}>Class ${c}</option>`).join('')}
         </select></div>
     </div>
     <div class="d-flex gap-2 mt-4">
@@ -2796,11 +2923,14 @@ async function loadPaymentsForDate(){
   const wrap=document.getElementById('adminTableWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data:s}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
+    let q=supabaseClient.from('students').select('studentid,name,class');
+    if(currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
+    q=q.order('class').order('name');
+    const {data:s}=await q;
     const {data:p}=await supabaseClient.from('payments').select('*').eq('date',date).eq('type','fee');
     const merged=(s||[]).map(x=>{
       const pay=(p||[]).find(y=>y.studentid===x.studentid);
-      return {studentId:x.studentid,name:x.name||'',
+      return {studentId:x.studentid,name:x.name||'',class:x.class||'',
         debit:pay?(pay.debit||0):0,credit:pay?(pay.credit||0):0,
         exists:!!pay,approved:pay?(pay.approved||false):false};
     });
@@ -2815,12 +2945,16 @@ function applyPaymentsFilters(){
 function renderAdminTable(){
   const wrap=document.getElementById('adminTableWrap');
   if(!filteredPayments||filteredPayments.length===0){wrap.innerHTML='<div class="empty-state">No students to show</div>';return;}
-  let html='<table><thead><tr><th>#</th><th>Student</th><th>Debit</th><th>Credit</th><th>Status</th></tr></thead><tbody>';
+  const showClass=currentAdminClass==='all';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'
+    +(showClass?'<th>Class</th>':'')
+    +'<th>Debit</th><th>Credit</th><th>Status</th></tr></thead><tbody>';
   filteredPayments.forEach((item,idx)=>{
     const cid=String(item.studentId).replace(/[^a-zA-Z0-9]/g,'');
     const st=item.exists?`<span class="existing-badge ${item.approved?'':'pending'}">${item.approved?'✅':'⏳'}</span>`:'—';
-    html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(item.name)}</strong></td>
-      <td><input type="number" id="admin_debit_${cid}" value="${item.debit}" min="0"></td>
+    html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(item.name)}</strong></td>`;
+    if(showClass)html+=`<td>${escapeHtml(item.class||'')}</td>`;
+    html+=`<td><input type="number" id="admin_debit_${cid}" value="${item.debit}" min="0"></td>
       <td><input type="number" id="admin_credit_${cid}" value="${item.credit}" min="0"></td>
       <td>${st}</td></tr>`;
   });
@@ -2872,18 +3006,25 @@ async function loadAllWithdrawals(){
   const wrap=document.getElementById('allWithdrawalsWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data:studs}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
-    const ids=(studs||[]).map(s=>s.studentid);
+    const ids=await getFilteredStudentIds();
     if(ids.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-    const {data:r}=await supabaseClient.from('withdrawals').select('*,students(name)').in('studentid',ids).order('date',{ascending:false});
-    allWithdrawals=(r||[]).map(x=>({...x,studentname:x.students?x.students.name:''}));
+    const {data:r}=await supabaseClient.from('withdrawals').select('*,students(name,class)')
+      .in('studentid',ids).order('date',{ascending:false});
+    allWithdrawals=(r||[]).map(x=>({
+      ...x,
+      studentname:x.students?x.students.name:'',
+      studentclass:x.students?x.students.class:''
+    }));
     renderAllWithdrawals();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
 }
 function renderAllWithdrawals(){
   const wrap=document.getElementById('allWithdrawalsWrap');
   if(allWithdrawals.length===0){wrap.innerHTML='<div class="empty-state">No withdrawal requests</div>';return;}
-  let html='<table><thead><tr><th>Student</th><th>Amount</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
+  const showClass=currentAdminClass==='all';
+  let html='<table><thead><tr><th>Student</th>'
+    +(showClass?'<th>Class</th>':'')
+    +'<th>Amount</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
   allWithdrawals.forEach(r=>{
     const st=r.status||'pending';
     let a='';
@@ -2891,8 +3032,9 @@ function renderAllWithdrawals(){
       <button class="btn-sm reject" onclick="rejectWithdrawal(${r.id})">❌</button>`;}
     a+=` <button class="btn-sm reject" onclick="adminDeleteWithdrawal(${r.id})">🗑️</button>`;
     const color=st==='approved'?'#6ee7b7':st==='rejected'?'#fca5a5':'#fcd34d';
-    html+=`<tr><td><strong>${escapeHtml(r.studentname)}</strong></td>
-      <td>₹${(r.amount||0).toFixed(2)}</td><td>${escapeHtml(r.reason)}</td>
+    html+=`<tr><td><strong>${escapeHtml(r.studentname)}</strong></td>`;
+    if(showClass)html+=`<td>${escapeHtml(r.studentclass||'')}</td>`;
+    html+=`<td>₹${(r.amount||0).toFixed(2)}</td><td>${escapeHtml(r.reason)}</td>
       <td><span style="color:${color};font-weight:800;font-size:.72rem;">${st.toUpperCase()}</span></td>
       <td>${a}</td></tr>`;
   });
@@ -2926,24 +3068,30 @@ async function loadBalances(){
   const wrap=document.getElementById('balancesWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data:s}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
+    let q=supabaseClient.from('students').select('studentid,name,class');
+    if(currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
+    const {data:s}=await q;
     const ids=(s||[]).map(x=>x.studentid);
     if(ids.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
     const {data:p}=await supabaseClient.from('payments').select('studentid,credit,debit,approved').in('studentid',ids);
     const bm={};(p||[]).forEach(x=>{if(x.approved===true)bm[x.studentid]=(bm[x.studentid]||0)+(x.debit||0)-(x.credit||0);});
-    balancesData=(s||[]).map(x=>({studentId:x.studentid,name:x.name||'',balance:bm[x.studentid]||0}));
+    balancesData=(s||[]).map(x=>({studentId:x.studentid,name:x.name||'',class:x.class,balance:bm[x.studentid]||0}));
     renderBalances();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
 }
 function renderBalances(){
   const wrap=document.getElementById('balancesWrap');
   if(balancesData.length===0){wrap.innerHTML='<div class="empty-state">No data</div>';return;}
-  let html='<table><thead><tr><th>#</th><th>Student</th><th style="text-align:right;">Palathulli Balance</th></tr></thead><tbody>';
+  const showClass=currentAdminClass==='all';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'
+    +(showClass?'<th>Class</th>':'')
+    +'<th style="text-align:right;">Palathulli Balance</th></tr></thead><tbody>';
   balancesData.forEach((i,idx)=>{
     const b=i.balance;
     const c=b>0?'balance-positive':b<0?'balance-negative':'balance-zero';
-    html+=`<tr><td>${idx+1}</td><td>${escapeHtml(i.name)}</td>
-      <td style="text-align:right;" class="${c}">₹${b.toLocaleString()}</td></tr>`;
+    html+=`<tr><td>${idx+1}</td><td>${escapeHtml(i.name)}</td>`;
+    if(showClass)html+=`<td>${escapeHtml(i.class||'')}</td>`;
+    html+=`<td style="text-align:right;" class="${c}">₹${b.toLocaleString()}</td></tr>`;
   });
   html+='</tbody></table>';wrap.innerHTML=html;
 }
@@ -2952,16 +3100,21 @@ async function loadAllTransactions(){
   const wrap=document.getElementById('allTransactionsWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data:studs}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
-    const ids=(studs||[]).map(s=>s.studentid);
+    const ids=await getFilteredStudentIds();
     if(ids.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-    const {data:txs}=await supabaseClient.from('payments').select('*,students(name)').in('studentid',ids).order('date',{ascending:false}).limit(200);
+    const {data:txs}=await supabaseClient.from('payments').select('*,students(name,class)')
+      .in('studentid',ids).order('date',{ascending:false}).limit(200);
     allTxData=txs||[];
     if(allTxData.length===0){wrap.innerHTML='<div class="empty-state">No transactions</div>';return;}
-    let html='<table><thead><tr><th>Date</th><th>Student</th><th>Debit</th><th>Credit</th></tr></thead><tbody>';
+    const showClass=currentAdminClass==='all';
+    let html='<table><thead><tr><th>Date</th><th>Student</th>'
+      +(showClass?'<th>Class</th>':'')
+      +'<th>Debit</th><th>Credit</th></tr></thead><tbody>';
     allTxData.forEach(t=>{
-      html+=`<tr><td>${formatDate(t.date)}</td><td>${escapeHtml(t.students?t.students.name:'')}</td>
-        <td>₹${t.debit||0}</td><td>₹${t.credit||0}</td></tr>`;
+      html+=`<tr><td>${formatDate(t.date)}</td>
+        <td>${escapeHtml(t.students?t.students.name:'')}</td>`;
+      if(showClass)html+=`<td>${escapeHtml(t.students?t.students.class:'')}</td>`;
+      html+=`<td>₹${t.debit||0}</td><td>₹${t.credit||0}</td></tr>`;
     });
     html+='</tbody></table>';wrap.innerHTML=html;
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
@@ -2973,9 +3126,10 @@ async function loadDailySummary(){
   const wrap=document.getElementById('summaryContent');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data:studs}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
-    const ids=(studs||[]).map(s=>s.studentid);
-    const {data:p}=await supabaseClient.from('payments').select('credit,debit,approved').eq('date',date).in('studentid',ids);
+    const ids=await getFilteredStudentIds();
+    if(ids.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
+    const {data:p}=await supabaseClient.from('payments')
+      .select('credit,debit,approved').eq('date',date).in('studentid',ids);
     let td=0,tc=0;
     (p||[]).forEach(x=>{if(x.approved===true){td+=(x.debit||0);tc+=(x.credit||0);}});
     wrap.innerHTML=`<div class="admin-summary">
@@ -2994,7 +3148,10 @@ async function loadStudentsForAdmin(){
   const wrap=document.getElementById('adminStudentsWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data}=await supabaseClient.from('students').select('*').eq('class',currentAdminClass).order('roll').order('name');
+    let q=supabaseClient.from('students').select('*');
+    if(currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
+    q=q.order('class').order('roll').order('name');
+    const {data}=await q;
     studentsAdminData=data||[];
     filterStudentsAdmin();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
@@ -3007,15 +3164,19 @@ function filterStudentsAdmin(){
 function renderStudentsAdmin(){
   const wrap=document.getElementById('adminStudentsWrap');
   if(filteredStudentsAdmin.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-  let html='<table><thead><tr><th>#</th><th>Photo</th><th>ID</th><th>Name</th><th>Roll</th><th>Actions</th></tr></thead><tbody>';
+  const showClass=currentAdminClass==='all';
+  let html='<table><thead><tr><th>#</th><th>Photo</th><th>ID</th><th>Name</th>'
+    +(showClass?'<th>Class</th>':'')
+    +'<th>Roll</th><th>Actions</th></tr></thead><tbody>';
   filteredStudentsAdmin.forEach((s,idx)=>{
     const photo=s.photo&&s.photo.startsWith('data:image')
       ?`<img src="${s.photo}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid rgba(125,179,255,.4);">`
       :`<div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,#1e6be0,#22d3ee);display:flex;align-items:center;justify-content:center;color:#03132e;font-weight:800;font-size:.85rem;">${(s.name||'?').charAt(0).toUpperCase()}</div>`;
     html+=`<tr><td>${idx+1}</td><td>${photo}</td>
       <td><strong>${escapeHtml(s.studentid)}</strong></td>
-      <td>${escapeHtml(s.name||'')}</td>
-      <td>${escapeHtml(s.roll||'')}</td>
+      <td>${escapeHtml(s.name||'')}</td>`;
+    if(showClass)html+=`<td>${escapeHtml(s.class||'')}</td>`;
+    html+=`<td>${escapeHtml(s.roll||'')}</td>
       <td><button class="btn-sm approve" onclick="editStudent('${s.studentid}')">✏️</button>
       <button class="btn-sm reject" onclick="deleteStudent('${s.studentid}')">🗑️</button></td></tr>`;
   });
@@ -3025,6 +3186,7 @@ function openStudentForm(sid){
   const isEdit=!!sid;
   const s=isEdit?studentsAdminData.find(x=>x.studentid===sid):{};
   modalTitleSpan.innerText=isEdit?'✏️ Edit Student':'➕ Add Student';
+  const clsVal=isEdit?(s.class||''):(currentAdminClass==='all'?'':currentAdminClass);
   modalBodyDiv.innerHTML=`<form>
     <div class="row g-3">
       <div class="col-md-6"><label class="text-white-50 small">ID *</label>
@@ -3032,8 +3194,10 @@ function openStudentForm(sid){
         oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'');"></div>
       <div class="col-md-6"><label class="text-white-50 small">Name *</label>
         <input type="text" id="sf_name" value="${escapeHtml(s.name||'')}" required class="modal-form-input"></div>
-      <div class="col-md-4"><label class="text-white-50 small">Class</label>
-        <input type="text" id="sf_class" value="${currentAdminClass}" readonly class="modal-form-input"></div>
+      <div class="col-md-4"><label class="text-white-50 small">Class *</label>
+        <select id="sf_class" class="modal-form-input" required>
+          ${[1,2,3,4,5,6,7,8,9,10].map(c=>`<option value="${c}" ${String(clsVal)===String(c)?'selected':''}>Class ${c}</option>`).join('')}
+        </select></div>
       <div class="col-md-4"><label class="text-white-50 small">Roll</label>
         <input type="text" id="sf_roll" value="${escapeHtml(s.roll||'')}" class="modal-form-input"></div>
       <div class="col-md-4"><label class="text-white-50 small">Password</label>
@@ -3069,8 +3233,13 @@ async function saveStudent(eid){
     else await supabaseClient.from('students').insert(obj);
     showToast('✅ Saved','success');
     closeModal('globalModal');loadStudentsForAdmin();
-    const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
-    document.getElementById('classBadgeStudents').textContent=(s||[]).length;
+    if(currentAdminClass==='all'){
+      const {data:s}=await supabaseClient.from('students').select('studentid');
+      document.getElementById('classBadgeStudents').textContent=(s||[]).length;
+    }else{
+      const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
+      document.getElementById('classBadgeStudents').textContent=(s||[]).length;
+    }
   }catch(e){showToast('❌ '+e.message,'error');}
   showLoading(false);
 }
@@ -3078,7 +3247,7 @@ async function deleteStudent(sid){
   if(!confirm('Delete this student?'))return;
   await supabaseClient.from('students').delete().eq('studentid',sid);
   showToast('🗑️ Deleted','success');loadStudentsForAdmin();
-  const {data:s}=await supabaseClient.from('students').select('studentid').eq('class',currentAdminClass);
+  const {data:s}=await supabaseClient.from('students').select('studentid');
   document.getElementById('classBadgeStudents').textContent=(s||[]).length;
 }
 
@@ -3087,6 +3256,11 @@ async function deleteStudent(sid){
 ============================================================ */
 async function loadMarksEntry(){
   if(!currentAdminClass)return;
+  if(currentAdminClass==='all'){
+    showToast('Marks-ന് specific class തിരഞ്ഞെടുക്കുക','error');
+    document.getElementById('marksWrap').innerHTML='<div class="empty-state">📚 Marks entry-ക്ക് ഒരു specific class തിരഞ്ഞെടുക്കുക</div>';
+    return;
+  }
   const exam=document.getElementById('marksExamName').value.trim();
   if(!exam){showToast('Select an exam','error');return;}
   marksExamCache=exam;
@@ -3152,6 +3326,7 @@ async function saveMarksBulk(){
 ============================================================ */
 async function autoCalculateRanks(silent){
   if(!currentAdminClass)return;
+  if(currentAdminClass==='all'){showToast('Auto rank-ന് specific class തിരഞ്ഞെടുക്കുക','error');return;}
   if(!silent&&!confirm('Recalculate ranks?'))return;
   if(!silent)showLoading(true);
   try{
@@ -3189,7 +3364,10 @@ async function loadGradesForAdmin(){
   const wrap=document.getElementById('gradesWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data}=await supabaseClient.from('students').select('*').eq('class',currentAdminClass).order('name');
+    let q=supabaseClient.from('students').select('*');
+    if(currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
+    q=q.order('class').order('name');
+    const {data}=await q;
     gradesData=data||[];filterGradesAdmin();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
 }
@@ -3201,11 +3379,15 @@ function filterGradesAdmin(){
 function renderGrades(){
   const wrap=document.getElementById('gradesWrap');
   if(filteredGrades.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-  let html='<table><thead><tr><th>#</th><th>Student</th><th>Grade</th><th>Perf%</th><th>Rank</th><th>Moral</th><th>Trend</th><th>Rank Δ</th></tr></thead><tbody>';
+  const showClass=currentAdminClass==='all';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'
+    +(showClass?'<th>Class</th>':'')
+    +'<th>Grade</th><th>Perf%</th><th>Rank</th><th>Moral</th><th>Trend</th><th>Rank Δ</th></tr></thead><tbody>';
   filteredGrades.forEach((s,idx)=>{
     const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-    html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>
-      <td><select id="gr_grade_${cid}" class="modal-form-input" style="width:70px;padding:5px;font-size:.75rem;">
+    html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
+    if(showClass)html+=`<td>${escapeHtml(s.class||'')}</td>`;
+    html+=`<td><select id="gr_grade_${cid}" class="modal-form-input" style="width:70px;padding:5px;font-size:.75rem;">
         <option value="">—</option>${GRADES_LIST.map(g=>`<option value="${g}" ${s.overallgrade===g?'selected':''}>${g}</option>`).join('')}
       </select></td>
       <td><input type="number" id="gr_perf_${cid}" value="${s.performance||0}" min="0" max="100" style="width:58px;"></td>
@@ -3245,9 +3427,10 @@ async function loadMoralValuesAdmin(){
   const wrap=document.getElementById('moralValuesAdminWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data:students}=await supabaseClient.from('students')
-      .select('studentid,name,moralvaluesgrade,moralvaluessub')
-      .eq('class',currentAdminClass).order('name');
+    let q=supabaseClient.from('students').select('studentid,name,class,moralvaluesgrade,moralvaluessub');
+    if(currentAdminClass!=='all')q=q.eq('class',currentAdminClass);
+    q=q.order('class').order('name');
+    const {data:students}=await q;
     const ids=(students||[]).map(s=>s.studentid);
     let mv=[];
     if(ids.length>0){
@@ -3256,7 +3439,7 @@ async function loadMoralValuesAdmin(){
     }
     const byStudent={};
     mv.forEach(v=>{if(!byStudent[v.studentid])byStudent[v.studentid]=[];byStudent[v.studentid].push(v);});
-    moralValuesData=(students||[]).map(s=>({studentid:s.studentid,name:s.name,
+    moralValuesData=(students||[]).map(s=>({studentid:s.studentid,name:s.name,class:s.class,
       overallgrade:s.moralvaluesgrade||'—',traits:byStudent[s.studentid]||[]}));
     renderMoralValuesAdmin();
   }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
@@ -3264,11 +3447,15 @@ async function loadMoralValuesAdmin(){
 function renderMoralValuesAdmin(){
   const wrap=document.getElementById('moralValuesAdminWrap');
   if(moralValuesData.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-  let html='<table><thead><tr><th>#</th><th>Student</th><th>Overall</th><th>Traits</th><th>Actions</th></tr></thead><tbody>';
+  const showClass=currentAdminClass==='all';
+  let html='<table><thead><tr><th>#</th><th>Student</th>'
+    +(showClass?'<th>Class</th>':'')
+    +'<th>Overall</th><th>Traits</th><th>Actions</th></tr></thead><tbody>';
   moralValuesData.forEach((s,idx)=>{
     const t=s.traits.map(x=>`<span style="display:inline-block;background:rgba(120,180,255,.10);padding:3px 9px;border-radius:20px;font-size:.66rem;margin:2px;border:1px solid rgba(140,190,255,.15);">${escapeHtml(x.trait)}: <strong style="color:#22d3ee;">${escapeHtml(x.grade||'—')}</strong></span>`).join('')||'<span style="color:#6d88ad;">No traits</span>';
-    html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>
-      <td>${escapeHtml(s.overallgrade)}</td><td>${t}</td>
+    html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>`;
+    if(showClass)html+=`<td>${escapeHtml(s.class||'')}</td>`;
+    html+=`<td>${escapeHtml(s.overallgrade)}</td><td>${t}</td>
       <td><button class="btn-sm approve" onclick="openMoralValueForm('${s.studentid}')">✏️</button></td></tr>`;
   });
   html+='</tbody></table>';wrap.innerHTML=html;
@@ -3290,7 +3477,7 @@ function openMoralValueForm(studentid){
   let so='';
   if(!isEdit){so=`<div class="mb-3"><select id="mv_student" class="modal-form-input" required>
     <option value="">-- Select Student --</option>
-    ${moralValuesData.map(x=>`<option value="${x.studentid}">${escapeHtml(x.name)}</option>`).join('')}
+    ${moralValuesData.map(x=>`<option value="${x.studentid}">${escapeHtml(x.name)}${x.class?' (Class '+x.class+')':''}</option>`).join('')}
   </select></div>`;}
   let tr='';
   if(isEdit&&s){
@@ -3341,65 +3528,6 @@ async function saveMoralValues(e,sid){
     closeModal('globalModal');loadMoralValuesAdmin();
   }catch(e){showToast('❌ Error','error');}
   showLoading(false);
-}
-
-/* ============================================================
-   ADMIN — ATTENDANCE
-============================================================ */
-async function loadAttendanceForAdmin(){
-  if(!currentAdminClass)return;
-  const month=document.getElementById('attendanceMonth').value;
-  if(!month){showToast('Select a month','error');return;}
-  const wrap=document.getElementById('attendanceWrap');
-  wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
-  try{
-    const {data:s}=await supabaseClient.from('students').select('studentid,name').eq('class',currentAdminClass);
-    const ids=(s||[]).map(x=>x.studentid);
-    let r=[];
-    if(ids.length>0){
-      const {data:rec}=await supabaseClient.from('attendance_records').select('*').eq('month_year',month).in('studentid',ids);
-      r=rec||[];
-    }
-    attendanceData=(s||[]).map(x=>{
-      const rec=r.find(y=>y.studentid===x.studentid);
-      return {studentid:x.studentid,name:x.name,present_days:rec?rec.present_days:0,
-        total_days:rec?rec.total_days:0,percentage:rec?rec.percentage:0,exists:!!rec};
-    });
-    renderAttendance();
-  }catch(e){wrap.innerHTML='<div class="empty-state">Error loading</div>';}
-}
-function renderAttendance(){
-  const wrap=document.getElementById('attendanceWrap');
-  if(attendanceData.length===0){wrap.innerHTML='<div class="empty-state">No students</div>';return;}
-  let html='<table><thead><tr><th>#</th><th>Student</th><th>Present</th><th>Total</th><th>%</th></tr></thead><tbody>';
-  attendanceData.forEach((s,idx)=>{
-    const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-    html+=`<tr><td>${idx+1}</td><td><strong>${escapeHtml(s.name)}</strong></td>
-      <td><input type="number" id="att_present_${cid}" value="${s.present_days}" min="0"></td>
-      <td><input type="number" id="att_total_${cid}" value="${s.total_days}" min="0"></td>
-      <td><span style="color:#22d3ee;font-weight:800;">${s.percentage}%</span></td></tr>`;
-  });
-  html+='</tbody></table>';wrap.innerHTML=html;
-}
-async function bulkUpdateAttendance(){
-  const month=document.getElementById('attendanceMonth').value;
-  if(!month)return;
-  const btn=document.getElementById('attendanceUpdateBtn');
-  btn.disabled=true;btn.innerHTML='Saving...';
-  try{
-    for(const s of attendanceData){
-      const cid=String(s.studentid).replace(/[^a-zA-Z0-9]/g,'');
-      const p=parseInt(document.getElementById(`att_present_${cid}`).value)||0;
-      const t=parseInt(document.getElementById(`att_total_${cid}`).value)||0;
-      const pct=t>0?Math.round(p/t*100):0;
-      const row={studentid:s.studentid,month_year:month,present_days:p,total_days:t,percentage:pct};
-      if(s.exists){await supabaseClient.from('attendance_records').update(row).eq('studentid',s.studentid).eq('month_year',month);}
-      else{await supabaseClient.from('attendance_records').insert(row);}
-    }
-    showToast('✅ Attendance saved','success');
-    loadAttendanceForAdmin();
-  }catch(e){showToast('❌ Error','error');}
-  btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Update';
 }
 
 /* ============================================================
@@ -3465,7 +3593,13 @@ async function loadAllActivities(){
   const wrap=document.getElementById('feedWrap');
   wrap.innerHTML='<div class="loading-tx"><div class="spinner-sm"></div></div>';
   try{
-    const {data}=await supabaseClient.from('activities').select('*').order('timestamp',{ascending:false}).limit(50);
+    let q=supabaseClient.from('activities').select('*').order('timestamp',{ascending:false}).limit(50);
+    if(currentAdminClass!=='all'){
+      const ids=await getFilteredStudentIds();
+      if(ids.length===0){wrap.innerHTML='<div class="empty-state">No activities</div>';return;}
+      q=q.in('studentid',ids);
+    }
+    const {data}=await q;
     activitiesData=data||[];
     if(activitiesData.length===0){wrap.innerHTML='<div class="empty-state">No activities</div>';return;}
     let html='<table><thead><tr><th>#</th><th>Student</th><th>Activity</th><th>Action</th></tr></thead><tbody>';
@@ -3484,7 +3618,7 @@ async function openActivityForm(){
     <div class="mb-3"><label class="text-white-50 small">Student</label>
       <select id="act_sid" class="modal-form-input">
         <option value="">Everyone</option>
-        ${studentsAdminData.map(s=>`<option value="${s.studentid}">${escapeHtml(s.name)}</option>`).join('')}
+        ${studentsAdminData.map(s=>`<option value="${s.studentid}">${escapeHtml(s.name)}${s.class?' (Class '+s.class+')':''}</option>`).join('')}
       </select></div>
     <div class="mb-3"><label class="text-white-50 small">Title *</label>
       <input type="text" id="act_title" placeholder="Activity title" required class="modal-form-input"></div>
@@ -3589,32 +3723,32 @@ function downloadPaymentsPDF(){
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
   const date=document.getElementById('adminDate').value;
-  doc.setFontSize(15);doc.text(`Payments — Class ${currentAdminClass}`,40,45);
+  doc.setFontSize(15);doc.text(`Payments — ${currentAdminClass==='all'?'All Classes':'Class '+currentAdminClass}`,40,45);
   doc.setFontSize(10);doc.text(`Date: ${date}`,40,65);
-  doc.autoTable({startY:85,head:[['#','Student','Debit','Credit','Status']],
-    body:filteredPayments.map((i,idx)=>[idx+1,i.name,i.debit,i.credit,i.exists?(i.approved?'YES':'PENDING'):'—']),
+  doc.autoTable({startY:85,head:[['#','Student','Class','Debit','Credit','Status']],
+    body:filteredPayments.map((i,idx)=>[idx+1,i.name,i.class||'',i.debit,i.credit,i.exists?(i.approved?'YES':'PENDING'):'—']),
     styles:{fontSize:9},headStyles:{fillColor:[30,107,224]}});
-  doc.save(`payments_class${currentAdminClass}_${date}.pdf`);
+  doc.save(`payments_${currentAdminClass}_${date}.pdf`);
 }
 function downloadStudentsPDF(){
   if(!filteredStudentsAdmin||filteredStudentsAdmin.length===0){showToast('No data','error');return;}
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
-  doc.setFontSize(15);doc.text(`Students — Class ${currentAdminClass}`,40,45);
-  doc.autoTable({startY:75,head:[['#','ID','Name','Roll']],
-    body:filteredStudentsAdmin.map((s,i)=>[i+1,s.studentid,s.name||'',s.roll||'']),
+  doc.setFontSize(15);doc.text(`Students — ${currentAdminClass==='all'?'All Classes':'Class '+currentAdminClass}`,40,45);
+  doc.autoTable({startY:75,head:[['#','ID','Name','Class','Roll']],
+    body:filteredStudentsAdmin.map((s,i)=>[i+1,s.studentid,s.name||'',s.class||'',s.roll||'']),
     styles:{fontSize:9},headStyles:{fillColor:[30,107,224]}});
-  doc.save(`students_class${currentAdminClass}.pdf`);
+  doc.save(`students_${currentAdminClass}.pdf`);
 }
 function downloadBalancesPDF(){
   if(!balancesData||balancesData.length===0){showToast('No data','error');return;}
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
-  doc.setFontSize(15);doc.text(`Palathulli Balances — Class ${currentAdminClass}`,40,45);
-  doc.autoTable({startY:75,head:[['#','Student','Balance']],
-    body:balancesData.map((b,i)=>[i+1,b.name,`Rs. ${b.balance.toLocaleString()}`]),
+  doc.setFontSize(15);doc.text(`Palathulli Balances — ${currentAdminClass==='all'?'All Classes':'Class '+currentAdminClass}`,40,45);
+  doc.autoTable({startY:75,head:[['#','Student','Class','Balance']],
+    body:balancesData.map((b,i)=>[i+1,b.name,b.class||'',`Rs. ${b.balance.toLocaleString()}`]),
     styles:{fontSize:9},headStyles:{fillColor:[30,107,224]}});
-  doc.save(`balances_class${currentAdminClass}.pdf`);
+  doc.save(`balances_${currentAdminClass}.pdf`);
 }
 
 /* ============================================================
@@ -3624,7 +3758,6 @@ let aiOpen=false;
 let aiHistory=[];
 
 function toggleAIChat(){
-  /* Only allow if logged in as student */
   if(!currentUser){showToast('Please login first','error');return;}
   aiOpen=!aiOpen;
   document.getElementById('aiPanel').classList.toggle('open',aiOpen);
@@ -3782,7 +3915,8 @@ Object.assign(window,{
   deleteHomework,loadNotificationsAdmin,openNotificationForm,saveNotification,deleteNotification,loadLibraryAdmin,openLibraryForm,saveLibraryItem,deleteLibrary,
   downloadPaymentsPDF,downloadStudentsPDF,downloadBalancesPDF,
   toggleAIChat,aiQuick,sendAIMessage,
-  openProfilePhotoPicker,uploadProfilePhoto,handleCropFile
+  openProfilePhotoPicker,uploadProfilePhoto,handleCropFile,recalcAttendancePercentages,
+  getFilteredStudentIds,getFilteredStudents
 });
 
 /* ============================================================
