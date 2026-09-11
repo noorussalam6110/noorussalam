@@ -1563,6 +1563,43 @@ const loadingOverlay=document.getElementById('loadingOverlay'),
 const modalTitleSpan=document.getElementById('modalTitle'),
       modalBodyDiv=document.getElementById('modalContentBody');
 
+/* ==== MALAYALAM MONTH FORMATTER ==== */
+const MALAYALAM_MONTHS = {
+  '01': 'ജനുവരി',
+  '02': 'ഫെബ്രുവരി',
+  '03': 'മാർച്ച്',
+  '04': 'ഏപ്രിൽ',
+  '05': 'മേയ്',
+  '06': 'ജൂൺ',
+  '07': 'ജൂലൈ',
+  '08': 'ഓഗസ്റ്റ്',
+  '09': 'സെപ്റ്റംബർ',
+  '10': 'ഒക്ടോബർ',
+  '11': 'നവംബർ',
+  '12': 'ഡിസംബർ'
+};
+
+function formatMonthMalayalam(monthYear) {
+  if (!monthYear) return '—';
+  const str = String(monthYear).trim();
+  const match = str.match(/^(\d{4})-(\d{1,2})$/);
+  if (match) {
+    const year = match[1];
+    const mm = match[2].padStart(2, '0');
+    const monthName = MALAYALAM_MONTHS[mm] || mm;
+    return `${monthName} ${year}`;
+  }
+  try {
+    const d = new Date(str);
+    if (!isNaN(d)) {
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const monthName = MALAYALAM_MONTHS[mm] || '';
+      return `${monthName} ${d.getFullYear()}`;
+    }
+  } catch (e) {}
+  return str;
+}
+
 /* ==== HELPERS ==== */
 function openHelpModal(){document.getElementById('helpModal').classList.add('active');document.body.style.overflow='hidden';}
 function closeHelpModal(){document.getElementById('helpModal').classList.remove('active');document.body.style.overflow='';}
@@ -2376,7 +2413,7 @@ async function fetchAttendanceRecords(){
         <h6 class="text-white mb-3" style="font-size:.9rem;">📅 Monthly Breakdown</h6>
         <ul class="list-unstyled mb-0">${records.map(r=>`
           <li class="d-flex justify-content-between py-2" style="border-bottom:1px solid rgba(140,190,255,.08);">
-            <span class="text-white" style="font-size:.86rem;">${r.month_year}</span>
+            <span class="text-white" style="font-size:.86rem;">${formatMonthMalayalam(r.month_year)}</span>
             <span style="color:#22d3ee;font-weight:800;">${r.percentage}% <small style="color:#9db8dd;">(${r.present_days}/${r.total_days})</small></span>
           </li>`).join('')}</ul>`;
     }else{
@@ -2813,7 +2850,7 @@ function switchAdminTab(tab){
   if(tab==='library')loadLibraryAdmin();
 }
 
-/* ==== ADMIN: MARKS (FIXED) ==== */
+/* ==== ADMIN: MARKS (FIXED with index-based IDs) ==== */
 async function loadMarksEntry(){
   if(!currentAdminClass)return;
   if(currentAdminClass==='all'){
@@ -2834,11 +2871,9 @@ async function loadMarksEntry(){
       .select('studentid,subject,max_marks,obtained_marks')
       .eq('exam_name',exam).limit(10000);
 
-    /* map: studentid||subject -> record  (avoids index collisions) */
     const exMap={};
     (existing||[]).forEach(e=>{exMap[`${e.studentid}||${e.subject}`]=e;});
 
-    /* per-subject max marks (from existing data, default 100) */
     const subjectConfig=subjects.map((sub,si)=>{
       let mx=100;
       const found=(existing||[]).find(e=>e.subject===sub && e.max_marks!==null && e.max_marks!==undefined && Number(e.max_marks)>0);
@@ -2846,7 +2881,6 @@ async function loadMarksEntry(){
       return {subject:sub,max_marks:mx,enabled:true,si};
     });
 
-    /* per-student marks array (index aligned with subjects) */
     marksEntryData=(students||[]).map(s=>({
       studentid:s.studentid,
       name:s.name,
@@ -3036,7 +3070,6 @@ async function autoCalculateRanks(silent){
     }
     if(marks.length===0){if(!silent)showToast('No marks found','error');if(!silent)showLoading(false);return;}
 
-    /* exam -> subject -> max */
     const examSubMax={};
     marks.forEach(m=>{
       const mx=Number(m.max_marks)||0;if(mx<=0)return;
@@ -3049,7 +3082,6 @@ async function autoCalculateRanks(silent){
       examTotalMax[ex]=Object.values(examSubMax[ex]).reduce((a,b)=>a+b,0);
     });
 
-    /* student -> exam -> obtained */
     const stuExam={};
     marks.forEach(m=>{
       const mx=Number(m.max_marks)||0;if(mx<=0)return;
@@ -4223,7 +4255,22 @@ async function aiRespond(q){
   if(/(attendance|ഹാജർ|present|absent|ഹാജര്)/.test(t)){
     const a=currentUser.attendance||0;
     const msg=a>=90?'മികച്ച ഹാജർ! 🌟':a>=75?'നല്ലത് 👍':a>=60?'ശരാശരി':'⚠️ ഹാജർ കുറവാണ്!';
-    return `📆 <b>${uname}, ഹാജർ വിവരം (Cumulative)</b><br><br>ആകെ ഹാജർ: <b>${a}%</b><br>${msg}`;
+    try{
+      const {data:recs}=await supabaseClient.from('attendance_records')
+        .select('month_year,percentage,present_days,total_days')
+        .eq('studentid',currentUser.studentId)
+        .order('month_year',{ascending:false}).limit(3);
+      let out=`📆 <b>${uname}, ഹാജർ വിവരം</b><br><br>ആകെ ഹാജർ: <b>${a}%</b><br>${msg}`;
+      if(recs&&recs.length>0){
+        out+='<br><br><b>Monthly:</b><br>';
+        recs.forEach(r=>{
+          out+=`• ${formatMonthMalayalam(r.month_year)}: <b>${r.percentage}%</b> (${r.present_days}/${r.total_days})<br>`;
+        });
+      }
+      return out;
+    }catch(e){
+      return `📆 <b>${uname}, ഹാജർ വിവരം</b><br><br>ആകെ ഹാജർ: <b>${a}%</b><br>${msg}`;
+    }
   }
   if(/(result|റിസൾട്ട്|grade|ഗ്രേഡ്|mark|മാർക്സ്|score|പരീക്ഷ)/.test(t)){
     return `📊 <b>${uname}, അക്കാദമിക് വിവരം</b><br><br>
@@ -4317,7 +4364,7 @@ Object.assign(window,{
   saveBgUrl,clearBgUrl,loadBgUrlsIntoForm,
   getStudentBalance,subscribeNotifications,
   toggleSubjectColumn,validateMarksInputs,parseMarksInput,
-  refreshStudentAttendance
+  refreshStudentAttendance,formatMonthMalayalam
 });
 
 /* ==== INIT ==== */
@@ -4331,7 +4378,7 @@ async function initApp(){
   });
   if(closeModalBtn)closeModalBtn.addEventListener('click',()=>modal.style.display='none');
 
-  /* ---- Service Worker registration (was missing!) ---- */
+  /* Service Worker registration */
   if('serviceWorker' in navigator){
     window.addEventListener('load',()=>{
       navigator.serviceWorker.register('./service-worker.js')
@@ -4340,7 +4387,7 @@ async function initApp(){
     });
   }
 
-  console.log('%c✅ Noorussalam Madrasa v15.4 — Final','color:#22d3ee;font-weight:bold;font-size:14px;');
+  console.log('%c✅ Noorussalam Madrasa v15.4 FINAL','color:#22d3ee;font-weight:bold;font-size:14px;');
 }
 initApp();
 </script>
