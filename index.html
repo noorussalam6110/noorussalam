@@ -14,16 +14,17 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{--bg1:#04070f;--bg2:#08182b;--gold:#f5c451;--gold2:#d99b1f;--emerald:#10b981;--rose:#e94560;--text:#f1f5f9;--muted:#8fa6bd;--border:rgba(255,255,255,.11);--glow:0 0 24px rgba(245,196,81,.45)}
 body{font-family:'Inter','Anek Malayalam',system-ui,-apple-system,sans-serif;background:radial-gradient(1200px 700px at 15% -10%,#0d2b45 0%,transparent 60%),radial-gradient(1000px 600px at 90% 110%,#12352a 0%,transparent 55%),linear-gradient(160deg,var(--bg1),var(--bg2));min-height:100vh;color:var(--text);overflow-x:hidden}
+body.display-active{overflow:hidden}
 .ml,[lang="ml"]{font-family:'Anek Malayalam','Inter',system-ui,sans-serif}
 input,textarea,select,button{font-family:'Inter','Anek Malayalam',system-ui,sans-serif}
 
-/* ============ TECH FEEL OVERLAYS ============ */
+/* ============ TECH OVERLAYS ============ */
 .tech-scanlines{position:fixed;inset:0;z-index:60;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0,transparent 2px,rgba(56,189,248,.035) 3px,transparent 4px);mix-blend-mode:overlay}
 .tech-scanline-mover{position:fixed;left:0;right:0;height:140px;z-index:61;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(56,189,248,.09),transparent);animation:scanMove 9s linear infinite}
 @keyframes scanMove{0%{top:-140px}100%{top:100%}}
 .tech-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(56,189,248,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.03) 1px,transparent 1px);background-size:60px 60px;opacity:.5}
 
-/* ============ RED ALERT OVERLAY ============ */
+/* ============ RED ALERT ============ */
 .red-alert{position:fixed;inset:0;z-index:6000;pointer-events:none;display:none;background:radial-gradient(circle at center,rgba(255,40,70,.72),rgba(160,10,35,.96));box-shadow:inset 0 0 240px rgba(255,0,0,.9)}
 .red-alert.active{display:block;animation:redAlertFlash 2.4s cubic-bezier(.4,0,.6,1) forwards}
 .red-alert::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0,transparent 44px,rgba(255,255,255,.13) 44px,rgba(255,255,255,.13) 88px);animation:alertStripe .32s linear infinite}
@@ -52,10 +53,10 @@ body.display-active .mode-toggle{display:none!important}
 .mode-btn.active{background:linear-gradient(120deg,var(--gold),var(--gold2));color:#04121f;border-color:transparent}
 .fs-btn{border:1px solid var(--border);background:rgba(56,189,248,.12);color:#7dd3fc;padding:10px 20px;border-radius:40px;font-weight:800;font-size:.8rem;cursor:pointer}
 
-.admin-mode,.display-mode{display:none;padding:22px 16px 50px;position:relative;z-index:10}
-.admin-mode.active,.display-mode.active{display:block}
+.admin-mode,.display-mode{display:none;position:relative;z-index:10}
+.admin-mode{padding:22px 16px 50px}
+.admin-mode.active{display:block}
 .admin-container{max-width:1500px;margin:0 auto}
-.display-container{max-width:1900px;margin:0 auto;padding:0 20px}
 .card{background:linear-gradient(160deg,rgba(18,41,63,.85),rgba(13,32,51,.85));border:1px solid var(--border);border-radius:26px;padding:20px;margin-bottom:20px;box-shadow:0 12px 34px rgba(0,0,0,.35);position:relative}
 .card::before{content:'';position:absolute;top:0;left:24px;right:24px;height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.6),transparent)}
 .card-title{font-size:.72rem;letter-spacing:2.4px;font-weight:900;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px;text-transform:uppercase}
@@ -85,18 +86,27 @@ select option{background:#0d2033}
 .row>*{flex:1;min-width:120px}
 .row .fixed{flex:0 0 auto;min-width:auto}
 
+/* TEMPLATES */
+.template-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+@media(min-width:600px){.template-grid{grid-template-columns:repeat(3,1fr)}}
+.tpl-btn{background:rgba(139,92,246,.13);border:1px solid rgba(139,92,246,.4);color:#ddd6fe;padding:11px 8px;border-radius:12px;font-weight:800;font-size:.74rem;cursor:pointer;transition:.15s;text-align:center;line-height:1.35}
+.tpl-btn:hover{background:rgba(139,92,246,.28);transform:translateY(-2px)}
+
+/* TICKER QUICK */
+.ticker-quick{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:rgba(4,7,15,.4);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:12px}
+.ticker-quick input{flex:1;min-width:180px}
+
 .qa-preview{margin-top:14px;padding:16px 18px;border-radius:18px;background:rgba(4,7,15,.55);border:1px solid rgba(245,196,81,.3)}
 .qa-preview-label{font-size:.68rem;letter-spacing:2px;color:var(--gold);font-weight:900;margin-bottom:10px}
 .qa-preview-text{font-size:1.15rem;font-weight:700;line-height:1.7;word-break:break-word}
 .qa-preview-text.ml{font-family:'Anek Malayalam',sans-serif}
 .qa-preview-text.en{font-size:.85rem;color:var(--muted);margin-top:10px;line-height:1.6;font-weight:600}
 
-/* ============ CHEST NUMBER HIGHLIGHT ============ */
 .chest-num{display:inline-block;background:linear-gradient(135deg,#fde047,#facc15,#f59e0b);color:#1a1200;font-family:ui-monospace,monospace;font-weight:900;padding:3px 13px;margin:4px 4px;border-radius:11px;font-size:.92em;box-shadow:0 0 0 2px #facc15,0 0 22px rgba(250,204,21,.75),inset 0 2px 0 rgba(255,255,255,.5);animation:chestPulse 1.9s ease-in-out infinite;letter-spacing:1px;position:relative;line-height:1.25;text-shadow:0 1px 0 rgba(255,255,255,.5)}
 .chest-num::before{content:'';position:absolute;inset:-5px;border-radius:14px;border:2px solid rgba(250,204,21,.45);animation:chestRing 2s ease-in-out infinite;pointer-events:none}
 @keyframes chestPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 @keyframes chestRing{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.85;transform:scale(1.1)}}
-.hl-item{color:#fde68a;text-shadow:0 0 22px rgba(250,204,21,.7),0 0 44px rgba(250,204,21,.35);font-weight:900}
+.hl-item{color:#fde68a;text-shadow:0 0 22px rgba(250,204,21,.7);font-weight:900}
 
 /* Stage admin / list */
 .stage-admin-grid{display:grid;grid-template-columns:1fr;gap:16px}
@@ -172,63 +182,113 @@ select option{background:#0d2033}
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:3000;background:linear-gradient(120deg,#0d2033,#12293f);color:var(--gold);border:1px solid rgba(245,196,81,.4);padding:13px 28px;border-radius:50px;font-weight:800;font-size:.84rem;box-shadow:0 14px 40px rgba(0,0,0,.6)}
 
-/* ============ DISPLAY ============ */
-.display-header{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;background:linear-gradient(120deg,rgba(13,32,51,.95),rgba(18,41,63,.95));border:1px solid rgba(245,196,81,.3);border-radius:26px;padding:18px 30px;margin-bottom:20px;box-shadow:0 0 40px rgba(245,196,81,.1);position:relative}
+/* ============================================================
+   📺 DISPLAY — TV FIXED LAYOUT
+   ============================================================ */
+.display-mode{position:fixed;inset:0;z-index:100}
+.display-mode.active{display:flex;flex-direction:column;height:100vh;overflow:hidden;padding:0}
+.display-container{
+  height:100vh;width:100%;max-width:100%;
+  padding:16px 24px;box-sizing:border-box;
+  display:flex;flex-direction:column;gap:14px;
+  overflow:hidden;
+}
+
+/* HEADER — FIXED */
+.display-header{
+  flex:0 0 auto;
+  height:96px;
+  display:flex;justify-content:space-between;align-items:center;gap:18px;
+  background:linear-gradient(120deg,rgba(13,32,51,.95),rgba(18,41,63,.95));
+  border:1px solid rgba(245,196,81,.3);border-radius:22px;
+  padding:0 28px;position:relative;overflow:hidden;
+  box-shadow:0 0 40px rgba(245,196,81,.1);
+}
 .display-header::before{content:'';position:absolute;top:0;left:30px;right:30px;height:2px;background:linear-gradient(90deg,transparent,#f5c451,#ff2a4a,#38bdf8,#f5c451,transparent);background-size:200% 100%;animation:borderFlow 5s linear infinite;border-radius:2px}
 @keyframes borderFlow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-.dh-left h1{font-size:2rem;font-weight:800;line-height:1.35;background:linear-gradient(120deg,#ffe9a8,#f5c451,#d99b1f);-webkit-background-clip:text;background-clip:text;color:transparent;animation:titleShimmer 6s ease-in-out infinite}
+.dh-left{flex:1;min-width:0;overflow:hidden}
+.dh-left h1{font-size:1.9rem;font-weight:800;line-height:1.2;background:linear-gradient(120deg,#ffe9a8,#f5c451,#d99b1f);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;animation:titleShimmer 6s ease-in-out infinite}
 @keyframes titleShimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
-.dh-left p{font-size:.82rem;color:var(--muted);margin-top:6px;letter-spacing:2.4px;font-weight:700;line-height:1.6}
-.dh-right{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.clock-box{background:rgba(4,7,15,.7);border:1px solid rgba(245,196,81,.35);border-radius:20px;padding:8px 24px;text-align:center;box-shadow:var(--glow);position:relative}
-.clock-box::before{content:'';position:absolute;inset:-1px;border-radius:20px;background:linear-gradient(120deg,#f5c451,#38bdf8,#f5c451);background-size:200% 200%;z-index:-1;animation:borderFlow 4s linear infinite;opacity:.5}
-.clock-time{font-family:ui-monospace,monospace;font-size:2.3rem;font-weight:900;color:var(--gold);letter-spacing:2px;line-height:1.1;text-shadow:0 0 22px rgba(245,196,81,.55)}
-.clock-date{font-size:.75rem;color:var(--muted);font-weight:600;margin-top:3px}
-.stat-pills{display:flex;gap:10px;flex-wrap:wrap}
-.stat-pill{background:rgba(4,7,15,.6);border:1px solid var(--border);border-radius:16px;padding:8px 18px;text-align:center;min-width:84px;position:relative;overflow:hidden}
+.dh-left p{font-size:.72rem;color:var(--muted);margin-top:3px;letter-spacing:2.2px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dh-right{display:flex;gap:12px;align-items:center;flex-shrink:0}
+.clock-box{background:rgba(4,7,15,.7);border:1px solid rgba(245,196,81,.35);border-radius:18px;padding:6px 20px;text-align:center;box-shadow:var(--glow);position:relative;min-width:200px}
+.clock-time{font-family:ui-monospace,monospace;font-size:2rem;font-weight:900;color:var(--gold);letter-spacing:2px;line-height:1.05;text-shadow:0 0 22px rgba(245,196,81,.55)}
+.clock-date{font-size:.68rem;color:var(--muted);font-weight:600;margin-top:1px}
+.stat-pills{display:flex;gap:8px}
+.stat-pill{background:rgba(4,7,15,.6);border:1px solid var(--border);border-radius:14px;padding:6px 14px;text-align:center;min-width:72px;position:relative;overflow:hidden}
 .stat-pill::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#f5c451,transparent);animation:statSweep 3s linear infinite}
 @keyframes statSweep{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-.stat-pill b{display:block;font-size:1.35rem;font-weight:900;color:var(--gold);text-shadow:0 0 18px rgba(245,196,81,.4)}
-.stat-pill span{font-size:.62rem;color:var(--muted);letter-spacing:1.4px;font-weight:800}
+.stat-pill b{display:block;font-size:1.15rem;font-weight:900;color:var(--gold);text-shadow:0 0 18px rgba(245,196,81,.4);line-height:1.1}
+.stat-pill span{font-size:.55rem;color:var(--muted);letter-spacing:1.2px;font-weight:800}
 
-/* Announcement bar with tech corners */
-.announce-bar{position:relative;display:flex;justify-content:center;align-items:center;background:linear-gradient(120deg,rgba(4,7,15,.95),rgba(13,32,51,.95));border:2px solid var(--gold);border-radius:26px;padding:34px 44px;margin-bottom:22px;box-shadow:0 0 40px rgba(245,196,81,.25),inset 0 0 60px rgba(245,196,81,.05);text-align:center;overflow:hidden}
-.announce-bar::before{content:'';position:absolute;top:0;left:0;width:60px;height:60px;border-top:4px solid #f5c451;border-left:4px solid #f5c451;border-radius:26px 0 0 0;pointer-events:none;box-shadow:0 0 20px rgba(245,196,81,.8)}
-.announce-bar::after{content:'';position:absolute;bottom:0;right:0;width:60px;height:60px;border-bottom:4px solid #f5c451;border-right:4px solid #f5c451;border-radius:0 0 26px 0;pointer-events:none;box-shadow:0 0 20px rgba(245,196,81,.8)}
-.announce-corner-tl,.announce-corner-br{position:absolute;width:60px;height:60px;pointer-events:none}
-.announce-corner-tr{top:0;right:0;border-top:4px solid #f5c451;border-right:4px solid #f5c451;border-radius:0 26px 0 0;box-shadow:0 0 20px rgba(245,196,81,.8)}
-.announce-corner-bl{bottom:0;left:0;border-bottom:4px solid #f5c451;border-left:4px solid #f5c451;border-radius:0 0 0 26px;box-shadow:0 0 20px rgba(245,196,81,.8)}
+/* ANNOUNCEMENT — FIXED HEIGHT (fills remaining space) */
+.announce-bar{
+  flex:1 1 auto;
+  min-height:0;
+  position:relative;
+  display:flex;justify-content:center;align-items:center;
+  background:linear-gradient(120deg,rgba(4,7,15,.95),rgba(13,32,51,.95));
+  border:2px solid var(--gold);border-radius:22px;
+  padding:20px 44px;
+  box-shadow:0 0 40px rgba(245,196,81,.25),inset 0 0 60px rgba(245,196,81,.05);
+  text-align:center;
+  overflow:hidden;
+}
+.announce-bar::before{content:'';position:absolute;top:0;left:0;width:52px;height:52px;border-top:4px solid #f5c451;border-left:4px solid #f5c451;border-radius:22px 0 0 0;pointer-events:none;box-shadow:0 0 20px rgba(245,196,81,.8)}
+.announce-bar::after{content:'';position:absolute;bottom:0;right:0;width:52px;height:52px;border-bottom:4px solid #f5c451;border-right:4px solid #f5c451;border-radius:0 0 22px 0;pointer-events:none;box-shadow:0 0 20px rgba(245,196,81,.8)}
+.announce-corner-tl,.announce-corner-br{position:absolute;width:52px;height:52px;pointer-events:none}
+.announce-corner-tr{top:0;right:0;border-top:4px solid #f5c451;border-right:4px solid #f5c451;border-radius:0 22px 0 0;box-shadow:0 0 20px rgba(245,196,81,.8)}
+.announce-corner-bl{bottom:0;left:0;border-bottom:4px solid #f5c451;border-left:4px solid #f5c451;border-radius:0 0 0 22px;box-shadow:0 0 20px rgba(245,196,81,.8)}
 .announce-bar.flash{animation:annFlash .55s ease-in-out 3}
 @keyframes annFlash{0%{border-color:var(--gold)}50%{border-color:#fff;background:linear-gradient(120deg,rgba(245,196,81,.28),rgba(217,155,31,.28))}100%{border-color:var(--gold)}}
-.announce-label{font-size:.75rem;letter-spacing:2.6px;color:var(--gold);font-weight:900;margin-bottom:12px;text-shadow:0 0 14px rgba(245,196,81,.6)}
-.announce-text{font-size:2.6rem;font-weight:800;line-height:1.65;word-break:break-word}
+.announce-inner{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;overflow:hidden}
+.announce-label{font-size:.72rem;letter-spacing:2.6px;color:var(--gold);font-weight:900;text-shadow:0 0 14px rgba(245,196,81,.6);flex-shrink:0}
+.announce-text{font-weight:800;line-height:1.5;word-break:break-word;width:100%;overflow:hidden;text-align:center}
+.announce-text.auto-s{font-size:3.2rem}
+.announce-text.auto-m{font-size:2.5rem}
+.announce-text.auto-l{font-size:1.9rem}
+.announce-text.auto-xl{font-size:1.5rem}
 
-.ticker-wrap{background:rgba(0,0,0,.6);border:1px solid rgba(245,196,81,.4);border-radius:18px;padding:12px 0;overflow:hidden;position:relative}
-.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:70px;z-index:2;pointer-events:none}
+/* TICKER — FIXED */
+.ticker-wrap{
+  flex:0 0 auto;
+  height:74px;
+  background:rgba(0,0,0,.6);
+  border:1px solid rgba(245,196,81,.4);
+  border-radius:16px;
+  overflow:hidden;position:relative;
+  display:flex;align-items:center;
+}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
 .ticker-wrap::before{left:0;background:linear-gradient(90deg,#04070f,transparent)}
 .ticker-wrap::after{right:0;background:linear-gradient(-90deg,#04070f,transparent)}
-.ticker-track{display:inline-flex;white-space:nowrap;animation:tickerScroll 40s linear infinite}
-.ticker-track span{font-size:1.75rem;font-weight:700;color:var(--gold);padding-right:80px;letter-spacing:.6px;line-height:1.5;text-shadow:0 0 14px rgba(245,196,81,.3)}
+.ticker-track{display:inline-flex;white-space:nowrap;animation:tickerScroll 40s linear infinite;will-change:transform}
+.ticker-track span{font-size:1.55rem;font-weight:700;color:var(--gold);padding-right:80px;letter-spacing:.6px;line-height:1;text-shadow:0 0 14px rgba(245,196,81,.3)}
 @keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.footer-copyright{text-align:center;padding:26px 0 10px;color:#4d6377;font-size:.78rem;font-weight:600;border-top:1px solid var(--border);margin-top:20px}
-@media(max-width:900px){
-  .announce-text{font-size:1.6rem}
+
+/* FOOTER — FIXED */
+.display-footer{
+  flex:0 0 auto;
+  height:22px;
+  text-align:center;
+  color:#4d6377;font-size:.7rem;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+}
+
+@media(max-width:1200px){
+  .dh-left h1{font-size:1.5rem}
   .clock-time{font-size:1.6rem}
-  .dh-left h1{font-size:1.3rem}
-  .ticker-track span{font-size:1.15rem}
-  .display-header{padding:14px 18px}
-  .red-alert .alert-text{font-size:3rem;letter-spacing:6px}
+  .clock-box{min-width:170px}
+  .display-header{height:auto;padding:14px 20px}
+  .display-container{padding:12px 16px;gap:10px}
 }
 </style>
 </head>
 <body>
 
-<!-- Tech overlays -->
 <div class="tech-grid"></div>
 <div class="tech-scanlines"></div>
 <div class="tech-scanline-mover"></div>
-
-<!-- 🔴 RED ALERT OVERLAY -->
 <div class="red-alert" id="redAlert">
   <div class="alert-text">⚠ ANNOUNCEMENT ⚠</div>
   <div class="alert-sub">NEW • IMPORTANT • ATTENTION</div>
@@ -259,28 +319,79 @@ select option{background:#0d2033}
   <div class="header">
     <h1>🎛️ Musabaka <span>Control Hub</span></h1>
     <div class="row fixed">
-      <button class="btn btn-gold fixed" onclick="testVoice()">🔊 Test Voice</button>
-      <button class="btn btn-rose fixed" onclick="triggerRedAlert()">🔴 Test Alert</button>
+      <button class="btn btn-gold fixed" onclick="testVoice()">🔊 Test</button>
+      <button class="btn btn-rose fixed" onclick="triggerRedAlert()">🔴 Alert</button>
       <button class="btn-logout" onclick="logout()">🚪 Logout</button>
     </div>
   </div>
 
   <div id="offlineIndicatorAdmin" class="offline-banner">⚠️ OFFLINE MODE</div>
 
+  <!-- TICKER QUICK SET -->
+  <div class="card">
+    <div class="card-title">📜 Ticker Message · Scroll Text</div>
+    <div class="ticker-quick">
+      <input type="text" id="tickerQuickInput" placeholder="Ticker scroll text type ചെയ്യുക…">
+      <button class="btn btn-blue fixed" onclick="setTickerQuick()">💾 Set Ticker</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-slate fixed" style="font-size:.75rem;padding:9px 14px" onclick="setTickerPreset('✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨')">✨ Welcome</button>
+      <button class="btn btn-slate fixed" style="font-size:.75rem;padding:9px 14px" onclick="setTickerPreset('🍽️ ഭക്ഷണ വിശ്രമം 12:30 മുതൽ 1:30 വരെ')">🍽️ Lunch</button>
+      <button class="btn btn-slate fixed" style="font-size:.75rem;padding:9px 14px" onclick="setTickerPreset('🏆 വിജയികൾക്ക് സമ്മാനദാനം വൈകുന്നേരം 4 മണിക്ക്')">🏆 Prize</button>
+      <button class="btn btn-slate fixed" style="font-size:.75rem;padding:9px 14px" onclick="setTickerPreset('📸 ഫോട്ടോഗ്രാഫി മത്സരം — വേദിക്ക് സമീപം')">📸 Photo</button>
+    </div>
+  </div>
+
+  <!-- QUICK ANNOUNCE -->
   <div class="card">
     <div class="card-title">🎯 Quick Announce · One-Click + Red Alert</div>
     <div class="row">
       <select id="qaStage" onchange="updateQAPreview()" style="flex:1"><option>Loading…</option></select>
       <select id="qaItem" onchange="updateQAPreview()" style="flex:3"><option>Loading…</option></select>
     </div>
-    <div class="qa-preview" id="qaPreview">
-      <div class="qa-preview-label">📄 LIVE PREVIEW (chest numbers highlighted in yellow)</div>
+    <div class="qa-preview">
+      <div class="qa-preview-label">📄 LIVE PREVIEW</div>
       <div class="qa-preview-text ml" id="qaPreviewMl">Select an item above…</div>
       <div class="qa-preview-text en" id="qaPreviewEn"></div>
     </div>
     <div class="row" style="margin-top:14px">
       <button class="btn btn-green" style="font-size:1rem;padding:16px" onclick="sendQuickAnnounce()">📢 SEND — With Red Alert</button>
     </div>
+  </div>
+
+  <!-- ANNOUNCEMENT TEMPLATES -->
+  <div class="card">
+    <div class="card-title">📝 Announcement Templates · Ready Messages</div>
+    <div class="template-grid">
+      <button class="tpl-btn" onclick="sendTemplate('🍽️ ഭക്ഷണ വിശ്രമം പ്രഖ്യാപിക്കുന്നു. എല്ലാ മത്സരാർത്ഥികളും ഉടൻ ഭക്ഷണശാലയിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'Lunch break is being announced. All participants are requested to proceed to the dining hall immediately.')">🍽️ ഭക്ഷണ വിശ്രമം</button>
+      <button class="tpl-btn" onclick="sendTemplate('🏆 സമ്മാനദാന ചടങ്ങ് ഉടൻ ആരംഭിക്കുന്നു. എല്ലാ വിജയികളും വേദിക്ക് മുന്നിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'The prize distribution ceremony is about to begin. All winners are requested to come to the stage.')">🏆 സമ്മാനദാനം</button>
+      <button class="tpl-btn" onclick="sendTemplate('📢 ശ്രദ്ധിക്കുക! എല്ലാ മത്സരാർത്ഥികളും ചെസ്റ്റ് നമ്പർ ദൃശ്യമായി വഹിക്കേണ്ടതാണ്.', 'Attention! All participants must display their chest numbers visibly.')">📢 ശ്രദ്ധ പ്രഖ്യാപനം</button>
+      <button class="tpl-btn" onclick="sendTemplate('⏰ മത്സര സമയക്രമം അനുസരിച്ച് 5 മിനിറ്റിനുള്ളിൽ എല്ലാ മത്സരാർത്ഥികളും വേദിയിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'As per schedule, all participants are requested to report to the stage within 5 minutes.')">⏰ സമയക്രമം</button>
+      <button class="tpl-btn" onclick="sendTemplate('🎙️ അടുത്ത മത്സരം ഉടൻ ആരംഭിക്കുന്നു. സ്റ്റേജ് അസിസ്റ്റന്റ്മാർ തയ്യാറാകുക.', 'The next competition will begin shortly. Stage assistants please get ready.')">🎙️ അടുത്ത മത്സരം</button>
+      <button class="tpl-btn" onclick="sendTemplate('👏 എല്ലാ മത്സരാർത്ഥികൾക്കും ഹൃദയം നിറഞ്ഞ അഭിനന്ദനങ്ങൾ! കലാമേള വിജയകരമായി പൂർത്തിയായി.', 'Hearty congratulations to all participants! The Kalamela has concluded successfully.')">👏 അഭിനന്ദനം</button>
+      <button class="tpl-btn" onclick="sendTemplate('📸 ഫോട്ടോഗ്രാഫി സെഷൻ വേദിക്ക് സമീപം നടക്കുന്നു. ആഗ്രഹിക്കുന്നവർ അവിടെ എത്തിച്ചേരുക.', 'Photo session is happening near the stage. Those interested please gather there.')">📸 ഫോട്ടോ സെഷൻ</button>
+      <button class="tpl-btn" onclick="sendTemplate('📱 മൊബൈൽ ഫോൺ ഉപയോഗം മത്സര വേദിയിൽ പൂർണ്ണമായി നിരോധിച്ചിരിക്കുന്നു.', 'Mobile phone usage is strictly prohibited in the competition area.')">📱 മൊബൈൽ നിരോധനം</button>
+      <button class="tpl-btn" onclick="sendTemplate('🚗 വാഹനങ്ങൾ നിശ്ചിത പാർക്കിംഗ് സ്ഥലത്ത് മാത്രം പാർക്ക് ചെയ്യുക.', 'Vehicles should be parked only in the designated parking area.')">🚗 പാർക്കിംഗ്</button>
+    </div>
+  </div>
+
+  <!-- CUSTOM ANNOUNCEMENT -->
+  <div class="card">
+    <div class="card-title">✏️ Custom Announcement · Free Text</div>
+    <textarea id="customAnnouncementInput" rows="3" placeholder="ഏത് അറിയിപ്പും ഇവിടെ ടൈപ്പ് ചെയ്യുക…"></textarea>
+    <div class="row" style="margin-top:12px">
+      <button class="btn btn-green" onclick="sendCustomAnnouncement()">📣 Send + Alert</button>
+      <button class="btn btn-amber" onclick="resetAnnouncementToWelcome()">🔄 Reset Welcome</button>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <select id="announceVoiceMode" onchange="saveVoiceMode()">
+        <option value="both">🗣️ Malayalam + English</option>
+        <option value="ml">🗣️ Malayalam only</option>
+        <option value="en">🗣️ English only</option>
+        <option value="none">🔇 Silent</option>
+      </select>
+    </div>
+    <div id="announceFeedback" style="margin-top:10px;color:#6ee7b7;font-weight:700;font-size:.8rem;min-height:18px"></div>
   </div>
 
   <div class="card">
@@ -295,24 +406,6 @@ select option{background:#0d2033}
   <div class="admin-grid">
     <div>
       <div class="card">
-        <div class="card-title">📢 Custom Announcement</div>
-        <textarea id="customAnnouncementInput" rows="3" placeholder="അറിയിപ്പ്…"></textarea>
-        <div class="row" style="margin-top:12px">
-          <button class="btn btn-green" onclick="sendCustomAnnouncement()">📣 Send + Alert</button>
-          <button class="btn btn-amber" onclick="resetAnnouncementToWelcome()">🔄 Reset</button>
-        </div>
-        <div class="row" style="margin-top:10px">
-          <select id="announceVoiceMode" onchange="saveVoiceMode()">
-            <option value="both">🗣️ Malayalam + English</option>
-            <option value="ml">🗣️ Malayalam only</option>
-            <option value="en">🗣️ English only</option>
-            <option value="none">🔇 Silent</option>
-          </select>
-        </div>
-        <div id="announceFeedback" style="margin-top:10px;color:#6ee7b7;font-weight:700;font-size:.8rem;min-height:18px"></div>
-      </div>
-
-      <div class="card">
         <div class="card-title">📣 Call Single Participant</div>
         <div class="row">
           <select id="callStageSelect" class="fixed" style="flex:1"></select>
@@ -325,13 +418,11 @@ select option{background:#0d2033}
       </div>
 
       <div class="card">
-        <div class="card-title">⚙️ Settings</div>
+        <div class="card-title">⚙️ Event Settings</div>
         <label style="font-size:.75rem;color:var(--muted);font-weight:800">EVENT NAME</label>
         <input type="text" id="eventNameInput" style="margin:7px 0 14px">
         <label style="font-size:.75rem;color:var(--muted);font-weight:800">SUBTITLE</label>
         <input type="text" id="eventSubInput" style="margin:7px 0 14px">
-        <label style="font-size:.75rem;color:var(--muted);font-weight:800">TICKER</label>
-        <input type="text" id="tickerInput" style="margin:7px 0 14px">
         <label style="font-size:.75rem;color:var(--muted);font-weight:800">NEXT #</label>
         <div class="row" style="margin-top:7px">
           <input type="number" id="nextParticipantInput" min="1" value="1">
@@ -389,10 +480,11 @@ select option{background:#0d2033}
     <div class="lib-grid" id="libGrid"></div>
   </div>
 
-  <div class="footer-copyright">© 2026 · Kerala Estate Range Jamiyathul Mualimeen</div>
+  <div class="footer-copyright" style="text-align:center;padding:20px 0;color:#4d6377;font-size:.78rem;border-top:1px solid var(--border);margin-top:20px">© 2026 · Kerala Estate Range Jamiyathul Mualimeen</div>
 </div>
 </div>
 
+<!-- ============ DISPLAY — TV FIXED ============ -->
 <div id="displayMode" class="display-mode">
 <div class="display-container">
   <div class="display-header">
@@ -408,14 +500,14 @@ select option{background:#0d2033}
       </div>
     </div>
   </div>
-  <div id="offlineIndicatorDisplay" class="offline-banner">📡 OFFLINE</div>
+  <div id="offlineIndicatorDisplay" class="offline-banner" style="position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:50;margin:0;padding:6px 20px">📡 OFFLINE</div>
 
   <div class="announce-bar" id="announcementBox">
-    <div class="announce-corner-tl announce-corner-tr"></div>
-    <div class="announce-corner-tl announce-corner-bl"></div>
-    <div style="width:100%">
+    <div class="announce-corner-tr"></div>
+    <div class="announce-corner-bl"></div>
+    <div class="announce-inner">
       <div class="announce-label">📢 അറിയിപ്പ് · ANNOUNCEMENT</div>
-      <div class="announce-text ml" id="announcementText">✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം</div>
+      <div class="announce-text ml auto-m" id="announcementText">✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം</div>
     </div>
   </div>
 
@@ -425,7 +517,8 @@ select option{background:#0d2033}
       <span id="tickerText2">✨ Welcome to Musabaka Kalamela ✨</span>
     </div>
   </div>
-  <div class="footer-copyright">© 2026 · Kerala Estate Range Jamiyathul Mualimeen</div>
+
+  <div class="display-footer">© 2026 · Kerala Estate Range Jamiyathul Mualimeen</div>
 </div>
 </div>
 
@@ -529,7 +622,6 @@ let lastAlertTs = 0;
 let alertInitialized = false;
 let redAlertTimer = null;
 
-/* ============ RED ALERT ============ */
 function triggerRedAlert(){
   const el = document.getElementById('redAlert');
   if(!el) return;
@@ -616,10 +708,87 @@ function showToast(msg){
 function stageName(id){ const s = stages.find(x => x.id === id); return s && s.name ? s.name : `Stage ${id}`; }
 function normalizeArray(val, fb){ if(!val) return fb; return Array.isArray(val) ? val : Object.values(val); }
 function escapeHtml(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function stripHtml(html){ const d = document.createElement('div'); d.innerHTML = html; return d.textContent || ''; }
 
-/* ============================================================
-   🎯 BUILD ANNOUNCEMENT — with HTML chest number highlighting
-   ============================================================ */
+/* ============ AUTO-FIT ANNOUNCEMENT ============ */
+function autoFitAnnouncement(){
+  const el = document.getElementById('announcementText');
+  if(!el) return;
+  // Reset classes
+  el.classList.remove('auto-s','auto-m','auto-l','auto-xl');
+  // Get plain text length
+  const txt = stripHtml(el.innerHTML).trim();
+  const len = txt.length;
+  // Pick size class based on length
+  let cls = 'auto-m';
+  if(len === 0) cls = 'auto-m';
+  else if(len <= 60) cls = 'auto-s';
+  else if(len <= 180) cls = 'auto-m';
+  else if(len <= 400) cls = 'auto-l';
+  else cls = 'auto-xl';
+  el.classList.add(cls);
+  // Extra fine-tune: if content overflows, drop one size
+  requestAnimationFrame(() => {
+    const inner = el.parentElement;
+    if(!inner) return;
+    let guard = 0;
+    const order = ['auto-s','auto-m','auto-l','auto-xl'];
+    while(el.scrollHeight > inner.clientHeight - 40 && guard++ < 4){
+      const currentIdx = order.findIndex(c => el.classList.contains(c));
+      if(currentIdx === -1 || currentIdx >= order.length - 1) break;
+      el.classList.remove(order[currentIdx]);
+      el.classList.add(order[currentIdx + 1]);
+    }
+  });
+}
+
+/* ============ ANNOUNCEMENT SET ============ */
+function setAnnouncementHtml(html, flash = true){
+  const el = document.getElementById('announcementText');
+  if(el){ el.innerHTML = html; autoFitAnnouncement(); }
+  if(flash){
+    const box = document.getElementById('announcementBox');
+    if(box){ box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash'); setTimeout(() => box.classList.remove('flash'), 1800); }
+  }
+}
+function setTicker(msg){
+  const a = document.getElementById('tickerText'); const b = document.getElementById('tickerText2');
+  if(a) a.textContent = msg; if(b) b.textContent = msg;
+}
+
+/* ============ TICKER QUICK ============ */
+async function setTickerQuick(){
+  const v = document.getElementById('tickerQuickInput').value.trim();
+  if(!v){ showToast("Enter ticker text"); return; }
+  await db.ref('config').update({ tickerMessage: v });
+  setTicker(v);
+  showToast("📜 Ticker updated");
+}
+async function setTickerPreset(txt){
+  document.getElementById('tickerQuickInput').value = txt;
+  await db.ref('config').update({ tickerMessage: txt });
+  setTicker(txt);
+  showToast("📜 Ticker preset");
+}
+
+/* ============ TEMPLATES ============ */
+async function sendTemplate(mlText, enText){
+  const now = Date.now();
+  const safeMl = escapeHtml(mlText);
+  await db.ref('config').update({
+    announcement: mlText,
+    announcementHtml: safeMl,
+    tickerMessage: mlText,
+    voice_ts: now,
+    alert_ts: now
+  });
+  setAnnouncementHtml(safeMl, true);
+  triggerRedAlert();
+  speakBoth(mlText, enText);
+  showToast("📢 Template sent");
+}
+
+/* ============ BUILD ANNOUNCEMENT ============ */
 function buildAnnouncement(item, stageId){
   const stage = stages.find(s => s.id === Number(stageId));
   const stgName = stage ? stage.name : `വേദി ${stageId}`;
@@ -627,13 +796,10 @@ function buildAnnouncement(item, stageId){
   const itemMl = ITEM_ML[item.name] || item.name;
   const nums = item.participants;
   const numsStr = nums.join(', ');
-
   const ml = `${stgName} ൽ ${secMl} വിഭാഗം ${itemMl} മത്സരം ഉടൻ ആരംഭിക്കുന്നു. ${numsStr} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഉള്ള മത്സരാർത്ഥികൾ ഉടൻ വേദിയിൽ എത്തിച്ചേരേണ്ടതാണ്.`;
   const en = `The ${item.section} category ${item.name} competition will begin soon at ${stgName}. Participants with chest numbers ${numsStr} are requested to report immediately.`;
-
   const numsHtml = nums.map(n => `<span class="chest-num">${n}</span>`).join('');
   const mlHtml = `${escapeHtml(stgName)} ൽ ${escapeHtml(secMl)} വിഭാഗം <span class="hl-item">${escapeHtml(itemMl)}</span> മത്സരം ഉടൻ ആരംഭിക്കുന്നു. ${numsHtml} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഉള്ള മത്സരാർത്ഥികൾ ഉടൻ വേദിയിൽ എത്തിച്ചേരേണ്ടതാണ്.`;
-
   return { ml, en, mlHtml, stageName: stgName, itemMl, secMl };
 }
 
@@ -660,18 +826,15 @@ async function sendQuickAnnounce(){
   if(!item) return;
   await sendItemAnnouncement(item, stageId);
 }
-
 async function quickAnnounceFromLibrary(itemCode){
   const item = ITEM_LIBRARY.find(x => x.code === itemCode);
   if(!item) return;
   const stageId = Number(document.getElementById('qaStage').value || 1);
   await sendItemAnnouncement(item, stageId);
 }
-
 async function sendItemAnnouncement(item, stageId){
   const ann = buildAnnouncement(item, stageId);
   const now = Date.now();
-
   await db.ref('config').update({
     announcement: ann.ml,
     announcementHtml: ann.mlHtml,
@@ -679,7 +842,6 @@ async function sendItemAnnouncement(item, stageId){
     voice_ts: now,
     alert_ts: now
   });
-
   const idx = stages.findIndex(s => s.id === stageId);
   if(idx !== -1){
     if(stages[idx].program && stages[idx].program !== item.name){
@@ -689,7 +851,6 @@ async function sendItemAnnouncement(item, stageId){
     stages[idx].status = 'live';
     await db.ref('stages').set(stages);
   }
-
   setAnnouncementHtml(ann.mlHtml);
   triggerRedAlert();
   speakBoth(ann.ml, ann.en);
@@ -697,13 +858,12 @@ async function sendItemAnnouncement(item, stageId){
   showToast(`🔴 📢 ${item.code} → ${ann.stageName}`);
 }
 
-/* ============ LIBRARY RENDER ============ */
+/* ============ LIBRARY ============ */
 function renderItemLibrary(){
   const search = (document.getElementById('libSearch')?.value || '').trim().toLowerCase();
   const secFilter = document.getElementById('libSection')?.value || '';
   const catFilter = document.getElementById('libCat')?.value || '';
   const scheduledCodes = new Set(programs.map(p => p.code).filter(Boolean));
-
   const filtered = ITEM_LIBRARY.filter(it => {
     if(secFilter && it.section !== secFilter) return false;
     if(catFilter && it.cat !== catFilter) return false;
@@ -713,13 +873,10 @@ function renderItemLibrary(){
     }
     return true;
   });
-
   const grid = document.getElementById('libGrid');
   if(!grid) return;
   document.getElementById('libCount').textContent = `${filtered.length} / ${ITEM_LIBRARY.length} items`;
-
   if(!filtered.length){ grid.innerHTML = '<div class="lib-empty">No items match</div>'; return; }
-
   grid.innerHTML = filtered.map((it) => {
     const scheduled = scheduledCodes.has(it.code);
     const globalIdx = ITEM_LIBRARY.indexOf(it);
@@ -734,7 +891,7 @@ function renderItemLibrary(){
         <div class="li-count">👥 ${it.participants.length}</div>
         <div class="li-actions">
           <button class="btn-add ${scheduled ? 'scheduled' : ''}" onclick="toggleScheduleItem(${globalIdx})">${scheduled ? '✓' : '+ Add'}</button>
-          <button class="btn-announce" onclick="quickAnnounceFromLibrary('${it.code}')" title="Announce with Red Alert">📢</button>
+          <button class="btn-announce" onclick="quickAnnounceFromLibrary('${it.code}')">📢</button>
           <button class="btn-view" onclick='showParticipants("${it.code}", "${escapeHtml(it.name).replace(/'/g,"&#39;")}", "${escapeHtml(it.section).replace(/'/g,"&#39;")}", ${JSON.stringify(it.participants)})'>👥</button>
         </div>
       </div>
@@ -742,7 +899,6 @@ function renderItemLibrary(){
   }).join('');
 }
 
-/* ============ SCHEDULE ============ */
 async function toggleScheduleItem(idx){
   const item = ITEM_LIBRARY[idx];
   if(!item) return;
@@ -783,7 +939,6 @@ async function clearSchedule(){
   showToast("🗑 Cleared");
 }
 
-/* ============ LOOKUP ============ */
 function lookupParticipant(){
   const num = parseInt(document.getElementById('lookupNum').value, 10);
   const box = document.getElementById('lookupResult');
@@ -792,7 +947,6 @@ function lookupParticipant(){
   if(!matches.length){ box.innerHTML = `<div class="lookup-empty">No records for <b>#${num}</b></div>`; return; }
   box.innerHTML = `<div class="lookup-result"><div class="lookup-head">Participant <span class="lookup-badge">#${num}</span> — ${matches.length}</div>${matches.map(it => `<div class="lookup-item"><span class="code">${it.code}</span><span style="flex:1;font-weight:700">${escapeHtml(it.name)}</span><span class="sec">${escapeHtml(it.section)}</span></div>`).join('')}</div>`;
 }
-
 function showParticipants(code, name, section, list){
   const box = document.getElementById('partModalBox');
   box.innerHTML = `<h3>${escapeHtml(code)} — ${escapeHtml(name)}</h3><div class="sub">${escapeHtml(section)} · ${list.length} participants</div><div class="part-chips">${list.map(n => `<div class="part-chip" onclick="quickCallParticipant(${n})">#${n}</div>`).join('')}</div><button class="btn btn-slate btn-block" onclick="closeModal()">Close</button>`;
@@ -823,7 +977,8 @@ function attachFirebase(){
     config = {...config, ...snap.val()};
     document.getElementById('eventNameInput').value = config.eventName || '';
     document.getElementById('eventSubInput').value = config.eventSub || '';
-    document.getElementById('tickerInput').value = config.tickerMessage || '';
+    if(document.getElementById('tickerQuickInput'))
+      document.getElementById('tickerQuickInput').value = config.tickerMessage || '';
     document.getElementById('nextParticipantInput').value = config.nextParticipant || 1;
     if(document.getElementById('announceVoiceMode')) document.getElementById('announceVoiceMode').value = config.voiceMode || 'both';
     document.getElementById('dispEventName').textContent = config.eventName || 'മുസാബഖ കലാമേള';
@@ -832,11 +987,8 @@ function attachFirebase(){
     if(config.announcementHtml) setAnnouncementHtml(config.announcementHtml, false);
     else if(config.announcement) setAnnouncementHtml(escapeHtml(config.announcement), false);
 
-    // Red alert on new announcement
     if(config.alert_ts && config.alert_ts !== prev.alert_ts){
-      if(alertInitialized && config.alert_ts > lastAlertTs){
-        triggerRedAlert();
-      }
+      if(alertInitialized && config.alert_ts > lastAlertTs) triggerRedAlert();
       lastAlertTs = config.alert_ts;
     }
     if(!alertInitialized) alertInitialized = true;
@@ -865,19 +1017,7 @@ function initData(){
   db.ref('programs').once('value', s => { if(!s.exists()) db.ref('programs').set([]); });
 }
 
-/* ============ ANNOUNCEMENT ============ */
-function setAnnouncementHtml(html, flash = true){
-  const el = document.getElementById('announcementText');
-  if(el) el.innerHTML = html;
-  if(flash){
-    const box = document.getElementById('announcementBox');
-    if(box){ box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash'); setTimeout(() => box.classList.remove('flash'), 1800); }
-  }
-}
-function setTicker(msg){
-  const a = document.getElementById('tickerText'); const b = document.getElementById('tickerText2');
-  if(a) a.textContent = msg; if(b) b.textContent = msg;
-}
+/* ============ ANNOUNCEMENT ACTIONS ============ */
 async function sendCustomAnnouncement(){
   const input = document.getElementById('customAnnouncementInput');
   const txt = input.value.trim();
@@ -889,7 +1029,7 @@ async function sendCustomAnnouncement(){
   triggerRedAlert();
   speakSmart(txt);
   const fb = document.getElementById('announceFeedback');
-  fb.textContent = "✅ Broadcast + Red Alert!";
+  fb.textContent = "✅ Broadcast + Alert!";
   setTimeout(() => fb.textContent = "", 2500);
   input.value = "";
 }
@@ -906,7 +1046,7 @@ function saveVoiceMode(){
   showToast("Voice: " + v.toUpperCase());
 }
 
-/* ============ STAGE ACTIONS ============ */
+/* ============ STAGE ============ */
 async function pushStages(){ await db.ref('stages').set(stages); }
 async function setStageProgram(id){
   const input = document.getElementById(`stageProgInput-${id}`);
@@ -922,8 +1062,7 @@ async function setStageProgram(id){
   const now = Date.now();
   await db.ref('config').update({ announcement: `${ml} · ${en}`, announcementHtml: `${escapeHtml(ml)} · ${escapeHtml(en)}`, voice_ts: now, alert_ts: now });
   setAnnouncementHtml(`${escapeHtml(ml)} · ${escapeHtml(en)}`, true);
-  triggerRedAlert();
-  speakBoth(ml, en); triggerBlink(id);
+  triggerRedAlert(); speakBoth(ml, en); triggerBlink(id);
   input.value = ""; showToast(`🎭 ${stageName(id)} → ${val}`);
 }
 async function callParticipant(id, explicitNumber){
@@ -943,16 +1082,14 @@ async function callParticipant(id, explicitNumber){
   const now = Date.now();
   await db.ref('config').update({ announcement: `${ml} · ${en}`, announcementHtml: mlHtml, nextParticipant: Math.max(config.nextParticipant || 1, num + 1), voice_ts: now, alert_ts: now });
   setAnnouncementHtml(mlHtml, true);
-  triggerRedAlert();
-  speakBoth(ml, en); triggerBlink(id);
+  triggerRedAlert(); speakBoth(ml, en); triggerBlink(id);
   if(input) input.value = ""; showToast(`📣 ${stageName(id)} → ${num}`);
 }
 function callParticipantFromPanel(){
   const sid = parseInt(document.getElementById('callStageSelect').value, 10);
   const num = parseInt(document.getElementById('callParticipantInput').value, 10);
   if(!num || num <= 0){ showToast("Enter #"); return; }
-  callParticipant(sid, num);
-  document.getElementById('callParticipantInput').value = "";
+  callParticipant(sid, num); document.getElementById('callParticipantInput').value = "";
 }
 function callNextParticipant(){
   const sid = parseInt(document.getElementById('callStageSelect').value, 10);
@@ -966,8 +1103,7 @@ async function repeatStage(id){
   const now = Date.now();
   await db.ref('config').update({ announcement: `${ml} · ${en}`, announcementHtml: escapeHtml(ml), voice_ts: now, alert_ts: now });
   setAnnouncementHtml(escapeHtml(ml), true);
-  triggerRedAlert();
-  speakBoth(ml, en); triggerBlink(id);
+  triggerRedAlert(); speakBoth(ml, en); triggerBlink(id);
   showToast(`🔁 Repeated`);
 }
 async function clearStage(id){
@@ -1036,8 +1172,7 @@ async function deleteProgram(id){
 async function saveSettings(){
   await db.ref('config').update({
     eventName: document.getElementById('eventNameInput').value.trim() || "മുസാബഖ കലാമേള",
-    eventSub: document.getElementById('eventSubInput').value.trim(),
-    tickerMessage: document.getElementById('tickerInput').value.trim()
+    eventSub: document.getElementById('eventSubInput').value.trim()
   });
   showToast("💾 Saved");
 }
@@ -1144,7 +1279,6 @@ function renderProgramList(){
     </div>
   `).join('');
 }
-
 function populateQuickAnnounceSelects(){
   const stageSel = document.getElementById('qaStage');
   if(stageSel){
@@ -1183,7 +1317,6 @@ function renderDisplay(){
     <div class="stat-pill"><b>${done}</b><span>DONE</span></div>
     <div class="stat-pill"><b>${closed}</b><span>CLOSED</span></div>`;
 }
-
 function updateDisplayClock(){
   const now = new Date();
   const t = document.getElementById('displayTime'); const d = document.getElementById('displayDate');
@@ -1197,12 +1330,17 @@ function setMode(mode){
   document.body.classList.toggle('display-active', mode === 'display');
   document.getElementById('btnAdmin').classList.toggle('active', mode === 'admin');
   document.getElementById('btnDisplay').classList.toggle('active', mode === 'display');
-  if(mode === 'display'){ updateDisplayClock(); renderDisplay(); }
+  if(mode === 'display'){
+    updateDisplayClock();
+    renderDisplay();
+    setTimeout(autoFitAnnouncement, 100);
+  }
 }
 function toggleFullscreen(){
   if(!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(()=>{});
   else document.exitFullscreen?.();
 }
+window.addEventListener('resize', () => { if(currentMode === 'display') autoFitAnnouncement(); });
 
 /* ============ AUTH ============ */
 function login(){
@@ -1239,7 +1377,8 @@ Object.assign(window, {
   saveSettings, updateNextParticipant, resetAll, resetStagesOnly,
   renderItemLibrary, toggleScheduleItem, bulkAddAllFiltered, clearSchedule,
   lookupParticipant, showParticipants, closeModal, quickCallParticipant,
-  updateQAPreview, sendQuickAnnounce, quickAnnounceFromLibrary
+  updateQAPreview, sendQuickAnnounce, quickAnnounceFromLibrary,
+  setTickerQuick, setTickerPreset, sendTemplate
 });
 </script>
 </body>
