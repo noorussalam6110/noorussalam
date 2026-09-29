@@ -223,16 +223,74 @@ select option{background:#0d2033}
 
 /* ANNOUNCEMENT — FIXED HEIGHT (fills remaining space) */
 .announce-bar{
-  flex:1 1 auto;
-  min-height:0;
-  position:relative;
+  flex:1 1 auto;min-height:0;position:relative;
   display:flex;justify-content:center;align-items:center;
   background:linear-gradient(120deg,rgba(4,7,15,.95),rgba(13,32,51,.95));
   border:2px solid var(--gold);border-radius:22px;
-  padding:20px 44px;
+  padding:32px 44px 24px;
   box-shadow:0 0 40px rgba(245,196,81,.25),inset 0 0 60px rgba(245,196,81,.05);
   text-align:center;
-  overflow:hidden;
+  overflow:visible;
+}
+
+/* 🔴 Floating tab at top of box */
+.announce-label-tab{
+  position:absolute;
+  top:-22px;
+  left:50%;
+  transform:translateX(-50%);
+  background:linear-gradient(120deg,#b91c3c,#e94560,#b91c3c,#e94560,#b91c3c);
+  background-size:250% 100%;
+  animation:tabGlow 3.5s ease-in-out infinite;
+  color:#fff;
+  padding:8px 26px;
+  border-radius:26px;
+  font-weight:900;
+  font-size:.82rem;
+  letter-spacing:2.4px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 8px 28px rgba(233,69,96,.75),0 0 0 2px rgba(245,196,81,.75),inset 0 1px 0 rgba(255,255,255,.3);
+  z-index:10;
+  white-space:nowrap;
+  text-shadow:0 1px 4px rgba(0,0,0,.75);
+  font-family:'Inter',sans-serif;
+}
+@keyframes tabGlow{
+  0%,100%{background-position:0% 50%;box-shadow:0 8px 28px rgba(233,69,96,.65),0 0 0 2px rgba(245,196,81,.7),inset 0 1px 0 rgba(255,255,255,.3)}
+  50%{background-position:100% 50%;box-shadow:0 8px 38px rgba(233,69,96,.95),0 0 0 3px rgba(245,196,81,1),inset 0 1px 0 rgba(255,255,255,.45)}
+}
+
+/* 🔴 Pulsing LIVE dot */
+.live-dot{
+  width:11px;height:11px;background:#fff;border-radius:50%;
+  box-shadow:0 0 14px #fff,0 0 28px #fff;
+  position:relative;flex-shrink:0;
+  animation:liveDotPulse 1.2s ease-in-out infinite;
+}
+.live-dot::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  background:#fff;opacity:.55;
+  animation:liveRing 1.6s ease-out infinite;
+  pointer-events:none;
+}
+@keyframes liveDotPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.9}}
+@keyframes liveRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.8);opacity:0}}
+
+/* LIVE text style */
+.live-text{
+  color:#fff;
+  font-family:ui-monospace,monospace;
+  font-weight:900;
+  letter-spacing:4px;
+  text-shadow:0 0 8px rgba(255,255,255,.9),0 0 18px rgba(255,255,255,.6);
+  font-size:.78rem;
+}
+
+/* Divider between LIVE and label */
+.tab-divider{
+  width:1.5px;height:14px;
+  background:rgba(255,255,255,.55);
+  margin:0 2px;border-radius:1px;
 }
 .announce-bar::before{content:'';position:absolute;top:0;left:0;width:52px;height:52px;border-top:4px solid #f5c451;border-left:4px solid #f5c451;border-radius:22px 0 0 0;pointer-events:none;box-shadow:0 0 20px rgba(245,196,81,.8)}
 .announce-bar::after{content:'';position:absolute;bottom:0;right:0;width:52px;height:52px;border-bottom:4px solid #f5c451;border-right:4px solid #f5c451;border-radius:0 0 22px 0;pointer-events:none;box-shadow:0 0 20px rgba(245,196,81,.8)}
@@ -241,8 +299,7 @@ select option{background:#0d2033}
 .announce-corner-bl{bottom:0;left:0;border-bottom:4px solid #f5c451;border-left:4px solid #f5c451;border-radius:0 0 0 22px;box-shadow:0 0 20px rgba(245,196,81,.8)}
 .announce-bar.flash{animation:annFlash .55s ease-in-out 3}
 @keyframes annFlash{0%{border-color:var(--gold)}50%{border-color:#fff;background:linear-gradient(120deg,rgba(245,196,81,.28),rgba(217,155,31,.28))}100%{border-color:var(--gold)}}
-.announce-inner{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;overflow:hidden}
-.announce-label{font-size:.72rem;letter-spacing:2.6px;color:var(--gold);font-weight:900;text-shadow:0 0 14px rgba(245,196,81,.6);flex-shrink:0}
+.announce-inner{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;overflow:hidden;position:relative}
 .announce-text{font-weight:800;line-height:1.5;word-break:break-word;width:100%;overflow:hidden;text-align:center}
 .announce-text.auto-s{font-size:3.2rem}
 .announce-text.auto-m{font-size:2.5rem}
@@ -502,14 +559,20 @@ select option{background:#0d2033}
   </div>
   <div id="offlineIndicatorDisplay" class="offline-banner" style="position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:50;margin:0;padding:6px 20px">📡 OFFLINE</div>
 
-  <div class="announce-bar" id="announcementBox">
+<div class="announce-bar" id="announcementBox">
+    <!-- 🔴 Floating LIVE + Label tab on TOP of the box -->
+    <div class="announce-label-tab">
+      <span class="live-dot"></span>
+      <span class="live-text">LIVE</span>
+      <span class="tab-divider"></span>
+      <span>📢 അറിയിപ്പ് · ANNOUNCEMENT</span>
+    </div>
     <div class="announce-corner-tr"></div>
     <div class="announce-corner-bl"></div>
     <div class="announce-inner">
-      <div class="announce-label">📢 അറിയിപ്പ് · ANNOUNCEMENT</div>
       <div class="announce-text ml auto-m" id="announcementText">✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം</div>
     </div>
-  </div>
+</div>
 
   <div class="ticker-wrap">
     <div class="ticker-track">
