@@ -7,52 +7,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{
-  --bg1:#04070f; --bg2:#08182b;
-  --gold:#f5c451; --gold2:#d99b1f;
-  --emerald:#10b981; --rose:#e94560;
-  --text:#f1f5f9; --muted:#8fa6bd;
-  --border:rgba(255,255,255,.11);
-  --glow:0 0 24px rgba(245,196,81,.45);
-}
-body{
-  font-family: 'Inter', 'Anek Malayalam', system-ui, -apple-system, sans-serif;
-  background:radial-gradient(1200px 700px at 15% -10%,#0d2b45 0%,transparent 60%),
-             radial-gradient(1000px 600px at 90% 110%,#12352a 0%,transparent 55%),
-             linear-gradient(160deg,var(--bg1),var(--bg2));
-  min-height:100vh;color:var(--text);overflow-x:hidden;
-}
-.ml,[lang="ml"]{ font-family: 'Anek Malayalam', 'Inter', system-ui, sans-serif; }
-input,textarea,select,button{ font-family: 'Inter', 'Anek Malayalam', system-ui, sans-serif; }
+:root{--bg1:#04070f;--bg2:#08182b;--gold:#f5c451;--gold2:#d99b1f;--emerald:#10b981;--rose:#e94560;--text:#f1f5f9;--muted:#8fa6bd;--border:rgba(255,255,255,.11);--glow:0 0 24px rgba(245,196,81,.45)}
+body{font-family:'Inter','Anek Malayalam',system-ui,-apple-system,sans-serif;background:radial-gradient(1200px 700px at 15% -10%,#0d2b45 0%,transparent 60%),radial-gradient(1000px 600px at 90% 110%,#12352a 0%,transparent 55%),linear-gradient(160deg,var(--bg1),var(--bg2));min-height:100vh;color:var(--text);overflow-x:hidden}
+.ml,[lang="ml"]{font-family:'Anek Malayalam','Inter',system-ui,sans-serif}
+input,textarea,select,button{font-family:'Inter','Anek Malayalam',system-ui,sans-serif}
 
-/* LOGIN */
 .login-container{position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 20% 25%,#0b2136,#04070f 70%);padding:18px}
 .login-box{width:100%;max-width:430px;background:rgba(13,32,51,.92);border:1px solid var(--border);border-radius:36px;padding:40px 30px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.7),0 0 0 1px rgba(245,196,81,.16) inset;backdrop-filter:blur(18px)}
 .login-box .badge{display:inline-block;font-size:.7rem;letter-spacing:2.5px;font-weight:800;color:var(--gold);border:1px solid rgba(245,196,81,.4);padding:6px 16px;border-radius:40px;margin-bottom:18px}
 .login-box h1{font-size:1.65rem;font-weight:800;line-height:1.45;margin-bottom:8px;background:linear-gradient(120deg,#f5c451,#ffe9a8,#e0a92e);-webkit-background-clip:text;background-clip:text;color:transparent}
 .login-box .sub{color:var(--muted);font-size:.9rem;margin-bottom:26px;line-height:1.7}
-.login-box input{width:100%;margin:9px 0;padding:14px 18px;border-radius:16px;border:1px solid var(--border);background:rgba(4,7,15,.7);color:#fff;font-size:.95rem;transition:.2s}
+.login-box input{width:100%;margin:9px 0;padding:14px 18px;border-radius:16px;border:1px solid var(--border);background:rgba(4,7,15,.7);color:#fff;font-size:.95rem}
 .login-box input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,196,81,.18)}
 .login-box button{width:100%;margin-top:12px;padding:14px;border:none;border-radius:16px;cursor:pointer;font-weight:800;font-size:.95rem;color:#04121f;background:linear-gradient(120deg,var(--gold),var(--gold2));transition:.2s}
 .login-box button:hover{transform:translateY(-2px)}
 #loginError{color:#fb7185;margin-top:14px;font-weight:600;font-size:.85rem;min-height:18px}
-.login-footer{margin-top:26px;font-size:.72rem;color:#4d6377;border-top:1px solid var(--border);padding-top:16px;letter-spacing:.5px}
+.login-footer{margin-top:26px;font-size:.72rem;color:#4d6377;border-top:1px solid var(--border);padding-top:16px}
 
-/* MODE TOGGLE */
 .mode-toggle{position:sticky;top:0;z-index:200;display:none;justify-content:center;gap:10px;flex-wrap:wrap;padding:11px 14px;background:rgba(4,7,15,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
 body.display-active .mode-toggle{display:none!important}
-.mode-btn{border:1px solid var(--border);background:rgba(255,255,255,.05);color:#dbe7f3;padding:10px 22px;border-radius:40px;font-weight:800;font-size:.8rem;cursor:pointer;letter-spacing:.4px;transition:.2s}
+.mode-btn{border:1px solid var(--border);background:rgba(255,255,255,.05);color:#dbe7f3;padding:10px 22px;border-radius:40px;font-weight:800;font-size:.8rem;cursor:pointer;transition:.2s}
 .mode-btn.active{background:linear-gradient(120deg,var(--gold),var(--gold2));color:#04121f;border-color:transparent}
 .fs-btn{border:1px solid var(--border);background:rgba(56,189,248,.12);color:#7dd3fc;padding:10px 20px;border-radius:40px;font-weight:800;font-size:.8rem;cursor:pointer}
 
-/* LAYOUT */
 .admin-mode,.display-mode{display:none;padding:22px 16px 50px}
 .admin-mode.active,.display-mode.active{display:block}
 .admin-container{max-width:1500px;margin:0 auto}
@@ -63,7 +46,7 @@ body.display-active .mode-toggle{display:none!important}
 .header h1{font-size:1.35rem;font-weight:800}
 .header h1 span{color:var(--gold)}
 .btn-logout{background:rgba(233,69,96,.15);border:1px solid rgba(233,69,96,.5);color:#fb7185;padding:10px 24px;border-radius:40px;font-weight:800;cursor:pointer;font-size:.82rem}
-.offline-banner{display:none;background:linear-gradient(90deg,#b91c1c,#e11d48);color:#fff;text-align:center;padding:9px;border-radius:14px;margin-bottom:16px;font-weight:800;font-size:.82rem;letter-spacing:.5px}
+.offline-banner{display:none;background:linear-gradient(90deg,#b91c1c,#e11d48);color:#fff;text-align:center;padding:9px;border-radius:14px;margin-bottom:16px;font-weight:800;font-size:.82rem}
 .admin-grid{display:grid;grid-template-columns:1fr;gap:20px}
 @media(min-width:1000px){.admin-grid{grid-template-columns:1.15fr 1fr}}
 textarea,input[type=text],input[type=number],select{width:100%;padding:13px 16px;border-radius:14px;border:1px solid var(--border);background:rgba(4,7,15,.6);color:#fff;font-size:.92rem;transition:.2s}
@@ -84,6 +67,15 @@ select option{background:#0d2033}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .row>*{flex:1;min-width:120px}
 .row .fixed{flex:0 0 auto;min-width:auto}
+
+/* QUICK ANNOUNCE */
+.qa-preview{margin-top:14px;padding:16px 18px;border-radius:18px;background:rgba(4,7,15,.55);border:1px solid rgba(245,196,81,.3)}
+.qa-preview-label{font-size:.68rem;letter-spacing:2px;color:var(--gold);font-weight:900;margin-bottom:10px}
+.qa-preview-text{font-size:1.15rem;font-weight:700;line-height:1.7;word-break:break-word}
+.qa-preview-text.ml{font-family:'Anek Malayalam',sans-serif}
+.qa-preview-text.en{font-size:.85rem;color:var(--muted);margin-top:10px;line-height:1.6;font-weight:600}
+.qa-numbers{display:inline-flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+.qa-num{background:rgba(245,196,81,.18);color:var(--gold);font-family:ui-monospace,monospace;font-weight:800;padding:3px 10px;border-radius:8px;font-size:.85rem}
 
 .stage-admin-grid{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:700px){.stage-admin-grid{grid-template-columns:repeat(2,1fr)}}
@@ -115,17 +107,12 @@ select option{background:#0d2033}
 .prog-meta{font-size:.75rem;color:var(--muted);font-weight:600;line-height:1.5}
 .prog-btns{display:flex;gap:6px;flex-wrap:wrap}
 
-/* ITEM LIBRARY */
 .lib-controls{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px}
 @media(min-width:700px){.lib-controls{grid-template-columns:2fr 1fr 1fr}}
-.lib-controls input,.lib-controls select{font-size:.88rem}
 .lib-grid{display:grid;grid-template-columns:1fr;gap:12px;max-height:640px;overflow-y:auto;padding-right:6px}
 @media(min-width:700px){.lib-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1300px){.lib-grid{grid-template-columns:repeat(3,1fr)}}
-.lib-item{
-  background:linear-gradient(160deg,rgba(21,49,74,.9),rgba(11,26,42,.9));
-  border:1px solid var(--border);border-radius:18px;padding:14px;transition:.2s;
-}
+.lib-item{background:linear-gradient(160deg,rgba(21,49,74,.9),rgba(11,26,42,.9));border:1px solid var(--border);border-radius:18px;padding:14px;transition:.2s}
 .lib-item:hover{border-color:rgba(245,196,81,.5);transform:translateY(-2px)}
 .lib-item.scheduled{border-color:rgba(16,185,129,.5);background:linear-gradient(160deg,rgba(6,60,44,.7),rgba(4,36,27,.7))}
 .lib-item .li-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
@@ -133,21 +120,18 @@ select option{background:#0d2033}
 .lib-item .li-cat{font-size:.58rem;font-weight:900;padding:3px 8px;border-radius:20px;background:rgba(139,92,246,.2);color:#c4b5fd;letter-spacing:1px}
 .lib-item .li-cat.group{background:rgba(244,114,182,.2);color:#f9a8d4}
 .lib-item .li-name{font-weight:800;font-size:.92rem;line-height:1.4;margin-bottom:6px;word-break:break-word}
-.lib-item .li-section{font-size:.72rem;color:var(--muted);font-weight:700;margin-bottom:10px;letter-spacing:.6px}
+.lib-item .li-section{font-size:.72rem;color:var(--muted);font-weight:700;margin-bottom:10px}
 .lib-item .li-count{display:inline-block;font-size:.68rem;font-weight:900;padding:3px 10px;border-radius:20px;background:rgba(245,196,81,.15);color:var(--gold);margin-bottom:10px}
-.lib-item .li-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.lib-item .li-actions button{padding:8px 6px;font-size:.72rem;font-weight:800;border-radius:10px;border:none;cursor:pointer;transition:.15s}
+.lib-item .li-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.lib-item .li-actions button{padding:8px 4px;font-size:.7rem;font-weight:800;border-radius:10px;border:none;cursor:pointer;transition:.15s}
 .lib-item .li-actions button:hover{filter:brightness(1.15)}
 .btn-add{background:linear-gradient(120deg,#34d399,#10b981);color:#03251a}
 .btn-add.scheduled{background:rgba(255,255,255,.08);color:#94a3b8}
+.btn-announce{background:linear-gradient(120deg,#f5c451,#d99b1f);color:#2b1a00}
 .btn-view{background:rgba(139,92,246,.25);color:#c4b5fd}
 .lib-empty{text-align:center;padding:30px;color:var(--muted);font-size:.85rem}
 
-/* PARTICIPANT LOOKUP */
-.lookup-result{
-  margin-top:14px;padding:16px;border-radius:18px;
-  background:rgba(4,7,15,.55);border:1px solid var(--border);
-}
+.lookup-result{margin-top:14px;padding:16px;border-radius:18px;background:rgba(4,7,15,.55);border:1px solid var(--border)}
 .lookup-head{font-weight:900;color:var(--gold);font-size:1.1rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
 .lookup-badge{background:rgba(245,196,81,.18);padding:5px 14px;border-radius:20px;font-family:ui-monospace,monospace;font-size:1.5rem}
 .lookup-item{padding:9px 12px;background:rgba(18,41,63,.7);border-radius:12px;margin-bottom:7px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:.85rem}
@@ -155,30 +139,17 @@ select option{background:#0d2033}
 .lookup-item .sec{font-size:.72rem;color:var(--muted);font-weight:700}
 .lookup-empty{color:var(--muted);font-size:.85rem;text-align:center;padding:18px}
 
-/* MODAL */
-.modal-backdrop{
-  position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);
-  display:none;align-items:center;justify-content:center;padding:20px;
-}
+.modal-backdrop{position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,.75);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
 .modal-backdrop.active{display:flex}
-.modal-box{
-  background:linear-gradient(160deg,#132a3f,#0d2033);border:1px solid rgba(245,196,81,.4);
-  border-radius:24px;padding:24px;max-width:600px;width:100%;max-height:85vh;overflow-y:auto;
-  box-shadow:0 30px 70px rgba(0,0,0,.7);
-}
+.modal-box{background:linear-gradient(160deg,#132a3f,#0d2033);border:1px solid rgba(245,196,81,.4);border-radius:24px;padding:24px;max-width:600px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.7)}
 .modal-box h3{color:var(--gold);font-size:1.1rem;font-weight:900;margin-bottom:6px}
 .modal-box .sub{color:var(--muted);font-size:.82rem;margin-bottom:16px}
 .part-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
-.part-chip{
-  background:rgba(245,196,81,.12);color:var(--gold);font-family:ui-monospace,monospace;
-  padding:7px 14px;border-radius:12px;font-weight:800;font-size:.85rem;
-  border:1px solid rgba(245,196,81,.25);cursor:pointer;transition:.15s;
-}
+.part-chip{background:rgba(245,196,81,.12);color:var(--gold);font-family:ui-monospace,monospace;padding:7px 14px;border-radius:12px;font-weight:800;font-size:.85rem;border:1px solid rgba(245,196,81,.25);cursor:pointer;transition:.15s}
 .part-chip:hover{background:rgba(245,196,81,.28);transform:scale(1.05)}
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:3000;background:linear-gradient(120deg,#0d2033,#12293f);color:var(--gold);border:1px solid rgba(245,196,81,.4);padding:13px 28px;border-radius:50px;font-weight:800;font-size:.84rem;box-shadow:0 14px 40px rgba(0,0,0,.6)}
 
-/* DISPLAY */
 .display-header{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;background:linear-gradient(120deg,rgba(13,32,51,.95),rgba(18,41,63,.95));border:1px solid rgba(245,196,81,.3);border-radius:26px;padding:18px 30px;margin-bottom:20px;box-shadow:0 0 40px rgba(245,196,81,.1)}
 .dh-left h1{font-size:2rem;font-weight:800;line-height:1.35;background:linear-gradient(120deg,#ffe9a8,#f5c451,#d99b1f);-webkit-background-clip:text;background-clip:text;color:transparent}
 .dh-left p{font-size:.82rem;color:var(--muted);margin-top:6px;letter-spacing:2.4px;font-weight:700;line-height:1.6}
@@ -194,17 +165,17 @@ select option{background:#0d2033}
 .announce-bar.flash{animation:annFlash .55s ease-in-out 3}
 @keyframes annFlash{0%{border-color:var(--gold)}50%{border-color:#fff;background:linear-gradient(120deg,rgba(245,196,81,.28),rgba(217,155,31,.28))}100%{border-color:var(--gold)}}
 .announce-label{font-size:.75rem;letter-spacing:2.6px;color:var(--gold);font-weight:900;margin-bottom:12px}
-.announce-text{font-size:3.2rem;font-weight:800;line-height:1.6;word-break:break-word}
+.announce-text{font-size:2.8rem;font-weight:800;line-height:1.65;word-break:break-word}
 .ticker-wrap{background:rgba(0,0,0,.6);border:1px solid rgba(245,196,81,.4);border-radius:18px;padding:12px 0;overflow:hidden;position:relative}
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:70px;z-index:2;pointer-events:none}
 .ticker-wrap::before{left:0;background:linear-gradient(90deg,#04070f,transparent)}
 .ticker-wrap::after{right:0;background:linear-gradient(-90deg,#04070f,transparent)}
-.ticker-track{display:inline-flex;white-space:nowrap;animation:tickerScroll 34s linear infinite}
+.ticker-track{display:inline-flex;white-space:nowrap;animation:tickerScroll 40s linear infinite}
 .ticker-track span{font-size:1.75rem;font-weight:700;color:var(--gold);padding-right:80px;letter-spacing:.6px;line-height:1.5}
 @keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .footer-copyright{text-align:center;padding:26px 0 10px;color:#4d6377;font-size:.78rem;font-weight:600;border-top:1px solid var(--border);margin-top:20px}
 @media(max-width:900px){
-  .announce-text{font-size:2rem}
+  .announce-text{font-size:1.7rem}
   .clock-time{font-size:1.6rem}
   .dh-left h1{font-size:1.3rem}
   .ticker-track span{font-size:1.15rem}
@@ -214,7 +185,6 @@ select option{background:#0d2033}
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginScreen" class="login-container">
   <div class="login-box">
     <div class="badge">LIVE INFORMATION SYSTEM</div>
@@ -228,14 +198,12 @@ select option{background:#0d2033}
   </div>
 </div>
 
-<!-- MODE TOGGLE -->
 <div class="mode-toggle" id="modeToggle">
   <button class="mode-btn active" id="btnAdmin" onclick="setMode('admin')">🎛️ CONTROL PANEL</button>
   <button class="mode-btn" id="btnDisplay" onclick="setMode('display')">📺 LIVE DISPLAY</button>
   <button class="fs-btn" onclick="toggleFullscreen()">⛶ FULLSCREEN</button>
 </div>
 
-<!-- ADMIN -->
 <div id="adminMode" class="admin-mode">
 <div class="admin-container">
 
@@ -249,7 +217,24 @@ select option{background:#0d2033}
 
   <div id="offlineIndicatorAdmin" class="offline-banner">⚠️ OFFLINE MODE — changes will sync when connection returns</div>
 
-  <!-- 🔍 PARTICIPANT LOOKUP — full width -->
+  <!-- 🎯 QUICK ANNOUNCE — One click -->
+  <div class="card">
+    <div class="card-title">🎯 Quick Announce · One-Click Message (Stage + Item + Chest Numbers)</div>
+    <div class="row">
+      <select id="qaStage" onchange="updateQAPreview()" style="flex:1"><option>Loading…</option></select>
+      <select id="qaItem" onchange="updateQAPreview()" style="flex:3"><option>Loading…</option></select>
+    </div>
+    <div class="qa-preview" id="qaPreview">
+      <div class="qa-preview-label">📄 LIVE PREVIEW</div>
+      <div class="qa-preview-text ml" id="qaPreviewMl">Select an item above to see the announcement preview…</div>
+      <div class="qa-preview-text en" id="qaPreviewEn"></div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn btn-green" style="font-size:1rem;padding:16px" onclick="sendQuickAnnounce()">📢 SEND ANNOUNCEMENT NOW</button>
+    </div>
+  </div>
+
+  <!-- 🔍 PARTICIPANT LOOKUP -->
   <div class="card">
     <div class="card-title">🔍 Participant Lookup · മത്സരാർത്ഥി വിവരം</div>
     <div class="row">
@@ -280,7 +265,7 @@ select option{background:#0d2033}
       </div>
 
       <div class="card">
-        <div class="card-title">📣 Call Participant</div>
+        <div class="card-title">📣 Call Single Participant</div>
         <div class="row">
           <select id="callStageSelect" class="fixed" style="flex:1"></select>
           <input type="number" id="callParticipantInput" placeholder="Participant #" style="flex:1">
@@ -332,11 +317,10 @@ select option{background:#0d2033}
     </div>
   </div>
 
-  <!-- 📚 MASTER ITEM LIBRARY — full width -->
   <div class="card">
-    <div class="card-title">📚 Master Item Library · 62 Items from Official List</div>
+    <div class="card-title">📚 Master Item Library · 62 Items</div>
     <div class="lib-controls">
-      <input type="text" id="libSearch" placeholder="🔍 Search by item name, code, or participant number…" oninput="renderItemLibrary()">
+      <input type="text" id="libSearch" placeholder="🔍 Search by item, code, or participant number…" oninput="renderItemLibrary()">
       <select id="libSection" onchange="renderItemLibrary()">
         <option value="">All Sections</option>
         <option value="KIDDIES BOYS">KIDDIES BOYS</option>
@@ -370,7 +354,6 @@ select option{background:#0d2033}
 </div>
 </div>
 
-<!-- DISPLAY -->
 <div id="displayMode" class="display-mode">
 <div class="display-container">
   <div class="display-header">
@@ -386,36 +369,29 @@ select option{background:#0d2033}
       </div>
     </div>
   </div>
-
   <div id="offlineIndicatorDisplay" class="offline-banner">📡 OFFLINE — RECONNECTING…</div>
-
   <div class="announce-bar" id="announcementBox">
-    <div style="width: 100%;">
+    <div style="width:100%">
       <div class="announce-label">📢 അറിയിപ്പ് · ANNOUNCEMENT</div>
       <div class="announce-text ml" id="announcementText">✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം</div>
     </div>
   </div>
-
   <div class="ticker-wrap">
     <div class="ticker-track">
       <span id="tickerText">✨ Welcome to Musabaka Kalamela ✨</span>
       <span id="tickerText2">✨ Welcome to Musabaka Kalamela ✨</span>
     </div>
   </div>
-
   <div class="footer-copyright">© 2026 · Kerala Estate Range Jamiyathul Mualimeen</div>
 </div>
 </div>
 
-<!-- MODAL — participant list -->
 <div class="modal-backdrop" id="partModal" onclick="if(event.target===this)closeModal()">
   <div class="modal-box" id="partModalBox"></div>
 </div>
 
 <script>
-/* ============================================================
-   ✅ Firebase Config
-   ============================================================ */
+/* ============================================================ */
 const firebaseConfig = {
   apiKey: "AIzaSyDrEDihal5XFy1JSAP__jdMulaoU_oNPb8",
   authDomain: "musabaka-kalamela.firebaseapp.com",
@@ -427,115 +403,124 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-const db   = firebase.database();
+const db = firebase.database();
 
-/* ============================================================
-   📚 MASTER ITEM LIBRARY — All 62 items from PDF
-   ============================================================ */
+/* ============ LANGUAGE MAPS ============ */
+const SECTION_ML = {
+  'KIDDIES BOYS':'കിഡ്സ് ബോയ്സ്','SUB JUNIOR BOYS':'സബ് ജൂനിയർ ബോയ്സ്',
+  'JUNIOR BOYS':'ജൂനിയർ ബോയ്സ്','SENIOR BOYS':'സീനിയർ ബോയ്സ്',
+  'SUPER SENIOR BOYS':'സൂപ്പർ സീനിയർ ബോയ്സ്','ALUMNI BOYS':'അൽമുനി ബോയ്സ്',
+  'GENERAL BOYS':'ജനറൽ ബോയ്സ്','SUB JUNIOR GIRLS':'സബ് ജൂനിയർ ഗേൾസ്',
+  'JUNIOR GIRLS':'ജൂനിയർ ഗേൾസ്','SENIOR GIRLS':'സീനിയർ ഗേൾസ്',
+  'MULLIM':'മുഅല്ലിം','MUALLIM':'മുഅല്ലിം'
+};
+const ITEM_ML = {
+  "Fathiha Recitation":"ഫാതിഹ പാരായണം","Story Telling":"കഥ പറയൽ",
+  "Qira'ath":"ഖിറാഅത്ത്","Hif":"ഹിഫ്ള്","Mad'hunnabi Song":"മദ്ഹുന്നബി ഗാനം",
+  "Hand writing Arabic Malayalam":"അറബി-മലയാളം ഹസ്തലിഖിതം","Memory Test":"മെമ്മറി ടെസ്റ്റ്",
+  "Adhaan":"അദാൻ","Elocution":"പ്രസംഗം","Arabic Song":"അറബി ഗാനം",
+  "Islamic Song":"ഇസ്ലാമിക ഗാനം","Urdu Song":"ഉർദു ഗാനം",
+  "Arabic Hand writing":"അറബി ഹസ്തലിഖിതം","Painting (Water color)":"ചിത്രരചന (ജലച്ചായം)",
+  "Test on KURUNNUKAL":"കുരുന്നുകൾ ടെസ്റ്റ്","Islamic Song Arabic":"ഇസ്ലാമിക ഗാനം (അറബി)",
+  "English Elocution":"ഇംഗ്ലീഷ് പ്രസംഗം","Urdu Elocution":"ഉർദു പ്രസംഗം",
+  "Mappillappattu":"മാപ്പിളപ്പാട്ട്","Arabic Calligraphy":"അറബി കാലിഗ്രാഫി","Quiz":"ക്വിസ്",
+  "Arabic Elocution":"അറബി പ്രസംഗം","Speech and Song":"പ്രസംഗവും ഗാനവും",
+  "Essay writing":"ലേഖന രചന","Arabic Word Fight":"അറബി വാക്പോര്",
+  "Spot Elocution":"സ്പോട്ട് പ്രസംഗം","Master Hunt":"മാസ്റ്റർ ഹണ്ട്",
+  "Digital Poster Designing":"ഡിജിറ്റൽ പോസ്റ്റർ ഡിസൈനിംഗ്",
+  "Arabic-Malayalam Hand writing":"അറബി-മലയാളം ഹസ്തലിഖിതം",
+  "Pencil Drawing":"പെൻസിൽ ഡ്രോയിംഗ്","KURUNNUKAL TEST":"കുരുന്നുകൾ ടെസ്റ്റ്",
+  "Nano Litreure":"നാനോ ലിറ്ററേച്ചർ","SANTHUSTA KUDUMBAM TEST":"സന്തുഷ്ട കുടുംബം ടെസ്റ്റ്",
+  "Hizb":"ഹിസ്ബ്","Hifi":"ഹിഫി","Adaan":"അദാൻ",
+  "Samastha Qissappatt":"സമസ്ത കിസ്സപ്പാട്ട്","Munaqasha":"മുനാഖശ",
+  "Islamic Group Song":"ഇസ്ലാമിക ഗ്രൂപ്പ് ഗാനം","Burda Recitation":"ബുർദ പാരായണം",
+  "Maulid Recitation":"മൗലിദ് പാരായണം","Arabic Group Song":"അറബി ഗ്രൂപ്പ് ഗാനം",
+  "Islamic Song Mashup":"ഇസ്ലാമിക് സോംഗ് മാഷ്അപ്പ്"
+};
+
+/* ============ ITEM LIBRARY (62 items) ============ */
 const ITEM_LIBRARY = [
-  // ===== KIDDIES BOYS =====
-  {cat:"Single Item", section:"KIDDIES BOYS", code:"101", name:"Fathiha Recitation", participants:[104,122,148,158,167,213,225,239,291,317]},
-  {cat:"Single Item", section:"KIDDIES BOYS", code:"102", name:"Story Telling", participants:[110,122,149,157,168,214,240,291,317]},
-  // ===== SUB JUNIOR BOYS =====
-  {cat:"Single Item", section:"SUB JUNIOR BOYS", code:"201", name:"Qira'ath", participants:[113,123,159,181,184,224,241,289,308,318]},
-  {cat:"Single Item", section:"SUB JUNIOR BOYS", code:"202", name:"Hif", participants:[124,160,182,184,188,215,224,242,308,318]},
-  {cat:"Single Item", section:"SUB JUNIOR BOYS", code:"203", name:"Mad'hunnabi Song", participants:[113,125,159,183,224,243,264,297,302,319]},
-  {cat:"Single Item", section:"SUB JUNIOR BOYS", code:"204", name:"Hand writing Arabic Malayalam", participants:[116,124,160,186,191,251,298,300,302,320]},
-  {cat:"Single Item", section:"SUB JUNIOR BOYS", code:"205", name:"Memory Test", participants:[114,124,160,185,192,253,289,308,344]},
-  // ===== JUNIOR BOYS =====
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"301", name:"Qira'ath", participants:[126,139,161,193,222,237,255,322]},
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"302", name:"Hif", participants:[127,145,171,222,244,255,322,361]},
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"303", name:"Adhaan", participants:[127,139,194,221,246,257,322,364]},
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"304", name:"Elocution", participants:[128,144,161,195,223,237,255,323]},
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"305", name:"Arabic Song", participants:[126,146,163,196,221,247,258,324]},
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"306", name:"Islamic Song", participants:[109,126,163,221,249,260,263,324]},
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"308", name:"Urdu Song", participants:[109,129,163,195,223,247,324]},
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"309", name:"Arabic Hand writing", participants:[127,142,173,200,265,293,299,325]},
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"310", name:"Painting (Water color)", participants:[129,140,174,201,266,293,301,323]},
-  {cat:"Single Item", section:"JUNIOR BOYS", code:"311", name:"Test on KURUNNUKAL", participants:[143,175,195,237,265,293,323]},
-  // ===== SENIOR BOYS =====
-  {cat:"Single Item", section:"SENIOR BOYS", code:"401", name:"Qira'ath", participants:[101,131,164,202,259,267,326]},
-  {cat:"Single Item", section:"SENIOR BOYS", code:"402", name:"Hif", participants:[105,131,176,203,267,272,326]},
-  {cat:"Single Item", section:"SENIOR BOYS", code:"403", name:"Adhaan", participants:[101,132,176,204,259,268,328]},
-  {cat:"Single Item", section:"SENIOR BOYS", code:"404", name:"Islamic Song Arabic", participants:[106,132,164,204,259,270,329]},
-  {cat:"Single Item", section:"SENIOR BOYS", code:"405", name:"Elocution", participants:[112,165,233,262,268,328]},
-  {cat:"Single Item", section:"SENIOR BOYS", code:"406", name:"English Elocution", participants:[102,165,202,211,273,328]},
-  {cat:"Single Item", section:"SENIOR BOYS", code:"407", name:"Urdu Elocution", participants:[103,177,210,269]},
-  {cat:"Single Item", section:"SENIOR BOYS", code:"408", name:"Mappillappattu", participants:[105,132,164,205,271,274,329]},
-  {cat:"Single Item", section:"SENIOR BOYS", code:"409", name:"Arabic Calligraphy", participants:[106,131,166,207,262,275,329]},
-  {cat:"Single Item", section:"SENIOR BOYS", code:"410", name:"Quiz", participants:[111,165,205,209,270,272,326]},
-  // ===== SUPER SENIOR BOYS =====
-  {cat:"Single Item", section:"SUPER SENIOR BOYS", code:"501", name:"Qira'ath", participants:[134,169,189,234,276,277,330]},
-  {cat:"Single Item", section:"SUPER SENIOR BOYS", code:"502", name:"Hif", participants:[133,169,189,220,276,277,346]},
-  {cat:"Single Item", section:"SUPER SENIOR BOYS", code:"503", name:"Arabic Elocution", participants:[138,170,218,279,332]},
-  {cat:"Single Item", section:"SUPER SENIOR BOYS", code:"504", name:"Elocution", participants:[108,180,216,277,279,332]},
-  {cat:"Single Item", section:"SUPER SENIOR BOYS", code:"505", name:"Islamic Song Arabic", participants:[134,156,179,217,236,280,282,330]},
-  {cat:"Single Item", section:"SUPER SENIOR BOYS", code:"506", name:"Speech and Song", participants:[179,206,235,278]},
-  {cat:"Single Item", section:"SUPER SENIOR BOYS", code:"507", name:"Mappillappattu", participants:[134,156,169,217,280,283,330]},
-  {cat:"Single Item", section:"SUPER SENIOR BOYS", code:"508", name:"Essay writing", participants:[133,180,219,234,281,332,343]},
-  {cat:"Single Item", section:"SUPER SENIOR BOYS", code:"509", name:"Arabic Word Fight", participants:[107,180,212,234,278,280,347]},
-  // ===== ALUMNI BOYS =====
-  {cat:"Single Item", section:"ALUMNI BOYS", code:"701", name:"Spot Elocution", participants:[284,355]},
-  {cat:"Single Item", section:"ALUMNI BOYS", code:"703", name:"Mappillappattu", participants:[284,314,359]},
-  {cat:"Single Item", section:"ALUMNI BOYS", code:"704", name:"Master Hunt", participants:[284,338,355,358]},
-  {cat:"Single Item", section:"ALUMNI BOYS", code:"705", name:"Digital Poster Designing", participants:[355,359]},
-  // ===== SUB JUNIOR GIRLS =====
-  {cat:"Single Item", section:"SUB JUNIOR GIRLS", code:"801", name:"Arabic-Malayalam Hand writing", participants:[115,118,152,187,254,287,303,316,331,333]},
-  {cat:"Single Item", section:"SUB JUNIOR GIRLS", code:"802", name:"Pencil Drawing", participants:[118,150,152,187,256,288,304,333,334,335]},
-  // ===== JUNIOR GIRLS =====
-  {cat:"Single Item", section:"JUNIOR GIRLS", code:"803", name:"Arabic Hand writing", participants:[119,153,208,226,248,290,307,350]},
-  {cat:"Single Item", section:"JUNIOR GIRLS", code:"804", name:"KURUNNUKAL TEST", participants:[141,153,228,250,292,307,351]},
-  // ===== SENIOR GIRLS =====
-  {cat:"Single Item", section:"SENIOR GIRLS", code:"805", name:"Arabic Calligraphy", participants:[120,135,154,229,238,294,309,352]},
-  {cat:"Single Item", section:"SENIOR GIRLS", code:"806", name:"Nano Litreure", participants:[121,136,155,295,311,342,353]},
-  {cat:"Single Item", section:"SENIOR GIRLS", code:"807", name:"SANTHUSTA KUDUMBAM TEST", participants:[137,296,310,313,354]},
-  // ===== MULLIM =====
-  {cat:"Single Item", section:"MULLIM", code:"901", name:"Hizb", participants:[151,231,232,321,356]},
-  // ===== MUALLIM =====
-  {cat:"Single Item", section:"MUALLIM", code:"902", name:"Hifi", participants:[340,356]},
-  {cat:"Single Item", section:"MUALLIM", code:"903", name:"Adaan", participants:[151,232,315,340,356]},
-  {cat:"Single Item", section:"MUALLIM", code:"904", name:"Arabic Elocution", participants:[117,341,360]},
-  {cat:"Single Item", section:"MUALLIM", code:"905", name:"Spot Elocution", participants:[117,315,341]},
-  {cat:"Single Item", section:"MUALLIM", code:"906", name:"Essay writing", participants:[117,151,245,341,357,360]},
-  {cat:"Single Item", section:"MUALLIM", code:"907", name:"Samastha Qissappatt", participants:[232,340]},
-  {cat:"Single Item", section:"MUALLIM", code:"908", name:"Munaqasha", participants:[315,339]},
-  {cat:"Single Item", section:"MUALLIM", code:"909", name:"Digital Poster Designing", participants:[230,339,357,360]},
-  // ===== GROUP ITEMS =====
-  {cat:"Group Item", section:"JUNIOR BOYS", code:"307", name:"Islamic Group Song", participants:[109,126,129,130,139,146,162,163,190,197,198,199,221,222,223,247,252,258,260,261,312,324,325,345]},
-  {cat:"Group Item", section:"GENERAL BOYS", code:"601", name:"Burda Recitation", participants:[101,105,113,126,129,131,132,134,139,156,164,166,169,176,177,259,262,269,285,286,324,329,330,332,345]},
-  {cat:"Group Item", section:"GENERAL BOYS", code:"602", name:"Maulid Recitation", participants:[101,105,128,131,132,133,134,139,156,164,166,169,177,189,259,262,269,285,286,324,330,337,346,347,348]},
-  {cat:"Group Item", section:"GENERAL BOYS", code:"604", name:"Arabic Group Song", participants:[105,106,109,113,126,129,131,132,134,156,164,166,169,259,262,269,285,286,324,330,337,345,346,349,363]},
-  {cat:"Group Item", section:"ALUMNI BOYS", code:"702", name:"Islamic Song Mashup", participants:[314,338]},
-  {cat:"Group Item", section:"MUALLIM", code:"911", name:"Burda Recitation", participants:[315]}
+  {cat:"Single Item",section:"KIDDIES BOYS",code:"101",name:"Fathiha Recitation",participants:[104,122,148,158,167,213,225,239,291,317]},
+  {cat:"Single Item",section:"KIDDIES BOYS",code:"102",name:"Story Telling",participants:[110,122,149,157,168,214,240,291,317]},
+  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"201",name:"Qira'ath",participants:[113,123,159,181,184,224,241,289,308,318]},
+  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"202",name:"Hif",participants:[124,160,182,184,188,215,224,242,308,318]},
+  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"203",name:"Mad'hunnabi Song",participants:[113,125,159,183,224,243,264,297,302,319]},
+  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"204",name:"Hand writing Arabic Malayalam",participants:[116,124,160,186,191,251,298,300,302,320]},
+  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"205",name:"Memory Test",participants:[114,124,160,185,192,253,289,308,344]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"301",name:"Qira'ath",participants:[126,139,161,193,222,237,255,322]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"302",name:"Hif",participants:[127,145,171,222,244,255,322,361]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"303",name:"Adhaan",participants:[127,139,194,221,246,257,322,364]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"304",name:"Elocution",participants:[128,144,161,195,223,237,255,323]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"305",name:"Arabic Song",participants:[126,146,163,196,221,247,258,324]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"306",name:"Islamic Song",participants:[109,126,163,221,249,260,263,324]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"308",name:"Urdu Song",participants:[109,129,163,195,223,247,324]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"309",name:"Arabic Hand writing",participants:[127,142,173,200,265,293,299,325]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"310",name:"Painting (Water color)",participants:[129,140,174,201,266,293,301,323]},
+  {cat:"Single Item",section:"JUNIOR BOYS",code:"311",name:"Test on KURUNNUKAL",participants:[143,175,195,237,265,293,323]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"401",name:"Qira'ath",participants:[101,131,164,202,259,267,326]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"402",name:"Hif",participants:[105,131,176,203,267,272,326]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"403",name:"Adhaan",participants:[101,132,176,204,259,268,328]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"404",name:"Islamic Song Arabic",participants:[106,132,164,204,259,270,329]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"405",name:"Elocution",participants:[112,165,233,262,268,328]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"406",name:"English Elocution",participants:[102,165,202,211,273,328]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"407",name:"Urdu Elocution",participants:[103,177,210,269]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"408",name:"Mappillappattu",participants:[105,132,164,205,271,274,329]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"409",name:"Arabic Calligraphy",participants:[106,131,166,207,262,275,329]},
+  {cat:"Single Item",section:"SENIOR BOYS",code:"410",name:"Quiz",participants:[111,165,205,209,270,272,326]},
+  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"501",name:"Qira'ath",participants:[134,169,189,234,276,277,330]},
+  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"502",name:"Hif",participants:[133,169,189,220,276,277,346]},
+  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"503",name:"Arabic Elocution",participants:[138,170,218,279,332]},
+  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"504",name:"Elocution",participants:[108,180,216,277,279,332]},
+  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"505",name:"Islamic Song Arabic",participants:[134,156,179,217,236,280,282,330]},
+  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"506",name:"Speech and Song",participants:[179,206,235,278]},
+  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"507",name:"Mappillappattu",participants:[134,156,169,217,280,283,330]},
+  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"508",name:"Essay writing",participants:[133,180,219,234,281,332,343]},
+  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"509",name:"Arabic Word Fight",participants:[107,180,212,234,278,280,347]},
+  {cat:"Single Item",section:"ALUMNI BOYS",code:"701",name:"Spot Elocution",participants:[284,355]},
+  {cat:"Single Item",section:"ALUMNI BOYS",code:"703",name:"Mappillappattu",participants:[284,314,359]},
+  {cat:"Single Item",section:"ALUMNI BOYS",code:"704",name:"Master Hunt",participants:[284,338,355,358]},
+  {cat:"Single Item",section:"ALUMNI BOYS",code:"705",name:"Digital Poster Designing",participants:[355,359]},
+  {cat:"Single Item",section:"SUB JUNIOR GIRLS",code:"801",name:"Arabic-Malayalam Hand writing",participants:[115,118,152,187,254,287,303,316,331,333]},
+  {cat:"Single Item",section:"SUB JUNIOR GIRLS",code:"802",name:"Pencil Drawing",participants:[118,150,152,187,256,288,304,333,334,335]},
+  {cat:"Single Item",section:"JUNIOR GIRLS",code:"803",name:"Arabic Hand writing",participants:[119,153,208,226,248,290,307,350]},
+  {cat:"Single Item",section:"JUNIOR GIRLS",code:"804",name:"KURUNNUKAL TEST",participants:[141,153,228,250,292,307,351]},
+  {cat:"Single Item",section:"SENIOR GIRLS",code:"805",name:"Arabic Calligraphy",participants:[120,135,154,229,238,294,309,352]},
+  {cat:"Single Item",section:"SENIOR GIRLS",code:"806",name:"Nano Litreure",participants:[121,136,155,295,311,342,353]},
+  {cat:"Single Item",section:"SENIOR GIRLS",code:"807",name:"SANTHUSTA KUDUMBAM TEST",participants:[137,296,310,313,354]},
+  {cat:"Single Item",section:"MULLIM",code:"901",name:"Hizb",participants:[151,231,232,321,356]},
+  {cat:"Single Item",section:"MUALLIM",code:"902",name:"Hifi",participants:[340,356]},
+  {cat:"Single Item",section:"MUALLIM",code:"903",name:"Adaan",participants:[151,232,315,340,356]},
+  {cat:"Single Item",section:"MUALLIM",code:"904",name:"Arabic Elocution",participants:[117,341,360]},
+  {cat:"Single Item",section:"MUALLIM",code:"905",name:"Spot Elocution",participants:[117,315,341]},
+  {cat:"Single Item",section:"MUALLIM",code:"906",name:"Essay writing",participants:[117,151,245,341,357,360]},
+  {cat:"Single Item",section:"MUALLIM",code:"907",name:"Samastha Qissappatt",participants:[232,340]},
+  {cat:"Single Item",section:"MUALLIM",code:"908",name:"Munaqasha",participants:[315,339]},
+  {cat:"Single Item",section:"MUALLIM",code:"909",name:"Digital Poster Designing",participants:[230,339,357,360]},
+  {cat:"Group Item",section:"JUNIOR BOYS",code:"307",name:"Islamic Group Song",participants:[109,126,129,130,139,146,162,163,190,197,198,199,221,222,223,247,252,258,260,261,312,324,325,345]},
+  {cat:"Group Item",section:"GENERAL BOYS",code:"601",name:"Burda Recitation",participants:[101,105,113,126,129,131,132,134,139,156,164,166,169,176,177,259,262,269,285,286,324,329,330,332,345]},
+  {cat:"Group Item",section:"GENERAL BOYS",code:"602",name:"Maulid Recitation",participants:[101,105,128,131,132,133,134,139,156,164,166,169,177,189,259,262,269,285,286,324,330,337,346,347,348]},
+  {cat:"Group Item",section:"GENERAL BOYS",code:"604",name:"Arabic Group Song",participants:[105,106,109,113,126,129,131,132,134,156,164,166,169,259,262,269,285,286,324,330,337,345,346,349,363]},
+  {cat:"Group Item",section:"ALUMNI BOYS",code:"702",name:"Islamic Song Mashup",participants:[314,338]},
+  {cat:"Group Item",section:"MUALLIM",code:"911",name:"Burda Recitation",participants:[315]}
 ];
 
-/* ================= STATE ================= */
 const STAGE_COUNT = 3;
 const DEFAULT_STAGES = () => Array.from({length: STAGE_COUNT}, (_, i) => ({
-  id: i + 1,
-  name: `സ്റ്റേജ് ${i + 1}`,
-  program: "",
-  participant: null,
-  status: "idle",
-  completed: 0,
-  visible: true
+  id: i + 1, name: `വേദി ${i + 1}`, program: "", participant: null, status: "idle", completed: 0, visible: true
 }));
 
-let stages   = DEFAULT_STAGES();
+let stages = DEFAULT_STAGES();
 let programs = [];
-let config   = {
-  eventName: "മുസാബഖ കലാമേള",
-  eventSub: "KERALA ESTATE RANGE · JAMIYATHUL MUALIMEEN",
+let config = {
+  eventName: "മുസാബഖ കലാമേള", eventSub: "KERALA ESTATE RANGE · JAMIYATHUL MUALIMEEN",
   tickerMessage: "✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨",
   announcement: "✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം",
-  nextParticipant: 1,
-  voiceMode: "both",
-  voice_ts: 0
+  nextParticipant: 1, voiceMode: "both", voice_ts: 0
 };
 let currentMode = 'admin';
 let adminStagesBuilt = false;
 
-/* ================= VOICE ================= */
+/* ============ VOICE ============ */
 let mlVoice = null, enVoice = null;
 let speechQueue = [], isSpeaking = false;
 
@@ -559,28 +544,25 @@ function playChime(){
 function selectVoices(){
   if(!window.speechSynthesis) return;
   const voices = window.speechSynthesis.getVoices();
-  mlVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ml'))
-         || voices.find(v => /malayalam/i.test(v.name));
-  enVoice = voices.find(v => v.name === "Google UK English Male")
-         || voices.find(v => v.lang === 'en-IN')
-         || voices.find(v => v.lang && v.lang.startsWith('en'));
+  mlVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ml')) || voices.find(v => /malayalam/i.test(v.name));
+  enVoice = voices.find(v => v.name === "Google UK English Male") || voices.find(v => v.lang === 'en-IN') || voices.find(v => v.lang && v.lang.startsWith('en'));
 }
 function isMalayalam(t){ return /[\u0D00-\u0D7F]/.test(t); }
-function speakSmart(text){
-  if(!text || !window.speechSynthesis) return;
-  const mode = config.voiceMode || 'both';
-  if(mode === 'none') return;
-  if(mode === 'both'){ speechQueue.push(text); }
-  else if(mode === 'ml'){ if(isMalayalam(text)) speechQueue.push(text); }
-  else { if(!isMalayalam(text)) speechQueue.push(text); }
-  processSpeechQueue();
-}
 function speakBoth(mlText, enText){
   const mode = config.voiceMode || 'both';
   if(mode === 'none') return;
   if(mode === 'ml'){ speechQueue.push(mlText); }
   else if(mode === 'en'){ speechQueue.push(enText); }
   else { speechQueue.push(mlText); speechQueue.push(enText); }
+  processSpeechQueue();
+}
+function speakSmart(text){
+  if(!text) return;
+  const mode = config.voiceMode || 'both';
+  if(mode === 'none') return;
+  if(mode === 'both') speechQueue.push(text);
+  else if(mode === 'ml'){ if(isMalayalam(text)) speechQueue.push(text); }
+  else { if(!isMalayalam(text)) speechQueue.push(text); }
   processSpeechQueue();
 }
 function processSpeechQueue(){
@@ -604,32 +586,143 @@ function testVoice(){
   showToast("🔊 Voice test played");
 }
 
-/* ================= HELPERS ================= */
+/* ============ HELPERS ============ */
 function showToast(msg){
   const t = document.createElement('div');
   t.className = 'toast'; t.textContent = msg;
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 2400);
 }
-function stageName(id){
-  const s = stages.find(x => x.id === id);
-  return s && s.name ? s.name : `Stage ${id}`;
-}
-function normalizeArray(val, fallback){
-  if(!val) return fallback;
-  if(Array.isArray(val)) return val;
-  return Object.values(val);
-}
-function escapeHtml(s){
-  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function stageName(id){ const s = stages.find(x => x.id === id); return s && s.name ? s.name : `Stage ${id}`; }
+function normalizeArray(val, fb){ if(!val) return fb; return Array.isArray(val) ? val : Object.values(val); }
+function escapeHtml(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ============================================================
+   🎯 QUICK ANNOUNCE — ONE CLICK
+   ============================================================ */
+function buildAnnouncement(item, stageId){
+  const stage = stages.find(s => s.id === Number(stageId));
+  const stgName = stage ? stage.name : `വേദി ${stageId}`;
+  const secMl = SECTION_ML[item.section] || item.section;
+  const itemMl = ITEM_ML[item.name] || item.name;
+  const nums = item.participants;
+  const numsStr = nums.join(', ');
+
+  const ml = `${stgName} ൽ ${secMl} വിഭാഗം ${itemMl} മത്സരം ഉടൻ ആരംഭിക്കുന്നു. ${numsStr} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഉള്ള മത്സരാർത്ഥികൾ ഉടൻ വേദിയിൽ എത്തിച്ചേരേണ്ടതാണ്.`;
+
+  const en = `The ${item.section} category ${item.name} competition will begin soon at ${stgName}. Participants with chest numbers ${numsStr} are requested to report to the venue immediately.`;
+
+  return { ml, en, stageName: stgName, itemMl, secMl };
 }
 
-/* ================= ITEM LIBRARY RENDER ================= */
+function updateQAPreview(){
+  const itemId = document.getElementById('qaItem').value;
+  if(!itemId){ 
+    document.getElementById('qaPreviewMl').textContent = 'Select an item above to see the announcement preview…';
+    document.getElementById('qaPreviewEn').textContent = '';
+    return;
+  }
+  const item = ITEM_LIBRARY[Number(itemId)];
+  if(!item) return;
+  const stageId = document.getElementById('qaStage').value || 1;
+  const ann = buildAnnouncement(item, stageId);
+  document.getElementById('qaPreviewMl').textContent = ann.ml;
+  document.getElementById('qaPreviewEn').textContent = ann.en;
+}
+
+async function sendQuickAnnounce(){
+  const itemId = document.getElementById('qaItem').value;
+  if(!itemId){ showToast("Select an item first"); return; }
+  const item = ITEM_LIBRARY[Number(itemId)];
+  const stageId = Number(document.getElementById('qaStage').value || 1);
+  if(!item) return;
+
+  const ann = buildAnnouncement(item, stageId);
+  await db.ref('config').update({
+    announcement: ann.ml,
+    tickerMessage: ann.ml,
+    voice_ts: Date.now()
+  });
+
+  // Update stage as live with the program
+  const idx = stages.findIndex(s => s.id === stageId);
+  if(idx !== -1){
+    if(stages[idx].program && stages[idx].program !== item.name){
+      stages[idx].completed = (stages[idx].completed || 0) + 1;
+    }
+    stages[idx].program = `${item.code} - ${item.name}`;
+    stages[idx].status = 'live';
+    await db.ref('stages').set(stages);
+  }
+
+  setAnnouncement(ann.ml, true);
+  speakBoth(ann.ml, ann.en);
+  triggerBlink(stageId);
+  showToast(`📢 Announced: ${item.code} → ${ann.stageName}`);
+}
+
+/* — Quick announce from library card (uses selected qaStage) — */
+async function quickAnnounceFromLibrary(itemCode){
+  const item = ITEM_LIBRARY.find(x => x.code === itemCode);
+  if(!item) return;
+  const stageId = Number(document.getElementById('qaStage').value || 1);
+  const ann = buildAnnouncement(item, stageId);
+
+  await db.ref('config').update({
+    announcement: ann.ml,
+    tickerMessage: ann.ml,
+    voice_ts: Date.now()
+  });
+
+  const idx = stages.findIndex(s => s.id === stageId);
+  if(idx !== -1){
+    if(stages[idx].program && stages[idx].program !== item.name){
+      stages[idx].completed = (stages[idx].completed || 0) + 1;
+    }
+    stages[idx].program = `${item.code} - ${item.name}`;
+    stages[idx].status = 'live';
+    await db.ref('stages').set(stages);
+  }
+
+  setAnnouncement(ann.ml, true);
+  speakBoth(ann.ml, ann.en);
+  triggerBlink(stageId);
+  showToast(`📢 ${item.code} → ${ann.stageName}`);
+}
+
+function populateQuickAnnounceSelects(){
+  const stageSel = document.getElementById('qaStage');
+  if(stageSel){
+    const cur = stageSel.value;
+    stageSel.innerHTML = stages.map(s => `<option value="${s.id}">${escapeHtml(s.name)}</option>`).join('');
+    if(cur) stageSel.value = cur;
+  }
+  const itemSel = document.getElementById('qaItem');
+  if(itemSel && itemSel.options.length <= 1){
+    // Group items by section
+    const groups = {};
+    ITEM_LIBRARY.forEach((it, i) => {
+      if(!groups[it.section]) groups[it.section] = [];
+      groups[it.section].push({ ...it, idx: i });
+    });
+    let html = '<option value="">— Select an item —</option>';
+    Object.keys(groups).forEach(sec => {
+      html += `<optgroup label="${escapeHtml(sec)}">`;
+      groups[sec].forEach(it => {
+        const itemMl = ITEM_ML[it.name] ? ` · ${ITEM_ML[it.name]}` : '';
+        html += `<option value="${it.idx}">${it.code} — ${escapeHtml(it.name)}${itemMl}</option>`;
+      });
+      html += '</optgroup>';
+    });
+    itemSel.innerHTML = html;
+  }
+}
+
+/* ============ ITEM LIBRARY RENDER ============ */
 function renderItemLibrary(){
   const search = (document.getElementById('libSearch')?.value || '').trim().toLowerCase();
   const secFilter = document.getElementById('libSection')?.value || '';
   const catFilter = document.getElementById('libCat')?.value || '';
-
   const scheduledCodes = new Set(programs.map(p => p.code).filter(Boolean));
 
   const filtered = ITEM_LIBRARY.filter(it => {
@@ -646,13 +739,11 @@ function renderItemLibrary(){
   if(!grid) return;
   document.getElementById('libCount').textContent = `${filtered.length} / ${ITEM_LIBRARY.length} items`;
 
-  if(!filtered.length){
-    grid.innerHTML = '<div class="lib-empty">No items match your search</div>';
-    return;
-  }
+  if(!filtered.length){ grid.innerHTML = '<div class="lib-empty">No items match your search</div>'; return; }
 
-  grid.innerHTML = filtered.map((it, idx) => {
+  grid.innerHTML = filtered.map((it) => {
     const scheduled = scheduledCodes.has(it.code);
+    const globalIdx = ITEM_LIBRARY.indexOf(it);
     return `
       <div class="lib-item ${scheduled ? 'scheduled' : ''}">
         <div class="li-top">
@@ -660,50 +751,42 @@ function renderItemLibrary(){
           <span class="li-cat ${it.cat === 'Group Item' ? 'group' : ''}">${it.cat === 'Group Item' ? 'GROUP' : 'SINGLE'}</span>
         </div>
         <div class="li-name">${escapeHtml(it.name)}</div>
-        <div class="li-section">${escapeHtml(it.section)}</div>
+        <div class="li-section">${escapeHtml(it.section)}${ITEM_ML[it.name] ? ' · ' + ITEM_ML[it.name] : ''}</div>
         <div class="li-count">👥 ${it.participants.length} participants</div>
         <div class="li-actions">
-          <button class="btn-add ${scheduled ? 'scheduled' : ''}" onclick='toggleScheduleItem(${idx}, ${JSON.stringify(it).replace(/'/g, "&#39;")})'>
-            ${scheduled ? '✓ Added' : '+ Add'}
-          </button>
-          <button class="btn-view" onclick='showParticipants("${it.code}", "${escapeHtml(it.name)}", "${escapeHtml(it.section)}", ${JSON.stringify(it.participants)})'>
-            👥 View
-          </button>
+          <button class="btn-add ${scheduled ? 'scheduled' : ''}" onclick="toggleScheduleItem(${globalIdx})">${scheduled ? '✓' : '+ Add'}</button>
+          <button class="btn-announce" onclick="quickAnnounceFromLibrary('${it.code}')" title="Announce now">📢</button>
+          <button class="btn-view" onclick='showParticipants("${it.code}", "${escapeHtml(it.name).replace(/'/g,"&#39;")}", "${escapeHtml(it.section).replace(/'/g,"&#39;")}", ${JSON.stringify(it.participants)})'>👥</button>
         </div>
       </div>
     `;
   }).join('');
 }
 
-/* ================= SCHEDULE MANAGEMENT ================= */
-async function toggleScheduleItem(idx, item){
+/* ============ SCHEDULE ============ */
+async function toggleScheduleItem(idx){
+  const item = ITEM_LIBRARY[idx];
+  if(!item) return;
   const existing = programs.find(p => p.code === item.code);
   if(existing){
     programs = programs.filter(p => p.code !== item.code);
     showToast(`🗑 Removed: ${item.code}`);
   } else {
     programs.push({
-      id: Date.now() + Math.random(),
-      code: item.code,
-      name: `${item.code} - ${item.name}`,
-      section: item.section,
-      cat: item.cat,
-      participants: item.participants,
-      stageId: 1,
-      status: 'upcoming'
+      id: Date.now() + Math.random(), code: item.code, name: `${item.code} - ${item.name}`,
+      section: item.section, cat: item.cat, participants: item.participants,
+      stageId: 1, status: 'upcoming'
     });
     showToast(`➕ Added: ${item.code}`);
   }
   await db.ref('programs').set(programs);
-  renderItemLibrary();
-  renderProgramList();
+  renderItemLibrary(); renderProgramList();
 }
 
 async function bulkAddAllFiltered(){
   const search = (document.getElementById('libSearch')?.value || '').trim().toLowerCase();
   const secFilter = document.getElementById('libSection')?.value || '';
   const catFilter = document.getElementById('libCat')?.value || '';
-
   const toAdd = ITEM_LIBRARY.filter(it => {
     if(secFilter && it.section !== secFilter) return false;
     if(catFilter && it.cat !== catFilter) return false;
@@ -713,25 +796,14 @@ async function bulkAddAllFiltered(){
     }
     return !programs.some(p => p.code === it.code);
   });
-
   if(!toAdd.length){ showToast("Nothing new to add"); return; }
   if(!confirm(`Add ${toAdd.length} items to schedule?`)) return;
-
-  toAdd.forEach(it => {
-    programs.push({
-      id: Date.now() + Math.random(),
-      code: it.code,
-      name: `${it.code} - ${it.name}`,
-      section: it.section,
-      cat: it.cat,
-      participants: it.participants,
-      stageId: 1,
-      status: 'upcoming'
-    });
-  });
+  toAdd.forEach(it => programs.push({
+    id: Date.now() + Math.random(), code: it.code, name: `${it.code} - ${it.name}`,
+    section: it.section, cat: it.cat, participants: it.participants, stageId: 1, status: 'upcoming'
+  }));
   await db.ref('programs').set(programs);
-  renderItemLibrary();
-  renderProgramList();
+  renderItemLibrary(); renderProgramList();
   showToast(`⚡ Added ${toAdd.length} items`);
 }
 
@@ -739,62 +811,34 @@ async function clearSchedule(){
   if(!confirm("Clear the entire program schedule?")) return;
   programs = [];
   await db.ref('programs').set([]);
-  renderItemLibrary();
-  renderProgramList();
+  renderItemLibrary(); renderProgramList();
   showToast("🗑 Schedule cleared");
 }
 
-/* ================= PARTICIPANT LOOKUP ================= */
+/* ============ PARTICIPANT LOOKUP ============ */
 function lookupParticipant(){
   const num = parseInt(document.getElementById('lookupNum').value, 10);
   const box = document.getElementById('lookupResult');
-  if(!num || num <= 0){
-    box.innerHTML = '<div class="lookup-empty">Please enter a valid participant number</div>';
-    return;
-  }
+  if(!num || num <= 0){ box.innerHTML = '<div class="lookup-empty">Please enter a valid participant number</div>'; return; }
   const matches = ITEM_LIBRARY.filter(it => it.participants.includes(num));
-  if(!matches.length){
-    box.innerHTML = `<div class="lookup-empty">No records found for participant <b>#${num}</b></div>`;
-    return;
-  }
-  box.innerHTML = `
-    <div class="lookup-result">
-      <div class="lookup-head">Participant <span class="lookup-badge">#${num}</span> — ${matches.length} item(s)</div>
-      ${matches.map(it => `
-        <div class="lookup-item">
-          <span class="code">${it.code}</span>
-          <span style="flex:1;font-weight:700">${escapeHtml(it.name)}</span>
-          <span class="sec">${escapeHtml(it.section)}</span>
-        </div>
-      `).join('')}
-    </div>
-  `;
+  if(!matches.length){ box.innerHTML = `<div class="lookup-empty">No records found for participant <b>#${num}</b></div>`; return; }
+  box.innerHTML = `<div class="lookup-result"><div class="lookup-head">Participant <span class="lookup-badge">#${num}</span> — ${matches.length} item(s)</div>${matches.map(it => `<div class="lookup-item"><span class="code">${it.code}</span><span style="flex:1;font-weight:700">${escapeHtml(it.name)}</span><span class="sec">${escapeHtml(it.section)}</span></div>`).join('')}</div>`;
 }
 
-/* ================= MODAL — participants list ================= */
+/* ============ MODAL ============ */
 function showParticipants(code, name, section, list){
   const box = document.getElementById('partModalBox');
   box.innerHTML = `
     <h3>${escapeHtml(code)} — ${escapeHtml(name)}</h3>
     <div class="sub">${escapeHtml(section)} · ${list.length} participants</div>
-    <div class="part-chips">
-      ${list.map(n => `<div class="part-chip" onclick="quickCallParticipant(${n})">#${n}</div>`).join('')}
-    </div>
-    <button class="btn btn-slate btn-block" onclick="closeModal()">Close</button>
-  `;
+    <div class="part-chips">${list.map(n => `<div class="part-chip" onclick="quickCallParticipant(${n})">#${n}</div>`).join('')}</div>
+    <button class="btn btn-slate btn-block" onclick="closeModal()">Close</button>`;
   document.getElementById('partModal').classList.add('active');
 }
-function closeModal(){
-  document.getElementById('partModal').classList.remove('active');
-}
-function quickCallParticipant(num){
-  closeModal();
-  document.getElementById('callParticipantInput').value = num;
-  window.scrollTo({top:0, behavior:'smooth'});
-  showToast(`Participant #${num} ready in Call field`);
-}
+function closeModal(){ document.getElementById('partModal').classList.remove('active'); }
+function quickCallParticipant(num){ closeModal(); document.getElementById('callParticipantInput').value = num; window.scrollTo({top:0,behavior:'smooth'}); showToast(`Participant #${num} ready in Call field`); }
 
-/* ================= FIREBASE LISTENERS ================= */
+/* ============ FIREBASE LISTENERS ============ */
 function attachFirebase(){
   db.ref('stages').on('value', snap => {
     if(!snap.exists()) return;
@@ -802,32 +846,27 @@ function attachFirebase(){
     stages = [];
     for(let i = 1; i <= STAGE_COUNT; i++){
       const found = arr.find(c => Number(c.id) === i);
-      stages.push(found
-        ? { ...found, id: i, visible: found.visible !== false, completed: found.completed || 0 }
-        : { id: i, name: `സ്റ്റേജ് ${i}`, program: "", participant: null, status: "idle", completed: 0, visible: true });
+      stages.push(found ? { ...found, id: i, visible: found.visible !== false, completed: found.completed || 0 }
+        : { id: i, name: `വേദി ${i}`, program: "", participant: null, status: "idle", completed: 0, visible: true });
     }
-    updateStageAdmin();
-    renderDisplay();
-    fillStageSelects();
+    updateStageAdmin(); renderDisplay(); fillStageSelects(); populateQuickAnnounceSelects();
   });
 
   db.ref('programs').on('value', snap => {
     programs = normalizeArray(snap.val(), []).map((p, i) => ({ ...p, id: p.id ?? (i + 1) }));
-    renderProgramList();
-    renderItemLibrary();
+    renderProgramList(); renderItemLibrary();
   });
 
   db.ref('config').on('value', snap => {
     if(!snap.exists()) return;
     config = { ...config, ...snap.val() };
-    document.getElementById('eventNameInput').value   = config.eventName || '';
-    document.getElementById('eventSubInput').value    = config.eventSub || '';
-    document.getElementById('tickerInput').value      = config.tickerMessage || '';
+    document.getElementById('eventNameInput').value = config.eventName || '';
+    document.getElementById('eventSubInput').value = config.eventSub || '';
+    document.getElementById('tickerInput').value = config.tickerMessage || '';
     document.getElementById('nextParticipantInput').value = config.nextParticipant || 1;
-    if(document.getElementById('announceVoiceMode'))
-      document.getElementById('announceVoiceMode').value = config.voiceMode || 'both';
+    if(document.getElementById('announceVoiceMode')) document.getElementById('announceVoiceMode').value = config.voiceMode || 'both';
     document.getElementById('dispEventName').textContent = config.eventName || 'മുസാബഖ കലാമേള';
-    document.getElementById('dispEventSub').textContent  = config.eventSub || '';
+    document.getElementById('dispEventSub').textContent = config.eventSub || '';
     setTicker(config.tickerMessage || '');
     if(config.announcement) setAnnouncement(config.announcement, false);
   });
@@ -836,66 +875,47 @@ function attachFirebase(){
     if(!snap.exists()) return;
     const sid = snap.val().stageId;
     const card = document.querySelector(`.stage-card[data-stage='${sid}']`);
-    if(card){
-      card.classList.remove('blink'); void card.offsetWidth;
-      card.classList.add('blink');
-      setTimeout(() => card.classList.remove('blink'), 2700);
-    }
+    if(card){ card.classList.remove('blink'); void card.offsetWidth; card.classList.add('blink'); setTimeout(() => card.classList.remove('blink'), 2700); }
   });
 }
-
 function initOfflineDetection(){
   db.ref('.info/connected').on('value', snap => {
     const online = snap.val();
-    document.getElementById('offlineIndicatorAdmin').style.display   = online ? 'none' : 'block';
+    document.getElementById('offlineIndicatorAdmin').style.display = online ? 'none' : 'block';
     document.getElementById('offlineIndicatorDisplay').style.display = online ? 'none' : 'block';
   });
 }
-
 function initData(){
   db.ref('stages').once('value', s => { if(!s.exists()) db.ref('stages').set(DEFAULT_STAGES()); });
   db.ref('config').once('value', s => {
-    if(!s.exists()){
-      db.ref('config').set({
-        eventName: "മുസാബഖ കലാമേള",
-        eventSub: "KERALA ESTATE RANGE · JAMIYATHUL MUALIMEEN",
-        tickerMessage: "✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨",
-        announcement: "✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം",
-        nextParticipant: 1,
-        voiceMode: "both",
-        voice_ts: 0
-      });
-    }
+    if(!s.exists()) db.ref('config').set({
+      eventName: "മുസാബഖ കലാമേള", eventSub: "KERALA ESTATE RANGE · JAMIYATHUL MUALIMEEN",
+      tickerMessage: "✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨", announcement: "✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം",
+      nextParticipant: 1, voiceMode: "both", voice_ts: 0
+    });
   });
   db.ref('programs').once('value', s => { if(!s.exists()) db.ref('programs').set([]); });
 }
 
-/* ================= ANNOUNCEMENT ================= */
+/* ============ ANNOUNCEMENT ============ */
 function setAnnouncement(text, flash = true){
   const el = document.getElementById('announcementText');
   if(el) el.textContent = text;
   if(flash){
     const box = document.getElementById('announcementBox');
-    if(box){
-      box.classList.remove('flash'); void box.offsetWidth;
-      box.classList.add('flash');
-      setTimeout(() => box.classList.remove('flash'), 1800);
-    }
+    if(box){ box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash'); setTimeout(() => box.classList.remove('flash'), 1800); }
   }
 }
 function setTicker(msg){
-  const a = document.getElementById('tickerText');
-  const b = document.getElementById('tickerText2');
-  if(a) a.textContent = msg;
-  if(b) b.textContent = msg;
+  const a = document.getElementById('tickerText'); const b = document.getElementById('tickerText2');
+  if(a) a.textContent = msg; if(b) b.textContent = msg;
 }
 async function sendCustomAnnouncement(){
   const input = document.getElementById('customAnnouncementInput');
   const txt = input.value.trim();
   if(!txt){ showToast("Please type an announcement"); return; }
   await db.ref('config').update({ announcement: txt, tickerMessage: txt, voice_ts: Date.now() });
-  setAnnouncement(txt, true);
-  speakSmart(txt);
+  setAnnouncement(txt, true); speakSmart(txt);
   const fb = document.getElementById('announceFeedback');
   fb.textContent = "✅ Announcement broadcast!";
   setTimeout(() => fb.textContent = "", 2500);
@@ -903,11 +923,9 @@ async function sendCustomAnnouncement(){
 }
 async function resetAnnouncementToWelcome(){
   const welcome = "✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨";
-  const welcomeEn = "Welcome to Musabaka Kalamela";
   await db.ref('config').update({ announcement: welcome, tickerMessage: welcome, voice_ts: Date.now() });
-  setAnnouncement(welcome, true);
-  speakBoth(welcome, welcomeEn);
-  showToast("Reset to welcome message");
+  setAnnouncement(welcome, true); speakBoth(welcome, "Welcome to Musabaka Kalamela");
+  showToast("Reset to welcome");
 }
 function saveVoiceMode(){
   const v = document.getElementById('announceVoiceMode').value;
@@ -915,7 +933,7 @@ function saveVoiceMode(){
   showToast("Voice mode: " + v.toUpperCase());
 }
 
-/* ================= STAGE ACTIONS ================= */
+/* ============ STAGE ACTIONS ============ */
 async function pushStages(){ await db.ref('stages').set(stages); }
 async function setStageProgram(id){
   const input = document.getElementById(`stageProgInput-${id}`);
@@ -923,21 +941,14 @@ async function setStageProgram(id){
   if(!val){ showToast("Enter a program name"); return; }
   const idx = stages.findIndex(s => s.id === id);
   if(idx === -1) return;
-  if(stages[idx].program && stages[idx].program !== val){
-    stages[idx].completed = (stages[idx].completed || 0) + 1;
-  }
-  stages[idx].program = val;
-  stages[idx].participant = null;
-  stages[idx].status = "live";
+  if(stages[idx].program && stages[idx].program !== val) stages[idx].completed = (stages[idx].completed || 0) + 1;
+  stages[idx].program = val; stages[idx].participant = null; stages[idx].status = "live";
   await pushStages();
   const ml = `അടുത്തതായി ${stageName(id)} ൽ ${val}`;
   const en = `Next program, ${val}, at ${stageName(id)}`;
   await db.ref('config').update({ announcement: `${ml} · ${en}`, voice_ts: Date.now() });
-  setAnnouncement(`${ml} · ${en}`, true);
-  speakBoth(ml, en);
-  triggerBlink(id);
-  input.value = "";
-  showToast(`🎭 ${stageName(id)} → ${val}`);
+  setAnnouncement(`${ml} · ${en}`, true); speakBoth(ml, en); triggerBlink(id);
+  input.value = ""; showToast(`🎭 ${stageName(id)} → ${val}`);
 }
 async function callParticipant(id, explicitNumber){
   const input = document.getElementById(`stagePartInput-${id}`);
@@ -946,31 +957,20 @@ async function callParticipant(id, explicitNumber){
   const idx = stages.findIndex(s => s.id === id);
   if(idx === -1) return;
   if(stages[idx].status === 'closed'){ showToast(`${stageName(id)} is closed`); return; }
-  if(stages[idx].participant !== null && stages[idx].participant !== undefined){
-    stages[idx].completed = (stages[idx].completed || 0) + 1;
-  }
-  stages[idx].participant = num;
-  stages[idx].status = "live";
+  if(stages[idx].participant !== null && stages[idx].participant !== undefined) stages[idx].completed = (stages[idx].completed || 0) + 1;
+  stages[idx].participant = num; stages[idx].status = "live";
   await pushStages();
   const ml = `മത്സരാർത്ഥി നമ്പർ ${num}, ${stageName(id)} ലേക്ക് എത്തിച്ചേരേണ്ടതാണ്`;
   const en = `Participant number ${num}, please report to ${stageName(id)}`;
-  await db.ref('config').update({
-    announcement: `${ml} · ${en}`,
-    nextParticipant: Math.max(config.nextParticipant || 1, num + 1),
-    voice_ts: Date.now()
-  });
-  setAnnouncement(`${ml} · ${en}`, true);
-  speakBoth(ml, en);
-  triggerBlink(id);
-  if(input) input.value = "";
-  showToast(`📣 ${stageName(id)} → Participant ${num}`);
+  await db.ref('config').update({ announcement: `${ml} · ${en}`, nextParticipant: Math.max(config.nextParticipant || 1, num + 1), voice_ts: Date.now() });
+  setAnnouncement(`${ml} · ${en}`, true); speakBoth(ml, en); triggerBlink(id);
+  if(input) input.value = ""; showToast(`📣 ${stageName(id)} → ${num}`);
 }
 function callParticipantFromPanel(){
   const sid = parseInt(document.getElementById('callStageSelect').value, 10);
   const num = parseInt(document.getElementById('callParticipantInput').value, 10);
   if(!num || num <= 0){ showToast("Enter participant number"); return; }
-  callParticipant(sid, num);
-  document.getElementById('callParticipantInput').value = "";
+  callParticipant(sid, num); document.getElementById('callParticipantInput').value = "";
 }
 function callNextParticipant(){
   const sid = parseInt(document.getElementById('callStageSelect').value, 10);
@@ -979,44 +979,31 @@ function callNextParticipant(){
 async function repeatStage(id){
   const s = stages.find(x => x.id === id);
   if(!s) return;
-  const ml = s.participant
-    ? `വീണ്ടും അറിയിപ്പ്. മത്സരാർത്ഥി നമ്പർ ${s.participant}, ${stageName(id)} ലേക്ക്`
-    : `വീണ്ടും അറിയിപ്പ്. ${stageName(id)} ൽ ${s.program || 'മത്സരം'}`;
-  const en = s.participant
-    ? `Repeat. Participant number ${s.participant}, please report to ${stageName(id)}`
-    : `Repeat. ${s.program || 'Program'} at ${stageName(id)}`;
+  const ml = s.participant ? `വീണ്ടും അറിയിപ്പ്. മത്സരാർത്ഥി നമ്പർ ${s.participant}, ${stageName(id)} ലേക്ക്` : `വീണ്ടും അറിയിപ്പ്. ${stageName(id)} ൽ ${s.program || 'മത്സരം'}`;
+  const en = s.participant ? `Repeat. Participant number ${s.participant}, please report to ${stageName(id)}` : `Repeat. ${s.program || 'Program'} at ${stageName(id)}`;
   await db.ref('config').update({ announcement: `${ml} · ${en}`, voice_ts: Date.now() });
-  setAnnouncement(`${ml} · ${en}`, true);
-  speakBoth(ml, en);
-  triggerBlink(id);
+  setAnnouncement(`${ml} · ${en}`, true); speakBoth(ml, en); triggerBlink(id);
   showToast(`🔁 Repeated for ${stageName(id)}`);
 }
 async function clearStage(id){
   const idx = stages.findIndex(s => s.id === id);
   if(idx === -1) return;
-  if(stages[idx].participant !== null && stages[idx].participant !== undefined){
-    stages[idx].completed = (stages[idx].completed || 0) + 1;
-  }
-  stages[idx].participant = null;
-  stages[idx].program = "";
-  stages[idx].status = "idle";
-  await pushStages();
-  showToast(`⏭ ${stageName(id)} cleared`);
+  if(stages[idx].participant !== null && stages[idx].participant !== undefined) stages[idx].completed = (stages[idx].completed || 0) + 1;
+  stages[idx].participant = null; stages[idx].program = ""; stages[idx].status = "idle";
+  await pushStages(); showToast(`⏭ ${stageName(id)} cleared`);
 }
 async function toggleStageClose(id){
   const idx = stages.findIndex(s => s.id === id);
   if(idx === -1) return;
   stages[idx].status = stages[idx].status === 'closed' ? 'idle' : 'closed';
   if(stages[idx].status === 'closed') stages[idx].participant = null;
-  await pushStages();
-  showToast(stages[idx].status === 'closed' ? `🔴 ${stageName(id)} closed` : `🟢 ${stageName(id)} opened`);
+  await pushStages(); showToast(stages[idx].status === 'closed' ? `🔴 ${stageName(id)} closed` : `🟢 ${stageName(id)} opened`);
 }
 async function toggleStageVisible(id){
   const idx = stages.findIndex(s => s.id === id);
   if(idx === -1) return;
   stages[idx].visible = !stages[idx].visible;
-  await pushStages();
-  showToast(`${stageName(id)} ${stages[idx].visible ? 'visible' : 'hidden'} on display`);
+  await pushStages(); showToast(`${stageName(id)} ${stages[idx].visible ? 'visible' : 'hidden'}`);
 }
 async function renameStage(id){
   const input = document.getElementById(`stageName-${id}`);
@@ -1026,7 +1013,7 @@ async function renameStage(id){
   const idx = stages.findIndex(s => s.id === id);
   if(idx === -1) return;
   stages[idx].name = val;
-  await pushStages();
+  await pushStages(); populateQuickAnnounceSelects();
   showToast("✏️ Stage renamed");
 }
 function triggerBlink(id){
@@ -1034,7 +1021,7 @@ function triggerBlink(id){
   setTimeout(() => db.ref('effects/blink').remove(), 3000);
 }
 
-/* ================= PROGRAMS ================= */
+/* ============ PROGRAMS ============ */
 async function addProgram(){
   const name = document.getElementById('newProgName').value.trim();
   const stageId = parseInt(document.getElementById('newProgStage').value, 10);
@@ -1050,22 +1037,17 @@ async function setProgramStatus(id, status){
   p.status = status;
   if(status === 'live'){
     const idx = stages.findIndex(s => s.id === p.stageId);
-    if(idx !== -1){
-      stages[idx].program = p.name;
-      stages[idx].status = 'live';
-      await pushStages();
-    }
+    if(idx !== -1){ stages[idx].program = p.name; stages[idx].status = 'live'; await pushStages(); }
   }
   await db.ref('programs').set(programs);
 }
 async function deleteProgram(id){
   programs = programs.filter(p => p.id !== id);
   await db.ref('programs').set(programs);
-  renderItemLibrary();
-  showToast("🗑 Deleted");
+  renderItemLibrary(); showToast("🗑 Deleted");
 }
 
-/* ================= SETTINGS ================= */
+/* ============ SETTINGS ============ */
 async function saveSettings(){
   await db.ref('config').update({
     eventName: document.getElementById('eventNameInput').value.trim() || "മുസാബഖ കലാമേള",
@@ -1076,15 +1058,12 @@ async function saveSettings(){
 }
 async function updateNextParticipant(){
   const v = parseInt(document.getElementById('nextParticipantInput').value, 10);
-  if(v > 0){
-    await db.ref('config').update({ nextParticipant: v });
-    showToast(`Next participant → ${v}`);
-  }
+  if(v > 0){ await db.ref('config').update({ nextParticipant: v }); showToast(`Next → ${v}`); }
 }
 
-/* ================= RESET ================= */
+/* ============ RESET ============ */
 async function resetAll(){
-  if(!confirm("⚠️ RESET ENTIRE SYSTEM?\nAll stages and programs will be cleared.")) return;
+  if(!confirm("⚠️ RESET ENTIRE SYSTEM?")) return;
   await db.ref('stages').set(DEFAULT_STAGES());
   await db.ref('programs').set([]);
   await db.ref('config').update({
@@ -1093,17 +1072,16 @@ async function resetAll(){
     tickerMessage: "✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨",
     voice_ts: Date.now()
   });
-  setAnnouncement("✨ സിസ്റ്റം റീസെറ്റ് ചെയ്തു · System Reset", true);
-  showToast("✅ Full system reset");
+  setAnnouncement("✨ സിസ്റ്റം റീസെറ്റ് ചെയ്തു", true);
+  showToast("✅ Full reset");
 }
 async function resetStagesOnly(){
-  if(!confirm("Clear all stage data (programs & participants)?")) return;
+  if(!confirm("Clear all stage data?")) return;
   const fresh = stages.map(s => ({ ...s, program: "", participant: null, status: "idle", completed: 0 }));
-  await db.ref('stages').set(fresh);
-  showToast("♻️ Stages cleared");
+  await db.ref('stages').set(fresh); showToast("♻️ Stages cleared");
 }
 
-/* ================= ADMIN RENDER ================= */
+/* ============ ADMIN RENDER ============ */
 function buildAdminStages(){
   const wrap = document.getElementById('stageAdminGrid');
   if(!wrap) return;
@@ -1114,32 +1092,21 @@ function buildAdminStages(){
     d.id = `stageAdmin-${i}`;
     d.innerHTML = `
       <div class="sac-head">
-        <input class="sac-name" id="stageName-${i}" value="സ്റ്റേജ് ${i}"
-               onchange="renameStage(${i})" onblur="renameStage(${i})">
+        <input class="sac-name" id="stageName-${i}" value="വേദി ${i}" onchange="renameStage(${i})" onblur="renameStage(${i})">
         <span class="pill" id="stageStatusPill-${i}">IDLE</span>
       </div>
       <div class="sac-now">
-        <div style="flex:1;min-width:90px">
-          <div class="sac-now-label">NOW RUNNING</div>
-          <div class="sac-now-prog" id="stageProgText-${i}">—</div>
-        </div>
+        <div style="flex:1;min-width:90px"><div class="sac-now-label">NOW RUNNING</div><div class="sac-now-prog" id="stageProgText-${i}">—</div></div>
         <div class="sac-now-part" id="stagePartText-${i}">—</div>
       </div>
-      <div class="sac-row">
-        <input type="text" id="stageProgInput-${i}" placeholder="Program name…">
-        <button class="btn-mini btn-blue" onclick="setStageProgram(${i})">Set</button>
-      </div>
-      <div class="sac-row">
-        <input type="number" id="stagePartInput-${i}" placeholder="Participant #">
-        <button class="btn-mini btn-green" onclick="callParticipant(${i})">📣 Call</button>
-      </div>
+      <div class="sac-row"><input type="text" id="stageProgInput-${i}" placeholder="Program name…"><button class="btn-mini btn-blue" onclick="setStageProgram(${i})">Set</button></div>
+      <div class="sac-row"><input type="number" id="stagePartInput-${i}" placeholder="Participant #"><button class="btn-mini btn-green" onclick="callParticipant(${i})">📣 Call</button></div>
       <div class="sac-actions">
         <button class="btn-mini btn-amber" onclick="repeatStage(${i})">🔁</button>
         <button class="btn-mini btn-slate" onclick="clearStage(${i})">⏭</button>
         <button class="btn-mini btn-rose" id="stageCloseBtn-${i}" onclick="toggleStageClose(${i})">Close</button>
         <button class="btn-mini btn-violet" id="stageVisBtn-${i}" onclick="toggleStageVisible(${i})">👁</button>
-      </div>
-    `;
+      </div>`;
     wrap.appendChild(d);
   }
   adminStagesBuilt = true;
@@ -1150,15 +1117,14 @@ function updateStageAdmin(){
     const card = document.getElementById(`stageAdmin-${s.id}`);
     if(!card) return;
     const nameEl = document.getElementById(`stageName-${s.id}`);
-    if(nameEl && document.activeElement !== nameEl) nameEl.value = s.name || `Stage ${s.id}`;
+    if(nameEl && document.activeElement !== nameEl) nameEl.value = s.name || `വേദി ${s.id}`;
     card.classList.toggle('live', s.status === 'live');
     card.classList.toggle('closed', s.status === 'closed');
     const pill = document.getElementById(`stageStatusPill-${s.id}`);
     pill.textContent = s.status === 'live' ? 'LIVE' : (s.status === 'closed' ? 'CLOSED' : 'IDLE');
     pill.className = 'pill ' + (s.status === 'live' ? 'live' : (s.status === 'closed' ? 'closed' : ''));
     document.getElementById(`stageProgText-${s.id}`).textContent = s.program || '—';
-    document.getElementById(`stagePartText-${s.id}`).textContent =
-      (s.participant !== null && s.participant !== undefined) ? s.participant : '—';
+    document.getElementById(`stagePartText-${s.id}`).textContent = (s.participant !== null && s.participant !== undefined) ? s.participant : '—';
     const closeBtn = document.getElementById(`stageCloseBtn-${s.id}`);
     if(closeBtn) closeBtn.textContent = s.status === 'closed' ? 'Open' : 'Close';
     const visBtn = document.getElementById(`stageVisBtn-${s.id}`);
@@ -1167,18 +1133,14 @@ function updateStageAdmin(){
 }
 function fillStageSelects(){
   const opts = stages.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
-  const a = document.getElementById('callStageSelect');
-  const b = document.getElementById('newProgStage');
+  const a = document.getElementById('callStageSelect'); const b = document.getElementById('newProgStage');
   if(a){ const cur = a.value; a.innerHTML = opts; if(cur) a.value = cur; }
   if(b){ const cur = b.value; b.innerHTML = opts; if(cur) b.value = cur; }
 }
 function renderProgramList(){
   const wrap = document.getElementById('programList');
   if(!wrap) return;
-  if(!programs.length){
-    wrap.innerHTML = `<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:14px">No programs added yet. Add from Master Library below ⬇️</div>`;
-    return;
-  }
+  if(!programs.length){ wrap.innerHTML = `<div style="color:var(--muted);font-size:.82rem;text-align:center;padding:14px">No programs yet. Add from Master Library below ⬇️</div>`; return; }
   wrap.innerHTML = programs.map((p, i) => `
     <div class="prog-item ${p.status === 'done' ? 'done' : ''} ${p.status === 'live' ? 'live' : ''}">
       <div class="prog-num">${i + 1}</div>
@@ -1187,7 +1149,8 @@ function renderProgramList(){
         <div class="prog-meta">${escapeHtml(p.section || stageName(p.stageId))} ${p.participants ? '· ' + p.participants.length + ' participants' : ''}</div>
       </div>
       <div class="prog-btns">
-        ${p.participants && p.participants.length ? `<button class="btn-mini btn-violet" onclick='showParticipants("${p.code || ''}","${escapeHtml(p.name)}","${escapeHtml(p.section || '')}",${JSON.stringify(p.participants)})'>👥</button>` : ''}
+        ${p.participants && p.participants.length ? `<button class="btn-mini btn-violet" onclick='showParticipants("${p.code || ''}","${escapeHtml(p.name).replace(/'/g,"&#39;")}","${escapeHtml(p.section || '').replace(/'/g,"&#39;")}",${JSON.stringify(p.participants)})'>👥</button>` : ''}
+        ${p.code ? `<button class="btn-mini btn-announce" onclick="quickAnnounceFromLibrary('${p.code}')" title="Announce now">📢</button>` : ''}
         <button class="btn-mini btn-green" onclick="setProgramStatus(${p.id},'live')">▶</button>
         <button class="btn-mini btn-slate" onclick="setProgramStatus(${p.id},'done')">✓</button>
         <button class="btn-mini btn-rose" onclick="deleteProgram(${p.id})">🗑</button>
@@ -1196,26 +1159,22 @@ function renderProgramList(){
   `).join('');
 }
 
-/* ================= DISPLAY RENDER ================= */
+/* ============ DISPLAY RENDER ============ */
 function renderDisplay(){
   const live = stages.filter(s => s.status === 'live').length;
   const closed = stages.filter(s => s.status === 'closed').length;
   const done = stages.reduce((a, s) => a + (s.completed || 0), 0);
   const stats = document.getElementById('displayStats');
-  if(stats){
-    stats.innerHTML = `
-      <div class="stat-pill"><b>${live}</b><span>LIVE</span></div>
-      <div class="stat-pill"><b>${done}</b><span>DONE</span></div>
-      <div class="stat-pill"><b>${closed}</b><span>CLOSED</span></div>
-    `;
-  }
+  if(stats) stats.innerHTML = `
+    <div class="stat-pill"><b>${live}</b><span>LIVE</span></div>
+    <div class="stat-pill"><b>${done}</b><span>DONE</span></div>
+    <div class="stat-pill"><b>${closed}</b><span>CLOSED</span></div>`;
 }
 
-/* ================= CLOCK & MODE ================= */
+/* ============ CLOCK & MODE ============ */
 function updateDisplayClock(){
   const now = new Date();
-  const t = document.getElementById('displayTime');
-  const d = document.getElementById('displayDate');
+  const t = document.getElementById('displayTime'); const d = document.getElementById('displayDate');
   if(t) t.textContent = now.toLocaleTimeString('en-IN', { hour12: true });
   if(d) d.textContent = now.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 }
@@ -1229,49 +1188,35 @@ function setMode(mode){
   if(mode === 'display'){ updateDisplayClock(); renderDisplay(); }
 }
 function toggleFullscreen(){
-  if(!document.fullscreenElement){
-    document.documentElement.requestFullscreen?.().catch(()=>{});
-  } else {
-    document.exitFullscreen?.();
-  }
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(()=>{});
+  else document.exitFullscreen?.();
 }
 
-/* ================= AUTH ================= */
+/* ============ AUTH ============ */
 function login(){
   const email = document.getElementById('loginEmail').value.trim();
   const pw = document.getElementById('loginPassword').value;
-  if(!email || !pw){
-    document.getElementById('loginError').textContent = "Enter email & password";
-    return;
-  }
-  auth.signInWithEmailAndPassword(email, pw)
-    .then(() => startApp())
-    .catch(e => document.getElementById('loginError').textContent = e.message);
+  if(!email || !pw){ document.getElementById('loginError').textContent = "Enter email & password"; return; }
+  auth.signInWithEmailAndPassword(email, pw).then(() => startApp()).catch(e => document.getElementById('loginError').textContent = e.message);
 }
-function logout(){
-  auth.signOut().then(() => location.reload());
-}
+function logout(){ auth.signOut().then(() => location.reload()); }
 function startApp(){
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('modeToggle').style.display = 'flex';
   if(!adminStagesBuilt) buildAdminStages();
-  initData();
-  attachFirebase();
-  initOfflineDetection();
-  renderItemLibrary();
-  if(window.speechSynthesis){
-    selectVoices();
-    window.speechSynthesis.onvoiceschanged = selectVoices;
-  }
+  initData(); attachFirebase(); initOfflineDetection();
+  renderItemLibrary(); populateQuickAnnounceSelects();
+  if(window.speechSynthesis){ selectVoices(); window.speechSynthesis.onvoiceschanged = selectVoices; }
   setMode('admin');
 }
 auth.onAuthStateChanged(user => { if(user) startApp(); });
 
-/* ================= BOOT ================= */
+/* ============ BOOT ============ */
 setInterval(() => { if(currentMode === 'display') updateDisplayClock(); }, 1000);
 updateDisplayClock();
 buildAdminStages();
 renderItemLibrary();
+populateQuickAnnounceSelects();
 
 Object.assign(window, {
   login, logout, setMode, toggleFullscreen,
@@ -1281,7 +1226,8 @@ Object.assign(window, {
   addProgram, setProgramStatus, deleteProgram,
   saveSettings, updateNextParticipant, resetAll, resetStagesOnly,
   renderItemLibrary, toggleScheduleItem, bulkAddAllFiltered, clearSchedule,
-  lookupParticipant, showParticipants, closeModal, quickCallParticipant
+  lookupParticipant, showParticipants, closeModal, quickCallParticipant,
+  updateQAPreview, sendQuickAnnounce, quickAnnounceFromLibrary
 });
 </script>
 </body>
