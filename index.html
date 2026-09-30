@@ -418,7 +418,7 @@ select option{background:#0d2033}
     <input type="password" id="loginPassword" placeholder="Password">
     <button onclick="login()">🔓 ADMIN LOGIN</button>
     <div id="loginError"></div>
-    <div class="login-footer">© 2026 · KERALA ESTATE RANGE JAMIYATHUL MUALIMEEN</div>
+    <div class="login-footer">© 2026 · SUHAIL KERALA</div>
   </div>
 </div>
 
@@ -516,9 +516,9 @@ select option{background:#0d2033}
   <div class="card">
     <div class="card-title">📝 Announcement Templates · Ready Messages</div>
     <div class="template-grid">
-      <button class="tpl-btn" onclick="sendTemplate('🍽️ ഭക്ഷണ വിശ്രമം പ്രഖ്യാപിക്കുന്നു. എല്ലാ മത്സരാർത്ഥികളും ഉടൻ ഭക്ഷണശാലയിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'Lunch break is being announced. All participants are requested to proceed to the dining hall immediately.')">🍽️ ഭക്ഷണ വിശ്രമം</button>
-      <button class="tpl-btn" onclick="sendTemplate('🏆 സമ്മാനദാന ചടങ്ങ് ഉടൻ ആരംഭിക്കുന്നു. എല്ലാ വിജയികളും വേദിക്ക് മുന്നിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'The prize distribution ceremony is about to begin. All winners are requested to come to the stage.')">🏆 സമ്മാനദാനം</button>
-      <button class="tpl-btn" onclick="sendTemplate('📢 ശ്രദ്ധിക്കുക! എല്ലാ മത്സരാർത്ഥികളും ചെസ്റ്റ് നമ്പർ ദൃശ്യമായി വഹിക്കേണ്ടതാണ്.', 'Attention! All participants must display their chest numbers visibly.')">📢 ശ്രദ്ധ പ്രഖ്യാപനം</button>
+      <button class="tpl-btn" onclick="sendTemplate('🍽️ ഭക്ഷണം തയ്യാറായിരിക്കുന്നു. എല്ലാ മത്സരാർത്ഥികളും ഉടൻ ഭക്ഷണശാലയിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'Lunch break is being announced. All participants are requested to proceed to the dining hall immediately.')">🍽️ ഭക്ഷണ വിശ്രമം</button>
+      <button class="tpl-btn" onclick="sendTemplate('🏆 സമ്മാനദാന ചടങ്ങ് ഉടൻ ആരംഭിക്കുന്നു.എല്ലാവരും വേദി 2 ൽ എത്തിച്ചേരേണ്ടതാണ്.', 'The prize distribution ceremony is about to begin. All winners are requested to come to the stage.')">🏆 സമ്മാനദാനം</button>
+      <button class="tpl-btn" onclick="sendTemplate('📢 ശ്രദ്ധിക്കുക! എല്ലാ മത്സരാർത്ഥികളും ചെസ്റ്റ് നമ്പർ സൂക്ഷിക്കേണ്ടതാണ്.', 'Attention! All participants must display their chest numbers visibly.')">📢 ശ്രദ്ധ പ്രഖ്യാപനം</button>
       <button class="tpl-btn" onclick="sendTemplate('⏰ മത്സര സമയക്രമം അനുസരിച്ച് 5 മിനിറ്റിനുള്ളിൽ എല്ലാ മത്സരാർത്ഥികളും വേദിയിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'As per schedule, all participants are requested to report to the stage within 5 minutes.')">⏰ സമയക്രമം</button>
       <button class="tpl-btn" onclick="sendTemplate('🎙️ അടുത്ത മത്സരം ഉടൻ ആരംഭിക്കുന്നു. സ്റ്റേജ് അസിസ്റ്റന്റ്മാർ തയ്യാറാകുക.', 'The next competition will begin shortly. Stage assistants please get ready.')">🎙️ അടുത്ത മത്സരം</button>
       <button class="tpl-btn" onclick="sendTemplate('👏 എല്ലാ മത്സരാർത്ഥികൾക്കും ഹൃദയം നിറഞ്ഞ അഭിനന്ദനങ്ങൾ! കലാമേള വിജയകരമായി പൂർത്തിയായി.', 'Hearty congratulations to all participants! The Kalamela has concluded successfully.')">👏 അഭിനന്ദനം</button>
@@ -634,7 +634,7 @@ select option{background:#0d2033}
     <div class="lib-grid" id="libGrid"></div>
   </div>
 
-  <div style="text-align:center;padding:20px 0;color:#4d6377;font-size:.78rem;border-top:1px solid var(--border);margin-top:20px">© 2026 · Kerala Estate Range Jamiyathul Mualimeen</div>
+  <div style="text-align:center;padding:20px 0;color:#4d6377;font-size:.78rem;border-top:1px solid var(--border);margin-top:20px">© 2026 · SUHAIL KERALA</div>
 </div>
 </div>
 
@@ -686,7 +686,7 @@ select option{background:#0d2033}
     </div>
   </div>
 
-  <div class="display-footer">© 2026 · Kerala Estate Range Jamiyathul Mualimeen</div>
+  <div class="display-footer">© 2026 · SUHAIL KERALA</div>
 </div>
 </div>
 
@@ -1476,10 +1476,10 @@ async function callParticipant(id, explicitNumber){
   if(stages[idx].participant !== null && stages[idx].participant !== undefined) stages[idx].completed = (stages[idx].completed || 0) + 1;
   stages[idx].participant = num; stages[idx].status = "live";
   await pushStages();
-  const ml = `മത്സരാർത്ഥി നമ്പർ ${num}, ${stageName(id)} ലേക്ക് എത്തിച്ചേരേണ്ടതാണ്`;
+  const ml = `ചെസ്റ്റ് നമ്പർ ${num}, ${stageName(id)} ലേക്ക് എത്തിച്ചേരേണ്ടതാണ്`;
   const en = `Participant number ${num}, please report to ${stageName(id)}`;
   const numsHtml = `<span class="chest-num">${num}</span>`;
-  const mlHtml = `മത്സരാർത്ഥി നമ്പർ ${numsHtml}, ${escapeHtml(stageName(id))} ലേക്ക് എത്തിച്ചേരേണ്ടതാണ്`;
+  const mlHtml = `ചെസ്റ്റ് നമ്പർ ${numsHtml}, ${escapeHtml(stageName(id))} ലേക്ക് എത്തിച്ചേരേണ്ടതാണ്`;
   const now = Date.now();
   await db.ref('config').update({ announcement: `${ml} · ${en}`, announcementHtml: mlHtml, nextParticipant: Math.max(config.nextParticipant || 1, num + 1), voice_ts: now, alert_ts: now });
   setAnnouncementHtml(mlHtml, true);
