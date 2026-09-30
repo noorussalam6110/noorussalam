@@ -18,13 +18,11 @@ body.display-active{overflow:hidden}
 .ml,[lang="ml"]{font-family:'Anek Malayalam','Inter',system-ui,sans-serif}
 input,textarea,select,button{font-family:'Inter','Anek Malayalam',system-ui,sans-serif}
 
-/* ============ TECH OVERLAYS ============ */
 .tech-scanlines{position:fixed;inset:0;z-index:60;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0,transparent 2px,rgba(56,189,248,.035) 3px,transparent 4px);mix-blend-mode:overlay}
 .tech-scanline-mover{position:fixed;left:0;right:0;height:140px;z-index:61;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(56,189,248,.09),transparent);animation:scanMove 9s linear infinite}
 @keyframes scanMove{0%{top:-140px}100%{top:100%}}
 .tech-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(56,189,248,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.03) 1px,transparent 1px);background-size:60px 60px;opacity:.5}
 
-/* ============ RED ALERT ============ */
 .red-alert{position:fixed;inset:0;z-index:6000;pointer-events:none;display:none;background:radial-gradient(circle at center,rgba(255,40,70,.72),rgba(160,10,35,.96));box-shadow:inset 0 0 240px rgba(255,0,0,.9)}
 .red-alert.active{display:block;animation:redAlertFlash 2.4s cubic-bezier(.4,0,.6,1) forwards}
 .red-alert::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0,transparent 44px,rgba(255,255,255,.13) 44px,rgba(255,255,255,.13) 88px);animation:alertStripe .32s linear infinite}
@@ -34,7 +32,6 @@ input,textarea,select,button{font-family:'Inter','Anek Malayalam',system-ui,sans
 @keyframes alertStripe{from{transform:translateX(0)}to{transform:translateX(88px)}}
 @keyframes alertPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.95}50%{transform:translate(-50%,-50%) scale(1.06);opacity:1}}
 
-/* LOGIN */
 .login-container{position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 20% 25%,#0b2136,#04070f 70%);padding:18px}
 .login-box{width:100%;max-width:430px;background:rgba(13,32,51,.92);border:1px solid var(--border);border-radius:36px;padding:40px 30px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.7),0 0 0 1px rgba(245,196,81,.16) inset;backdrop-filter:blur(18px)}
 .login-box .badge{display:inline-block;font-size:.7rem;letter-spacing:2.5px;font-weight:800;color:var(--gold);border:1px solid rgba(245,196,81,.4);padding:6px 16px;border-radius:40px;margin-bottom:18px}
@@ -86,13 +83,11 @@ select option{background:#0d2033}
 .row>*{flex:1;min-width:120px}
 .row .fixed{flex:0 0 auto;min-width:auto}
 
-/* TEMPLATES */
 .template-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 @media(min-width:600px){.template-grid{grid-template-columns:repeat(3,1fr)}}
 .tpl-btn{background:rgba(139,92,246,.13);border:1px solid rgba(139,92,246,.4);color:#ddd6fe;padding:11px 8px;border-radius:12px;font-weight:800;font-size:.74rem;cursor:pointer;transition:.15s;text-align:center;line-height:1.35}
 .tpl-btn:hover{background:rgba(139,92,246,.28);transform:translateY(-2px)}
 
-/* TICKER QUICK */
 .ticker-quick{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:rgba(4,7,15,.4);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:12px}
 .ticker-quick input{flex:1;min-width:180px}
 
@@ -108,7 +103,6 @@ select option{background:#0d2033}
 @keyframes chestRing{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.85;transform:scale(1.1)}}
 .hl-item{color:#fde68a;text-shadow:0 0 22px rgba(250,204,21,.7);font-weight:900}
 
-/* Stage admin / list */
 .stage-admin-grid{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:700px){.stage-admin-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1250px){.stage-admin-grid{grid-template-columns:repeat(3,1fr)}}
@@ -123,7 +117,6 @@ select option{background:#0d2033}
 .sac-now{background:rgba(4,7,15,.5);border-radius:14px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
 .sac-now-label{font-size:.58rem;letter-spacing:2px;color:var(--gold);font-weight:900}
 .sac-now-prog{font-weight:700;font-size:.9rem;flex:1;min-width:100px;word-break:break-word;line-height:1.5}
-.sac-now-part{font-family:ui-monospace,monospace;font-weight:900;font-size:1.5rem;color:var(--gold);background:rgba(0,0,0,.35);padding:4px 14px;border-radius:10px;min-width:56px;text-align:center}
 .sac-row{display:flex;gap:8px;margin-bottom:8px}
 .sac-row input{flex:1;padding:10px 12px!important;border-radius:11px!important;font-size:.82rem}
 .btn-mini{border:none;border-radius:11px;padding:10px 13px;font-weight:800;font-size:.74rem;cursor:pointer;white-space:nowrap;transition:.16s}
@@ -182,9 +175,6 @@ select option{background:#0d2033}
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:3000;background:linear-gradient(120deg,#0d2033,#12293f);color:var(--gold);border:1px solid rgba(245,196,81,.4);padding:13px 28px;border-radius:50px;font-weight:800;font-size:.84rem;box-shadow:0 14px 40px rgba(0,0,0,.6)}
 
-/* ============================================================
-   📺 DISPLAY — TV FIXED LAYOUT
-   ============================================================ */
 .display-mode{position:fixed;inset:0;z-index:100}
 .display-mode.active{display:flex;flex-direction:column;height:100vh;overflow:hidden;padding:0}
 .display-container{
@@ -194,7 +184,6 @@ select option{background:#0d2033}
   overflow:hidden;position:relative;
 }
 
-/* HEADER — FIXED */
 .display-header{
   flex:0 0 auto;
   height:96px;
@@ -221,7 +210,6 @@ select option{background:#0d2033}
 .stat-pill b{display:block;font-size:1.15rem;font-weight:900;color:var(--gold);text-shadow:0 0 18px rgba(245,196,81,.4);line-height:1.1}
 .stat-pill span{font-size:.55rem;color:var(--muted);letter-spacing:1.2px;font-weight:800}
 
-/* ANNOUNCEMENT — FIXED HEIGHT (fills remaining space) */
 .announce-bar{
   flex:1 1 auto;min-height:0;position:relative;
   display:flex;justify-content:center;align-items:center;
@@ -233,7 +221,6 @@ select option{background:#0d2033}
   overflow:visible;
 }
 
-/* 🔴 Floating tab at top of box */
 .announce-label-tab{
   position:absolute;
   top:-22px;
@@ -297,7 +284,6 @@ select option{background:#0d2033}
 .announce-text.auto-l{font-size:1.9rem}
 .announce-text.auto-xl{font-size:1.5rem}
 
-/* TICKER — FIXED */
 .ticker-wrap{
   flex:0 0 auto;
   height:74px;
@@ -314,7 +300,6 @@ select option{background:#0d2033}
 .ticker-track span{font-size:1.55rem;font-weight:700;color:var(--gold);padding-right:80px;letter-spacing:.6px;line-height:1;text-shadow:0 0 14px rgba(245,196,81,.3)}
 @keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* FOOTER — FIXED */
 .display-footer{
   flex:0 0 auto;
   height:22px;
@@ -323,7 +308,6 @@ select option{background:#0d2033}
   display:flex;align-items:center;justify-content:center;
 }
 
-/* ============ SPONSOR BADGE ============ */
 .sponsor-badge{
   position:absolute;
   bottom:14px;
@@ -359,7 +343,6 @@ select option{background:#0d2033}
 .sponsor-badge .sponsor-label{font-size:.62rem;color:var(--muted);font-weight:900;letter-spacing:1.6px;text-transform:uppercase}
 .sponsor-badge .sponsor-name{background:linear-gradient(120deg,#fde047,#f5c451,#d99b1f);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900}
 
-/* ============ FULL-SCREEN PHOTO OVERLAY ============ */
 .photo-overlay{position:fixed;inset:0;z-index:5000;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at center,rgba(4,7,15,.92),rgba(0,0,0,.98));backdrop-filter:blur(10px);padding:20px;animation:photoFadeIn .4s ease-out}
 .photo-overlay.active{display:flex}
 @keyframes photoFadeIn{from{opacity:0}to{opacity:1}}
@@ -373,7 +356,6 @@ select option{background:#0d2033}
 .photo-overlay.has-close .photo-timer{display:none}
 .photo-overlay .photo-close:hover{transform:scale(1.1) rotate(90deg)}
 
-/* ============ ADMIN PHOTO UPLOAD ============ */
 .photo-upload-zone{border:2px dashed rgba(245,196,81,.55);border-radius:20px;padding:24px;text-align:center;background:rgba(4,7,15,.35);cursor:pointer;transition:.2s;position:relative}
 .photo-upload-zone:hover{border-color:var(--gold);background:rgba(245,196,81,.06)}
 .photo-upload-zone.dragover{border-color:var(--emerald);background:rgba(16,185,129,.1)}
@@ -408,7 +390,7 @@ select option{background:#0d2033}
   <div class="alert-sub">NEW • IMPORTANT • ATTENTION</div>
 </div>
 
-<!-- ============ LOGIN ============ -->
+<!-- LOGIN -->
 <div id="loginScreen" class="login-container">
   <div class="login-box">
     <div class="badge">LIVE INFORMATION SYSTEM</div>
@@ -422,14 +404,14 @@ select option{background:#0d2033}
   </div>
 </div>
 
-<!-- ============ MODE TOGGLE ============ -->
+<!-- MODE TOGGLE -->
 <div class="mode-toggle" id="modeToggle">
   <button class="mode-btn active" id="btnAdmin" onclick="setMode('admin')">🎛️ CONTROL PANEL</button>
   <button class="mode-btn" id="btnDisplay" onclick="setMode('display')">📺 LIVE DISPLAY</button>
   <button class="fs-btn" onclick="toggleFullscreen()">⛶ FULLSCREEN</button>
 </div>
 
-<!-- ============ ADMIN ============ -->
+<!-- ADMIN -->
 <div id="adminMode" class="admin-mode">
 <div class="admin-container">
 
@@ -444,7 +426,7 @@ select option{background:#0d2033}
 
   <div id="offlineIndicatorAdmin" class="offline-banner">⚠️ OFFLINE MODE — changes will sync when connection returns</div>
 
-  <!-- TICKER QUICK SET -->
+  <!-- TICKER QUICK -->
   <div class="card">
     <div class="card-title">📜 Ticker Message · Scroll Text</div>
     <div class="ticker-quick">
@@ -454,7 +436,7 @@ select option{background:#0d2033}
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       <button class="btn btn-slate fixed" style="font-size:.75rem;padding:9px 14px" onclick="setTickerPreset('✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨')">✨ Welcome</button>
       <button class="btn btn-slate fixed" style="font-size:.75rem;padding:9px 14px" onclick="setTickerPreset('🍽️ ഭക്ഷണ വിശ്രമം 12:30 മുതൽ 1:30 വരെ')">🍽️ Lunch</button>
-      <button class="btn btn-slate fixed" style="font-size:.75rem;padding:9px 14px" onclick="setTickerPreset('🏆 വിജയികൾക്ക് സമ്മാനദാനം വൈകുന്നേരം 4 മണിക്ക്')">🏆 Prize</button>
+      <button class="btn btn-slate fixed" style="font-size:.75rem;padding:9px 14px" onclick="setTickerPreset('🏆 സമ്മാനദാനചടങ്ങ് ഉടൻ ആരംഭിക്കും')">🏆 Prize</button>
       <button class="btn btn-slate fixed" style="font-size:.75rem;padding:9px 14px" onclick="setTickerPreset('📸 ഫോട്ടോഗ്രാഫി മത്സരം — വേദിക്ക് സമീപം')">📸 Photo</button>
     </div>
   </div>
@@ -512,15 +494,15 @@ select option{background:#0d2033}
     <div id="photoFeedback" style="margin-top:10px;color:#6ee7b7;font-weight:700;font-size:.8rem;min-height:18px"></div>
   </div>
 
-  <!-- ANNOUNCEMENT TEMPLATES -->
+  <!-- TEMPLATES -->
   <div class="card">
     <div class="card-title">📝 Announcement Templates · Ready Messages</div>
     <div class="template-grid">
-      <button class="tpl-btn" onclick="sendTemplate('🍽️ ഭക്ഷണം തയ്യാറായിരിക്കുന്നു. എല്ലാ മത്സരാർത്ഥികളും ഉടൻ ഭക്ഷണശാലയിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'Lunch break is being announced. All participants are requested to proceed to the dining hall immediately.')">🍽️ ഭക്ഷണ വിശ്രമം</button>
-      <button class="tpl-btn" onclick="sendTemplate('🏆 സമ്മാനദാന ചടങ്ങ് ഉടൻ ആരംഭിക്കുന്നു.എല്ലാവരും വേദി 2 ൽ എത്തിച്ചേരേണ്ടതാണ്.', 'The prize distribution ceremony is about to begin. All winners are requested to come to the stage.')">🏆 സമ്മാനദാനം</button>
+      <button class="tpl-btn" onclick="sendTemplate('🍽️ ഭക്ഷണം തയ്യാറായിരിക്കുന്നു. എല്ലാ മത്സരാർത്ഥികളും ഉടൻ ഭക്ഷണശാലയിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'Lunch is ready. All participants are requested to proceed to the dining hall immediately.')">🍽️ ഭക്ഷണ വിശ്രമം</button>
+      <button class="tpl-btn" onclick="sendTemplate('🏆 സമ്മാനദാന ചടങ്ങ് ഉടൻ ആരംഭിക്കുന്നു. എല്ലാവരും വേദി 2 ൽ എത്തിച്ചേരേണ്ടതാണ്.', 'The prize distribution ceremony is about to begin. All are requested to come to Venue 2.')">🏆 സമ്മാനദാനം</button>
       <button class="tpl-btn" onclick="sendTemplate('📢 ശ്രദ്ധിക്കുക! എല്ലാ മത്സരാർത്ഥികളും ചെസ്റ്റ് നമ്പർ സൂക്ഷിക്കേണ്ടതാണ്.', 'Attention! All participants must display their chest numbers visibly.')">📢 ശ്രദ്ധ പ്രഖ്യാപനം</button>
-      <button class="tpl-btn" onclick="sendTemplate('⏰ മത്സര സമയക്രമം അനുസരിച്ച് 5 മിനിറ്റിനുള്ളിൽ എല്ലാ മത്സരാർത്ഥികളും വേദിയിൽ എത്തിച്ചേരേണ്ടതാണ്.', 'As per schedule, all participants are requested to report to the stage within 5 minutes.')">⏰ സമയക്രമം</button>
-      <button class="tpl-btn" onclick="sendTemplate('🎙️ അടുത്ത മത്സരം ഉടൻ ആരംഭിക്കുന്നു. സ്റ്റേജ് അസിസ്റ്റന്റ്മാർ തയ്യാറാകുക.', 'The next competition will begin shortly. Stage assistants please get ready.')">🎙️ അടുത്ത മത്സരം</button>
+      <button class="tpl-btn" onclick="sendTemplate('⏰ റിപ്പോർട്ട് ചെയ്യാത്ത മത്സരാർത്ഥികൾ ഉടൻ വേദിയിൽ എത്തിച്ചേരേണ്ടതാണ്. വൈകിയാൽ പങ്കെടുക്കാൻ സാധിക്കില്ല.', 'Participants who have not yet reported should report at the venue immediately. Late entries may not be permitted.')">⏰ റിപ്പോർട്ട് ചെയ്യുക</button>
+      <button class="tpl-btn" onclick="sendTemplate('🎙️ അടുത്ത മത്സരം ഉടൻ ആരംഭിക്കുന്നു. ബന്ധപ്പെട്ട ചെസ്റ്റ് നമ്പറുകാർ തയ്യാറാകുക.', 'The next competition will begin shortly. Concerned chest numbers please get ready.')">🎙️ അടുത്ത മത്സരം</button>
       <button class="tpl-btn" onclick="sendTemplate('👏 എല്ലാ മത്സരാർത്ഥികൾക്കും ഹൃദയം നിറഞ്ഞ അഭിനന്ദനങ്ങൾ! കലാമേള വിജയകരമായി പൂർത്തിയായി.', 'Hearty congratulations to all participants! The Kalamela has concluded successfully.')">👏 അഭിനന്ദനം</button>
       <button class="tpl-btn" onclick="sendTemplate('📸 ഫോട്ടോഗ്രാഫി സെഷൻ വേദിക്ക് സമീപം നടക്കുന്നു. ആഗ്രഹിക്കുന്നവർ അവിടെ എത്തിച്ചേരുക.', 'Photo session is happening near the stage. Those interested please gather there.')">📸 ഫോട്ടോ സെഷൻ</button>
       <button class="tpl-btn" onclick="sendTemplate('📱 മൊബൈൽ ഫോൺ ഉപയോഗം മത്സര വേദിയിൽ പൂർണ്ണമായി നിരോധിച്ചിരിക്കുന്നു.', 'Mobile phone usage is strictly prohibited in the competition area.')">📱 മൊബൈൽ നിരോധനം</button>
@@ -560,28 +542,11 @@ select option{background:#0d2033}
   <div class="admin-grid">
     <div>
       <div class="card">
-        <div class="card-title">📣 Call Single Participant</div>
-        <div class="row">
-          <select id="callStageSelect" class="fixed" style="flex:1"></select>
-          <input type="number" id="callParticipantInput" placeholder="Participant #" style="flex:1">
-        </div>
-        <div class="row" style="margin-top:12px">
-          <button class="btn btn-green" onclick="callParticipantFromPanel()">📢 Call Now</button>
-          <button class="btn btn-violet" onclick="callNextParticipant()">⏩ Next</button>
-        </div>
-      </div>
-
-      <div class="card">
         <div class="card-title">⚙️ Event Settings</div>
         <label style="font-size:.75rem;color:var(--muted);font-weight:800">EVENT NAME</label>
         <input type="text" id="eventNameInput" style="margin:7px 0 14px">
         <label style="font-size:.75rem;color:var(--muted);font-weight:800">SUBTITLE</label>
         <input type="text" id="eventSubInput" style="margin:7px 0 14px">
-        <label style="font-size:.75rem;color:var(--muted);font-weight:800">NEXT #</label>
-        <div class="row" style="margin-top:7px">
-          <input type="number" id="nextParticipantInput" min="1" value="1">
-          <button class="btn btn-blue fixed" onclick="updateNextParticipant()">Update</button>
-        </div>
         <button class="btn btn-gold btn-block" style="margin-top:14px" onclick="saveSettings()">💾 Save</button>
       </div>
 
@@ -611,15 +576,14 @@ select option{background:#0d2033}
   </div>
 
   <div class="card">
-    <div class="card-title">📚 Master Item Library · 62 Items</div>
+    <div class="card-title">📚 Master Item Library · 55 Items</div>
     <div class="lib-controls">
       <input type="text" id="libSearch" placeholder="🔍 Search item, code, or participant…" oninput="renderItemLibrary()">
       <select id="libSection" onchange="renderItemLibrary()">
         <option value="">All Sections</option>
-        <option>KIDDIES BOYS</option><option>SUB JUNIOR BOYS</option><option>JUNIOR BOYS</option>
-        <option>SENIOR BOYS</option><option>SUPER SENIOR BOYS</option><option>ALUMNI BOYS</option>
-        <option>GENERAL BOYS</option><option>SUB JUNIOR GIRLS</option><option>JUNIOR GIRLS</option>
-        <option>SENIOR GIRLS</option><option>MULLIM</option><option>MUALLIM</option>
+        <option>KIDDIES</option><option>SUB JUNIOR</option><option>JUNIOR</option>
+        <option>SENIOR</option><option>SUPER SENIOR</option><option>ALUMNI</option>
+        <option>GENERAL</option><option>MULLIM</option><option>MUALLIM</option>
       </select>
       <select id="libCat" onchange="renderItemLibrary()">
         <option value="">All Categories</option>
@@ -638,11 +602,10 @@ select option{background:#0d2033}
 </div>
 </div>
 
-<!-- ============ DISPLAY — TV FIXED ============ -->
+<!-- DISPLAY -->
 <div id="displayMode" class="display-mode">
 <div class="display-container">
 
-  <!-- 📢 SPONSOR BADGE -->
   <div class="sponsor-badge" id="sponsorBadge">
     <span class="sponsor-label">SPONSORED BY</span>
     <span class="sponsor-name" id="sponsorNameText">SKSSF MANJALPARA UNIT</span>
@@ -665,7 +628,6 @@ select option{background:#0d2033}
   <div id="offlineIndicatorDisplay" class="offline-banner" style="position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:50;margin:0;padding:6px 20px">📡 OFFLINE</div>
 
   <div class="announce-bar" id="announcementBox">
-    <!-- 🔴 Floating LIVE + Label tab on TOP of the box -->
     <div class="announce-label-tab">
       <span class="live-dot"></span>
       <span class="live-text">LIVE</span>
@@ -690,7 +652,6 @@ select option{background:#0d2033}
 </div>
 </div>
 
-<!-- ============ FULL-SCREEN PHOTO OVERLAY ============ -->
 <div class="photo-overlay" id="photoOverlay" onclick="if(event.target===this && !photoAutoTimer) hidePhoto()">
   <div class="photo-frame">
     <div class="photo-timer" id="photoTimer">15</div>
@@ -705,9 +666,6 @@ select option{background:#0d2033}
 </div>
 
 <script>
-/* ============================================================
-   FIREBASE
-   ============================================================ */
 const firebaseConfig = {
   apiKey: "AIzaSyDrEDihal5XFy1JSAP__jdMulaoU_oNPb8",
   authDomain: "musabaka-kalamela.firebaseapp.com",
@@ -721,63 +679,50 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
 
-/* ============================================================
-   LANGUAGE MAPS
-   ============================================================ */
-const SECTION_ML = {'KIDDIES BOYS':'കിഡ്സ് ബോയ്സ്','SUB JUNIOR BOYS':'സബ് ജൂനിയർ ബോയ്സ്','JUNIOR BOYS':'ജൂനിയർ ബോയ്സ്','SENIOR BOYS':'സീനിയർ ബോയ്സ്','SUPER SENIOR BOYS':'സൂപ്പർ സീനിയർ ബോയ്സ്','ALUMNI BOYS':'അൽമുനി ബോയ്സ്','GENERAL BOYS':'ജനറൽ ബോയ്സ്','SUB JUNIOR GIRLS':'സബ് ജൂനിയർ ഗേൾസ്','JUNIOR GIRLS':'ജൂനിയർ ഗേൾസ്','SENIOR GIRLS':'സീനിയർ ഗേൾസ്','MULLIM':'മുഅല്ലിം','MUALLIM':'മുഅല്ലിം'};
-const ITEM_ML = {"Fathiha Recitation":"ഫാതിഹ പാരായണം","Story Telling":"കഥ പറയൽ","Qira'ath":"ഖിറാഅത്ത്","Hif":"ഹിഫ്ള്","Mad'hunnabi Song":"മദ്ഹുന്നബി ഗാനം","Hand writing Arabic Malayalam":"അറബി-മലയാളം ഹസ്തലിഖിതം","Memory Test":"മെമ്മറി ടെസ്റ്റ്","Adhaan":"അദാൻ","Elocution":"പ്രസംഗം","Arabic Song":"അറബി ഗാനം","Islamic Song":"ഇസ്ലാമിക ഗാനം","Urdu Song":"ഉർദു ഗാനം","Arabic Hand writing":"അറബി ഹസ്തലിഖിതം","Painting (Water color)":"ചിത്രരചന","Test on KURUNNUKAL":"കുരുന്നുകൾ ടെസ്റ്റ്","Islamic Song Arabic":"ഇസ്ലാമിക ഗാനം (അറബി)","English Elocution":"ഇംഗ്ലീഷ് പ്രസംഗം","Urdu Elocution":"ഉർദു പ്രസംഗം","Mappillappattu":"മാപ്പിളപ്പാട്ട്","Arabic Calligraphy":"അറബി കാലിഗ്രാഫി","Quiz":"ക്വിസ്","Arabic Elocution":"അറബി പ്രസംഗം","Speech and Song":"പ്രസംഗവും ഗാനവും","Essay writing":"ലേഖന രചന","Arabic Word Fight":"അറബി വാക്പോര്","Spot Elocution":"സ്പോട്ട് പ്രസംഗം","Master Hunt":"മാസ്റ്റർ ഹണ്ട്","Digital Poster Designing":"ഡിജിറ്റൽ പോസ്റ്റർ ഡിസൈനിംഗ്","Arabic-Malayalam Hand writing":"അറബി-മലയാളം ഹസ്തലിഖിതം","Pencil Drawing":"പെൻസിൽ ഡ്രോയിംഗ്","KURUNNUKAL TEST":"കുരുന്നുകൾ ടെസ്റ്റ്","Nano Litreure":"നാനോ ലിറ്ററേച്ചർ","SANTHUSTA KUDUMBAM TEST":"സന്തുഷ്ട കുടുംബം ടെസ്റ്റ്","Hizb":"ഹിസ്ബ്","Hifi":"ഹിഫി","Adaan":"അദാൻ","Samastha Qissappatt":"സമസ്ത കിസ്സപ്പാട്ട്","Munaqasha":"മുനാഖശ","Islamic Group Song":"ഇസ്ലാമിക ഗ്രൂപ്പ് ഗാനം","Burda Recitation":"ബുർദ പാരായണം","Maulid Recitation":"മൗലിദ് പാരായണം","Arabic Group Song":"അറബി ഗ്രൂപ്പ് ഗാനം","Islamic Song Mashup":"ഇസ്ലാമിക് സോംഗ് മാഷ്അപ്പ്"};
+const SECTION_ML = {'KIDDIES':'കിഡ്ഡീസ്','SUB JUNIOR':'സബ് ജൂനിയർ','JUNIOR':'ജൂനിയർ','SENIOR':'സീനിയർ','SUPER SENIOR':'സൂപ്പർ സീനിയർ','ALUMNI':'അലുംനി','GENERAL':'ജനറൽ','MULLIM':'മുഅല്ലിം','MUALLIM':'മുഅല്ലിം'};
+const ITEM_ML = {"Fathiha Recitation":"ഫാതിഹ പാരായണം","Story Telling":"കഥാകഥനം","Qira'ath":"ഖിറാഅത്ത്","Hif":"ഹിഫ്ള്","Mad'hunnabi Song":"മദ്ഹുന്നബി ഗാനം","Hand writing Arabic Malayalam":"അറബി-മലയാളം കൈയെഴുത്ത്","Memory Test":"മെമ്മറി ടെസ്റ്റ്","Adhaan":"അദാൻ","Elocution":"പ്രസംഗം","Arabic Song":"അറബി ഗാനം","Islamic Song":"ഇസ്ലാമിക ഗാനം","Urdu Song":"ഉർദു ഗാനം","Arabic Hand writing":"അറബി കൈയെഴുത്ത്","Painting (Water color)":"ചിത്രരചന","Test on KURUNNUKAL":"കുരുന്നുകൾ ടെസ്റ്റ്","Islamic Song Arabic":"ഇസ്ലാമിക ഗാനം (അറബി)","English Elocution":"ഇംഗ്ലീഷ് പ്രസംഗം","Urdu Elocution":"ഉർദു പ്രസംഗം","Mappillappattu":"മാപ്പിളപ്പാട്ട്","Arabic Calligraphy":"അറബി കാലിഗ്രാഫി","Quiz":"ക്വിസ്","Arabic Elocution":"അറബി പ്രസംഗം","Speech and Song":"പ്രസംഗവും ഗാനവും","Essay writing":"ലേഖന രചന","Arabic Word Fight":"അറബി വാക്പോര്","Spot Elocution":"സ്പോട്ട് പ്രസംഗം","Master Hunt":"മാസ്റ്റർ ഹണ്ട്","Digital Poster Designing":"ഡിജിറ്റൽ പോസ്റ്റർ ഡിസൈനിംഗ്","Arabic-Malayalam Hand writing":"അറബി-മലയാളം ഹസ്തലിഖിതം","Pencil Drawing":"പെൻസിൽ ഡ്രോയിംഗ്","KURUNNUKAL TEST":"കുരുന്നുകൾ ടെസ്റ്റ്","Nano Litreure":"നാനോ ലിറ്ററേച്ചർ","SANTHUSTA KUDUMBAM TEST":"സന്തുഷ്ട കുടുംബം ടെസ്റ്റ്","Hizb":"ഹിസ്ബ്","Hifi":"ഹിഫി","Adaan":"അദാൻ","Samastha Qissappatt":"സമസ്ത കിസ്സപ്പാട്ട്","Munaqasha":"മുനാഖശ","Islamic Group Song":"ഇസ്ലാമിക ഗ്രൂപ്പ് ഗാനം","Burda Recitation":"ബുർദ പാരായണം","Maulid Recitation":"മൗലിദ് പാരായണം","Arabic Group Song":"അറബി ഗ്രൂപ്പ് ഗാനം","Islamic Song Mashup":"ഇസ്ലാമിക് സോംഗ് മാഷ്അപ്പ്"};
 
-/* ============================================================
-   ITEM LIBRARY — 62 ITEMS
-   ============================================================ */
 const ITEM_LIBRARY = [
-  {cat:"Single Item",section:"KIDDIES BOYS",code:"101",name:"Fathiha Recitation",participants:[104,122,148,158,167,213,225,239,291,317]},
-  {cat:"Single Item",section:"KIDDIES BOYS",code:"102",name:"Story Telling",participants:[110,122,149,157,168,214,240,291,317]},
-  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"201",name:"Qira'ath",participants:[113,123,159,181,184,224,241,289,308,318]},
-  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"202",name:"Hif",participants:[124,160,182,184,188,215,224,242,308,318]},
-  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"203",name:"Mad'hunnabi Song",participants:[113,125,159,183,224,243,264,297,302,319]},
-  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"204",name:"Hand writing Arabic Malayalam",participants:[116,124,160,186,191,251,298,300,302,320]},
-  {cat:"Single Item",section:"SUB JUNIOR BOYS",code:"205",name:"Memory Test",participants:[114,124,160,185,192,253,289,308,344]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"301",name:"Qira'ath",participants:[126,139,161,193,222,237,255,322]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"302",name:"Hif",participants:[127,145,171,222,244,255,322,361]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"303",name:"Adhaan",participants:[127,139,194,221,246,257,322,364]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"304",name:"Elocution",participants:[128,144,161,195,223,237,255,323]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"305",name:"Arabic Song",participants:[126,146,163,196,221,247,258,324]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"306",name:"Islamic Song",participants:[109,126,163,221,249,260,263,324]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"308",name:"Urdu Song",participants:[109,129,163,195,223,247,324]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"309",name:"Arabic Hand writing",participants:[127,142,173,200,265,293,299,325]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"310",name:"Painting (Water color)",participants:[129,140,174,201,266,293,301,323]},
-  {cat:"Single Item",section:"JUNIOR BOYS",code:"311",name:"Test on KURUNNUKAL",participants:[143,175,195,237,265,293,323]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"401",name:"Qira'ath",participants:[101,131,164,202,259,267,326]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"402",name:"Hif",participants:[105,131,176,203,267,272,326]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"403",name:"Adhaan",participants:[101,132,176,204,259,268,328]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"404",name:"Islamic Song Arabic",participants:[106,132,164,204,259,270,329]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"405",name:"Elocution",participants:[112,165,233,262,268,328]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"406",name:"English Elocution",participants:[102,165,202,211,273,328]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"407",name:"Urdu Elocution",participants:[103,177,210,269]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"408",name:"Mappillappattu",participants:[105,132,164,205,271,274,329]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"409",name:"Arabic Calligraphy",participants:[106,131,166,207,262,275,329]},
-  {cat:"Single Item",section:"SENIOR BOYS",code:"410",name:"Quiz",participants:[111,165,205,209,270,272,326]},
-  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"501",name:"Qira'ath",participants:[134,169,189,234,276,277,330]},
-  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"502",name:"Hif",participants:[133,169,189,220,276,277,346]},
-  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"503",name:"Arabic Elocution",participants:[138,170,218,279,332]},
-  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"504",name:"Elocution",participants:[108,180,216,277,279,332]},
-  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"505",name:"Islamic Song Arabic",participants:[134,156,179,217,236,280,282,330]},
-  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"506",name:"Speech and Song",participants:[179,206,235,278]},
-  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"507",name:"Mappillappattu",participants:[134,156,169,217,280,283,330]},
-  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"508",name:"Essay writing",participants:[133,180,219,234,281,332,343]},
-  {cat:"Single Item",section:"SUPER SENIOR BOYS",code:"509",name:"Arabic Word Fight",participants:[107,180,212,234,278,280,347]},
-  {cat:"Single Item",section:"ALUMNI BOYS",code:"701",name:"Spot Elocution",participants:[284,355]},
-  {cat:"Single Item",section:"ALUMNI BOYS",code:"703",name:"Mappillappattu",participants:[284,314,359]},
-  {cat:"Single Item",section:"ALUMNI BOYS",code:"704",name:"Master Hunt",participants:[284,338,355,358]},
-  {cat:"Single Item",section:"ALUMNI BOYS",code:"705",name:"Digital Poster Designing",participants:[355,359]},
-  {cat:"Single Item",section:"SUB JUNIOR GIRLS",code:"801",name:"Arabic-Malayalam Hand writing",participants:[115,118,152,187,254,287,303,316,331,333]},
-  {cat:"Single Item",section:"SUB JUNIOR GIRLS",code:"802",name:"Pencil Drawing",participants:[118,150,152,187,256,288,304,333,334,335]},
-  {cat:"Single Item",section:"JUNIOR GIRLS",code:"803",name:"Arabic Hand writing",participants:[119,153,208,226,248,290,307,350]},
-  {cat:"Single Item",section:"JUNIOR GIRLS",code:"804",name:"KURUNNUKAL TEST",participants:[141,153,228,250,292,307,351]},
-  {cat:"Single Item",section:"SENIOR GIRLS",code:"805",name:"Arabic Calligraphy",participants:[120,135,154,229,238,294,309,352]},
-  {cat:"Single Item",section:"SENIOR GIRLS",code:"806",name:"Nano Litreure",participants:[121,136,155,295,311,342,353]},
-  {cat:"Single Item",section:"SENIOR GIRLS",code:"807",name:"SANTHUSTA KUDUMBAM TEST",participants:[137,296,310,313,354]},
+  {cat:"Single Item",section:"KIDDIES",code:"101",name:"Fathiha Recitation",participants:[104,122,148,158,167,213,225,239,291,317]},
+  {cat:"Single Item",section:"KIDDIES",code:"102",name:"Story Telling",participants:[110,122,149,157,168,214,240,291,317]},
+  {cat:"Single Item",section:"SUB JUNIOR",code:"201",name:"Qira'ath",participants:[113,123,159,181,184,224,241,289,308,318]},
+  {cat:"Single Item",section:"SUB JUNIOR",code:"202",name:"Hif",participants:[124,160,182,184,188,215,224,242,308,318]},
+  {cat:"Single Item",section:"SUB JUNIOR",code:"203",name:"Mad'hunnabi Song",participants:[113,125,159,183,224,243,264,297,302,319]},
+  {cat:"Single Item",section:"SUB JUNIOR",code:"204",name:"Hand writing Arabic Malayalam",participants:[116,124,160,186,191,251,298,300,302,320]},
+  {cat:"Single Item",section:"SUB JUNIOR",code:"205",name:"Memory Test",participants:[114,124,160,185,192,253,289,308,344]},
+  {cat:"Single Item",section:"JUNIOR",code:"301",name:"Qira'ath",participants:[126,139,161,193,222,237,255,322]},
+  {cat:"Single Item",section:"JUNIOR",code:"302",name:"Hif",participants:[127,145,171,222,244,255,322,361]},
+  {cat:"Single Item",section:"JUNIOR",code:"303",name:"Adhaan",participants:[127,139,194,221,246,257,322,364]},
+  {cat:"Single Item",section:"JUNIOR",code:"304",name:"Elocution",participants:[128,144,161,195,223,237,255,323]},
+  {cat:"Single Item",section:"JUNIOR",code:"305",name:"Arabic Song",participants:[126,146,163,196,221,247,258,324]},
+  {cat:"Single Item",section:"JUNIOR",code:"306",name:"Islamic Song",participants:[109,126,163,221,249,260,263,324]},
+  {cat:"Single Item",section:"JUNIOR",code:"308",name:"Urdu Song",participants:[109,129,163,195,223,247,324]},
+  {cat:"Single Item",section:"JUNIOR",code:"309",name:"Arabic Hand writing",participants:[127,142,173,200,265,293,299,325]},
+  {cat:"Single Item",section:"JUNIOR",code:"310",name:"Painting (Water color)",participants:[129,140,174,201,266,293,301,323]},
+  {cat:"Single Item",section:"JUNIOR",code:"311",name:"Test on KURUNNUKAL",participants:[143,175,195,237,265,293,323]},
+  {cat:"Single Item",section:"SENIOR",code:"401",name:"Qira'ath",participants:[101,131,164,202,259,267,326]},
+  {cat:"Single Item",section:"SENIOR",code:"402",name:"Hif",participants:[105,131,176,203,267,272,326]},
+  {cat:"Single Item",section:"SENIOR",code:"403",name:"Adhaan",participants:[101,132,176,204,259,268,328]},
+  {cat:"Single Item",section:"SENIOR",code:"404",name:"Islamic Song Arabic",participants:[106,132,164,204,259,270,329]},
+  {cat:"Single Item",section:"SENIOR",code:"405",name:"Elocution",participants:[112,165,233,262,268,328]},
+  {cat:"Single Item",section:"SENIOR",code:"406",name:"English Elocution",participants:[102,165,202,211,273,328]},
+  {cat:"Single Item",section:"SENIOR",code:"407",name:"Urdu Elocution",participants:[103,177,210,269]},
+  {cat:"Single Item",section:"SENIOR",code:"408",name:"Mappillappattu",participants:[105,132,164,205,271,274,329]},
+  {cat:"Single Item",section:"SENIOR",code:"409",name:"Arabic Calligraphy",participants:[106,131,166,207,262,275,329]},
+  {cat:"Single Item",section:"SENIOR",code:"410",name:"Quiz",participants:[111,165,205,209,270,272,326]},
+  {cat:"Single Item",section:"SUPER SENIOR",code:"501",name:"Qira'ath",participants:[134,169,189,234,276,277,330]},
+  {cat:"Single Item",section:"SUPER SENIOR",code:"502",name:"Hif",participants:[133,169,189,220,276,277,346]},
+  {cat:"Single Item",section:"SUPER SENIOR",code:"503",name:"Arabic Elocution",participants:[138,170,218,279,332]},
+  {cat:"Single Item",section:"SUPER SENIOR",code:"504",name:"Elocution",participants:[108,180,216,277,279,332]},
+  {cat:"Single Item",section:"SUPER SENIOR",code:"505",name:"Islamic Song Arabic",participants:[134,156,179,217,236,280,282,330]},
+  {cat:"Single Item",section:"SUPER SENIOR",code:"506",name:"Speech and Song",participants:[179,206,235,278]},
+  {cat:"Single Item",section:"SUPER SENIOR",code:"507",name:"Mappillappattu",participants:[134,156,169,217,280,283,330]},
+  {cat:"Single Item",section:"SUPER SENIOR",code:"508",name:"Essay writing",participants:[133,180,219,234,281,332,343]},
+  {cat:"Single Item",section:"SUPER SENIOR",code:"509",name:"Arabic Word Fight",participants:[107,180,212,234,278,280,347]},
+  {cat:"Single Item",section:"ALUMNI",code:"701",name:"Spot Elocution",participants:[284,355]},
+  {cat:"Single Item",section:"ALUMNI",code:"703",name:"Mappillappattu",participants:[284,314,359]},
+  {cat:"Single Item",section:"ALUMNI",code:"704",name:"Master Hunt",participants:[284,338,355,358]},
+  {cat:"Single Item",section:"ALUMNI",code:"705",name:"Digital Poster Designing",participants:[355,359]},
   {cat:"Single Item",section:"MULLIM",code:"901",name:"Hizb",participants:[151,231,232,321,356]},
   {cat:"Single Item",section:"MUALLIM",code:"902",name:"Hifi",participants:[340,356]},
   {cat:"Single Item",section:"MUALLIM",code:"903",name:"Adaan",participants:[151,232,315,340,356]},
@@ -787,17 +732,14 @@ const ITEM_LIBRARY = [
   {cat:"Single Item",section:"MUALLIM",code:"907",name:"Samastha Qissappatt",participants:[232,340]},
   {cat:"Single Item",section:"MUALLIM",code:"908",name:"Munaqasha",participants:[315,339]},
   {cat:"Single Item",section:"MUALLIM",code:"909",name:"Digital Poster Designing",participants:[230,339,357,360]},
-  {cat:"Group Item",section:"JUNIOR BOYS",code:"307",name:"Islamic Group Song",participants:[109,126,129,130,139,146,162,163,190,197,198,199,221,222,223,247,252,258,260,261,312,324,325,345]},
-  {cat:"Group Item",section:"GENERAL BOYS",code:"601",name:"Burda Recitation",participants:[101,105,113,126,129,131,132,134,139,156,164,166,169,176,177,259,262,269,285,286,324,329,330,332,345]},
-  {cat:"Group Item",section:"GENERAL BOYS",code:"602",name:"Maulid Recitation",participants:[101,105,128,131,132,133,134,139,156,164,166,169,177,189,259,262,269,285,286,324,330,337,346,347,348]},
-  {cat:"Group Item",section:"GENERAL BOYS",code:"604",name:"Arabic Group Song",participants:[105,106,109,113,126,129,131,132,134,156,164,166,169,259,262,269,285,286,324,330,337,345,346,349,363]},
-  {cat:"Group Item",section:"ALUMNI BOYS",code:"702",name:"Islamic Song Mashup",participants:[314,338]},
+  {cat:"Group Item",section:"JUNIOR",code:"307",name:"Islamic Group Song",participants:[109,126,129,130,139,146,162,163,190,197,198,199,221,222,223,247,252,258,260,261,312,324,325,345]},
+  {cat:"Group Item",section:"GENERAL",code:"601",name:"Burda Recitation",participants:[101,105,113,126,129,131,132,134,139,156,164,166,169,176,177,259,262,269,285,286,324,329,330,332,345]},
+  {cat:"Group Item",section:"GENERAL",code:"602",name:"Maulid Recitation",participants:[101,105,128,131,132,133,134,139,156,164,166,169,177,189,259,262,269,285,286,324,330,337,346,347,348]},
+  {cat:"Group Item",section:"GENERAL",code:"604",name:"Arabic Group Song",participants:[105,106,109,113,126,129,131,132,134,156,164,166,169,259,262,269,285,286,324,330,337,345,346,349,363]},
+  {cat:"Group Item",section:"ALUMNI",code:"702",name:"Islamic Song Mashup",participants:[314,338]},
   {cat:"Group Item",section:"MUALLIM",code:"911",name:"Burda Recitation",participants:[315]}
 ];
 
-/* ============================================================
-   STATE
-   ============================================================ */
 const STAGE_COUNT = 3;
 const DEFAULT_STAGES = () => Array.from({length: STAGE_COUNT}, (_, i) => ({
   id: i + 1, name: `വേദി ${i + 1}`, program: "", participant: null, status: "idle", completed: 0, visible: true
@@ -805,7 +747,7 @@ const DEFAULT_STAGES = () => Array.from({length: STAGE_COUNT}, (_, i) => ({
 
 let stages = DEFAULT_STAGES();
 let programs = [];
-let config = {eventName:"മുസാബഖ കലാമേള",eventSub:"KERALA ESTATE RANGE · JAMIYATHUL MUALIMEEN",tickerMessage:"✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨",announcement:"✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം",nextParticipant:1,voiceMode:"both",voice_ts:0,sponsorText:"Sponsored by SKSSF MANJALPARA UNIT",sponsorVisible:true};
+let config = {eventName:"മുസാബഖ കലാമേള",eventSub:"KERALA ESTATE RANGE · JAMIYATHUL MUALIMEEN",tickerMessage:"✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨",announcement:"✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം",voiceMode:"both",voice_ts:0,sponsorText:"Sponsored by SKSSF MANJALPARA UNIT",sponsorVisible:true};
 let currentMode = 'admin';
 let adminStagesBuilt = false;
 let lastAlertTs = 0;
@@ -816,9 +758,6 @@ let photoCountdownTimer = null;
 let lastPhotoTs = 0;
 let photoInitialized = false;
 
-/* ============================================================
-   RED ALERT
-   ============================================================ */
 function triggerRedAlert(){
   const el = document.getElementById('redAlert');
   if(!el) return;
@@ -829,9 +768,6 @@ function triggerRedAlert(){
   redAlertTimer = setTimeout(() => el.classList.remove('active'), 2500);
 }
 
-/* ============================================================
-   VOICE ENGINE
-   ============================================================ */
 let mlVoice = null, enVoice = null;
 let speechQueue = [], isSpeaking = false;
 
@@ -897,9 +833,6 @@ function testVoice(){
   showToast("🔊 Voice test");
 }
 
-/* ============================================================
-   HELPERS
-   ============================================================ */
 function showToast(msg){
   const t = document.createElement('div');
   t.className = 'toast'; t.textContent = msg;
@@ -911,9 +844,6 @@ function normalizeArray(val, fb){ if(!val) return fb; return Array.isArray(val) 
 function escapeHtml(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function stripHtml(html){ const d = document.createElement('div'); d.innerHTML = html; return d.textContent || ''; }
 
-/* ============================================================
-   AUTO-FIT ANNOUNCEMENT
-   ============================================================ */
 function autoFitAnnouncement(){
   const el = document.getElementById('announcementText');
   if(!el) return;
@@ -954,9 +884,6 @@ function setTicker(msg){
   if(a) a.textContent = msg; if(b) b.textContent = msg;
 }
 
-/* ============================================================
-   TICKER QUICK
-   ============================================================ */
 async function setTickerQuick(){
   const v = document.getElementById('tickerQuickInput').value.trim();
   if(!v){ showToast("Enter ticker text"); return; }
@@ -971,9 +898,6 @@ async function setTickerPreset(txt){
   showToast("📜 Ticker preset");
 }
 
-/* ============================================================
-   TEMPLATES
-   ============================================================ */
 async function sendTemplate(mlText, enText){
   const now = Date.now();
   const safeMl = escapeHtml(mlText);
@@ -990,9 +914,6 @@ async function sendTemplate(mlText, enText){
   showToast("📢 Template sent");
 }
 
-/* ============================================================
-   BUILD ANNOUNCEMENT (with chest numbers yellow)
-   ============================================================ */
 function buildAnnouncement(item, stageId){
   const stage = stages.find(s => s.id === Number(stageId));
   const stgName = stage ? stage.name : `വേദി ${stageId}`;
@@ -1000,10 +921,10 @@ function buildAnnouncement(item, stageId){
   const itemMl = ITEM_ML[item.name] || item.name;
   const nums = item.participants;
   const numsStr = nums.join(', ');
-  const ml = `${stgName} ൽ ${secMl} വിഭാഗം ${itemMl} മത്സരം ഉടൻ ആരംഭിക്കുന്നു. ${numsStr} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഉള്ള മത്സരാർത്ഥികൾ ഉടൻ വേദിയിൽ എത്തിച്ചേരേണ്ടതാണ്.`;
-  const en = `The ${item.section} category ${item.name} competition will begin soon at ${stgName}. Participants with chest numbers ${numsStr} are requested to report immediately.`;
+  const ml = `${secMl} വിഭാഗം ${itemMl} മത്സരത്തിനുള്ള ${numsStr} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഇതുവരെ റിപ്പോർട്ട് ചെയ്തിട്ടില്ല. ഉടൻ തന്നെ ${stgName} ൽ റിപ്പോർട്ട് ചെയ്യേണ്ടതാണ്.`;
+  const en = `Chest numbers ${numsStr} for the ${item.section} ${item.name} competition have not yet reported. Please report immediately at ${stgName}.`;
   const numsHtml = nums.map(n => `<span class="chest-num">${n}</span>`).join('');
-  const mlHtml = `${escapeHtml(stgName)} ൽ ${escapeHtml(secMl)} വിഭാഗം <span class="hl-item">${escapeHtml(itemMl)}</span> മത്സരം ഉടൻ ആരംഭിക്കുന്നു. ${numsHtml} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഉള്ള മത്സരാർത്ഥികൾ ഉടൻ വേദിയിൽ എത്തിച്ചേരേണ്ടതാണ്.`;
+  const mlHtml = `${escapeHtml(secMl)} വിഭാഗം <span class="hl-item">${escapeHtml(itemMl)}</span> മത്സരത്തിനുള്ള ${numsHtml} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഇതുവരെ റിപ്പോർട്ട് ചെയ്തിട്ടില്ല. ഉടൻ തന്നെ <span class="hl-item">${escapeHtml(stgName)}</span> ൽ റിപ്പോർട്ട് ചെയ്യേണ്ടതാണ്.`;
   return { ml, en, mlHtml, stageName: stgName, itemMl, secMl };
 }
 
@@ -1062,9 +983,6 @@ async function sendItemAnnouncement(item, stageId){
   showToast(`🔴 📢 ${item.code} → ${ann.stageName}`);
 }
 
-/* ============================================================
-   PHOTO SYSTEM
-   ============================================================ */
 function compressImage(file, maxDim = 1400, quality = 0.78){
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -1211,7 +1129,6 @@ function renderSponsor(){
   }
 }
 
-/* Drag & drop photo */
 (function setupPhotoDrop(){
   const attach = () => {
     const zone = document.getElementById('photoUploadZone');
@@ -1234,9 +1151,6 @@ function renderSponsor(){
   else attach();
 })();
 
-/* ============================================================
-   LIBRARY RENDER
-   ============================================================ */
 function renderItemLibrary(){
   const search = (document.getElementById('libSearch')?.value || '').trim().toLowerCase();
   const secFilter = document.getElementById('libSection')?.value || '';
@@ -1331,11 +1245,8 @@ function showParticipants(code, name, section, list){
   document.getElementById('partModal').classList.add('active');
 }
 function closeModal(){ document.getElementById('partModal').classList.remove('active'); }
-function quickCallParticipant(num){ closeModal(); document.getElementById('callParticipantInput').value = num; window.scrollTo({top:0,behavior:'smooth'}); showToast(`#${num} ready`); }
+function quickCallParticipant(num){ showToast(`Chest #${num} — വേദിയിൽ റിപ്പോർട്ട് ചെയ്യാൻ ആവശ്യപ്പെടുക`); }
 
-/* ============================================================
-   FIREBASE LISTENERS
-   ============================================================ */
 function attachFirebase(){
   db.ref('stages').on('value', snap => {
     if(!snap.exists()) return;
@@ -1359,7 +1270,6 @@ function attachFirebase(){
     document.getElementById('eventSubInput').value = config.eventSub || '';
     if(document.getElementById('tickerQuickInput'))
       document.getElementById('tickerQuickInput').value = config.tickerMessage || '';
-    document.getElementById('nextParticipantInput').value = config.nextParticipant || 1;
     if(document.getElementById('announceVoiceMode')) document.getElementById('announceVoiceMode').value = config.voiceMode || 'both';
     document.getElementById('dispEventName').textContent = config.eventName || 'മുസാബഖ കലാമേള';
     document.getElementById('dispEventSub').textContent = config.eventSub || '';
@@ -1373,10 +1283,8 @@ function attachFirebase(){
     }
     if(!alertInitialized) alertInitialized = true;
 
-    // Sponsor
     renderSponsor();
 
-    // Photo trigger
     if(config.photo_ts && config.photo_ts !== prev.photo_ts){
       if(photoInitialized && config.photo_ts > lastPhotoTs){
         showPhotoFullscreen();
@@ -1409,14 +1317,11 @@ function initData(){
   db.ref('config').once('value', s => { if(!s.exists()) db.ref('config').set({
     eventName:"മുസാബഖ കലാമേള",eventSub:"KERALA ESTATE RANGE · JAMIYATHUL MUALIMEEN",
     tickerMessage:"✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨",announcement:"✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം",
-    nextParticipant:1,voiceMode:"both",voice_ts:0,sponsorText:"Sponsored by SKSSF MANJALPARA UNIT",sponsorVisible:true
+    voiceMode:"both",voice_ts:0,sponsorText:"Sponsored by SKSSF MANJALPARA UNIT",sponsorVisible:true
   }); });
   db.ref('programs').once('value', s => { if(!s.exists()) db.ref('programs').set([]); });
 }
 
-/* ============================================================
-   ANNOUNCEMENT ACTIONS
-   ============================================================ */
 async function sendCustomAnnouncement(){
   const input = document.getElementById('customAnnouncementInput');
   const txt = input.value.trim();
@@ -1445,9 +1350,6 @@ function saveVoiceMode(){
   showToast("Voice: " + v.toUpperCase());
 }
 
-/* ============================================================
-   STAGE ACTIONS
-   ============================================================ */
 async function pushStages(){ await db.ref('stages').set(stages); }
 async function setStageProgram(id){
   const input = document.getElementById(`stageProgInput-${id}`);
@@ -1466,44 +1368,26 @@ async function setStageProgram(id){
   triggerRedAlert(); speakBoth(ml, en); triggerBlink(id);
   input.value = ""; showToast(`🎭 ${stageName(id)} → ${val}`);
 }
-async function callParticipant(id, explicitNumber){
-  const input = document.getElementById(`stagePartInput-${id}`);
-  let num = explicitNumber != null ? explicitNumber : parseInt(input?.value || "", 10);
-  if(!num || num <= 0) num = config.nextParticipant || 1;
-  const idx = stages.findIndex(s => s.id === id);
-  if(idx === -1) return;
-  if(stages[idx].status === 'closed'){ showToast("Closed"); return; }
-  if(stages[idx].participant !== null && stages[idx].participant !== undefined) stages[idx].completed = (stages[idx].completed || 0) + 1;
-  stages[idx].participant = num; stages[idx].status = "live";
-  await pushStages();
-  const ml = `ചെസ്റ്റ് നമ്പർ ${num}, ${stageName(id)} ലേക്ക് എത്തിച്ചേരേണ്ടതാണ്`;
-  const en = `Participant number ${num}, please report to ${stageName(id)}`;
-  const numsHtml = `<span class="chest-num">${num}</span>`;
-  const mlHtml = `ചെസ്റ്റ് നമ്പർ ${numsHtml}, ${escapeHtml(stageName(id))} ലേക്ക് എത്തിച്ചേരേണ്ടതാണ്`;
-  const now = Date.now();
-  await db.ref('config').update({ announcement: `${ml} · ${en}`, announcementHtml: mlHtml, nextParticipant: Math.max(config.nextParticipant || 1, num + 1), voice_ts: now, alert_ts: now });
-  setAnnouncementHtml(mlHtml, true);
-  triggerRedAlert(); speakBoth(ml, en); triggerBlink(id);
-  if(input) input.value = ""; showToast(`📣 ${stageName(id)} → ${num}`);
-}
-function callParticipantFromPanel(){
-  const sid = parseInt(document.getElementById('callStageSelect').value, 10);
-  const num = parseInt(document.getElementById('callParticipantInput').value, 10);
-  if(!num || num <= 0){ showToast("Enter #"); return; }
-  callParticipant(sid, num); document.getElementById('callParticipantInput').value = "";
-}
-function callNextParticipant(){
-  const sid = parseInt(document.getElementById('callStageSelect').value, 10);
-  callParticipant(sid, config.nextParticipant || 1);
-}
 async function repeatStage(id){
   const s = stages.find(x => x.id === id);
   if(!s) return;
-  const ml = s.participant ? `വീണ്ടും അറിയിപ്പ്. നമ്പർ ${s.participant}, ${stageName(id)} ലേക്ക്` : `വീണ്ടും അറിയിപ്പ്. ${stageName(id)} ൽ ${s.program || 'മത്സരം'}`;
-  const en = s.participant ? `Repeat. Participant number ${s.participant}, please report to ${stageName(id)}` : `Repeat at ${stageName(id)}`;
+  let ml, en, mlHtml;
+  const codeMatch = (s.program || '').match(/^(\d+)/);
+  if(codeMatch){
+    const item = ITEM_LIBRARY.find(x => x.code === codeMatch[1]);
+    if(item){
+      const ann = buildAnnouncement(item, id);
+      ml = ann.ml; en = ann.en; mlHtml = ann.mlHtml;
+    }
+  }
+  if(!ml){
+    ml = `വീണ്ടും അറിയിപ്പ്. ${stageName(id)} ൽ ${s.program || 'മത്സരം'}`;
+    en = `Repeat at ${stageName(id)}`;
+    mlHtml = escapeHtml(ml);
+  }
   const now = Date.now();
-  await db.ref('config').update({ announcement: `${ml} · ${en}`, announcementHtml: escapeHtml(ml), voice_ts: now, alert_ts: now });
-  setAnnouncementHtml(escapeHtml(ml), true);
+  await db.ref('config').update({ announcement: ml, announcementHtml: mlHtml, tickerMessage: ml, voice_ts: now, alert_ts: now });
+  setAnnouncementHtml(mlHtml, true);
   triggerRedAlert(); speakBoth(ml, en); triggerBlink(id);
   showToast(`🔁 Repeated`);
 }
@@ -1543,9 +1427,6 @@ function triggerBlink(id){
   setTimeout(() => db.ref('effects/blink').remove(), 3000);
 }
 
-/* ============================================================
-   PROGRAMS
-   ============================================================ */
 async function addProgram(){
   const name = document.getElementById('newProgName').value.trim();
   const stageId = parseInt(document.getElementById('newProgStage').value, 10);
@@ -1571,9 +1452,6 @@ async function deleteProgram(id){
   renderItemLibrary(); showToast("🗑 Deleted");
 }
 
-/* ============================================================
-   SETTINGS
-   ============================================================ */
 async function saveSettings(){
   await db.ref('config').update({
     eventName: document.getElementById('eventNameInput').value.trim() || "മുസാബഖ കലാമേള",
@@ -1581,20 +1459,12 @@ async function saveSettings(){
   });
   showToast("💾 Saved");
 }
-async function updateNextParticipant(){
-  const v = parseInt(document.getElementById('nextParticipantInput').value, 10);
-  if(v > 0){ await db.ref('config').update({ nextParticipant: v }); showToast(`Next → ${v}`); }
-}
 
-/* ============================================================
-   RESET
-   ============================================================ */
 async function resetAll(){
   if(!confirm("Reset entire system?")) return;
   await db.ref('stages').set(DEFAULT_STAGES());
   await db.ref('programs').set([]);
   await db.ref('config').update({
-    nextParticipant: 1,
     announcement: "✨ സിസ്റ്റം റീസെറ്റ് ചെയ്തു",
     announcementHtml: "✨ സിസ്റ്റം റീസെറ്റ് ചെയ്തു",
     tickerMessage: "✨ മുസാബഖ കലാമേളയിലേക്ക് സ്വാഗതം ✨",
@@ -1609,9 +1479,6 @@ async function resetStagesOnly(){
   await db.ref('stages').set(fresh); showToast("♻️ Cleared");
 }
 
-/* ============================================================
-   ADMIN RENDER
-   ============================================================ */
 function buildAdminStages(){
   const wrap = document.getElementById('stageAdminGrid');
   if(!wrap) return;
@@ -1627,10 +1494,8 @@ function buildAdminStages(){
       </div>
       <div class="sac-now">
         <div style="flex:1;min-width:90px"><div class="sac-now-label">NOW RUNNING</div><div class="sac-now-prog" id="stageProgText-${i}">—</div></div>
-        <div class="sac-now-part" id="stagePartText-${i}">—</div>
       </div>
       <div class="sac-row"><input type="text" id="stageProgInput-${i}" placeholder="Program…"><button class="btn-mini btn-blue" onclick="setStageProgram(${i})">Set</button></div>
-      <div class="sac-row"><input type="number" id="stagePartInput-${i}" placeholder="Participant #"><button class="btn-mini btn-green" onclick="callParticipant(${i})">📣</button></div>
       <div class="sac-actions">
         <button class="btn-mini btn-amber" onclick="repeatStage(${i})">🔁</button>
         <button class="btn-mini btn-slate" onclick="clearStage(${i})">⏭</button>
@@ -1654,7 +1519,6 @@ function updateStageAdmin(){
     pill.textContent = s.status === 'live' ? 'LIVE' : (s.status === 'closed' ? 'CLOSED' : 'IDLE');
     pill.className = 'pill ' + (s.status === 'live' ? 'live' : (s.status === 'closed' ? 'closed' : ''));
     document.getElementById(`stageProgText-${s.id}`).textContent = s.program || '—';
-    document.getElementById(`stagePartText-${s.id}`).textContent = (s.participant !== null && s.participant !== undefined) ? s.participant : '—';
     const closeBtn = document.getElementById(`stageCloseBtn-${s.id}`);
     if(closeBtn) closeBtn.textContent = s.status === 'closed' ? 'Open' : 'Close';
     const visBtn = document.getElementById(`stageVisBtn-${s.id}`);
@@ -1663,8 +1527,7 @@ function updateStageAdmin(){
 }
 function fillStageSelects(){
   const opts = stages.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
-  const a = document.getElementById('callStageSelect'); const b = document.getElementById('newProgStage');
-  if(a){ const cur = a.value; a.innerHTML = opts; if(cur) a.value = cur; }
+  const b = document.getElementById('newProgStage');
   if(b){ const cur = b.value; b.innerHTML = opts; if(cur) b.value = cur; }
 }
 function renderProgramList(){
@@ -1715,9 +1578,6 @@ function populateQuickAnnounceSelects(){
   }
 }
 
-/* ============================================================
-   DISPLAY RENDER
-   ============================================================ */
 function renderDisplay(){
   const live = stages.filter(s => s.status === 'live').length;
   const closed = stages.filter(s => s.status === 'closed').length;
@@ -1729,9 +1589,6 @@ function renderDisplay(){
     <div class="stat-pill"><b>${closed}</b><span>CLOSED</span></div>`;
 }
 
-/* ============================================================
-   CLOCK & MODE
-   ============================================================ */
 function updateDisplayClock(){
   const now = new Date();
   const t = document.getElementById('displayTime'); const d = document.getElementById('displayDate');
@@ -1758,9 +1615,6 @@ function toggleFullscreen(){
 }
 window.addEventListener('resize', () => { if(currentMode === 'display') autoFitAnnouncement(); });
 
-/* ============================================================
-   AUTH
-   ============================================================ */
 function login(){
   const email = document.getElementById('loginEmail').value.trim();
   const pw = document.getElementById('loginPassword').value;
@@ -1780,9 +1634,6 @@ function startApp(){
 }
 auth.onAuthStateChanged(user => { if(user) startApp(); });
 
-/* ============================================================
-   BOOT
-   ============================================================ */
 setInterval(() => { if(currentMode === 'display') updateDisplayClock(); }, 1000);
 updateDisplayClock();
 buildAdminStages();
@@ -1792,10 +1643,10 @@ populateQuickAnnounceSelects();
 Object.assign(window, {
   login, logout, setMode, toggleFullscreen, triggerRedAlert,
   sendCustomAnnouncement, resetAnnouncementToWelcome, saveVoiceMode, testVoice,
-  setStageProgram, callParticipant, callParticipantFromPanel, callNextParticipant,
+  setStageProgram,
   repeatStage, clearStage, toggleStageClose, toggleStageVisible, renameStage,
   addProgram, setProgramStatus, deleteProgram,
-  saveSettings, updateNextParticipant, resetAll, resetStagesOnly,
+  saveSettings, resetAll, resetStagesOnly,
   renderItemLibrary, toggleScheduleItem, bulkAddAllFiltered, clearSchedule,
   lookupParticipant, showParticipants, closeModal, quickCallParticipant,
   updateQAPreview, sendQuickAnnounce, quickAnnounceFromLibrary,
