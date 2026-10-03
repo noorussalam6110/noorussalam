@@ -953,10 +953,10 @@ function buildAnnouncement(item, stageId){
   const itemMl = ITEM_ML[item.name] || item.name;
   const nums = item.participants;
   const numsStr = nums.join(', ');
-  const ml = `${secMl} വിഭാഗം ${itemMl} മത്സരത്തിനുള്ള ${numsStr} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഇതുവരെ റിപ്പോർട്ട് ചെയ്തിട്ടില്ല. ഉടൻ തന്നെ ${stgName} ൽ റിപ്പോർട്ട് ചെയ്യേണ്ടതാണ്.`;
+  const ml = `${secMl} വിഭാഗം ${itemMl} മത്സരം ഉടൻ ആരംഭിക്കുന്നു. ${numsStr} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഉടൻ തന്നെ ${stgName} ൽ റിപ്പോർട്ട് ചെയ്യേണ്ടതാണ്.`;
   const en = `Chest numbers ${numsStr} for the ${item.section} ${item.name} competition have not yet reported. Please report immediately at ${stgName}.`;
   const numsHtml = nums.map(n => `<span class="chest-num">${n}</span>`).join('');
-  const mlHtml = `${escapeHtml(secMl)} വിഭാഗം <span class="hl-item">${escapeHtml(itemMl)}</span> മത്സരത്തിനുള്ള ${numsHtml} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഇതുവരെ റിപ്പോർട്ട് ചെയ്തിട്ടില്ല. ഉടൻ തന്നെ <span class="hl-item">${escapeHtml(stgName)}</span> ൽ റിപ്പോർട്ട് ചെയ്യേണ്ടതാണ്.`;
+  const mlHtml = `${escapeHtml(secMl)} വിഭാഗം <span class="hl-item">${escapeHtml(itemMl)}</span> മത്സരം ഉടൻ ആരംഭിക്കുന്നു. ${numsHtml} എന്നീ ചെസ്റ്റ് നമ്പറുകൾ ഉടൻ തന് ഉടൻ തന്നെ <span class="hl-item">${escapeHtml(stgName)}</span> ൽ റിപ്പോർട്ട് ചെയ്യേണ്ടതാണ്.`;
   return { ml, en, mlHtml, stageName: stgName, itemMl, secMl };
 }
 
